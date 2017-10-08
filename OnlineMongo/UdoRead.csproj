@@ -1,0 +1,368 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9836ABAB-2FB1-430A-B67B-54B62465C9C1}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>OnlineMongo</RootNamespace>
+    <AssemblyName>OnlineMongo</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Bunifu_UI_v1.52">
+      <HintPath>..\..\..\..\..\Downloads\SWIFT PROJECT FINAL\Bunifu_UI_v1.52.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp">
+      <HintPath>..\..\..\..\..\Desktop\New folder\packages\iTextSharp.5.5.11\lib\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="MySql.Data, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="aboutb.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="aboutb.Designer.cs">
+      <DependentUpon>aboutb.cs</DependentUpon>
+    </Compile>
+    <Compile Include="changePIN.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="changePIN.Designer.cs">
+      <DependentUpon>changePIN.cs</DependentUpon>
+    </Compile>
+    <Compile Include="changePwd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="changePwd.Designer.cs">
+      <DependentUpon>changePwd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="classPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="classPage.Designer.cs">
+      <DependentUpon>classPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="composeMsg.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="composeMsg.Designer.cs">
+      <DependentUpon>composeMsg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dashBoard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dashBoard.Designer.cs">
+      <DependentUpon>dashBoard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="draftTab.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="draftTab.Designer.cs">
+      <DependentUpon>draftTab.cs</DependentUpon>
+    </Compile>
+    <Compile Include="friendtb.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="friendtb.Designer.cs">
+      <DependentUpon>friendtb.cs</DependentUpon>
+    </Compile>
+    <Compile Include="hometb.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="hometb.Designer.cs">
+      <DependentUpon>hometb.cs</DependentUpon>
+    </Compile>
+    <Compile Include="inbonTab.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="inbonTab.Designer.cs">
+      <DependentUpon>inbonTab.cs</DependentUpon>
+    </Compile>
+    <Compile Include="login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="login.Designer.cs">
+      <DependentUpon>login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="myProfile.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="myProfile.Designer.cs">
+      <DependentUpon>myProfile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="pic.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="pic.Designer.cs">
+      <DependentUpon>pic.cs</DependentUpon>
+    </Compile>
+    <Compile Include="picPreview.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="picPreview.Designer.cs">
+      <DependentUpon>picPreview.cs</DependentUpon>
+    </Compile>
+    <Compile Include="pinWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="pinWindow.Designer.cs">
+      <DependentUpon>pinWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="pinWindow2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="pinWindow2.Designer.cs">
+      <DependentUpon>pinWindow2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="postb.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="postb.Designer.cs">
+      <DependentUpon>postb.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="readerPdf.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="readerPdf.Designer.cs">
+      <DependentUpon>readerPdf.cs</DependentUpon>
+    </Compile>
+    <Compile Include="resetPwd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="resetPwd.Designer.cs">
+      <DependentUpon>resetPwd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="secretWord.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="secretWord.Designer.cs">
+      <DependentUpon>secretWord.cs</DependentUpon>
+    </Compile>
+    <Compile Include="sentTab.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="sentTab.Designer.cs">
+      <DependentUpon>sentTab.cs</DependentUpon>
+    </Compile>
+    <Compile Include="settingTab.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="settingTab.Designer.cs">
+      <DependentUpon>settingTab.cs</DependentUpon>
+    </Compile>
+    <Compile Include="signUp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="signUp.Designer.cs">
+      <DependentUpon>signUp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="trashTab.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="trashTab.Designer.cs">
+      <DependentUpon>trashTab.cs</DependentUpon>
+    </Compile>
+    <Compile Include="verifyEmail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="verifyEmail.Designer.cs">
+      <DependentUpon>verifyEmail.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="aboutb.resx">
+      <DependentUpon>aboutb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="changePIN.resx">
+      <DependentUpon>changePIN.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="changePwd.resx">
+      <DependentUpon>changePwd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="classPage.resx">
+      <DependentUpon>classPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="composeMsg.resx">
+      <DependentUpon>composeMsg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dashBoard.resx">
+      <DependentUpon>dashBoard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="draftTab.resx">
+      <DependentUpon>draftTab.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="friendtb.resx">
+      <DependentUpon>friendtb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="hometb.resx">
+      <DependentUpon>hometb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="inbonTab.resx">
+      <DependentUpon>inbonTab.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="login.resx">
+      <DependentUpon>login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="myProfile.resx">
+      <DependentUpon>myProfile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pic.resx">
+      <DependentUpon>pic.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="picPreview.resx">
+      <DependentUpon>picPreview.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pinWindow.resx">
+      <DependentUpon>pinWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pinWindow2.resx">
+      <DependentUpon>pinWindow2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="postb.resx">
+      <DependentUpon>postb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="readerPdf.resx">
+      <DependentUpon>readerPdf.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="resetPwd.resx">
+      <DependentUpon>resetPwd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="secretWord.resx">
+      <DependentUpon>secretWord.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sentTab.resx">
+      <DependentUpon>sentTab.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="settingTab.resx">
+      <DependentUpon>settingTab.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="signUp.resx">
+      <DependentUpon>signUp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="trashTab.resx">
+      <DependentUpon>trashTab.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="verifyEmail.resx">
+      <DependentUpon>verifyEmail.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="AcroPDFLib">
+      <Guid>{05BFD3F1-6319-4F30-B752-C7A22889BCC4}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="AxAcroPDFLib">
+      <Guid>{05BFD3F1-6319-4F30-B752-C7A22889BCC4}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>aximp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="AxAXVLC">
+      <Guid>{DF2BBE39-40A8-433B-A279-073F48DA94B6}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>aximp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="AXVLC">
+      <Guid>{DF2BBE39-40A8-433B-A279-073F48DA94B6}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="AxWMPLib">
+      <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>aximp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="WMPLib">
+      <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
