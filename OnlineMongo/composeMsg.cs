@@ -264,6 +264,8 @@ namespace OnlineMongo
                 com1.Parameters.AddWithValue("@sentmsg", mail);
                 com1.ExecuteNonQuery();
 
+                MessageBox.Show("Message Sent. If you need to send the same message, please change the tittle or the email for message safety.");
+
             }
 
             catch (MySqlException ex)

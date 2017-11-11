@@ -29,9 +29,6 @@ namespace OnlineMongo
             InitializeComponent();
         }
 
-        private static string book;
-        private static string lect;
-        private static string vido;
 
        //A function to read data from the Myclass table
        

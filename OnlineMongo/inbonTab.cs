@@ -73,6 +73,7 @@ namespace OnlineMongo
 
         private void inbonTab_Load(object sender, EventArgs e)
         {
+            timer1.Start();
             refreshBar.Visible = true;
             refreshBar.animated = true;
             loadEmail();
@@ -164,6 +165,53 @@ namespace OnlineMongo
             loadEmail();
             refreshBar.Visible = false;
             refreshBar.animated = false;
+        }
+
+        private void deleteBtn_Click(object sender, EventArgs e)
+        {
+            MySqlConnection con = new MySqlConnection();
+            con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+            string insert = "insert into trash select * from sentmail where mailsubject = '" + selectedWord + "'";
+            string delete = "delete from sentmail where mailsubject = '" + selectedWord + "' ";
+
+            MySqlCommand com = new MySqlCommand(insert, con);
+            MySqlCommand com1 = new MySqlCommand(delete, con);
+            MySqlDataReader reader;
+            try
+            {
+
+
+               con.Open();
+                //inserting the deletede message to the trash
+               reader = com.ExecuteReader();
+               reader.Close();
+
+                //deleting the message from the sentmail table
+                reader = com1.ExecuteReader();
+                reader.Close();
+
+                MessageBox.Show("Moved to Trash");
+
+                if(emailsList.SelectedRows.Count > 0)
+                {
+                    emailsList.Rows.RemoveAt(emailsList.SelectedRows[0].Index); 
+                }
+                else
+                {
+
+                }
+
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            con.Close();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            loadEmail();
         }
     }
 }

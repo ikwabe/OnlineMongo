@@ -81,9 +81,9 @@
             this.closeBtn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.closeBtn.Image = ((System.Drawing.Image)(resources.GetObject("closeBtn.Image")));
             this.closeBtn.ImageActive = null;
-            this.closeBtn.Location = new System.Drawing.Point(377, 12);
+            this.closeBtn.Location = new System.Drawing.Point(369, 3);
             this.closeBtn.Name = "closeBtn";
-            this.closeBtn.Size = new System.Drawing.Size(16, 15);
+            this.closeBtn.Size = new System.Drawing.Size(31, 37);
             this.closeBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.closeBtn.TabIndex = 0;
             this.closeBtn.TabStop = false;

@@ -99,7 +99,7 @@
             this.searchBtn.ActiveFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(0)))), ((int)(((byte)(40)))));
             this.searchBtn.ActiveForecolor = System.Drawing.Color.Gray;
             this.searchBtn.ActiveLineColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.searchBtn.BackColor = System.Drawing.Color.Transparent;
+            this.searchBtn.BackColor = System.Drawing.SystemColors.Control;
             this.searchBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("searchBtn.BackgroundImage")));
             this.searchBtn.ButtonText = "Search";
             this.searchBtn.Cursor = System.Windows.Forms.Cursors.Hand;

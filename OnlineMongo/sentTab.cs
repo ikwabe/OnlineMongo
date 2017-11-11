@@ -141,6 +141,8 @@ namespace OnlineMongo
         {
             emailsList.BringToFront();
             loadEmail();
+
+            timer1.Start();
             
         }
 
@@ -150,6 +152,11 @@ namespace OnlineMongo
             backBtn.Visible = false;
             refreshBtn.Visible = true;
             richTextBox1.Clear();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            loadEmail();
         }
     }
 }

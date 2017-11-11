@@ -657,9 +657,9 @@ namespace OnlineMongo
             bunifuImageButton4.Visible = true;
             bunifuImageButton3.Visible = false;
             bunifuImageButton1.Location = new Point(1320, bunifuImageButton1.Location.Y);
-            bunifuImageButton2.Location = new Point(1290, bunifuImageButton2.Location.Y);
-            bunifuImageButton3.Location = new Point(1260, bunifuImageButton3.Location.Y);
-            bunifuImageButton4.Location = new Point(1260, bunifuImageButton4.Location.Y);
+            bunifuImageButton2.Location = new Point(1260, bunifuImageButton2.Location.Y);
+            bunifuImageButton3.Location = new Point(1290, bunifuImageButton3.Location.Y);
+            bunifuImageButton4.Location = new Point(1290, bunifuImageButton4.Location.Y);
         }
 
         private void bunifuImageButton4_Click(object sender, EventArgs e)
@@ -669,8 +669,8 @@ namespace OnlineMongo
             bunifuImageButton3.Visible = true;
             bunifuImageButton4.Visible = false;
             bunifuImageButton1.Location = new Point(1063, bunifuImageButton1.Location.Y);
-            bunifuImageButton2.Location = new Point(1033, bunifuImageButton2.Location.Y);
-            bunifuImageButton3.Location = new Point(1003, bunifuImageButton3.Location.Y);
+            bunifuImageButton2.Location = new Point(1003, bunifuImageButton2.Location.Y);
+            bunifuImageButton3.Location = new Point(1033, bunifuImageButton3.Location.Y);
         }
 
         private void chooseQn_Click(object sender, EventArgs e)
