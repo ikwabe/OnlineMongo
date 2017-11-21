@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.changePrflPhoto = new Bunifu.Framework.UI.BunifuFlatButton();
             this.userPrflName = new System.Windows.Forms.Label();
@@ -66,7 +67,7 @@
             this.series = new System.Windows.Forms.Label();
             this.game = new System.Windows.Forms.Label();
             this.channel = new System.Windows.Forms.Label();
-            this.refreshBtn = new Bunifu.Framework.UI.BunifuFlatButton();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -224,7 +225,7 @@
             this.bunifuSeparator2.LineThickness = 3;
             this.bunifuSeparator2.Location = new System.Drawing.Point(2, 141);
             this.bunifuSeparator2.Name = "bunifuSeparator2";
-            this.bunifuSeparator2.Size = new System.Drawing.Size(1180, 3);
+            this.bunifuSeparator2.Size = new System.Drawing.Size(1301, 3);
             this.bunifuSeparator2.TabIndex = 12;
             this.bunifuSeparator2.Transparency = 255;
             this.bunifuSeparator2.Vertical = false;
@@ -238,7 +239,7 @@
             this.bunifuSeparator1.LineThickness = 3;
             this.bunifuSeparator1.Location = new System.Drawing.Point(2, 416);
             this.bunifuSeparator1.Name = "bunifuSeparator1";
-            this.bunifuSeparator1.Size = new System.Drawing.Size(1148, 3);
+            this.bunifuSeparator1.Size = new System.Drawing.Size(1269, 3);
             this.bunifuSeparator1.TabIndex = 13;
             this.bunifuSeparator1.Transparency = 255;
             this.bunifuSeparator1.Vertical = false;
@@ -264,7 +265,7 @@
             this.bunifuSeparator3.LineThickness = 3;
             this.bunifuSeparator3.Location = new System.Drawing.Point(2, 693);
             this.bunifuSeparator3.Name = "bunifuSeparator3";
-            this.bunifuSeparator3.Size = new System.Drawing.Size(1116, 3);
+            this.bunifuSeparator3.Size = new System.Drawing.Size(1237, 3);
             this.bunifuSeparator3.TabIndex = 24;
             this.bunifuSeparator3.Transparency = 255;
             this.bunifuSeparator3.Vertical = false;
@@ -514,48 +515,16 @@
             this.channel.Size = new System.Drawing.Size(0, 16);
             this.channel.TabIndex = 38;
             // 
-            // refreshBtn
+            // timer1
             // 
-            this.refreshBtn.Activecolor = System.Drawing.Color.Transparent;
-            this.refreshBtn.BackColor = System.Drawing.Color.Transparent;
-            this.refreshBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.refreshBtn.BorderRadius = 0;
-            this.refreshBtn.ButtonText = "Refresh";
-            this.refreshBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.refreshBtn.DisabledColor = System.Drawing.Color.Transparent;
-            this.refreshBtn.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.refreshBtn.Iconcolor = System.Drawing.Color.Transparent;
-            this.refreshBtn.Iconimage = null;
-            this.refreshBtn.Iconimage_right = null;
-            this.refreshBtn.Iconimage_right_Selected = null;
-            this.refreshBtn.Iconimage_Selected = null;
-            this.refreshBtn.IconMarginLeft = 0;
-            this.refreshBtn.IconMarginRight = 0;
-            this.refreshBtn.IconRightVisible = true;
-            this.refreshBtn.IconRightZoom = 0D;
-            this.refreshBtn.IconVisible = false;
-            this.refreshBtn.IconZoom = 90D;
-            this.refreshBtn.IsTab = false;
-            this.refreshBtn.Location = new System.Drawing.Point(461, 99);
-            this.refreshBtn.Name = "refreshBtn";
-            this.refreshBtn.Normalcolor = System.Drawing.Color.Transparent;
-            this.refreshBtn.OnHovercolor = System.Drawing.Color.DarkGray;
-            this.refreshBtn.OnHoverTextColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(0)))), ((int)(((byte)(40)))));
-            this.refreshBtn.selected = false;
-            this.refreshBtn.Size = new System.Drawing.Size(64, 19);
-            this.refreshBtn.TabIndex = 39;
-            this.refreshBtn.Text = "Refresh";
-            this.refreshBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.refreshBtn.Textcolor = System.Drawing.SystemColors.ActiveCaption;
-            this.refreshBtn.TextFont = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.refreshBtn.Click += new System.EventHandler(this.refreshBtn_Click);
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // myProfile
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.Controls.Add(this.refreshBtn);
             this.Controls.Add(this.channel);
             this.Controls.Add(this.game);
             this.Controls.Add(this.series);
@@ -594,7 +563,7 @@
             this.Controls.Add(this.changePrflPhoto);
             this.Controls.Add(this.pictureBox1);
             this.Name = "myProfile";
-            this.Size = new System.Drawing.Size(679, 213);
+            this.Size = new System.Drawing.Size(662, 196);
             this.Load += new System.EventHandler(this.myProfile_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
@@ -642,6 +611,6 @@
         private System.Windows.Forms.Label series;
         private System.Windows.Forms.Label game;
         private System.Windows.Forms.Label channel;
-        private Bunifu.Framework.UI.BunifuFlatButton refreshBtn;
+        private System.Windows.Forms.Timer timer1;
     }
 }

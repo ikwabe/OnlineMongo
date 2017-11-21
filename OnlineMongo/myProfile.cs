@@ -137,12 +137,7 @@ namespace OnlineMongo
 
         private void myProfile_Load(object sender, EventArgs e)
         {
-
-            profile();
-        }
-
-        private void refreshBtn_Click(object sender, EventArgs e)
-        {
+            timer1.Start();
             profile();
         }
 
@@ -150,6 +145,11 @@ namespace OnlineMongo
         {
             picPreview pc = new picPreview();
             pc.Show(); 
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            profile();
         }
     }
 }
