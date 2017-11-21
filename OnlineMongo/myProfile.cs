@@ -39,7 +39,7 @@ namespace OnlineMongo
             string pic = "update users set prfpic = @prfpic where username = '" + login.txt.Text + "'";
             try
             {
-                openFileDialog1.Filter = "(*.JGP)|*.JPG";
+                openFileDialog1.Filter = "(*.JPG)|*.JPG";
                 if (openFileDialog1.ShowDialog() == DialogResult.OK)
                 {
                     pictureBox1.Image = Image.FromFile(openFileDialog1.FileName);

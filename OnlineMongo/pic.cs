@@ -28,83 +28,55 @@ namespace OnlineMongo
         public pic()
         {
             InitializeComponent();
-            pictures = new PictureBox[20];
-        }
-        private void createControl()
-        {
-            for (var i = 0; i < 20; i++)
-            {
-                var newPicturebox = new PictureBox();
-                newPicturebox.Width = 150;
-                newPicturebox.Height = 150;
-
-                pictures[i] = SizeImage(newPicturebox, i);
-            }
+           
         }
 
-        string[] names;
-        private void getNames()
+        int i = 0 ;
+        string[] name;
+        PictureBox phot;
+        private PictureBox photo()
         {
-            openFileDialog1.Filter = "(*.JPG)|*.JPG";
+            openFileDialog1.Filter = "(*.JPG ; *.PNG)|*.JPG; *.PNG";
+            MessageBox.Show("Please, Select Maximum of 20 images");
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                names = openFileDialog1.FileNames;
-            }
-        }
-        private PictureBox SizeImage(PictureBox pb, int i)
-        {
-
-
-
-            try
-            {
-                Image img = Image.FromFile(names[i]);
-                pb.SizeMode = PictureBoxSizeMode.Zoom;
-                pb.Image = img;
-
-            }
-            catch
-            {
-
-
-            }
-            return pb;
-        }
-
-        private void display()
-        {
-            for (var i = 0; i < 20; i++)
-            {
-                pictures[i].Left = (i * 160) + 100;
-                pictures[i].Top = 50;
-                if (i > 9)
+                name = openFileDialog1.FileNames;
+                for (int j = 0; j < name.Length; j++)
                 {
+                    i++;
+                    PictureBox phot = new PictureBox();
+                    phot.Width = 300;
+                    phot.Height = 172;
+                    phot.Name = "pic" + i;
+                    phot.SizeMode = PictureBoxSizeMode.Zoom;
 
-                    for (var j = 0; j <= i - (j + 10); j++)
-                    {
+                    phot.Image = Image.FromFile(name[j]);
 
-                        pictures[i].Left = (j * 160) + 100;
-                        pictures[i].Top = 200;
-                       panel2.Controls.Add(pictures[i]);
-
-                    }
+                    flowLayoutPanel1.Controls.Add(phot);
 
                 }
-                else
-                {
-                    panel2.Controls.Add(pictures[i]);
-                }
-
+               
             }
+            
+
+            return phot;
         }
+      
 
         private void addPic_Click(object sender, EventArgs e)
         {
-            getNames();
-            createControl();
-            display();
+            photo();
         }
 
+        private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
+        {
+            OpenFileDialog dlg = sender as OpenFileDialog;
+            if (20 < dlg.FileNames.Length)
+            {
+                MessageBox.Show("Please, Select Maximum of 20 images");
+                e.Cancel = true;
+            }
+        }
     }
 
    
