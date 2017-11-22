@@ -49,6 +49,8 @@ namespace OnlineMongo
                     phot.Height = 172;
                     phot.Name = "pic" + i;
                     phot.SizeMode = PictureBoxSizeMode.Zoom;
+                    phot.Cursor = Cursors.Hand;
+                   
 
                     phot.Image = Image.FromFile(name[j]);
 
@@ -77,6 +79,8 @@ namespace OnlineMongo
                 e.Cancel = true;
             }
         }
+
+       
     }
 
    
