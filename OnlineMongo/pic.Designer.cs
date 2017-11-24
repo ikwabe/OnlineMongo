@@ -28,11 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(pic));
             this.addPic = new Bunifu.Framework.UI.BunifuFlatButton();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.panel1 = new System.Windows.Forms.Panel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.refreshBtn = new Bunifu.Framework.UI.BunifuImageButton();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.refreshBtn)).BeginInit();
             this.SuspendLayout();
             // 
             // addPic
@@ -80,6 +85,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.refreshBtn);
             this.panel1.Controls.Add(this.addPic);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
@@ -96,6 +102,26 @@
             this.flowLayoutPanel1.Size = new System.Drawing.Size(815, 290);
             this.flowLayoutPanel1.TabIndex = 2;
             // 
+            // timer1
+            // 
+            this.timer1.Interval = 2000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // refreshBtn
+            // 
+            this.refreshBtn.BackColor = System.Drawing.Color.Transparent;
+            this.refreshBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.refreshBtn.Image = ((System.Drawing.Image)(resources.GetObject("refreshBtn.Image")));
+            this.refreshBtn.ImageActive = null;
+            this.refreshBtn.Location = new System.Drawing.Point(3, 13);
+            this.refreshBtn.Name = "refreshBtn";
+            this.refreshBtn.Size = new System.Drawing.Size(26, 30);
+            this.refreshBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.refreshBtn.TabIndex = 1;
+            this.refreshBtn.TabStop = false;
+            this.refreshBtn.Zoom = 10;
+            this.refreshBtn.Click += new System.EventHandler(this.refreshBtn_Click);
+            // 
             // pic
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -105,7 +131,9 @@
             this.Controls.Add(this.panel1);
             this.Name = "pic";
             this.Size = new System.Drawing.Size(815, 349);
+            this.Load += new System.EventHandler(this.pic_Load);
             this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.refreshBtn)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -116,5 +144,7 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.Timer timer1;
+        private Bunifu.Framework.UI.BunifuImageButton refreshBtn;
     }
 }
