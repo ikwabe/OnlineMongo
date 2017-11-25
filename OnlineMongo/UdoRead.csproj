@@ -127,6 +127,12 @@
     <Compile Include="myProfile.Designer.cs">
       <DependentUpon>myProfile.cs</DependentUpon>
     </Compile>
+    <Compile Include="photoPost.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="photoPost.Designer.cs">
+      <DependentUpon>photoPost.cs</DependentUpon>
+    </Compile>
     <Compile Include="pic.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -242,6 +248,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="myProfile.resx">
       <DependentUpon>myProfile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="photoPost.resx">
+      <DependentUpon>photoPost.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="pic.resx">
       <DependentUpon>pic.cs</DependentUpon>

@@ -72,7 +72,7 @@ namespace OnlineMongo
                     phot.Width = 300;
                     phot.Height = 172;
                     phot.Name = "pic" + i;
-                    phot.SizeMode = PictureBoxSizeMode.Zoom;
+                    phot.SizeMode = PictureBoxSizeMode.StretchImage;
                     phot.Cursor = Cursors.Hand;
 
                 //takking photo to the panel
@@ -100,6 +100,8 @@ namespace OnlineMongo
         private void addPic_Click(object sender, EventArgs e)
         {
             addPicToDb();
+            flowLayoutPanel1.Controls.Clear();
+            timer1.Start();
         }
 
         private void openFileDialog1_FileOk(object sender, CancelEventArgs e)

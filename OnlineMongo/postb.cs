@@ -27,5 +27,17 @@ namespace OnlineMongo
         {
             InitializeComponent();
         }
+
+        private void photo_Click(object sender, EventArgs e)
+        {
+            line.Visible = true;
+            line.Width = photo.Width;
+            line.Left = photo.Left;
+
+            //load photo upload form
+            photoPost phP = new photoPost();
+            phP.Show();
+
+        }
     }
 }

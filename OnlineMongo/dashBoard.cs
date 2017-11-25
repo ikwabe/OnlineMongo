@@ -295,6 +295,7 @@ namespace OnlineMongo
         }
         private void dashBoard_Load_1(object sender, EventArgs e)
         {
+           
             createDirectory();
             line.Visible = true;
             line.Width = home.Width;
