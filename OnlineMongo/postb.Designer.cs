@@ -31,6 +31,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.line = new Bunifu.Framework.UI.BunifuSeparator();
             this.photo = new Bunifu.Framework.UI.BunifuCustomLabel();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -70,10 +71,22 @@
             this.photo.Text = "Upload Photo";
             this.photo.Click += new System.EventHandler(this.photo_Click);
             // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.AutoScroll = true;
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 51);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(815, 298);
+            this.flowLayoutPanel1.TabIndex = 1;
+            this.flowLayoutPanel1.WrapContents = false;
+            // 
             // postb
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.panel1);
             this.Name = "postb";
             this.Size = new System.Drawing.Size(815, 349);
@@ -88,5 +101,6 @@
         private System.Windows.Forms.Panel panel1;
         private Bunifu.Framework.UI.BunifuSeparator line;
         private Bunifu.Framework.UI.BunifuCustomLabel photo;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
     }
 }
