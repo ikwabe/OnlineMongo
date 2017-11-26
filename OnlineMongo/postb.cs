@@ -64,7 +64,7 @@ namespace OnlineMongo
             MySqlDataAdapter ad;
 
             //reading data query
-            string readAccount = "select * from users";
+            string readAccount = "select * from users where username <> '"+ login.txt.Text +"'";
 
             MySqlCommand com = new MySqlCommand(readAccount, con);
             ad = new MySqlDataAdapter(com);
@@ -105,7 +105,7 @@ namespace OnlineMongo
                 uname.Name = "lable" + k;
                 uname.AutoSize = true;
                 uname.ForeColor = Color.DarkGreen;
-                uname.Font = new Font("Cambria", 11);
+                uname.Font = new Font("Cambria", 11,FontStyle.Bold);
                 uname.Text = fullname;
 
                 //Button
@@ -256,8 +256,10 @@ namespace OnlineMongo
 
         private void friendTimer_Tick(object sender, EventArgs e)
         {
+            
             showFriend();
             friendTimer.Stop();
+            
         }
     }
 }

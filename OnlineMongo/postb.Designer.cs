@@ -109,6 +109,7 @@
             // 
             // postTimer
             // 
+            this.postTimer.Interval = 10;
             this.postTimer.Tick += new System.EventHandler(this.postTimer_Tick);
             // 
             // flowLayoutPanel2
@@ -124,6 +125,7 @@
             // 
             // friendTimer
             // 
+            this.friendTimer.Interval = 20;
             this.friendTimer.Tick += new System.EventHandler(this.friendTimer_Tick);
             // 
             // postb
