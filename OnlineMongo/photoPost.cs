@@ -63,8 +63,7 @@ namespace OnlineMongo
         //the function to add a post
         private void addPostToDb()
         {
-            DateTime pst_date = new DateTime();
-            pst_date = DateTime.Today;
+            DateTime pst_date = DateTime.Today;
             MySqlConnection con = new MySqlConnection();
             con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
             string userId = "select * from users where username = '" + login.txt.Text + "'";
@@ -98,7 +97,7 @@ namespace OnlineMongo
                         int user_id = int.Parse(user_idc);
                         //
                         //string to insert data
-                        string pic = "insert into post(image,status,user_id,pst_date,fullname) values(@image,'" + photoSttsTxt.Text + "','" + user_id + "', pst_date = '" + pst_date.ToLongDateString() + "', '"+ fullname +"')";
+                        string pic = "insert into post(image,status,user_id,pst_date,fullname) values(@image,'" + photoSttsTxt.Text + "','" + user_id + "','" + pst_date.ToShortDateString() + "', '"+ fullname +"')";
 
                         //command to insert photos
                         MySqlCommand com = new MySqlCommand(pic, con);

@@ -117,8 +117,7 @@ namespace OnlineMongo
 
         private void addPicToDb()
         {
-            DateTime img_date = new DateTime();
-            img_date = DateTime.Today;
+            DateTime img_date = DateTime.Today;
             MySqlConnection con = new MySqlConnection();
             con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
             string userId = "select * from users where username = '" + login.txt.Text + "'";
@@ -159,7 +158,7 @@ namespace OnlineMongo
                         int user_id = int.Parse(user_idc);
                         //
                         //string to insert data
-                        string pic = "insert into images(image,user_id,img_date) values(@image,'" + user_id + "', img_date = '" + img_date.ToLongDateString() + "')";
+                        string pic = "insert into images(image,user_id,img_date) values(@image,'" + user_id + "','" + img_date.ToShortDateString() + "')";
                     
                         //command to insert photos
                         MySqlCommand com = new MySqlCommand(pic, con);

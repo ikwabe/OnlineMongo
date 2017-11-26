@@ -37,6 +37,9 @@ namespace OnlineMongo
        
         int i = 0;
         int k = 0;
+
+        string frindName;
+        string postname;
        
         private void photo_Click(object sender, EventArgs e)
         {
@@ -112,6 +115,7 @@ namespace OnlineMongo
                 BunifuFlatButton bt = new BunifuFlatButton();
                 bt.Name = "Btn" + i;
                 bt.Text = "Add Friend";
+                frindName = bt.Text;
                 bt.Height = 30;
                 bt.Width = 120;
                 bt.Normalcolor = Color.FromArgb(0, 122, 204);
@@ -120,6 +124,7 @@ namespace OnlineMongo
                 bt.Iconimage = null;
                 bt.TextAlign = ContentAlignment.MiddleCenter;
                 bt.BorderRadius = 5;
+                bt.Click += new EventHandler(addFriendBtn_Click);
 
                 //taking photo to panel
                 flowLayoutPanel2.Controls.Add(phot);
@@ -205,6 +210,7 @@ namespace OnlineMongo
                 BunifuFlatButton bt = new BunifuFlatButton();
                 bt.Name = "Btn" + i;
                 bt.Text = "Comment";
+                postname = bt.Text;
                 bt.Height = 40;
                 bt.Width = 300;
                 bt.Normalcolor = Color.FromArgb(0, 122, 204);
@@ -213,6 +219,7 @@ namespace OnlineMongo
                 bt.Iconimage = null;
                 bt.TextAlign = ContentAlignment.MiddleCenter;
                 bt.BorderRadius = 5;
+                bt.Click += new EventHandler(commentPostBtn_Click);
 
                 //TextBox
                 BunifuCustomTextbox txt = new BunifuCustomTextbox();
@@ -261,5 +268,20 @@ namespace OnlineMongo
             friendTimer.Stop();
             
         }
+
+        //function for add friend button 
+        private void addFriendBtn_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(frindName);
+        }
+
+        //function for commenting the posts
+        private void commentPostBtn_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(postname);
+        }
+
+
+
     }
 }
