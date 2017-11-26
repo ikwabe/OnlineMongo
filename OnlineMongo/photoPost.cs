@@ -47,6 +47,7 @@ namespace OnlineMongo
             animator.ShowSync(panel1);
         }
 
+        //hidding panel and clear text function
         private void panelCont()
         {
             panel1.Visible = false;
@@ -128,7 +129,10 @@ namespace OnlineMongo
                     {
                         addPostToDb();
                         panelCont();
+                        postb pstb = new postb();
+                        pstb.postTimer.Start();
                         MessageBox.Show("Posted");
+                        
 
                     }
                     else
@@ -143,8 +147,13 @@ namespace OnlineMongo
             {
                 addPostToDb();
                 panelCont();
+                postb pstb = new postb();
+                pstb.postTimer.Start();
                 MessageBox.Show("Posted");
+               
             }
+
+            
            
         }
     }
