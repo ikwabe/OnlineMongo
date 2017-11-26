@@ -37,6 +37,7 @@ namespace OnlineMongo
        
         int i = 0;
         int k = 0;
+       
         private void photo_Click(object sender, EventArgs e)
         {
             line.Visible = true;
@@ -59,19 +60,7 @@ namespace OnlineMongo
         {
             MySqlConnection con = new MySqlConnection();
             con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
-            string userId = "select * from users where username = '" + login.txt.Text + "'";
             MySqlDataAdapter ad;
-
-            //taking user id from the database
-            MySqlCommand com1 = new MySqlCommand(userId, con);
-            ad = new MySqlDataAdapter(com1);
-            DataTable table = new DataTable();
-            ad.Fill(table);
-           // string user_idc = table.Rows[0][0].ToString();
-            string fullname = table.Rows[0][1].ToString() + " " + table.Rows[0][2].ToString();
-            ad.Dispose();
-
-           // int user_id = int.Parse(user_idc);
 
             //reading data query
             string readImage = "select * from post";
@@ -123,11 +112,12 @@ namespace OnlineMongo
 
                 }
                 //User Full name
-
+              string  fullname = table1.Rows[j][5].ToString();
                 Label uname = new Label();
                 uname = new Label();
                 uname.Name = "lable" + k;
                 uname.AutoSize = true;
+                uname.ForeColor = Color.DarkGreen;
                 uname.Font = new Font("Cambria", 14);
                 uname.Text = "Posted by: " + fullname;
                 //Button

@@ -92,12 +92,13 @@ namespace OnlineMongo
                         DataTable table = new DataTable();
                         ad.Fill(table);
                         string user_idc = table.Rows[0][0].ToString();
+                        string fullname = table.Rows[0][1].ToString() + " " + table.Rows[0][2].ToString();
                         ad.Dispose();
 
                         int user_id = int.Parse(user_idc);
                         //
                         //string to insert data
-                        string pic = "insert into post(image,status,user_id,pst_date) values(@image,'" + photoSttsTxt.Text + "','" + user_id + "', pst_date = '" + pst_date.ToLongDateString() + "')";
+                        string pic = "insert into post(image,status,user_id,pst_date,fullname) values(@image,'" + photoSttsTxt.Text + "','" + user_id + "', pst_date = '" + pst_date.ToLongDateString() + "', '"+ fullname +"')";
 
                         //command to insert photos
                         MySqlCommand com = new MySqlCommand(pic, con);
