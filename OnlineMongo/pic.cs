@@ -15,7 +15,7 @@ namespace OnlineMongo
 {
     public partial class pic : UserControl
     {
-        private PictureBox[] pictures;
+
         //creating instance to access this control
         public static pic _instance;
         public static pic Instance

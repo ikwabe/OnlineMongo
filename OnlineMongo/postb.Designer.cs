@@ -36,7 +36,10 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.postTimer = new System.Windows.Forms.Timer(this.components);
+            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.friendTimer = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -86,6 +89,7 @@
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.flowLayoutPanel2);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel3.Location = new System.Drawing.Point(0, 51);
             this.panel3.Name = "panel3";
@@ -107,6 +111,21 @@
             // 
             this.postTimer.Tick += new System.EventHandler(this.postTimer_Tick);
             // 
+            // flowLayoutPanel2
+            // 
+            this.flowLayoutPanel2.AutoScroll = true;
+            this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(200, 298);
+            this.flowLayoutPanel2.TabIndex = 0;
+            this.flowLayoutPanel2.WrapContents = false;
+            // 
+            // friendTimer
+            // 
+            this.friendTimer.Tick += new System.EventHandler(this.friendTimer_Tick);
+            // 
             // postb
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -120,6 +139,7 @@
             this.Load += new System.EventHandler(this.postb_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.panel3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -133,5 +153,7 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         public System.Windows.Forms.Timer postTimer;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
+        private System.Windows.Forms.Timer friendTimer;
     }
 }

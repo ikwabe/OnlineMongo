@@ -53,7 +53,88 @@ namespace OnlineMongo
         private void postb_Load(object sender, EventArgs e)
         {
             postTimer.Start();
+            friendTimer.Start();
         }
+
+        //the function to retrieve user acounts from the databases
+        private void showFriend()
+        {
+            MySqlConnection con = new MySqlConnection();
+            con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+            MySqlDataAdapter ad;
+
+            //reading data query
+            string readAccount = "select * from users";
+
+            MySqlCommand com = new MySqlCommand(readAccount, con);
+            ad = new MySqlDataAdapter(com);
+            DataTable table1 = new DataTable();
+            ad.Fill(table1);
+
+
+
+            for (int j = 0; j < table1.Rows.Count; j++)
+            {
+                i++;
+                //Image
+                PictureBox phot = new PictureBox();
+                phot.Width = 120;
+                phot.Height =95;
+                phot.Name = "pic" + i;
+                phot.SizeMode = PictureBoxSizeMode.Zoom;
+                phot.Cursor = Cursors.Hand;
+
+                //takking photo to the panel
+                try
+                {
+                    byte[] img = (byte[])table1.Rows[j][7];
+                    MemoryStream ms = new MemoryStream(img);
+                    phot.Image = Image.FromStream(ms);
+
+
+                }
+                catch
+                {
+
+                }
+
+                //User Full name
+                string fullname = table1.Rows[j][1].ToString() + " " + table1.Rows[j][2].ToString();
+                Label uname = new Label();
+                uname = new Label();
+                uname.Name = "lable" + k;
+                uname.AutoSize = true;
+                uname.ForeColor = Color.DarkGreen;
+                uname.Font = new Font("Cambria", 11);
+                uname.Text = fullname;
+
+                //Button
+                BunifuFlatButton bt = new BunifuFlatButton();
+                bt.Name = "Btn" + i;
+                bt.Text = "Add Friend";
+                bt.Height = 30;
+                bt.Width = 120;
+                bt.Normalcolor = Color.FromArgb(0, 122, 204);
+                bt.OnHovercolor = Color.FromArgb(32, 9, 191);
+                bt.Activecolor = Color.FromArgb(0, 122, 204);
+                bt.Iconimage = null;
+                bt.TextAlign = ContentAlignment.MiddleCenter;
+                bt.BorderRadius = 5;
+
+                //taking photo to panel
+                flowLayoutPanel2.Controls.Add(phot);
+
+                //adding user name to the panel
+                flowLayoutPanel2.Controls.Add(uname);
+
+                //adding button to the panel
+                flowLayoutPanel2.Controls.Add(bt);
+            }
+
+            ad.Dispose();
+
+        }
+
 
         //function for retreaving posts from post table
         private void loadPost()
@@ -171,6 +252,12 @@ namespace OnlineMongo
 
             loadPost();
             postTimer.Stop();
+        }
+
+        private void friendTimer_Tick(object sender, EventArgs e)
+        {
+            showFriend();
+            friendTimer.Stop();
         }
     }
 }
