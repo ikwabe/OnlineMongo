@@ -34,13 +34,9 @@ namespace OnlineMongo
 
       
         Label lb;
-       
+        string comment;
         int i = 0;
         int k = 0;
-
-        string frindName;
-        string postname;
-       
         private void photo_Click(object sender, EventArgs e)
         {
             line.Visible = true;
@@ -86,7 +82,7 @@ namespace OnlineMongo
                 phot.Name = "pic" + i;
                 phot.SizeMode = PictureBoxSizeMode.Zoom;
                 phot.Cursor = Cursors.Hand;
-
+              
                 //takking photo to the panel
                 try
                 {
@@ -115,7 +111,7 @@ namespace OnlineMongo
                 BunifuFlatButton bt = new BunifuFlatButton();
                 bt.Name = "Btn" + i;
                 bt.Text = "Add Friend";
-                frindName = bt.Text;
+               
                 bt.Height = 30;
                 bt.Width = 120;
                 bt.Normalcolor = Color.FromArgb(0, 122, 204);
@@ -139,7 +135,9 @@ namespace OnlineMongo
             ad.Dispose();
 
         }
-
+        BunifuFlatButton[] bt;
+        string [] btnName;
+        int count = 0;
 
         //function for retreaving posts from post table
         private void loadPost()
@@ -158,8 +156,12 @@ namespace OnlineMongo
 
 
 
+            bt = new BunifuFlatButton[table1.Rows.Count];
+            btnName = new string[table1.Rows.Count];
+            count = table1.Rows.Count;
             for (int j = 0; j < table1.Rows.Count; j++)
             {
+               
                 i++;
                 //Image
                 PictureBox phot = new PictureBox();
@@ -201,25 +203,25 @@ namespace OnlineMongo
               string  fullname = table1.Rows[j][5].ToString();
                 Label uname = new Label();
                 uname = new Label();
-                uname.Name = "lable" + k;
+                uname.Name = "lable" + k.ToString();
                 uname.AutoSize = true;
                 uname.ForeColor = Color.DarkGreen;
                 uname.Font = new Font("Cambria", 14);
                 uname.Text = "Posted by: " + fullname;
                 //Button
-                BunifuFlatButton bt = new BunifuFlatButton();
-                bt.Name = "Btn" + i;
-                bt.Text = "Comment";
-                postname = bt.Text;
-                bt.Height = 40;
-                bt.Width = 300;
-                bt.Normalcolor = Color.FromArgb(0, 122, 204);
-                bt.OnHovercolor = Color.FromArgb(32, 9, 191);
-                bt.Activecolor = Color.FromArgb(0, 122, 204);
-                bt.Iconimage = null;
-                bt.TextAlign = ContentAlignment.MiddleCenter;
-                bt.BorderRadius = 5;
-                bt.Click += new EventHandler(commentPostBtn_Click);
+
+                bt[j] = new BunifuFlatButton();
+                bt[j].Text =  "Comment";
+                bt[j].Name = "Btn" + i.ToString();
+                bt[j].Height = 40;
+                bt[j].Width = 300;
+                bt[j].Normalcolor = Color.FromArgb(0, 122, 204);
+                bt[j].OnHovercolor = Color.FromArgb(32, 9, 191);
+                bt[j].Activecolor = Color.FromArgb(0, 122, 204);
+                bt[j].Iconimage = null;
+                bt[j].TextAlign = ContentAlignment.MiddleCenter;
+                bt[j].BorderRadius = 5;
+                bt[j].Click += new EventHandler(commentPostBtn_Click);
 
                 //TextBox
                 BunifuCustomTextbox txt = new BunifuCustomTextbox();
@@ -232,21 +234,23 @@ namespace OnlineMongo
                 txt.BorderStyle = BorderStyle.FixedSingle;
                 txt.ForeColor = Color.Black;
                 txt.BorderColor = Color.FromArgb(32,9,191);
+                txt.TextChanged += new EventHandler(txt_TextChanged);
 
-                //adding user name to the panel
-                flowLayoutPanel1.Controls.Add(uname);
-
-                //takking lable to the panel
-                flowLayoutPanel1.Controls.Add(lb);
-
-                //taking photo to panel
-                flowLayoutPanel1.Controls.Add(phot);
+                //adding button to the panel
+                flowLayoutPanel1.Controls.Add(bt[j]);
 
                 //adding Textbox
                 flowLayoutPanel1.Controls.Add(txt);
 
-                //adding button to the panel
-                flowLayoutPanel1.Controls.Add(bt);
+                //taking photo to panel
+                flowLayoutPanel1.Controls.Add(phot);
+
+                //takking lable to the panel
+                flowLayoutPanel1.Controls.Add(lb);
+
+                //adding user name to the panel
+                flowLayoutPanel1.Controls.Add(uname);
+               
             }
 
             ad.Dispose();
@@ -272,13 +276,27 @@ namespace OnlineMongo
         //function for add friend button 
         private void addFriendBtn_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(frindName);
+            MessageBox.Show("System is in Testing");
+        }
+      
+       
+        private void txt_TextChanged(object sender, EventArgs e)
+        {
+            var txt = sender as BunifuCustomTextbox;
+
+            comment = txt.Text;
+
+
         }
 
         //function for commenting the posts
         private void commentPostBtn_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(postname);
+            var button = sender as BunifuFlatButton;
+
+            MessageBox.Show(button.Name.ToString());
+            MessageBox.Show(comment);
+
         }
 
 

@@ -198,6 +198,7 @@
             this.pwd.Size = new System.Drawing.Size(295, 30);
             this.pwd.TabIndex = 26;
             this.pwd.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.pwd.KeyDown += new System.Windows.Forms.KeyEventHandler(this.pwd_KeyDown);
             // 
             // forgetPwdLink
             // 

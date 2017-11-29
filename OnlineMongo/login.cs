@@ -102,5 +102,46 @@ namespace OnlineMongo
             con.Close();
         }
 
+        private void pwd_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                MySqlConnection con = new MySqlConnection();
+                con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+                string signIn = "select username,password from users where username = '" + txt.Text + "' and password = '" + pwd.Text + "'";
+
+                MySqlCommand com = new MySqlCommand(signIn, con);
+                try
+                {
+                    con.Open();
+                    MySqlDataReader reader;
+                    DataTable table = new DataTable();
+                    reader = com.ExecuteReader();
+                    table.Load(reader);
+                    reader.Close();
+
+                    if (table.Rows.Count > 0)
+                    {
+                        pwd.Enabled = false;
+                        dashBoard dsb = new dashBoard();
+                        dsb.Show();
+                        this.Hide();
+                    }
+                    else
+                    {
+                        label3.Text = "You have enterd a wrong Password or Username";
+                    }
+                }
+                catch (MySqlException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                con.Close();
+            }
+            else
+            {
+
+            }
+        }
     }
 }
