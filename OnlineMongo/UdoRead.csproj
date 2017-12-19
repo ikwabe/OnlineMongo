@@ -145,6 +145,12 @@
     <Compile Include="picPreview.Designer.cs">
       <DependentUpon>picPreview.cs</DependentUpon>
     </Compile>
+    <Compile Include="pictureView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="pictureView.Designer.cs">
+      <DependentUpon>pictureView.cs</DependentUpon>
+    </Compile>
     <Compile Include="pinWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -257,6 +263,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="picPreview.resx">
       <DependentUpon>picPreview.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pictureView.resx">
+      <DependentUpon>pictureView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="pinWindow.resx">
       <DependentUpon>pinWindow.cs</DependentUpon>

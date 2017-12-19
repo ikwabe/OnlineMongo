@@ -181,6 +181,7 @@ namespace OnlineMongo
                 {
                     reader = com1.ExecuteReader();
                     reader.Close();
+                    richTextBox1.Clear();
                     MessageBox.Show("E-mail delete successifully");
                 }
                 else

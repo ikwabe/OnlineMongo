@@ -72,27 +72,68 @@ namespace OnlineMongo
                 con.Open();
                 if(seComboBox.Visible == true && cusSecQn.Visible == false)
                 {
-                    //inserting the question from combobox
-                    reader = com1.ExecuteReader();
-                    reader.Close();
+                    
+                    try
+                    {
+                        if(seComboBox.Text != "Choose the question...")
+                        {
+                            if(secword.Text != "")
+                            {
+                                //inserting the question from combobox
+                                reader = com1.ExecuteReader();
+                                reader.Close();
 
-                    //inserting the secret word`s answer
-                    reader2 = com2.ExecuteReader();
-                    reader2.Close();
-                    MessageBox.Show("Your secret word is " + secword.Text + ", and it is successiful saved.");
-                    this.Close();
+
+                                //inserting the secret word`s answer
+                                reader2 = com2.ExecuteReader();
+                                reader2.Close();
+                                MessageBox.Show("Your secret word is " + secword.Text + ", and it is successiful saved.");
+                                this.Close();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Please set an Answer for The Question.");
+                            }
+                           
+                        }
+                        else
+                        {
+                            MessageBox.Show("Please Select the Queston");
+                        }
+                       
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Please select the Question.");
+                    }
+                    
                 }
                 else if(cusSecQn.Visible == true && seComboBox.Visible == false)
                 {
-                    //inserting the question from textBox
-                    reader = com.ExecuteReader();
-                    reader.Close();
+                    if (cusSecQn.Text != "")
+                    {
+                        if(secword.Text != "")
+                        {
+                            //inserting the question from textBox
+                            reader = com.ExecuteReader();
+                            reader.Close();
 
-                    //inserting the secret word`s answer
-                    reader2 = com2.ExecuteReader();
-                    reader2.Close();
-                    MessageBox.Show("Your secret word is " + secword.Text + ", and it is successiful saved.");
-                    this.Close();
+                            //inserting the secret word`s answer
+                            reader2 = com2.ExecuteReader();
+                            reader2.Close();
+                            MessageBox.Show("Your secret word is " + secword.Text + ", and it is successiful saved.");
+                            this.Close();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Please set an Answer for The Question.");
+                        }
+                        
+                    }
+                    else
+                    {
+                        MessageBox.Show("Please Write Your Question.");
+                    }
                 }
                 else
                 {

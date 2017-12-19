@@ -39,6 +39,7 @@ namespace OnlineMongo
                 classPage.Instance.Width = 810;
                 friendtb.Instance.Width = 810;
                 hometb.Instance.Dock = DockStyle.Fill;
+                signOutBtn.Location = new Point(1000, signOutBtn.Location.Y);
 
 
             }
@@ -48,6 +49,7 @@ namespace OnlineMongo
                 panel2.Width = 50;
                 logo.Visible = false;
                 mnBtn.Location = new Point(12, mnBtn.Location.Y);
+                signOutBtn.Location = new Point(1200, signOutBtn.Location.Y);
                 panelAnimator.ShowSync(panel2);
                 panel4.Width = 1015;
                 pic.Instance.Width = 1015;
@@ -68,7 +70,8 @@ namespace OnlineMongo
 
             if (MessageBox.Show("Are you sure you want to close?", "Close", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-                Application.Exit();
+                Application.Restart();
+              
             }
         }
 
@@ -295,7 +298,13 @@ namespace OnlineMongo
         }
         private void dashBoard_Load_1(object sender, EventArgs e)
         {
+            //maximize the window
+            maximize();
            
+           
+
+
+            //creating Directory for the app Data.
             createDirectory();
             line.Visible = true;
             line.Width = home.Width;
@@ -313,8 +322,8 @@ namespace OnlineMongo
             trashTab.Instance.Visible = false;
             settingTab.Instance.Visible = false;
             sentTab.Instance.Visible = false;
-            bunifuImageButton4.Visible = false;
-            bunifuImageButton4.Location = new Point(1260, bunifuImageButton4.Location.Y);
+            //restoreDownBtn.Visible = false;
+            //restoreDownBtn.Location = new Point(1260, restoreDownBtn.Location.Y);
             hometb.Instance.BringToFront();
             panel4.Controls.Add(hometb.Instance);
             hometb.Instance.Dock = DockStyle.Fill;
@@ -651,33 +660,61 @@ namespace OnlineMongo
             }
         }
 
-        private void bunifuImageButton3_Click(object sender, EventArgs e)
+        //function to maximize the screen
+
+            private void maximize()
         {
             this.WindowState = FormWindowState.Maximized;
             panel4.Height = 600;
-            bunifuImageButton4.Visible = true;
-            bunifuImageButton3.Visible = false;
-            bunifuImageButton1.Location = new Point(1320, bunifuImageButton1.Location.Y);
-            bunifuImageButton2.Location = new Point(1260, bunifuImageButton2.Location.Y);
-            bunifuImageButton3.Location = new Point(1290, bunifuImageButton3.Location.Y);
-            bunifuImageButton4.Location = new Point(1290, bunifuImageButton4.Location.Y);
+            restoreDownBtn.Visible = true;
+            restoreDownBtn.BringToFront();
+            maximizeBtn.Visible = false;
+            closeBtn.Location = new Point(1320, closeBtn.Location.Y);
+            miniMizeBtn.Location = new Point(1260, miniMizeBtn.Location.Y);
+            maximizeBtn.Location = new Point(1290, maximizeBtn.Location.Y);
+            restoreDownBtn.Location = new Point(1290, restoreDownBtn.Location.Y);
+            signOutBtn.Location = new Point(1200, signOutBtn.Location.Y);
         }
 
-        private void bunifuImageButton4_Click(object sender, EventArgs e)
+        //function for restoring the screen to normal size
+        private void restoreDown()
         {
             panel4.Height = 336;
             this.WindowState = FormWindowState.Normal;
-            bunifuImageButton3.Visible = true;
-            bunifuImageButton4.Visible = false;
-            bunifuImageButton1.Location = new Point(1063, bunifuImageButton1.Location.Y);
-            bunifuImageButton2.Location = new Point(1003, bunifuImageButton2.Location.Y);
-            bunifuImageButton3.Location = new Point(1033, bunifuImageButton3.Location.Y);
+            maximizeBtn.Visible = true;
+            restoreDownBtn.Visible = false;
+            closeBtn.Location = new Point(1063, closeBtn.Location.Y);
+            miniMizeBtn.Location = new Point(1003, miniMizeBtn.Location.Y);
+            maximizeBtn.Location = new Point(1033, maximizeBtn.Location.Y);
+            signOutBtn.Location = new Point(776, signOutBtn.Location.Y);
         }
 
         private void chooseQn_Click(object sender, EventArgs e)
         {
             secretWord sc = new secretWord();
             sc.Show();
+        }
+
+        private void logoutBtn_Click(object sender, EventArgs e)
+        {
+            Application.Restart();
+        }
+
+        //restoreDown Button
+        private void restoreDownBtn_Click(object sender, EventArgs e)
+        {
+            restoreDown();
+        }
+
+        //maximize button
+        private void maximizeBtn_Click(object sender, EventArgs e)
+        {
+            maximize();
+        }
+
+        private void signOutBtn_Click(object sender, EventArgs e)
+        {
+            Application.Restart();
         }
     }
 }

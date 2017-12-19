@@ -28,7 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(classPage));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.bunifuSeparator3 = new Bunifu.Framework.UI.BunifuSeparator();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -54,7 +56,6 @@
             this.hideVideoBtn = new Bunifu.Framework.UI.BunifuFlatButton();
             this.videoList = new System.Windows.Forms.ListBox();
             this.lectureView = new System.Windows.Forms.ListBox();
-            this.bookView = new System.Windows.Forms.ListBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
@@ -81,13 +82,19 @@
             this.label3 = new System.Windows.Forms.Label();
             this.subjectTextBox2 = new Bunifu.Framework.UI.BunifuMaterialTextbox();
             this.label4 = new System.Windows.Forms.Label();
-            this.bunifuThinButton22 = new Bunifu.Framework.UI.BunifuThinButton2();
+            this.lectSendBtn = new Bunifu.Framework.UI.BunifuThinButton2();
             this.videoPlayer = new AxWMPLib.AxWindowsMediaPlayer();
             this.openBookBtn = new Bunifu.Framework.UI.BunifuFlatButton();
+            this.bookDataGrid = new System.Windows.Forms.DataGridView();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.openLectureBtn = new Bunifu.Framework.UI.BunifuFlatButton();
             this.bookgroupBox.SuspendLayout();
             this.videogroupBox.SuspendLayout();
             this.lecturegroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.videoPlayer)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bookDataGrid)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // bunifuSeparator3
@@ -99,7 +106,7 @@
             this.bunifuSeparator3.LineThickness = 3;
             this.bunifuSeparator3.Location = new System.Drawing.Point(1, 693);
             this.bunifuSeparator3.Name = "bunifuSeparator3";
-            this.bunifuSeparator3.Size = new System.Drawing.Size(872, 3);
+            this.bunifuSeparator3.Size = new System.Drawing.Size(1019, 3);
             this.bunifuSeparator3.TabIndex = 47;
             this.bunifuSeparator3.Transparency = 255;
             this.bunifuSeparator3.Vertical = false;
@@ -137,7 +144,7 @@
             this.bunifuSeparator1.LineThickness = 3;
             this.bunifuSeparator1.Location = new System.Drawing.Point(1, 416);
             this.bunifuSeparator1.Name = "bunifuSeparator1";
-            this.bunifuSeparator1.Size = new System.Drawing.Size(872, 3);
+            this.bunifuSeparator1.Size = new System.Drawing.Size(1019, 3);
             this.bunifuSeparator1.TabIndex = 37;
             this.bunifuSeparator1.Transparency = 255;
             this.bunifuSeparator1.Vertical = false;
@@ -151,7 +158,7 @@
             this.bunifuSeparator2.LineThickness = 3;
             this.bunifuSeparator2.Location = new System.Drawing.Point(1, 141);
             this.bunifuSeparator2.Name = "bunifuSeparator2";
-            this.bunifuSeparator2.Size = new System.Drawing.Size(872, 3);
+            this.bunifuSeparator2.Size = new System.Drawing.Size(1019, 3);
             this.bunifuSeparator2.TabIndex = 36;
             this.bunifuSeparator2.Transparency = 255;
             this.bunifuSeparator2.Vertical = false;
@@ -618,7 +625,7 @@
             this.bunifuSeparator4.LineThickness = 3;
             this.bunifuSeparator4.Location = new System.Drawing.Point(-2, 968);
             this.bunifuSeparator4.Name = "bunifuSeparator4";
-            this.bunifuSeparator4.Size = new System.Drawing.Size(872, 3);
+            this.bunifuSeparator4.Size = new System.Drawing.Size(1019, 3);
             this.bunifuSeparator4.TabIndex = 60;
             this.bunifuSeparator4.Transparency = 255;
             this.bunifuSeparator4.Vertical = false;
@@ -715,14 +722,6 @@
             this.lectureView.Name = "lectureView";
             this.lectureView.Size = new System.Drawing.Size(231, 199);
             this.lectureView.TabIndex = 69;
-            // 
-            // bookView
-            // 
-            this.bookView.FormattingEnabled = true;
-            this.bookView.Location = new System.Drawing.Point(19, 150);
-            this.bookView.Name = "bookView";
-            this.bookView.Size = new System.Drawing.Size(231, 199);
-            this.bookView.TabIndex = 70;
             // 
             // label8
             // 
@@ -1035,7 +1034,7 @@
             this.lecturegroupBox.Controls.Add(this.label3);
             this.lecturegroupBox.Controls.Add(this.subjectTextBox2);
             this.lecturegroupBox.Controls.Add(this.label4);
-            this.lecturegroupBox.Controls.Add(this.bunifuThinButton22);
+            this.lecturegroupBox.Controls.Add(this.lectSendBtn);
             this.lecturegroupBox.Location = new System.Drawing.Point(381, 425);
             this.lecturegroupBox.Name = "lecturegroupBox";
             this.lecturegroupBox.Size = new System.Drawing.Size(414, 263);
@@ -1152,30 +1151,31 @@
             this.label4.TabIndex = 89;
             this.label4.Text = "To:";
             // 
-            // bunifuThinButton22
+            // lectSendBtn
             // 
-            this.bunifuThinButton22.ActiveBorderThickness = 1;
-            this.bunifuThinButton22.ActiveCornerRadius = 20;
-            this.bunifuThinButton22.ActiveFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(0)))), ((int)(((byte)(40)))));
-            this.bunifuThinButton22.ActiveForecolor = System.Drawing.Color.Gray;
-            this.bunifuThinButton22.ActiveLineColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.bunifuThinButton22.BackColor = System.Drawing.SystemColors.Control;
-            this.bunifuThinButton22.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("bunifuThinButton22.BackgroundImage")));
-            this.bunifuThinButton22.ButtonText = "Send";
-            this.bunifuThinButton22.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.bunifuThinButton22.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bunifuThinButton22.ForeColor = System.Drawing.Color.DimGray;
-            this.bunifuThinButton22.IdleBorderThickness = 1;
-            this.bunifuThinButton22.IdleCornerRadius = 20;
-            this.bunifuThinButton22.IdleFillColor = System.Drawing.Color.Transparent;
-            this.bunifuThinButton22.IdleForecolor = System.Drawing.Color.Black;
-            this.bunifuThinButton22.IdleLineColor = System.Drawing.Color.DarkSlateBlue;
-            this.bunifuThinButton22.Location = new System.Drawing.Point(323, 222);
-            this.bunifuThinButton22.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.bunifuThinButton22.Name = "bunifuThinButton22";
-            this.bunifuThinButton22.Size = new System.Drawing.Size(76, 34);
-            this.bunifuThinButton22.TabIndex = 88;
-            this.bunifuThinButton22.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lectSendBtn.ActiveBorderThickness = 1;
+            this.lectSendBtn.ActiveCornerRadius = 20;
+            this.lectSendBtn.ActiveFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(0)))), ((int)(((byte)(40)))));
+            this.lectSendBtn.ActiveForecolor = System.Drawing.Color.Gray;
+            this.lectSendBtn.ActiveLineColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.lectSendBtn.BackColor = System.Drawing.SystemColors.Control;
+            this.lectSendBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("lectSendBtn.BackgroundImage")));
+            this.lectSendBtn.ButtonText = "Send";
+            this.lectSendBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lectSendBtn.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lectSendBtn.ForeColor = System.Drawing.Color.DimGray;
+            this.lectSendBtn.IdleBorderThickness = 1;
+            this.lectSendBtn.IdleCornerRadius = 20;
+            this.lectSendBtn.IdleFillColor = System.Drawing.Color.Transparent;
+            this.lectSendBtn.IdleForecolor = System.Drawing.Color.Black;
+            this.lectSendBtn.IdleLineColor = System.Drawing.Color.DarkSlateBlue;
+            this.lectSendBtn.Location = new System.Drawing.Point(323, 222);
+            this.lectSendBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lectSendBtn.Name = "lectSendBtn";
+            this.lectSendBtn.Size = new System.Drawing.Size(76, 34);
+            this.lectSendBtn.TabIndex = 88;
+            this.lectSendBtn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lectSendBtn.Click += new System.EventHandler(this.lectSendBtn_Click);
             // 
             // videoPlayer
             // 
@@ -1223,16 +1223,85 @@
             this.openBookBtn.TextFont = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.openBookBtn.Click += new System.EventHandler(this.openBookBtn_Click);
             // 
+            // bookDataGrid
+            // 
+            this.bookDataGrid.AllowUserToAddRows = false;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Cambria", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            this.bookDataGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.bookDataGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.bookDataGrid.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.bookDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.bookDataGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.bookDataGrid.Location = new System.Drawing.Point(0, 0);
+            this.bookDataGrid.Name = "bookDataGrid";
+            this.bookDataGrid.ReadOnly = true;
+            this.bookDataGrid.Size = new System.Drawing.Size(243, 221);
+            this.bookDataGrid.TabIndex = 96;
+            this.bookDataGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.bookDataGrid_CellClick);
+            // 
+            // panel1
+            // 
+            this.panel1.AutoScroll = true;
+            this.panel1.BackColor = System.Drawing.Color.Transparent;
+            this.panel1.Controls.Add(this.bookDataGrid);
+            this.panel1.Location = new System.Drawing.Point(19, 150);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(243, 221);
+            this.panel1.TabIndex = 97;
+            // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // openLectureBtn
+            // 
+            this.openLectureBtn.Activecolor = System.Drawing.Color.Transparent;
+            this.openLectureBtn.BackColor = System.Drawing.Color.Transparent;
+            this.openLectureBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.openLectureBtn.BorderRadius = 0;
+            this.openLectureBtn.ButtonText = "Open Lecture";
+            this.openLectureBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.openLectureBtn.DisabledColor = System.Drawing.Color.Transparent;
+            this.openLectureBtn.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.openLectureBtn.Iconcolor = System.Drawing.Color.Transparent;
+            this.openLectureBtn.Iconimage = null;
+            this.openLectureBtn.Iconimage_right = null;
+            this.openLectureBtn.Iconimage_right_Selected = null;
+            this.openLectureBtn.Iconimage_Selected = null;
+            this.openLectureBtn.IconMarginLeft = 0;
+            this.openLectureBtn.IconMarginRight = 0;
+            this.openLectureBtn.IconRightVisible = true;
+            this.openLectureBtn.IconRightZoom = 0D;
+            this.openLectureBtn.IconVisible = false;
+            this.openLectureBtn.IconZoom = 90D;
+            this.openLectureBtn.IsTab = false;
+            this.openLectureBtn.Location = new System.Drawing.Point(268, 614);
+            this.openLectureBtn.Name = "openLectureBtn";
+            this.openLectureBtn.Normalcolor = System.Drawing.Color.Transparent;
+            this.openLectureBtn.OnHovercolor = System.Drawing.Color.DarkGray;
+            this.openLectureBtn.OnHoverTextColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(0)))), ((int)(((byte)(40)))));
+            this.openLectureBtn.selected = false;
+            this.openLectureBtn.Size = new System.Drawing.Size(100, 19);
+            this.openLectureBtn.TabIndex = 98;
+            this.openLectureBtn.Text = "Open Lecture";
+            this.openLectureBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.openLectureBtn.Textcolor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.openLectureBtn.TextFont = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.openLectureBtn.Click += new System.EventHandler(this.openLectureBtn_Click);
+            // 
             // classPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
+            this.Controls.Add(this.openLectureBtn);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.openBookBtn);
             this.Controls.Add(this.lecturegroupBox);
             this.Controls.Add(this.videogroupBox);
             this.Controls.Add(this.bookgroupBox);
-            this.Controls.Add(this.bookView);
             this.Controls.Add(this.lectureView);
             this.Controls.Add(this.videoPlayer);
             this.Controls.Add(this.videoList);
@@ -1259,7 +1328,8 @@
             this.Controls.Add(this.userPrflName);
             this.Controls.Add(this.addBook);
             this.Name = "classPage";
-            this.Size = new System.Drawing.Size(730, 264);
+            this.Size = new System.Drawing.Size(696, 230);
+            this.Load += new System.EventHandler(this.classPage_Load);
             this.bookgroupBox.ResumeLayout(false);
             this.bookgroupBox.PerformLayout();
             this.videogroupBox.ResumeLayout(false);
@@ -1267,6 +1337,8 @@
             this.lecturegroupBox.ResumeLayout(false);
             this.lecturegroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.videoPlayer)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bookDataGrid)).EndInit();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1300,7 +1372,6 @@
         private System.Windows.Forms.ListBox videoList;
         private AxWMPLib.AxWindowsMediaPlayer videoPlayer;
         private System.Windows.Forms.ListBox lectureView;
-        private System.Windows.Forms.ListBox bookView;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
@@ -1327,7 +1398,11 @@
         private System.Windows.Forms.Label label3;
         private Bunifu.Framework.UI.BunifuMaterialTextbox subjectTextBox2;
         private System.Windows.Forms.Label label4;
-        private Bunifu.Framework.UI.BunifuThinButton2 bunifuThinButton22;
+        private Bunifu.Framework.UI.BunifuThinButton2 lectSendBtn;
         private Bunifu.Framework.UI.BunifuFlatButton openBookBtn;
+        private System.Windows.Forms.DataGridView bookDataGrid;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Timer timer1;
+        private Bunifu.Framework.UI.BunifuFlatButton openLectureBtn;
     }
 }

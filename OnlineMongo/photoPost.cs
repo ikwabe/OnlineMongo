@@ -129,8 +129,6 @@ namespace OnlineMongo
                     {
                         addPostToDb();
                         panelCont();
-                        postb pstb = new postb();
-                        pstb.postTimer.Start();
                         MessageBox.Show("Posted");
                         
 

@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(postb));
             this.panel1 = new System.Windows.Forms.Panel();
             this.line = new Bunifu.Framework.UI.BunifuSeparator();
             this.photo = new Bunifu.Framework.UI.BunifuCustomLabel();
@@ -38,13 +39,17 @@
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.postTimer = new System.Windows.Forms.Timer(this.components);
             this.friendTimer = new System.Windows.Forms.Timer(this.components);
+            this.refreshBtn = new Bunifu.Framework.UI.BunifuImageButton();
+            this.instPostTimer = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.refreshBtn)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.Control;
+            this.panel1.Controls.Add(this.refreshBtn);
             this.panel1.Controls.Add(this.line);
             this.panel1.Controls.Add(this.photo);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -128,6 +133,25 @@
             this.friendTimer.Interval = 20;
             this.friendTimer.Tick += new System.EventHandler(this.friendTimer_Tick);
             // 
+            // refreshBtn
+            // 
+            this.refreshBtn.BackColor = System.Drawing.Color.Transparent;
+            this.refreshBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.refreshBtn.Image = ((System.Drawing.Image)(resources.GetObject("refreshBtn.Image")));
+            this.refreshBtn.ImageActive = null;
+            this.refreshBtn.Location = new System.Drawing.Point(366, 19);
+            this.refreshBtn.Name = "refreshBtn";
+            this.refreshBtn.Size = new System.Drawing.Size(36, 23);
+            this.refreshBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.refreshBtn.TabIndex = 14;
+            this.refreshBtn.TabStop = false;
+            this.refreshBtn.Zoom = 10;
+            this.refreshBtn.Click += new System.EventHandler(this.refreshBtn_Click);
+            // 
+            // instPostTimer
+            // 
+            this.instPostTimer.Tick += new System.EventHandler(this.instPostTimer_Tick);
+            // 
             // postb
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -142,6 +166,7 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.refreshBtn)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -153,9 +178,11 @@
         private Bunifu.Framework.UI.BunifuCustomLabel photo;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         public System.Windows.Forms.Timer postTimer;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private System.Windows.Forms.Timer friendTimer;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
+        private Bunifu.Framework.UI.BunifuImageButton refreshBtn;
+        private System.Windows.Forms.Timer instPostTimer;
     }
 }

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using System.Text.RegularExpressions;
 
 namespace OnlineMongo
 {
@@ -68,12 +69,15 @@ namespace OnlineMongo
                 MySqlDataReader reader;
                 MySqlDataReader reader1;
                 MySqlDataReader reader2;
+                //verifying if the password is correct
                 if (pwd.Text == rtPwd.Text)
                 {
+
                     DataTable table1 = new DataTable();
                     reader1 = com1.ExecuteReader();
                     table1.Load(reader1);
                     reader1.Close();
+                    //checking if the email exist in the database
                     if (table1.Rows.Count > 0)
                     {
                         MessageBox.Show("The enterd email, already exist. Please login", "Information", MessageBoxButtons.OK);
@@ -81,6 +85,8 @@ namespace OnlineMongo
                     }
                     else
                     {
+                        //Cheking if the user is already registerd
+
                         DataTable table2 = new DataTable();
                         reader2 = com2.ExecuteReader();
                         table2.Load(reader2);
@@ -92,12 +98,24 @@ namespace OnlineMongo
                         }
                         else
                         {
-                            reader = com.ExecuteReader();
-                            reader.Close();
-                            MessageBox.Show("Welcome,You have been added", "User added", MessageBoxButtons.OK);
-                            this.Close();
-                            login lgn = new login();
-                            lgn.Show();
+                            //verifying the email if is valid
+
+                            Regex reg = new Regex(@"\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*");
+                            if (!reg.IsMatch(email.Text))
+                            {
+                                MessageBox.Show("Please enter the valid email");
+                            }
+                            else
+                            {
+                                //creating the account
+
+                                reader = com.ExecuteReader();
+                                reader.Close();
+                                MessageBox.Show("Welcome,You have been added", "User added", MessageBoxButtons.OK);
+                                this.Close();
+                                login lgn = new login();
+                                lgn.Show();
+                            } 
                         }
                     }
                     

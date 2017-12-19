@@ -37,5 +37,11 @@ namespace OnlineMongo
         {
             this.Close();
         }
+
+        private void readerPdf_Load(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Maximized;
+            CancelBtn.Location = new Point(1281, 725);
+        }
     }
 }

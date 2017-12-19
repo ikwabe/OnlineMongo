@@ -191,7 +191,7 @@ namespace OnlineMongo
                 reader.Close();
 
                 MessageBox.Show("Moved to Trash");
-
+                richTextBox1.Clear();
                 if(emailsList.SelectedRows.Count > 0)
                 {
                     emailsList.Rows.RemoveAt(emailsList.SelectedRows[0].Index); 
