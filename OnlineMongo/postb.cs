@@ -70,12 +70,17 @@ namespace OnlineMongo
 
             //string to read userID from request table
             string checkReq = "select * from requests";
-
+            con.Open();
             //for request user_id fetch
             MySqlCommand com1 = new MySqlCommand(checkReq, con);
             ad = new MySqlDataAdapter(com1);
             DataTable table = new DataTable();
             ad.Fill(table);
+
+            //execute ones to check if the database is empty or not
+            object nullValue = com1.ExecuteScalar();
+            
+
             ReqUser_id = new int[table.Rows.Count];
             for(int i =0; i< table.Rows.Count; i++)
             {
@@ -89,101 +94,163 @@ namespace OnlineMongo
             ad = new MySqlDataAdapter(com);
             DataTable table1 = new DataTable();
             ad.Fill(table1);
-
+            
             i = 0;
 
             for (int j = 0; j < table1.Rows.Count; j++)
             {
-
-                
                 string user_id = table1.Rows[j][0].ToString();
-try
+
+                //if the database return null value
+                if(nullValue == null || nullValue == DBNull.Value)
                 {
-                    //reseting if the bound exeeds
-                    if (i > (table.Rows.Count - 1))
+                    //Image
+                    PictureBox phot = new PictureBox();
+                    phot.Width = 120;
+                    phot.Height = 95;
+                    phot.Name = user_id;
+                    phot.SizeMode = PictureBoxSizeMode.Zoom;
+                    phot.Cursor = Cursors.Hand;
+
+                    //takking photo to the panel
+                    try
                     {
-                        i = table.Rows.Count - 1;
-
-                    }
-                    else
-                    {
-
-                    }
-                    //checking if the request is available
-                    if (ReqUser_id[i] != int.Parse(user_id))
-                    {
-                        //Image
-                        PictureBox phot = new PictureBox();
-                        phot.Width = 120;
-                        phot.Height = 95;
-                        phot.Name = user_id;
-                        phot.SizeMode = PictureBoxSizeMode.Zoom;
-                        phot.Cursor = Cursors.Hand;
-
-                        //takking photo to the panel
-                        try
-                        {
-                            byte[] img = (byte[])table1.Rows[j][7];
-                            MemoryStream ms = new MemoryStream(img);
-                            phot.Image = Image.FromStream(ms);
-
-
-                        }
-                        catch
-                        {
-
-                        }
-
-                        //User Full name
-                        string fullname = table1.Rows[j][1].ToString() + " " + table1.Rows[j][2].ToString();
-                        Label uname = new Label();
-                        uname = new Label();
-                        uname.Name = "lable" + k;
-                        uname.AutoSize = true;
-                        uname.ForeColor = Color.DarkGreen;
-                        uname.Font = new Font("Cambria", 11, FontStyle.Bold);
-                        uname.Text = fullname;
-
-                        //Button
-                        BunifuFlatButton bt = new BunifuFlatButton();
-                        bt.Name = user_id;
-                        bt.Text = "Add Friend";
-                        bt.Height = 30;
-                        bt.Width = 120;
-                        bt.Normalcolor = Color.FromArgb(0, 122, 204);
-                        bt.OnHovercolor = Color.FromArgb(32, 9, 191);
-                        bt.Activecolor = Color.FromArgb(0, 122, 204);
-                        bt.Iconimage = null;
-                        bt.TextAlign = ContentAlignment.MiddleCenter;
-                        bt.BorderRadius = 5;
-                        bt.Click += new EventHandler(addFriendBtn_Click);
-
-                        //taking photo to panel
-                        flowLayoutPanel2.Controls.Add(phot);
-
-                        //adding user name to the panel
-                        flowLayoutPanel2.Controls.Add(uname);
-
-                        //adding button to the panel
-                        flowLayoutPanel2.Controls.Add(bt);
+                        byte[] img = (byte[])table1.Rows[j][7];
+                        MemoryStream ms = new MemoryStream(img);
+                        phot.Image = Image.FromStream(ms);
 
 
                     }
-                    else
+                    catch
                     {
 
                     }
-                    i++;
+
+                    //User Full name
+                    string fullname = table1.Rows[j][1].ToString() + " " + table1.Rows[j][2].ToString();
+                    Label uname = new Label();
+                    uname = new Label();
+                    uname.Name = "lable" + k;
+                    uname.AutoSize = true;
+                    uname.ForeColor = Color.DarkGreen;
+                    uname.Font = new Font("Cambria", 11, FontStyle.Bold);
+                    uname.Text = fullname;
+
+                    //Button
+                    BunifuFlatButton bt = new BunifuFlatButton();
+                    bt.Name = user_id;
+                    bt.Text = "Add Friend";
+                    bt.Height = 30;
+                    bt.Width = 120;
+                    bt.Normalcolor = Color.FromArgb(0, 122, 204);
+                    bt.OnHovercolor = Color.FromArgb(32, 9, 191);
+                    bt.Activecolor = Color.FromArgb(0, 122, 204);
+                    bt.Iconimage = null;
+                    bt.TextAlign = ContentAlignment.MiddleCenter;
+                    bt.BorderRadius = 5;
+                    bt.Click += new EventHandler(addFriendBtn_Click);
+
+                    //taking photo to panel
+                    flowLayoutPanel2.Controls.Add(phot);
+
+                    //adding user name to the panel
+                    flowLayoutPanel2.Controls.Add(uname);
+
+                    //adding button to the panel
+                    flowLayoutPanel2.Controls.Add(bt);
+
                 }
-                catch
+                //if the database doesnt return null value
+                else
                 {
+                    try
+                    {
+                        //reseting if the bound exeeds
+                        if (i > (table.Rows.Count - 1))
+                        {
+                            i = table.Rows.Count - 1;
 
+                        }
+                        else
+                        {
+
+                        }
+                        //checking if the request is available
+                        if (ReqUser_id[i] != int.Parse(user_id))
+                        {
+                            //Image
+                            PictureBox phot = new PictureBox();
+                            phot.Width = 120;
+                            phot.Height = 95;
+                            phot.Name = user_id;
+                            phot.SizeMode = PictureBoxSizeMode.Zoom;
+                            phot.Cursor = Cursors.Hand;
+
+                            //takking photo to the panel
+                            try
+                            {
+                                byte[] img = (byte[])table1.Rows[j][7];
+                                MemoryStream ms = new MemoryStream(img);
+                                phot.Image = Image.FromStream(ms);
+
+
+                            }
+                            catch
+                            {
+
+                            }
+
+                            //User Full name
+                            string fullname = table1.Rows[j][1].ToString() + " " + table1.Rows[j][2].ToString();
+                            Label uname = new Label();
+                            uname = new Label();
+                            uname.Name = "lable" + k;
+                            uname.AutoSize = true;
+                            uname.ForeColor = Color.DarkGreen;
+                            uname.Font = new Font("Cambria", 11, FontStyle.Bold);
+                            uname.Text = fullname;
+
+                            //Button
+                            BunifuFlatButton bt = new BunifuFlatButton();
+                            bt.Name = user_id;
+                            bt.Text = "Add Friend";
+                            bt.Height = 30;
+                            bt.Width = 120;
+                            bt.Normalcolor = Color.FromArgb(0, 122, 204);
+                            bt.OnHovercolor = Color.FromArgb(32, 9, 191);
+                            bt.Activecolor = Color.FromArgb(0, 122, 204);
+                            bt.Iconimage = null;
+                            bt.TextAlign = ContentAlignment.MiddleCenter;
+                            bt.BorderRadius = 5;
+                            bt.Click += new EventHandler(addFriendBtn_Click);
+
+                            //taking photo to panel
+                            flowLayoutPanel2.Controls.Add(phot);
+
+                            //adding user name to the panel
+                            flowLayoutPanel2.Controls.Add(uname);
+
+                            //adding button to the panel
+                            flowLayoutPanel2.Controls.Add(bt);
+
+
+                        }
+                        else
+                        {
+
+                        }
+                        i++;
+                    }
+                    catch
+                    {
+
+                    }
                 }
                
             }
 
             ad.Dispose();
-
+            con.Close();
         }
         BunifuFlatButton[] bt;
         PictureBox[] phot;
