@@ -788,6 +788,7 @@ namespace OnlineMongo
         //the strig to hold the pic name for retrieving it from the database
         public static string photName;
 
+        public static bool chek = false;
         //function for handling picture click
         private void photoClickBtn_Click(object sender, EventArgs e)
         {
@@ -795,7 +796,8 @@ namespace OnlineMongo
 
             //taking the clicked PictureName to the static string
             photName = picName.Name;
-
+            chek = true;
+            pic.chek = false;
             pictureView picv = new pictureView();
             picv.Show();
 

@@ -19,7 +19,8 @@ namespace OnlineMongo
             InitializeComponent();
         }
 
-        private void pictureView_Load(object sender, EventArgs e)
+        //a function for viewing a post image when clicked
+        private void postImageView()
         {
             //takin the image from the database
             MySqlDataAdapter ad;
@@ -55,6 +56,67 @@ namespace OnlineMongo
                 MessageBox.Show(ex.Message);
             }
             con.Close();
+        }
+
+        //afunction to view pic uploaded by user
+        private void userUploadedImages()
+        {
+            //takin the image from the database
+            MySqlDataAdapter ad;
+            MySqlConnection con = new MySqlConnection();
+            con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+            string detail = "select * from images where img_id = '" + pic.photName + "'";
+            MySqlCommand com = new MySqlCommand(detail, con);
+
+            try
+            {
+
+                con.Open();
+                // MySqlDataReader reader;
+                ad = new MySqlDataAdapter(com);
+                // reader = com.ExecuteReader();
+                DataTable table = new DataTable();
+                ad.Fill(table);
+                try
+                {
+                    byte[] img = (byte[])table.Rows[0][1];
+                    MemoryStream ms = new MemoryStream(img);
+                    pictureBox1.Image = Image.FromStream(ms);
+                }
+                catch
+                {
+
+                }
+
+                ad.Dispose();
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            con.Close();
+
+        }
+
+        private void pictureView_Load(object sender, EventArgs e)
+        {
+            if(postb.chek == true)
+            {
+                //view the clicked post image
+                postImageView();
+            }
+            else if(pic.chek == true)
+            {
+                //view the clicked useruploaded image
+                userUploadedImages();
+            }
+            else
+            {
+                MessageBox.Show("Error 003, image overrupt.");
+            }
+            
+
+           
         }
 
         private void CancelBtn_Click(object sender, EventArgs e)

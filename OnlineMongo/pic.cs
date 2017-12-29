@@ -36,7 +36,7 @@ namespace OnlineMongo
 
         int i = 0 ;
         string[] image;
-        PictureBox phot;
+        PictureBox [] phot;
         private PictureBox photo()
         {
 
@@ -62,25 +62,27 @@ namespace OnlineMongo
             ad = new MySqlDataAdapter(com);
             DataTable table1 = new DataTable();
             ad.Fill(table1);
-           
 
-           
-                for (int j = 0; j <= table1.Rows.Count; j++)
+
+            PictureBox[] phot = new PictureBox[table1.Rows.Count];
+                for (int j = 0; j < table1.Rows.Count; j++)
                 {
                 i++;
-                    PictureBox phot = new PictureBox();
-                    phot.Width = 300;
-                    phot.Height = 172;
-                    phot.Name = "pic" + i;
-                    phot.SizeMode = PictureBoxSizeMode.StretchImage;
-                    phot.Cursor = Cursors.Hand;
+                string image_id = table1.Rows[j][0].ToString();
+                phot[j] = new PictureBox();
+                    phot[j].Width = 300;
+                    phot[j].Height = 172;
+                    phot[j].Name = image_id;
+                    phot[j].SizeMode = PictureBoxSizeMode.StretchImage;
+                    phot[j].Cursor = Cursors.Hand;
+                    phot[j].Click += new EventHandler(photoClickBtn_Click);
 
                 //takking photo to the panel
-               try
+                try
                 {
                     byte[] img = (byte[])table1.Rows[j][1];
                     MemoryStream ms = new MemoryStream(img);
-                    phot.Image = Image.FromStream(ms);
+                    phot[j].Image = Image.FromStream(ms);
                    
 
                 }
@@ -89,13 +91,34 @@ namespace OnlineMongo
 
                 }
 
-                flowLayoutPanel1.Controls.Add(phot);
+                flowLayoutPanel1.Controls.Add(phot[j]);
             }
             
             ad.Dispose();
-            return phot;
+            return phot[table1.Rows.Count - 1];
         }
-      
+
+        //the strig to hold the pic name for retrieving it from the database
+        public static string photName;
+        public static bool chek = false;
+        //function for handling picture click
+        private void photoClickBtn_Click(object sender, EventArgs e)
+        {
+            var picName = sender as PictureBox;
+
+            //taking the clicked PictureName to the static string
+            photName = picName.Name;
+
+            //for checking if the is true
+            chek = true;
+
+            postb.chek = false;
+
+            pictureView picv = new pictureView();
+            picv.Show();
+
+
+        }
 
         private void addPic_Click(object sender, EventArgs e)
         {
