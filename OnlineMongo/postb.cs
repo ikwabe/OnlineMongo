@@ -68,8 +68,18 @@ namespace OnlineMongo
             //reading data query
             string readAccount = "select * from users where username <> '"+ login.txt.Text +"'";
 
+            string readLoginAccount = "select * from users where username = '" + login.txt.Text + "'";
+
+            //for login users 
+            MySqlCommand com3 = new MySqlCommand(readLoginAccount, con);
+            ad = new MySqlDataAdapter(com3);
+            DataTable table2 = new DataTable();
+            ad.Fill(table2);
+            string loginUserID = table2.Rows[0][0].ToString();
+            ad.Dispose();
+
             //string to read userID from request table
-            string checkReq = "select * from requests";
+            string checkReq = "select * from requests where sender_id = '"+ loginUserID +"'";
             con.Open();
             //for request user_id fetch
             MySqlCommand com1 = new MySqlCommand(checkReq, con);
@@ -96,10 +106,10 @@ namespace OnlineMongo
             ad.Fill(table1);
             
             i = 0;
-
+            
             for (int j = 0; j < table1.Rows.Count; j++)
             {
-                string user_id = table1.Rows[j][0].ToString();
+               string user_id = table1.Rows[j][0].ToString();
 
                 //if the database return null value
                 if(nullValue == null || nullValue == DBNull.Value)
@@ -163,88 +173,92 @@ namespace OnlineMongo
                 //if the database doesnt return null value
                 else
                 {
-                    try
-                    {
-                        //reseting if the bound exeeds
-                        if (i > (table.Rows.Count - 1))
-                        {
-                            i = table.Rows.Count - 1;
 
-                        }
-                        else
+                        try
                         {
-
-                        }
-                        //checking if the request is available
-                        if (ReqUser_id[i] != int.Parse(user_id))
-                        {
-                            //Image
-                            PictureBox phot = new PictureBox();
-                            phot.Width = 120;
-                            phot.Height = 95;
-                            phot.Name = user_id;
-                            phot.SizeMode = PictureBoxSizeMode.Zoom;
-                            phot.Cursor = Cursors.Hand;
-
-                            //takking photo to the panel
-                            try
+                            //reseting if the requests index bound exeeds
+                            if (i > (table.Rows.Count - 1))
                             {
-                                byte[] img = (byte[])table1.Rows[j][7];
-                                MemoryStream ms = new MemoryStream(img);
-                                phot.Image = Image.FromStream(ms);
-
+                                i = table.Rows.Count - 1;
 
                             }
-                            catch
+                            else
                             {
 
                             }
+                            //checking if the request is available
+                            if (ReqUser_id[i] != int.Parse(user_id))
+                            {
+                                //Image
+                                PictureBox phot = new PictureBox();
+                                phot.Width = 120;
+                                phot.Height = 95;
+                                phot.Name = user_id;
+                                phot.SizeMode = PictureBoxSizeMode.Zoom;
+                                phot.Cursor = Cursors.Hand;
 
-                            //User Full name
-                            string fullname = table1.Rows[j][1].ToString() + " " + table1.Rows[j][2].ToString();
-                            Label uname = new Label();
-                            uname = new Label();
-                            uname.Name = "lable" + k;
-                            uname.AutoSize = true;
-                            uname.ForeColor = Color.DarkGreen;
-                            uname.Font = new Font("Cambria", 11, FontStyle.Bold);
-                            uname.Text = fullname;
-
-                            //Button
-                            BunifuFlatButton bt = new BunifuFlatButton();
-                            bt.Name = user_id;
-                            bt.Text = "Add Friend";
-                            bt.Height = 30;
-                            bt.Width = 120;
-                            bt.Normalcolor = Color.FromArgb(0, 122, 204);
-                            bt.OnHovercolor = Color.FromArgb(32, 9, 191);
-                            bt.Activecolor = Color.FromArgb(0, 122, 204);
-                            bt.Iconimage = null;
-                            bt.TextAlign = ContentAlignment.MiddleCenter;
-                            bt.BorderRadius = 5;
-                            bt.Click += new EventHandler(addFriendBtn_Click);
-
-                            //taking photo to panel
-                            flowLayoutPanel2.Controls.Add(phot);
-
-                            //adding user name to the panel
-                            flowLayoutPanel2.Controls.Add(uname);
-
-                            //adding button to the panel
-                            flowLayoutPanel2.Controls.Add(bt);
+                                //takking photo to the panel
+                                try
+                                {
+                                    byte[] img = (byte[])table1.Rows[j][7];
+                                    MemoryStream ms = new MemoryStream(img);
+                                    phot.Image = Image.FromStream(ms);
 
 
+                                }
+                                catch
+                                {
+
+                                }
+
+                                //User Full name
+                                string fullname = table1.Rows[j][1].ToString() + " " + table1.Rows[j][2].ToString();
+                                Label uname = new Label();
+                                uname = new Label();
+                                uname.Name = "lable" + k;
+                                uname.AutoSize = true;
+                                uname.ForeColor = Color.DarkGreen;
+                                uname.Font = new Font("Cambria", 11, FontStyle.Bold);
+                                uname.Text = fullname;
+
+                                //Button
+                                BunifuFlatButton bt = new BunifuFlatButton();
+                                bt.Name = user_id;
+                                bt.Text = "Add Friend";
+                                bt.Height = 30;
+                                bt.Width = 120;
+                                bt.Normalcolor = Color.FromArgb(0, 122, 204);
+                                bt.OnHovercolor = Color.FromArgb(32, 9, 191);
+                                bt.Activecolor = Color.FromArgb(0, 122, 204);
+                                bt.Iconimage = null;
+                                bt.TextAlign = ContentAlignment.MiddleCenter;
+                                bt.BorderRadius = 5;
+                                bt.Click += new EventHandler(addFriendBtn_Click);
+
+                                //taking photo to panel
+                                flowLayoutPanel2.Controls.Add(phot);
+
+                                //adding user name to the panel
+                                flowLayoutPanel2.Controls.Add(uname);
+
+                                //adding button to the panel
+                                flowLayoutPanel2.Controls.Add(bt);
+
+
+                            }
+                            else
+                            {
+
+
+                            }
+                            i++;
                         }
-                        else
+                        catch
                         {
 
                         }
-                        i++;
-                    }
-                    catch
-                    {
-
-                    }
+                  
+                   
                 }
                
             }
@@ -252,6 +266,143 @@ namespace OnlineMongo
             ad.Dispose();
             con.Close();
         }
+
+        //function to clear the panel for add friend request
+        private void friendRequest()
+        {
+           
+            MySqlConnection con = new MySqlConnection();
+            con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+            MySqlDataAdapter ad;
+
+            //reading data query
+            string readAccount = "select * from users where username <> '" + login.txt.Text + "'";
+
+            string readLoginAccount = "select * from users where username = '" + login.txt.Text + "'";
+
+            //for login users 
+            MySqlCommand com3 = new MySqlCommand(readLoginAccount, con);
+            ad = new MySqlDataAdapter(com3);
+            DataTable table2 = new DataTable();
+            ad.Fill(table2);
+            string loginUserID = table2.Rows[0][0].ToString();
+            ad.Dispose();
+
+            //string to read userID from request table
+            string checkReq = "select * from requests where sender_id = '" + loginUserID + "'";
+            con.Open();
+            //for request user_id fetch
+            MySqlCommand com1 = new MySqlCommand(checkReq, con);
+            ad = new MySqlDataAdapter(com1);
+            DataTable table = new DataTable();
+            ad.Fill(table);
+
+            //execute ones to check if the database is empty or not
+            object nullValue = com1.ExecuteScalar();
+
+
+            ReqUser_id = new int[table.Rows.Count];
+            for (int i = 0; i < table.Rows.Count; i++)
+            {
+                ReqUser_id[i] = (int)table.Rows[i][1];
+            }
+            ad.Dispose();
+
+            //for users 
+            MySqlCommand com = new MySqlCommand(readAccount, con);
+
+            ad = new MySqlDataAdapter(com);
+            DataTable table1 = new DataTable();
+            ad.Fill(table1);
+
+            i = 0;
+
+            for (int j = 0; j < table1.Rows.Count; j++)
+            {
+                string user_id = table1.Rows[j][0].ToString();
+                //reseting if the requests index bound exeeds
+                if (i > (table.Rows.Count - 1))
+                {
+                    i = table.Rows.Count - 1;
+
+                }
+                else
+                {
+
+                }
+                //checking if the request is available
+                if (ReqUser_id[i] != int.Parse(user_id))
+                {
+                    //Image
+                    PictureBox phot = new PictureBox();
+                    phot.Width = 120;
+                    phot.Height = 95;
+                    phot.Name = user_id;
+                    phot.SizeMode = PictureBoxSizeMode.Zoom;
+                    phot.Cursor = Cursors.Hand;
+
+                    //takking photo to the panel
+                    try
+                    {
+                        byte[] img = (byte[])table1.Rows[j][7];
+                        MemoryStream ms = new MemoryStream(img);
+                        phot.Image = Image.FromStream(ms);
+
+
+                    }
+                    catch
+                    {
+
+                    }
+
+                    //User Full name
+                    string fullname = table1.Rows[j][1].ToString() + " " + table1.Rows[j][2].ToString();
+                    Label uname = new Label();
+                    uname = new Label();
+                    uname.Name = "lable" + k;
+                    uname.AutoSize = true;
+                    uname.ForeColor = Color.DarkGreen;
+                    uname.Font = new Font("Cambria", 11, FontStyle.Bold);
+                    uname.Text = fullname;
+
+                    //Button
+                    BunifuFlatButton bt = new BunifuFlatButton();
+                    bt.Name = user_id;
+                    bt.Text = "Add Friend";
+                    bt.Height = 30;
+                    bt.Width = 120;
+                    bt.Normalcolor = Color.FromArgb(0, 122, 204);
+                    bt.OnHovercolor = Color.FromArgb(32, 9, 191);
+                    bt.Activecolor = Color.FromArgb(0, 122, 204);
+                    bt.Iconimage = null;
+                    bt.TextAlign = ContentAlignment.MiddleCenter;
+                    bt.BorderRadius = 5;
+                    bt.Click += new EventHandler(addFriendBtn_Click);
+
+                    //taking photo to panel
+                    flowLayoutPanel2.Controls.Add(phot);
+
+                    //adding user name to the panel
+                    flowLayoutPanel2.Controls.Add(uname);
+
+                    //adding button to the panel
+                    flowLayoutPanel2.Controls.Add(bt);
+
+
+                }
+                else
+                {
+
+
+                }
+                i++;
+
+            }
+
+    }
+
+
+
         BunifuFlatButton[] bt;
         PictureBox[] phot;
         string [] btnName;
@@ -503,7 +654,7 @@ namespace OnlineMongo
 
         private void friendTimer_Tick(object sender, EventArgs e)
         {
-            
+            flowLayoutPanel2.Controls.Clear();
             showFriend();
             friendTimer.Stop();
             
@@ -512,8 +663,71 @@ namespace OnlineMongo
         //function for add friend button 
         private void addFriendBtn_Click(object sender, EventArgs e)
         {
-            var button = sender as BunifuFlatButton;
-            MessageBox.Show(button.Name);
+            DateTime date = DateTime.Now;
+            MySqlConnection con = new MySqlConnection();
+            con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+            MySqlDataAdapter ad;
+
+            try
+            {
+                con.Open();
+
+                //taking the login user id
+                string userId = "select * from users where username = '" + login.txt.Text + "'";
+
+                MySqlCommand com1 = new MySqlCommand(userId, con);
+                ad = new MySqlDataAdapter(com1);
+                DataTable table = new DataTable();
+                ad.Fill(table);
+                string user_idc = table.Rows[0][0].ToString();
+                string fullname = table.Rows[0][1].ToString() + " " + table.Rows[0][2].ToString(); ;
+
+                ad.Dispose();
+
+                int user_id = int.Parse(user_idc);
+                //a variable to handle button clik
+                var button = sender as BunifuFlatButton;
+
+                //string to insert data to the request table
+                string sendReq = "insert into requests(user_id,date,sender_id,sender_full_name) values ('" + button.Name + "', '" + date + "','" + user_id + "','"+ fullname +"')";
+
+                //a string to check if the request is already in the table
+
+                string reqCheck = "select * from requests where user_id = '" + button.Name + "' and sender_id = '" + user_id + "'";
+                MySqlDataReader rd;
+                //command to insert requests table
+                MySqlCommand com = new MySqlCommand(sendReq, con);
+                //command to check if the request is alread made
+                MySqlCommand com2 = new MySqlCommand(reqCheck, con);
+                DataTable table1 = new DataTable();
+
+                //check the request if is pressent
+                rd = com2.ExecuteReader();
+                table1.Load(rd);
+                rd.Close();
+
+                if(table1.Rows.Count == 0)
+                {
+                    //request sent
+                    rd = com.ExecuteReader();
+                    rd.Close();
+
+                    //removing the requested user
+                    friendRequestTimer.Start();
+                }
+                else
+                {
+
+                }
+                
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            con.Close();
+           
+            
         }
 
         string comment;
@@ -631,6 +845,13 @@ namespace OnlineMongo
                 MessageBox.Show(ex.Message);
             }
             con.Close();
+        }
+
+        private void friendRequestTimer_Tick(object sender, EventArgs e)
+        {
+            flowLayoutPanel2.Controls.Clear();
+            friendRequest();
+            friendRequestTimer.Stop();
         }
     }
 }

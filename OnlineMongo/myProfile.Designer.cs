@@ -225,7 +225,7 @@
             this.bunifuSeparator2.LineThickness = 3;
             this.bunifuSeparator2.Location = new System.Drawing.Point(2, 141);
             this.bunifuSeparator2.Name = "bunifuSeparator2";
-            this.bunifuSeparator2.Size = new System.Drawing.Size(1301, 3);
+            this.bunifuSeparator2.Size = new System.Drawing.Size(1439, 3);
             this.bunifuSeparator2.TabIndex = 12;
             this.bunifuSeparator2.Transparency = 255;
             this.bunifuSeparator2.Vertical = false;
@@ -239,7 +239,7 @@
             this.bunifuSeparator1.LineThickness = 3;
             this.bunifuSeparator1.Location = new System.Drawing.Point(2, 416);
             this.bunifuSeparator1.Name = "bunifuSeparator1";
-            this.bunifuSeparator1.Size = new System.Drawing.Size(1269, 3);
+            this.bunifuSeparator1.Size = new System.Drawing.Size(1407, 3);
             this.bunifuSeparator1.TabIndex = 13;
             this.bunifuSeparator1.Transparency = 255;
             this.bunifuSeparator1.Vertical = false;
@@ -265,7 +265,7 @@
             this.bunifuSeparator3.LineThickness = 3;
             this.bunifuSeparator3.Location = new System.Drawing.Point(2, 693);
             this.bunifuSeparator3.Name = "bunifuSeparator3";
-            this.bunifuSeparator3.Size = new System.Drawing.Size(1237, 3);
+            this.bunifuSeparator3.Size = new System.Drawing.Size(1375, 3);
             this.bunifuSeparator3.TabIndex = 24;
             this.bunifuSeparator3.Transparency = 255;
             this.bunifuSeparator3.Vertical = false;
@@ -563,7 +563,7 @@
             this.Controls.Add(this.changePrflPhoto);
             this.Controls.Add(this.pictureBox1);
             this.Name = "myProfile";
-            this.Size = new System.Drawing.Size(662, 196);
+            this.Size = new System.Drawing.Size(645, 179);
             this.Load += new System.EventHandler(this.myProfile_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);

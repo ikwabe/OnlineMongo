@@ -213,6 +213,12 @@
     <Compile Include="trashTab.Designer.cs">
       <DependentUpon>trashTab.cs</DependentUpon>
     </Compile>
+    <Compile Include="userInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="userInfo.Designer.cs">
+      <DependentUpon>userInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="verifyEmail.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -305,6 +311,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="trashTab.resx">
       <DependentUpon>trashTab.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="userInfo.resx">
+      <DependentUpon>userInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="verifyEmail.resx">
       <DependentUpon>verifyEmail.cs</DependentUpon>

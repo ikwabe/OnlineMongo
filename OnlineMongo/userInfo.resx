@@ -117,7 +117,27 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="friendRequestTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>49, 24</value>
+  <metadata name="bunifuElipse1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>50, 25</value>
+  </metadata>
+  <metadata name="Headerpanel.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="closeBtn.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABGdBTUEAALGPC/xhBQAAAaRJREFUeF7t
+        kwtqAzEQQ/coPUqPkqP1pu0O1LAI25mPBC6dByKQ2n6jIb2apmmapmma5i3ffyx0ZpKTQ2cmOTl0ZpKT
+        Q0cuKCKfTy4oIp9PLigin08uKCKfTy4oIp9PLiginy8j+Pj9rOB9IzNfiKjgdcfO2WeWyBvP2Sx0IoIx
+        +EhmCdE3nmctdLwC+8niWUtkCVh+ZPfvgGfpRASrAp4lZO/ieTpRQaZItryBd+hkBJFClfIG3qOTFXiK
+        VcsbeJdORbAryChv4H06VcGq6CzR8ga+QYch8CwhU97Ad+iwBLslZMsb+BYdluBfL2BXfiS7BHyHTlXg
+        KT+SWQK+QaciWJW373d/i4D36WQFnoKMJeBdOhlBpFh1CXiPTlSQKVRZAt6hExFUimTv4nk6XsHnHTxr
+        8ZQfrJZgb6/As3Qigq87z7OR8gNcgr2543nWQicqGEvIlB+MJbwrbzxns9DJCHY/WS/eNzLzhZALisjn
+        kwuKyOeTC4rI55MLisjnkwuKyOeTC4rI50PB6aEzk5wcOjPJyaEzk5ycpmmapmmapllyXT++f1J2jaFP
+        +wAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <metadata name="bunifuDragControl1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>174, 25</value>
   </metadata>
 </root>

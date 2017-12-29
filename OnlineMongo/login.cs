@@ -71,9 +71,10 @@ namespace OnlineMongo
         {
             MySqlConnection con = new MySqlConnection();
             con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
-            string signIn = "select username,password from users where username = '" + txt.Text + "' and password = '"+ pwd.Text +"'";
-
+            string signIn = "select username,password from users where username = '" + txt.Text + "' and password = '" + pwd.Text + "'";
+            string chekSecWord = "select secword from users where username = '" + txt.Text + "' and password = '" + pwd.Text + "'";
             MySqlCommand com = new MySqlCommand(signIn, con);
+            MySqlCommand com1 = new MySqlCommand(chekSecWord, con);
             try
             {
                 con.Open();
@@ -83,25 +84,41 @@ namespace OnlineMongo
                 table.Load(reader);
                 reader.Close();
 
-                if(table.Rows.Count > 0)
+                //execute ones to check if the database is empty or not
+                object nullValue = com1.ExecuteScalar();
+
+                if (table.Rows.Count > 0)
                 {
                     pwd.Enabled = false;
-                    dashBoard dsb = new dashBoard();
-                    dsb.Show();
-                    this.Hide();
+                    if (nullValue == null || nullValue == DBNull.Value)
+                    {
+                        MessageBox.Show("Please remember to set your SECRET WORD for password recovery and security purposes.");
+                        dashBoard dsb = new dashBoard();
+                        dsb.Show();
+                        this.Hide();
+                    }
+                    else
+                    {
+                        dashBoard dsb = new dashBoard();
+                        dsb.Show();
+                        this.Hide();
+
+                    }
+
+
                 }
                 else
                 {
                     label3.Text = "You have enterd a wrong Password or Username";
                 }
             }
-            catch(MySqlException ex)
+            catch (MySqlException ex)
             {
                 MessageBox.Show(ex.Message);
             }
             con.Close();
         }
-
+       
         private void pwd_KeyDown(object sender, KeyEventArgs e)
         {
             if(e.KeyCode == Keys.Enter)
@@ -109,8 +126,9 @@ namespace OnlineMongo
                 MySqlConnection con = new MySqlConnection();
                 con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
                 string signIn = "select username,password from users where username = '" + txt.Text + "' and password = '" + pwd.Text + "'";
-
+                string chekSecWord = "select secword from users where username = '" + txt.Text + "' and password = '" + pwd.Text + "'";
                 MySqlCommand com = new MySqlCommand(signIn, con);
+                MySqlCommand com1 = new MySqlCommand(chekSecWord, con);
                 try
                 {
                     con.Open();
@@ -120,12 +138,28 @@ namespace OnlineMongo
                     table.Load(reader);
                     reader.Close();
 
+                    //execute ones to check if the database is empty or not
+                    object nullValue = com1.ExecuteScalar();
+
                     if (table.Rows.Count > 0)
                     {
                         pwd.Enabled = false;
-                        dashBoard dsb = new dashBoard();
-                        dsb.Show();
-                        this.Hide();
+                        if (nullValue == null || nullValue == DBNull.Value)
+                        {
+                            MessageBox.Show("Please remember to set your SECRET WORD for password recovery and security purposes.");
+                            dashBoard dsb = new dashBoard();
+                            dsb.Show();
+                            this.Hide();
+                        }
+                        else
+                        {
+                            dashBoard dsb = new dashBoard();
+                            dsb.Show();
+                            this.Hide();
+
+                        }
+                           
+                        
                     }
                     else
                     {

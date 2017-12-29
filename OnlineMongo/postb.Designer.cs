@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(postb));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.refreshBtn = new Bunifu.Framework.UI.BunifuImageButton();
             this.line = new Bunifu.Framework.UI.BunifuSeparator();
             this.photo = new Bunifu.Framework.UI.BunifuCustomLabel();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -39,11 +40,11 @@
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.postTimer = new System.Windows.Forms.Timer(this.components);
             this.friendTimer = new System.Windows.Forms.Timer(this.components);
-            this.refreshBtn = new Bunifu.Framework.UI.BunifuImageButton();
             this.instPostTimer = new System.Windows.Forms.Timer(this.components);
+            this.friendRequestTimer = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
-            this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.refreshBtn)).BeginInit();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -57,6 +58,21 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(815, 51);
             this.panel1.TabIndex = 0;
+            // 
+            // refreshBtn
+            // 
+            this.refreshBtn.BackColor = System.Drawing.Color.Transparent;
+            this.refreshBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.refreshBtn.Image = ((System.Drawing.Image)(resources.GetObject("refreshBtn.Image")));
+            this.refreshBtn.ImageActive = null;
+            this.refreshBtn.Location = new System.Drawing.Point(366, 19);
+            this.refreshBtn.Name = "refreshBtn";
+            this.refreshBtn.Size = new System.Drawing.Size(36, 23);
+            this.refreshBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.refreshBtn.TabIndex = 14;
+            this.refreshBtn.TabStop = false;
+            this.refreshBtn.Zoom = 10;
+            this.refreshBtn.Click += new System.EventHandler(this.refreshBtn_Click);
             // 
             // line
             // 
@@ -133,24 +149,13 @@
             this.friendTimer.Interval = 20;
             this.friendTimer.Tick += new System.EventHandler(this.friendTimer_Tick);
             // 
-            // refreshBtn
-            // 
-            this.refreshBtn.BackColor = System.Drawing.Color.Transparent;
-            this.refreshBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.refreshBtn.Image = ((System.Drawing.Image)(resources.GetObject("refreshBtn.Image")));
-            this.refreshBtn.ImageActive = null;
-            this.refreshBtn.Location = new System.Drawing.Point(366, 19);
-            this.refreshBtn.Name = "refreshBtn";
-            this.refreshBtn.Size = new System.Drawing.Size(36, 23);
-            this.refreshBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.refreshBtn.TabIndex = 14;
-            this.refreshBtn.TabStop = false;
-            this.refreshBtn.Zoom = 10;
-            this.refreshBtn.Click += new System.EventHandler(this.refreshBtn_Click);
-            // 
             // instPostTimer
             // 
             this.instPostTimer.Tick += new System.EventHandler(this.instPostTimer_Tick);
+            // 
+            // friendRequestTimer
+            // 
+            this.friendRequestTimer.Tick += new System.EventHandler(this.friendRequestTimer_Tick);
             // 
             // postb
             // 
@@ -165,8 +170,8 @@
             this.Load += new System.EventHandler(this.postb_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.refreshBtn)).EndInit();
+            this.panel3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -184,5 +189,6 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private Bunifu.Framework.UI.BunifuImageButton refreshBtn;
         private System.Windows.Forms.Timer instPostTimer;
+        private System.Windows.Forms.Timer friendRequestTimer;
     }
 }

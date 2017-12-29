@@ -79,7 +79,7 @@ namespace OnlineMongo
 
 
         }
-
+        //a function to load profile information for the user login
         private void profile()
         {
             MySqlDataAdapter ad;
