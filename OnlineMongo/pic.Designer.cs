@@ -33,9 +33,10 @@
             this.addPic = new Bunifu.Framework.UI.BunifuFlatButton();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.refreshBtn = new Bunifu.Framework.UI.BunifuImageButton();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.refreshBtn = new Bunifu.Framework.UI.BunifuImageButton();
+            this.reLoadTimer = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.refreshBtn)).BeginInit();
             this.SuspendLayout();
@@ -93,20 +94,6 @@
             this.panel1.Size = new System.Drawing.Size(815, 59);
             this.panel1.TabIndex = 1;
             // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.AutoScroll = true;
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 59);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(815, 290);
-            this.flowLayoutPanel1.TabIndex = 2;
-            // 
-            // timer1
-            // 
-            this.timer1.Interval = 50;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
             // refreshBtn
             // 
             this.refreshBtn.BackColor = System.Drawing.Color.Transparent;
@@ -122,6 +109,25 @@
             this.refreshBtn.Zoom = 10;
             this.refreshBtn.Click += new System.EventHandler(this.refreshBtn_Click);
             // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.AutoScroll = true;
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 59);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(815, 290);
+            this.flowLayoutPanel1.TabIndex = 2;
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 50;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // reLoadTimer
+            // 
+            this.reLoadTimer.Interval = 1;
+            this.reLoadTimer.Tick += new System.EventHandler(this.reLoadTimer_Tick);
+            // 
             // pic
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -132,6 +138,7 @@
             this.Name = "pic";
             this.Size = new System.Drawing.Size(815, 349);
             this.Load += new System.EventHandler(this.pic_Load);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pic_MouseDown);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.refreshBtn)).EndInit();
             this.ResumeLayout(false);
@@ -143,8 +150,9 @@
         private Bunifu.Framework.UI.BunifuFlatButton addPic;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Panel panel1;
+        private Bunifu.Framework.UI.BunifuImageButton refreshBtn;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Timer timer1;
-        private Bunifu.Framework.UI.BunifuImageButton refreshBtn;
+        private System.Windows.Forms.Timer reLoadTimer;
     }
 }

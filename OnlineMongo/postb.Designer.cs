@@ -141,20 +141,22 @@
             // 
             // postTimer
             // 
-            this.postTimer.Interval = 10;
+            this.postTimer.Interval = 1;
             this.postTimer.Tick += new System.EventHandler(this.postTimer_Tick);
             // 
             // friendTimer
             // 
-            this.friendTimer.Interval = 20;
+            this.friendTimer.Interval = 2;
             this.friendTimer.Tick += new System.EventHandler(this.friendTimer_Tick);
             // 
             // instPostTimer
             // 
+            this.instPostTimer.Interval = 1;
             this.instPostTimer.Tick += new System.EventHandler(this.instPostTimer_Tick);
             // 
             // friendRequestTimer
             // 
+            this.friendRequestTimer.Interval = 1;
             this.friendRequestTimer.Tick += new System.EventHandler(this.friendRequestTimer_Tick);
             // 
             // postb

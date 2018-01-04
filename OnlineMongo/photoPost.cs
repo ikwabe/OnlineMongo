@@ -130,7 +130,7 @@ namespace OnlineMongo
                         addPostToDb();
                         panelCont();
                         MessageBox.Show("Posted");
-                        
+                        postb.check = true;
 
                     }
                     else
@@ -145,10 +145,9 @@ namespace OnlineMongo
             {
                 addPostToDb();
                 panelCont();
-                postb pstb = new postb();
-                pstb.postTimer.Start();
                 MessageBox.Show("Posted");
-               
+                postb.check = true;
+
             }
 
             

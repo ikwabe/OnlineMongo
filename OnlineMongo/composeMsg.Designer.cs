@@ -151,7 +151,7 @@
             this.sendBtn1.IdleFillColor = System.Drawing.Color.Transparent;
             this.sendBtn1.IdleForecolor = System.Drawing.Color.Black;
             this.sendBtn1.IdleLineColor = System.Drawing.Color.DarkSlateBlue;
-            this.sendBtn1.Location = new System.Drawing.Point(706, 3);
+            this.sendBtn1.Location = new System.Drawing.Point(706, 1);
             this.sendBtn1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.sendBtn1.Name = "sendBtn1";
             this.sendBtn1.Size = new System.Drawing.Size(76, 34);

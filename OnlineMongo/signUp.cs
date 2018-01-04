@@ -107,14 +107,26 @@ namespace OnlineMongo
                             }
                             else
                             {
-                                //creating the account
+                                string password = pwd.Text;
+                                //check if the password is strong 
+                                bool validPassword = password.Any(char.IsDigit) && !password.All(char.IsLetterOrDigit) && password.Length >= 6;
 
-                                reader = com.ExecuteReader();
-                                reader.Close();
-                                MessageBox.Show("Welcome,You have been added", "User added", MessageBoxButtons.OK);
-                                this.Close();
-                                login lgn = new login();
-                                lgn.Show();
+                                if(validPassword == true)
+                                {
+                                    //creating the account
+
+                                    reader = com.ExecuteReader();
+                                    reader.Close();
+                                    MessageBox.Show("Welcome,You have been added", "User added", MessageBoxButtons.OK);
+                                    this.Close();
+                                    login lgn = new login();
+                                    lgn.Show();
+
+                                }
+                                else
+                                {
+                                    MessageBox.Show("The Password should contain at least later, number,special character and more than 6 characters ");
+                                }
                             } 
                         }
                     }
@@ -131,6 +143,19 @@ namespace OnlineMongo
                 MessageBox.Show(ex.Message);
             }
             con.Close();
+        }
+
+        //a function handle the entrace of number in first name and last name
+        private void fname_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
         }
     }
 }

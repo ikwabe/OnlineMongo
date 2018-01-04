@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            BunifuAnimatorNS.Animation animation8 = new BunifuAnimatorNS.Animation();
-            BunifuAnimatorNS.Animation animation6 = new BunifuAnimatorNS.Animation();
-            BunifuAnimatorNS.Animation animation5 = new BunifuAnimatorNS.Animation();
+            BunifuAnimatorNS.Animation animation2 = new BunifuAnimatorNS.Animation();
+            BunifuAnimatorNS.Animation animation3 = new BunifuAnimatorNS.Animation();
+            BunifuAnimatorNS.Animation animation4 = new BunifuAnimatorNS.Animation();
+            BunifuAnimatorNS.Animation animation1 = new BunifuAnimatorNS.Animation();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(dashBoard));
-            BunifuAnimatorNS.Animation animation7 = new BunifuAnimatorNS.Animation();
             this.bunifuElipse1 = new Bunifu.Framework.UI.BunifuElipse(this.components);
             this.Headerpanel = new System.Windows.Forms.Panel();
             this.restoreDownBtn = new Bunifu.Framework.UI.BunifuImageButton();
@@ -50,6 +50,7 @@
             this.settingBtn = new Bunifu.Framework.UI.BunifuFlatButton();
             this.mnBtn = new Bunifu.Framework.UI.BunifuImageButton();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.signOutBtn = new Bunifu.Framework.UI.BunifuCustomLabel();
             this.chooseQn = new Bunifu.Framework.UI.BunifuFlatButton();
             this.line = new Bunifu.Framework.UI.BunifuSeparator();
             this.about = new Bunifu.Framework.UI.BunifuCustomLabel();
@@ -58,6 +59,7 @@
             this.photos = new Bunifu.Framework.UI.BunifuCustomLabel();
             this.panelAnimator = new BunifuAnimatorNS.BunifuTransition(this.components);
             this.panel2 = new System.Windows.Forms.Panel();
+            this.emailNumberLabel = new System.Windows.Forms.Label();
             this.logo = new System.Windows.Forms.PictureBox();
             this.myClassBtn = new Bunifu.Framework.UI.BunifuFlatButton();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -67,7 +69,7 @@
             this.picAnimation = new BunifuAnimatorNS.BunifuTransition(this.components);
             this.logoTransition = new BunifuAnimatorNS.BunifuTransition(this.components);
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.signOutBtn = new Bunifu.Framework.UI.BunifuCustomLabel();
+            this.emailCheckTimer = new System.Windows.Forms.Timer(this.components);
             this.Headerpanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.restoreDownBtn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.maximizeBtn)).BeginInit();
@@ -507,6 +509,24 @@
             this.panel1.Size = new System.Drawing.Size(837, 40);
             this.panel1.TabIndex = 48;
             // 
+            // signOutBtn
+            // 
+            this.signOutBtn.AutoSize = true;
+            this.signOutBtn.BackColor = System.Drawing.Color.Transparent;
+            this.signOutBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.picAnimation.SetDecoration(this.signOutBtn, BunifuAnimatorNS.DecorationType.None);
+            this.tabAnimator.SetDecoration(this.signOutBtn, BunifuAnimatorNS.DecorationType.None);
+            this.logoTransition.SetDecoration(this.signOutBtn, BunifuAnimatorNS.DecorationType.None);
+            this.panelAnimator.SetDecoration(this.signOutBtn, BunifuAnimatorNS.DecorationType.None);
+            this.signOutBtn.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.signOutBtn.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.signOutBtn.Location = new System.Drawing.Point(776, 8);
+            this.signOutBtn.Name = "signOutBtn";
+            this.signOutBtn.Size = new System.Drawing.Size(54, 16);
+            this.signOutBtn.TabIndex = 61;
+            this.signOutBtn.Text = "Sign Out";
+            this.signOutBtn.Click += new System.EventHandler(this.signOutBtn_Click);
+            // 
             // chooseQn
             // 
             this.chooseQn.Activecolor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(0)))), ((int)(((byte)(40)))));
@@ -638,27 +658,28 @@
             // 
             this.panelAnimator.AnimationType = BunifuAnimatorNS.AnimationType.HorizBlind;
             this.panelAnimator.Cursor = null;
-            animation8.AnimateOnlyDifferences = true;
-            animation8.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation8.BlindCoeff")));
-            animation8.LeafCoeff = 0F;
-            animation8.MaxTime = 1F;
-            animation8.MinTime = 0F;
-            animation8.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation8.MosaicCoeff")));
-            animation8.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation8.MosaicShift")));
-            animation8.MosaicSize = 0;
-            animation8.Padding = new System.Windows.Forms.Padding(0);
-            animation8.RotateCoeff = 0F;
-            animation8.RotateLimit = 0F;
-            animation8.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation8.ScaleCoeff")));
-            animation8.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation8.SlideCoeff")));
-            animation8.TimeCoeff = 0F;
-            animation8.TransparencyCoeff = 0F;
-            this.panelAnimator.DefaultAnimation = animation8;
+            animation2.AnimateOnlyDifferences = true;
+            animation2.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.BlindCoeff")));
+            animation2.LeafCoeff = 0F;
+            animation2.MaxTime = 1F;
+            animation2.MinTime = 0F;
+            animation2.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.MosaicCoeff")));
+            animation2.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation2.MosaicShift")));
+            animation2.MosaicSize = 0;
+            animation2.Padding = new System.Windows.Forms.Padding(0);
+            animation2.RotateCoeff = 0F;
+            animation2.RotateLimit = 0F;
+            animation2.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.ScaleCoeff")));
+            animation2.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.SlideCoeff")));
+            animation2.TimeCoeff = 0F;
+            animation2.TransparencyCoeff = 0F;
+            this.panelAnimator.DefaultAnimation = animation2;
             this.panelAnimator.TimeStep = 0.03F;
             // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.Black;
+            this.panel2.Controls.Add(this.emailNumberLabel);
             this.panel2.Controls.Add(this.logo);
             this.panel2.Controls.Add(this.myClassBtn);
             this.panel2.Controls.Add(this.mnBtn);
@@ -678,6 +699,21 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(254, 433);
             this.panel2.TabIndex = 47;
+            // 
+            // emailNumberLabel
+            // 
+            this.emailNumberLabel.AutoSize = true;
+            this.emailNumberLabel.BackColor = System.Drawing.Color.Transparent;
+            this.picAnimation.SetDecoration(this.emailNumberLabel, BunifuAnimatorNS.DecorationType.None);
+            this.tabAnimator.SetDecoration(this.emailNumberLabel, BunifuAnimatorNS.DecorationType.None);
+            this.logoTransition.SetDecoration(this.emailNumberLabel, BunifuAnimatorNS.DecorationType.None);
+            this.panelAnimator.SetDecoration(this.emailNumberLabel, BunifuAnimatorNS.DecorationType.None);
+            this.emailNumberLabel.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.emailNumberLabel.ForeColor = System.Drawing.Color.LimeGreen;
+            this.emailNumberLabel.Location = new System.Drawing.Point(12, 201);
+            this.emailNumberLabel.Name = "emailNumberLabel";
+            this.emailNumberLabel.Size = new System.Drawing.Size(0, 19);
+            this.emailNumberLabel.TabIndex = 8;
             // 
             // logo
             // 
@@ -787,22 +823,22 @@
             // 
             this.tabAnimator.AnimationType = BunifuAnimatorNS.AnimationType.Scale;
             this.tabAnimator.Cursor = null;
-            animation6.AnimateOnlyDifferences = true;
-            animation6.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation6.BlindCoeff")));
-            animation6.LeafCoeff = 0F;
-            animation6.MaxTime = 1F;
-            animation6.MinTime = 0F;
-            animation6.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation6.MosaicCoeff")));
-            animation6.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation6.MosaicShift")));
-            animation6.MosaicSize = 0;
-            animation6.Padding = new System.Windows.Forms.Padding(0);
-            animation6.RotateCoeff = 0F;
-            animation6.RotateLimit = 0F;
-            animation6.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation6.ScaleCoeff")));
-            animation6.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation6.SlideCoeff")));
-            animation6.TimeCoeff = 0F;
-            animation6.TransparencyCoeff = 0F;
-            this.tabAnimator.DefaultAnimation = animation6;
+            animation3.AnimateOnlyDifferences = true;
+            animation3.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation3.BlindCoeff")));
+            animation3.LeafCoeff = 0F;
+            animation3.MaxTime = 1F;
+            animation3.MinTime = 0F;
+            animation3.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation3.MosaicCoeff")));
+            animation3.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation3.MosaicShift")));
+            animation3.MosaicSize = 0;
+            animation3.Padding = new System.Windows.Forms.Padding(0);
+            animation3.RotateCoeff = 0F;
+            animation3.RotateLimit = 0F;
+            animation3.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation3.ScaleCoeff")));
+            animation3.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation3.SlideCoeff")));
+            animation3.TimeCoeff = 0F;
+            animation3.TransparencyCoeff = 0F;
+            this.tabAnimator.DefaultAnimation = animation3;
             this.tabAnimator.Interval = 1;
             this.tabAnimator.TimeStep = 0.15F;
             // 
@@ -810,22 +846,22 @@
             // 
             this.picAnimation.AnimationType = BunifuAnimatorNS.AnimationType.HorizSlide;
             this.picAnimation.Cursor = null;
-            animation5.AnimateOnlyDifferences = true;
-            animation5.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation5.BlindCoeff")));
-            animation5.LeafCoeff = 0F;
-            animation5.MaxTime = 1F;
-            animation5.MinTime = 0F;
-            animation5.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation5.MosaicCoeff")));
-            animation5.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation5.MosaicShift")));
-            animation5.MosaicSize = 0;
-            animation5.Padding = new System.Windows.Forms.Padding(0);
-            animation5.RotateCoeff = 0F;
-            animation5.RotateLimit = 0F;
-            animation5.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation5.ScaleCoeff")));
-            animation5.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation5.SlideCoeff")));
-            animation5.TimeCoeff = 0F;
-            animation5.TransparencyCoeff = 0F;
-            this.picAnimation.DefaultAnimation = animation5;
+            animation4.AnimateOnlyDifferences = true;
+            animation4.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation4.BlindCoeff")));
+            animation4.LeafCoeff = 0F;
+            animation4.MaxTime = 1F;
+            animation4.MinTime = 0F;
+            animation4.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation4.MosaicCoeff")));
+            animation4.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation4.MosaicShift")));
+            animation4.MosaicSize = 0;
+            animation4.Padding = new System.Windows.Forms.Padding(0);
+            animation4.RotateCoeff = 0F;
+            animation4.RotateLimit = 0F;
+            animation4.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation4.ScaleCoeff")));
+            animation4.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation4.SlideCoeff")));
+            animation4.TimeCoeff = 0F;
+            animation4.TransparencyCoeff = 0F;
+            this.picAnimation.DefaultAnimation = animation4;
             this.picAnimation.Interval = 1;
             this.picAnimation.TimeStep = 0.15F;
             // 
@@ -833,22 +869,22 @@
             // 
             this.logoTransition.AnimationType = BunifuAnimatorNS.AnimationType.ScaleAndRotate;
             this.logoTransition.Cursor = null;
-            animation7.AnimateOnlyDifferences = true;
-            animation7.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation7.BlindCoeff")));
-            animation7.LeafCoeff = 0F;
-            animation7.MaxTime = 1F;
-            animation7.MinTime = 0F;
-            animation7.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation7.MosaicCoeff")));
-            animation7.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation7.MosaicShift")));
-            animation7.MosaicSize = 0;
-            animation7.Padding = new System.Windows.Forms.Padding(30);
-            animation7.RotateCoeff = 0.5F;
-            animation7.RotateLimit = 0.2F;
-            animation7.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation7.ScaleCoeff")));
-            animation7.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation7.SlideCoeff")));
-            animation7.TimeCoeff = 0F;
-            animation7.TransparencyCoeff = 0F;
-            this.logoTransition.DefaultAnimation = animation7;
+            animation1.AnimateOnlyDifferences = true;
+            animation1.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.BlindCoeff")));
+            animation1.LeafCoeff = 0F;
+            animation1.MaxTime = 1F;
+            animation1.MinTime = 0F;
+            animation1.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.MosaicCoeff")));
+            animation1.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation1.MosaicShift")));
+            animation1.MosaicSize = 0;
+            animation1.Padding = new System.Windows.Forms.Padding(30);
+            animation1.RotateCoeff = 0.5F;
+            animation1.RotateLimit = 0.2F;
+            animation1.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.ScaleCoeff")));
+            animation1.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.SlideCoeff")));
+            animation1.TimeCoeff = 0F;
+            animation1.TransparencyCoeff = 0F;
+            this.logoTransition.DefaultAnimation = animation1;
             this.logoTransition.Interval = 1;
             this.logoTransition.TimeStep = 0.1F;
             // 
@@ -856,23 +892,10 @@
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // signOutBtn
+            // emailCheckTimer
             // 
-            this.signOutBtn.AutoSize = true;
-            this.signOutBtn.BackColor = System.Drawing.Color.Transparent;
-            this.signOutBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.picAnimation.SetDecoration(this.signOutBtn, BunifuAnimatorNS.DecorationType.None);
-            this.tabAnimator.SetDecoration(this.signOutBtn, BunifuAnimatorNS.DecorationType.None);
-            this.logoTransition.SetDecoration(this.signOutBtn, BunifuAnimatorNS.DecorationType.None);
-            this.panelAnimator.SetDecoration(this.signOutBtn, BunifuAnimatorNS.DecorationType.None);
-            this.signOutBtn.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.signOutBtn.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.signOutBtn.Location = new System.Drawing.Point(776, 8);
-            this.signOutBtn.Name = "signOutBtn";
-            this.signOutBtn.Size = new System.Drawing.Size(54, 16);
-            this.signOutBtn.TabIndex = 61;
-            this.signOutBtn.Text = "Sign Out";
-            this.signOutBtn.Click += new System.EventHandler(this.signOutBtn_Click);
+            this.emailCheckTimer.Interval = 1;
+            this.emailCheckTimer.Tick += new System.EventHandler(this.emailCheckTimer_Tick);
             // 
             // dashBoard
             // 
@@ -903,6 +926,7 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
@@ -946,5 +970,7 @@
         private Bunifu.Framework.UI.BunifuImageButton restoreDownBtn;
         private Bunifu.Framework.UI.BunifuFlatButton chooseQn;
         private Bunifu.Framework.UI.BunifuCustomLabel signOutBtn;
+        private System.Windows.Forms.Label emailNumberLabel;
+        private System.Windows.Forms.Timer emailCheckTimer;
     }
 }

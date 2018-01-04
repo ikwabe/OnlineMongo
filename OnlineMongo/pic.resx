@@ -120,22 +120,25 @@
   <metadata name="openFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <metadata name="timer1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>157, 17</value>
-  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="refreshBtn.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAFjSURBVEhLvVbtbYMwFGSEjtARMkJHyAj8AMS/skG7Sdgg3aDZIN6g3SBsQO85h2KeseNILz3p
-        hPD7OPvsmFQl6Pv+tW3bd/C76zoH7hmyQV3XL2j6Ac6kE1GGbSAiWME5EJnwvmPYDjL7QET4yZAdpKkS
-        mWSFDNuAll2U0MiwHSBSK5FZxhi2A5p+aaGmad4YToJOHIotRmN9COaS4mCCRw7lEQosZCgJ5AyqZmDo
-        BszkVyVlKfks9RBbt/Iiu1EYbX6Oks/S5WrSJ3TJu0SWIzDqxARXxxzv0X6GhNiZqTcgkC0CHVM98F40
-        OYgdWHKF2IDApBPJ1c0g9m3kJCn5LL2idGNR+NABAldueGDw/lFVUPmeDOWBGfsfnzw5lIRYqkXAeAVb
-        YPFYciNs2V0ywYeBxtrqePMtgMb6mP/bt+v5X2KInhiyA5ru1GqcuWW8RX4CkafYtQed2ITnUPY/r6r+
-        AL0hB0tmZhDUAAAAAElFTkSuQmCC
+        iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAABGdBTUEAALGPC/xhBQAAAWNJREFUSEu9
+        Vu1tgzAUZISO0BEyQkfICPwAxL+yQbtJ2CDdoNkg3qDdIGxA7zmHYp6x40gvPemE8Ps4++yYVCXo+/61
+        bdt38LvrOgfuGbJBXdcvaPoBzqQTUYZtICJYwTkQmfC+Y9gOMvtARPjJkB2kqRKZZIUM24CWXZTQyLAd
+        IFIrkVnGGLYDmn5poaZp3hhOgk4cii1GY30I5pLiYIJHDuURCixkKAnkDKpmYOgGzORXJWUp+Sz1EFu3
+        8iK7URhtfo6Sz9LlatIndMm7RJYjMOrEBFfHHO/RfoaE2JmpNyCQLQIdUz3wXjQ5iB1YcoXYgMCkE8nV
+        zSD2beQkKfksvaJ0Y1H40AECV254YPD+UVVQ+Z4M5YEZ+x+fPDmUhFiqRcB4BVtg8VhyI2zZXTLBh4HG
+        2up48y2AxvqY/9u36/lfYoieGLIDmu7Uapy5ZbxFfgKRp9i1B53YhOdQ9j+vqv4AvSEHS2ZmENQAAAAA
+        SUVORK5CYII=
 </value>
   </data>
+  <metadata name="timer1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>157, 17</value>
+  </metadata>
+  <metadata name="reLoadTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>244, 17</value>
+  </metadata>
   <metadata name="$this.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>

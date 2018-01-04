@@ -55,16 +55,20 @@ namespace OnlineMongo
             
         }
 
-
+        //a function to verify the password
         private void pwdTextBox_OnValueChanged(object sender, EventArgs e)
         {
            
             if (pwdTextBox.Text == pwd)
             {
                 pwdTextBox.Enabled = false;
+               
                 dashBoard dshb = new dashBoard();
-                dshb.Show();
                 this.Close();
+                dshb.Show();
+                inbonTab.check = true;
+                dashBoard.check = true;
+               
             }
         }
 
@@ -107,6 +111,7 @@ namespace OnlineMongo
             con.Close();
         }
 
+        //a function to verify PIN
         private void pinTextBox_TextChanged(object sender, EventArgs e)
         {
             if (pinTextBox.Text == pn)
@@ -114,6 +119,8 @@ namespace OnlineMongo
                 dashBoard dsb = new dashBoard();
                 this.Close();
                 dsb.Show();
+                dashBoard.check = true;
+                inbonTab.check = true;
             }
         }
     }

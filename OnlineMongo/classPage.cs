@@ -450,7 +450,7 @@ namespace OnlineMongo
                 senderEmail = table.Rows[0][3].ToString();
                 ad.Dispose();
                 string subject = subjectTextBox2.Text + "(By " + login.txt.Text + ")";
-                string insert = "insert into sentmail (mailsubject,sentmsg,senderemail,receiveremail) values ('" + subject + "', @sentmsg,'" + senderEmail + "', '" + toTextBox2.Text + "')";
+                string insert = "insert into sentmail (mailsubject,sentmsg,senderemail,receiveremail,status) values ('" + subject + "', @sentmsg,'" + senderEmail + "', '" + toTextBox2.Text + "','New')";
 
 
                 byte[] mail = null;
@@ -470,6 +470,8 @@ namespace OnlineMongo
                 toTextBox2.Text = null;
                 composetextBox2.Text = null;
                 subjectTextBox2.Text = null;
+                inbonTab.check = true;
+                dashBoard.check = true;
 
             }
 

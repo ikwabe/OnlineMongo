@@ -21,6 +21,7 @@ namespace OnlineMongo
 
         private void picPreview_Load(object sender, EventArgs e)
         {
+           
             MySqlDataAdapter ad;
             MySqlConnection con = new MySqlConnection();
             con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";

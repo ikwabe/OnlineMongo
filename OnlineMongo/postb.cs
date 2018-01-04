@@ -121,13 +121,14 @@ namespace OnlineMongo
                     phot.Name = user_id;
                     phot.SizeMode = PictureBoxSizeMode.Zoom;
                     phot.Cursor = Cursors.Hand;
-
+                    phot.Click += new EventHandler(ProfilePhoto_Click);
                     //takking photo to the panel
                     try
                     {
                         byte[] img = (byte[])table1.Rows[j][7];
                         MemoryStream ms = new MemoryStream(img);
                         phot.Image = Image.FromStream(ms);
+
 
 
                     }
@@ -140,16 +141,18 @@ namespace OnlineMongo
                     string fullname = table1.Rows[j][1].ToString() + " " + table1.Rows[j][2].ToString();
                     Label uname = new Label();
                     uname = new Label();
-                    uname.Name = "lable" + k;
+                    uname.Name = table1.Rows[j][0].ToString();
                     uname.AutoSize = true;
                     uname.ForeColor = Color.DarkGreen;
+                    uname.Cursor = Cursors.Hand;
                     uname.Font = new Font("Cambria", 11, FontStyle.Bold);
+                    uname.Click += new EventHandler(uname_Click);
                     uname.Text = fullname;
 
                     //Button
                     BunifuFlatButton bt = new BunifuFlatButton();
                     bt.Name = user_id;
-                    bt.Text = "Add Friend";
+                    bt.Text = "Follow";
                     bt.Height = 30;
                     bt.Width = 120;
                     bt.Normalcolor = Color.FromArgb(0, 122, 204);
@@ -196,9 +199,9 @@ namespace OnlineMongo
                                 phot.Name = user_id;
                                 phot.SizeMode = PictureBoxSizeMode.Zoom;
                                 phot.Cursor = Cursors.Hand;
-
-                                //takking photo to the panel
-                                try
+                            phot.Click += new EventHandler(ProfilePhoto_Click);
+                            //takking photo to the panel
+                            try
                                 {
                                     byte[] img = (byte[])table1.Rows[j][7];
                                     MemoryStream ms = new MemoryStream(img);
@@ -215,16 +218,18 @@ namespace OnlineMongo
                                 string fullname = table1.Rows[j][1].ToString() + " " + table1.Rows[j][2].ToString();
                                 Label uname = new Label();
                                 uname = new Label();
-                                uname.Name = "lable" + k;
-                                uname.AutoSize = true;
-                                uname.ForeColor = Color.DarkGreen;
-                                uname.Font = new Font("Cambria", 11, FontStyle.Bold);
-                                uname.Text = fullname;
+                            uname.Name = table1.Rows[j][0].ToString();
+                            uname.AutoSize = true;
+                            uname.ForeColor = Color.DarkGreen;
+                            uname.Cursor = Cursors.Hand;
+                            uname.Font = new Font("Cambria", 11, FontStyle.Bold);
+                            uname.Click += new EventHandler(uname_Click);
+                            uname.Text = fullname;
 
-                                //Button
-                                BunifuFlatButton bt = new BunifuFlatButton();
+                            //Button
+                            BunifuFlatButton bt = new BunifuFlatButton();
                                 bt.Name = user_id;
-                                bt.Text = "Add Friend";
+                                bt.Text = "Follow";
                                 bt.Height = 30;
                                 bt.Width = 120;
                                 bt.Normalcolor = Color.FromArgb(0, 122, 204);
@@ -340,7 +345,7 @@ namespace OnlineMongo
                     phot.Name = user_id;
                     phot.SizeMode = PictureBoxSizeMode.Zoom;
                     phot.Cursor = Cursors.Hand;
-
+                    phot.Click += new EventHandler(ProfilePhoto_Click);
                     //takking photo to the panel
                     try
                     {
@@ -359,16 +364,18 @@ namespace OnlineMongo
                     string fullname = table1.Rows[j][1].ToString() + " " + table1.Rows[j][2].ToString();
                     Label uname = new Label();
                     uname = new Label();
-                    uname.Name = "lable" + k;
+                    uname.Name = table1.Rows[j][0].ToString();
                     uname.AutoSize = true;
                     uname.ForeColor = Color.DarkGreen;
+                    uname.Cursor = Cursors.Hand;
                     uname.Font = new Font("Cambria", 11, FontStyle.Bold);
+                    uname.Click += new EventHandler(uname_Click);
                     uname.Text = fullname;
 
                     //Button
                     BunifuFlatButton bt = new BunifuFlatButton();
                     bt.Name = user_id;
-                    bt.Text = "Add Friend";
+                    bt.Text = "Follow";
                     bt.Height = 30;
                     bt.Width = 120;
                     bt.Normalcolor = Color.FromArgb(0, 122, 204);
@@ -408,6 +415,8 @@ namespace OnlineMongo
         string [] btnName;
         int count;
 
+        //boolean for activating the instant post
+        public static bool check = false;
         //add posted post at instant
         private void instLoadPost()
         {
@@ -471,11 +480,13 @@ namespace OnlineMongo
                 string fullname = table1.Rows[j][5].ToString();
                 Label uname = new Label();
                 uname = new Label();
-                uname.Name = "lable" + k.ToString();
+                uname.Name = table1.Rows[j][3].ToString();
                 uname.AutoSize = true;
                 uname.ForeColor = Color.DarkGreen;
                 uname.Font = new Font("Cambria", 14);
+                uname.Cursor = Cursors.Hand;
                 uname.Text = "Posted by: " + fullname;
+                uname.Click += new EventHandler(uname_Click);
                 //Button
 
                 bt[j] = new BunifuFlatButton();
@@ -590,11 +601,13 @@ namespace OnlineMongo
               string  fullname = table1.Rows[j][5].ToString();
                 Label uname = new Label();
                 uname = new Label();
-                uname.Name = "lable" + k.ToString();
+                uname.Name = table1.Rows[j][3].ToString();
                 uname.AutoSize = true;
                 uname.ForeColor = Color.DarkGreen;
+                uname.Cursor = Cursors.Hand;
                 uname.Font = new Font("Cambria", 14);
                 uname.Text = "Posted by: " + fullname;
+                uname.Click += new EventHandler(uname_Click);
                 //Button
 
                 bt[j] = new BunifuFlatButton();
@@ -815,38 +828,47 @@ namespace OnlineMongo
         //timer for instant post
         private void instPostTimer_Tick(object sender, EventArgs e)
         {
-            int check;
-            MySqlConnection con = new MySqlConnection();
-            con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
-            MySqlDataAdapter ad;
-
-            //reading data query
-            string readpost = "select * from post";
-            try
+            if(check == true)
             {
-                MySqlCommand com = new MySqlCommand(readpost, con);
-            ad = new MySqlDataAdapter(com);
-            DataTable table1 = new DataTable();
-            ad.Fill(table1);
-                check = table1.Rows.Count;
+                int check1;
+                MySqlConnection con = new MySqlConnection();
+                con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+                MySqlDataAdapter ad;
 
-                //check if there is an update of post
-                if(check > count)
+                //reading data query
+                string readpost = "select * from post";
+                try
                 {
-                    instLoadPost();
-                    count = table1.Rows.Count;
-                }
-                else
-                {
+                    MySqlCommand com = new MySqlCommand(readpost, con);
+                    ad = new MySqlDataAdapter(com);
+                    DataTable table1 = new DataTable();
+                    ad.Fill(table1);
+                    check1 = table1.Rows.Count;
+
+                    //check if there is an update of post
+                    if (check1 > count)
+                    {
+                        instLoadPost();
+                        count = table1.Rows.Count;
+                    }
+                    else
+                    {
+
+                    }
 
                 }
+                catch (MySqlException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                con.Close();
+                check = false;
+            }
+            else
+            {
 
             }
-            catch (MySqlException ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            con.Close();
+            
         }
 
         private void friendRequestTimer_Tick(object sender, EventArgs e)
@@ -855,5 +877,30 @@ namespace OnlineMongo
             friendRequest();
             friendRequestTimer.Stop();
         }
-    }
+
+//a function to show userprofile on post click
+public static int user_id;
+        public static bool profile = false;
+        private void uname_Click(object sender, EventArgs e)
+        {
+            var labl = sender as Label;
+            user_id = int.Parse(labl.Name);
+            profile = true;
+            friendtb.profile = false;
+            userInfo uInf = new userInfo();
+            uInf.Show();
+        }
+
+        private void ProfilePhoto_Click(object sender, EventArgs e)
+        {
+            var pc = sender as PictureBox;
+            user_id = int.Parse(pc.Name);
+            profile = true;
+            friendtb.profile = false;
+            userInfo uInf = new userInfo();
+            uInf.Show();
+
+        }
+
+        }
 }

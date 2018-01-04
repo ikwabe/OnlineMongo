@@ -31,8 +31,7 @@ namespace OnlineMongo
             InitializeComponent(); 
         }
 
-       
-    
+        string myuserid;
         //function to read requests 
 
         private void fetchRequest()
@@ -49,6 +48,7 @@ namespace OnlineMongo
             DataTable table2 = new DataTable();
             ad.Fill(table2);
             string loginUserID = table2.Rows[0][0].ToString();
+            myuserid = loginUserID;
             ad.Dispose();
 
             //string to read userID from request table
@@ -66,10 +66,12 @@ namespace OnlineMongo
             if (nullValue == null || nullValue == DBNull.Value)
             {
                 //do nothing 
+                reqNumberLabel.Text = "(0)";
 
             }
             else
             {
+                reqNumberLabel.Text = "(" + table.Rows.Count + ")";
                 for (int j = 0; j < table.Rows.Count; j++)
                 {
                    
@@ -137,43 +139,256 @@ namespace OnlineMongo
 
 
         //a function for adding friends
-
+        private string btnName;
         private void addFriendBtn_Click(object sender, EventArgs e)
         {
             var button = sender as BunifuFlatButton;
-            MessageBox.Show(button.Name);
+            btnName = button.Name;
+            addFriend();
+            loadFriendTimer.Start();
+            
 
         }
 
         //function to cancel request
+       
         private void CancelFriendBtn_Click(object sender, EventArgs e)
         {
             var button = sender as BunifuFlatButton;
-            MessageBox.Show(button.Name);
-
+            btnName = button.Name;
+            cancelReq();
         }
         public static int user_id;
-
+        public static bool profile = false;
         //a function for lable click
         private void uname_Click(object sender, EventArgs e)
         {
             var button = sender as Label;
             user_id = int.Parse(button.Name);
-
-            userInfo uInf = new userInfo();
-            uInf.Show();
+            profile = true;
+            postb.profile = false;
+            userMenu usMn = new userMenu();
+            usMn.Show();
 
         }
 
         private void friendtb_Load(object sender, EventArgs e)
         {
             friendRequestTimer.Start();
+            loadFriendTimer.Start();
+           
         }
 
         private void friendRequestTimer_Tick(object sender, EventArgs e)
         {
+            flowLayoutPanel1.Controls.Clear();
             friendRequestTimer.Stop();
             fetchRequest();
+        }
+
+
+        //function to add friend
+        private void addFriend()
+        {
+            MySqlDataAdapter ad;
+            MySqlConnection con = new MySqlConnection();
+            con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+            string detail = "select * from requests where request_id = '"+ btnName + "'";
+            string deleteReq = "delete from requests where request_id = '" + btnName + "'";
+           
+            MySqlCommand com = new MySqlCommand(detail, con);
+            MySqlDataReader rd;
+
+            try
+            {
+
+                con.Open();
+                // MySqlDataReader reader;
+                ad = new MySqlDataAdapter(com);
+                // reader = com.ExecuteReader();
+                DataTable table = new DataTable();
+                ad.Fill(table);
+                ad.Dispose();
+
+                //checking if the user exist in the friend table
+                string chek = "select * from friends where user_id = '" + table.Rows[0][3] + "' and myuserid = '" + myuserid + "'";
+                MySqlCommand com3 = new MySqlCommand(chek, con);
+                ad = new MySqlDataAdapter(com3);
+                DataTable table1 = new DataTable();
+                ad.Fill(table1);
+                ad.Dispose();
+                if (table1.Rows.Count > 0)
+                {
+                    MessageBox.Show("Sorry, This User is already added as a friend");
+
+                }
+                else
+                {
+                    //command to insert friend request
+                    string addfriend = "insert into friends(user_id,username,myuserid) values('" + table.Rows[0][3] + "','" + table.Rows[0][4] + "','" + myuserid + "')";
+                    MySqlCommand com1 = new MySqlCommand(addfriend, con);
+
+                    //adding a friend in database
+                    rd = com1.ExecuteReader();
+                    rd.Close();
+
+                    //command to remove the request from the database
+                    MySqlCommand com2 = new MySqlCommand(deleteReq, con);
+
+                    rd = com2.ExecuteReader();
+                    rd.Close();
+
+                    loadFriendTimer.Start();
+                    friendRequestTimer.Start();
+                    
+                   
+
+                }
+                
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            con.Close();
+        }
+
+        //afunction to cancel the request
+        private void cancelReq()
+        {
+            MySqlDataAdapter ad;
+            MySqlConnection con = new MySqlConnection();
+            con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+            string detail = "select * from requests where request_id = '" + btnName + "'";
+            string deleteReq = "delete from requests where request_id = '" + btnName + "'";
+            MySqlCommand com = new MySqlCommand(detail, con);
+            MySqlDataReader rd;
+
+            try
+            {
+
+                con.Open();
+                // MySqlDataReader reader;
+                ad = new MySqlDataAdapter(com);
+                // reader = com.ExecuteReader();
+                DataTable table = new DataTable();
+                ad.Fill(table);
+                ad.Dispose();
+
+                //command to remove the request from the database
+                MySqlCommand com2 = new MySqlCommand(deleteReq, con);
+
+                rd = com2.ExecuteReader();
+                rd.Close();
+
+                friendRequestTimer.Start();
+
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            con.Close();
+
+        }
+
+        //a function to load friends
+        private void loadFrineds()
+        {
+            MySqlDataAdapter ad;
+            MySqlConnection con = new MySqlConnection();
+            con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+
+            //reading data query
+            string userId = "select * from users where username = '" + login.txt.Text + "'";
+           try
+            {
+                con.Open();
+                MySqlCommand com = new MySqlCommand(userId, con);
+                ad = new MySqlDataAdapter(com);
+                DataTable table1 = new DataTable();
+                ad.Fill(table1);
+                int user_id = (int)table1.Rows[0][0];
+                ad.Dispose();
+
+                string detail = "SELECT * FROM friends,users where friends.user_id = users.user_id and friends.myuserid = '"+user_id+"'";
+                MySqlCommand com1 = new MySqlCommand(detail, con);
+                ad = new MySqlDataAdapter(com1);
+                DataTable table = new DataTable();
+                ad.Fill(table);
+
+                //execute ones to check if the database is empty or not
+                object nullValue = com1.ExecuteScalar();
+
+                if (nullValue == null || nullValue == DBNull.Value)
+                {
+                    //do nothing 
+                    friendNumberLabel.Text = "(0)";
+                }
+                else
+                {
+                    PictureBox[] phot = new PictureBox[table.Rows.Count];
+                    friendNumberLabel.Text = "(" + table.Rows.Count + ")";
+                    for (int i = 0; i < table.Rows.Count; i++)
+                    {
+                        //User Full name
+                        string fullname = table.Rows[i][2].ToString();
+                        Label uname = new Label();
+                        uname = new Label();
+                        uname.Name = table.Rows[i][1].ToString();
+                        uname.AutoSize = true;
+                        uname.ForeColor = Color.DarkGreen;
+                        uname.Font = new Font("Cambria", 16, FontStyle.Bold);
+                        uname.Text = fullname;
+                        uname.Cursor = Cursors.Hand;
+                        uname.Click += new EventHandler(uname_Click);
+                       
+
+                        //Image
+                        phot[i] = new PictureBox();
+                        phot[i].Width = 100;
+                        phot[i].Height = 65;
+                        phot[i].Name = table.Rows[i][1].ToString();
+                        phot[i].SizeMode = PictureBoxSizeMode.StretchImage;
+                        phot[i].Cursor = Cursors.Hand;
+                        //takking photo to the panel
+                        try
+                        {
+                            byte[] img = (byte[])table.Rows[i][11];
+                            MemoryStream ms = new MemoryStream(img);
+                            phot[i].Image = Image.FromStream(ms);
+
+
+                        }
+                        catch
+                        {
+
+                        }
+                        //adding the profile pic to the panel
+                         flowLayoutPanel2.Controls.Add(phot[i]);
+                        //adding the name to the flowlayout
+                        flowLayoutPanel2.Controls.Add(uname);
+                      
+                    }
+
+                }
+                
+
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            con.Close();
+
+        }
+       
+        private void loadFriendTimer_Tick(object sender, EventArgs e)
+        {
+            
+                flowLayoutPanel2.Controls.Clear();
+                loadFrineds();
+            loadFriendTimer.Stop();
         }
     }
 

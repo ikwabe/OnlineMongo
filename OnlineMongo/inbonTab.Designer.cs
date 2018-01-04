@@ -30,16 +30,16 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(inbonTab));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.refreshBtn = new Bunifu.Framework.UI.BunifuImageButton();
             this.refreshBar = new Bunifu.Framework.UI.BunifuCircleProgressbar();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.replyBtn = new Bunifu.Framework.UI.BunifuThinButton2();
+            this.emailNumberLabel = new System.Windows.Forms.Label();
             this.deleteBtn = new Bunifu.Framework.UI.BunifuImageButton();
             this.backBtn = new Bunifu.Framework.UI.BunifuImageButton();
             this.label2 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.emailsList = new Bunifu.Framework.UI.BunifuCustomDataGrid();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.refreshBtn)).BeginInit();
@@ -47,7 +47,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.deleteBtn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.backBtn)).BeginInit();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.emailsList)).BeginInit();
             this.SuspendLayout();
             // 
             // refreshBtn
@@ -56,7 +55,7 @@
             this.refreshBtn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.refreshBtn.Image = ((System.Drawing.Image)(resources.GetObject("refreshBtn.Image")));
             this.refreshBtn.ImageActive = null;
-            this.refreshBtn.Location = new System.Drawing.Point(155, 18);
+            this.refreshBtn.Location = new System.Drawing.Point(10, 13);
             this.refreshBtn.Name = "refreshBtn";
             this.refreshBtn.Size = new System.Drawing.Size(29, 24);
             this.refreshBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -89,6 +88,8 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.replyBtn);
+            this.panel1.Controls.Add(this.emailNumberLabel);
             this.panel1.Controls.Add(this.deleteBtn);
             this.panel1.Controls.Add(this.refreshBar);
             this.panel1.Controls.Add(this.backBtn);
@@ -97,8 +98,46 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1238, 56);
+            this.panel1.Size = new System.Drawing.Size(1238, 90);
             this.panel1.TabIndex = 4;
+            // 
+            // replyBtn
+            // 
+            this.replyBtn.ActiveBorderThickness = 1;
+            this.replyBtn.ActiveCornerRadius = 20;
+            this.replyBtn.ActiveFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(0)))), ((int)(((byte)(40)))));
+            this.replyBtn.ActiveForecolor = System.Drawing.Color.Gray;
+            this.replyBtn.ActiveLineColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.replyBtn.BackColor = System.Drawing.SystemColors.Control;
+            this.replyBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("replyBtn.BackgroundImage")));
+            this.replyBtn.ButtonText = "Reply";
+            this.replyBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.replyBtn.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.replyBtn.ForeColor = System.Drawing.Color.DimGray;
+            this.replyBtn.IdleBorderThickness = 1;
+            this.replyBtn.IdleCornerRadius = 20;
+            this.replyBtn.IdleFillColor = System.Drawing.Color.Transparent;
+            this.replyBtn.IdleForecolor = System.Drawing.Color.Black;
+            this.replyBtn.IdleLineColor = System.Drawing.Color.DarkSlateBlue;
+            this.replyBtn.Location = new System.Drawing.Point(392, 50);
+            this.replyBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.replyBtn.Name = "replyBtn";
+            this.replyBtn.Size = new System.Drawing.Size(76, 34);
+            this.replyBtn.TabIndex = 89;
+            this.replyBtn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.replyBtn.Visible = false;
+            this.replyBtn.Click += new System.EventHandler(this.replyBtn_Click);
+            // 
+            // emailNumberLabel
+            // 
+            this.emailNumberLabel.AutoSize = true;
+            this.emailNumberLabel.BackColor = System.Drawing.Color.Transparent;
+            this.emailNumberLabel.Font = new System.Drawing.Font("Cambria", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.emailNumberLabel.ForeColor = System.Drawing.Color.DarkGreen;
+            this.emailNumberLabel.Location = new System.Drawing.Point(123, 56);
+            this.emailNumberLabel.Name = "emailNumberLabel";
+            this.emailNumberLabel.Size = new System.Drawing.Size(0, 25);
+            this.emailNumberLabel.TabIndex = 7;
             // 
             // deleteBtn
             // 
@@ -106,12 +145,13 @@
             this.deleteBtn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.deleteBtn.Image = ((System.Drawing.Image)(resources.GetObject("deleteBtn.Image")));
             this.deleteBtn.ImageActive = null;
-            this.deleteBtn.Location = new System.Drawing.Point(190, 18);
+            this.deleteBtn.Location = new System.Drawing.Point(45, 13);
             this.deleteBtn.Name = "deleteBtn";
             this.deleteBtn.Size = new System.Drawing.Size(29, 24);
             this.deleteBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.deleteBtn.TabIndex = 6;
             this.deleteBtn.TabStop = false;
+            this.deleteBtn.Visible = false;
             this.deleteBtn.Zoom = 10;
             this.deleteBtn.Click += new System.EventHandler(this.deleteBtn_Click);
             // 
@@ -121,7 +161,7 @@
             this.backBtn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.backBtn.Image = ((System.Drawing.Image)(resources.GetObject("backBtn.Image")));
             this.backBtn.ImageActive = null;
-            this.backBtn.Location = new System.Drawing.Point(155, 18);
+            this.backBtn.Location = new System.Drawing.Point(10, 13);
             this.backBtn.Name = "backBtn";
             this.backBtn.Size = new System.Drawing.Size(29, 24);
             this.backBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -136,7 +176,7 @@
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Century Gothic", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(3, 5);
+            this.label2.Location = new System.Drawing.Point(3, 40);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(120, 44);
             this.label2.TabIndex = 4;
@@ -144,50 +184,24 @@
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.emailsList);
+            this.panel2.Controls.Add(this.flowLayoutPanel1);
             this.panel2.Controls.Add(this.richTextBox1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 56);
+            this.panel2.Location = new System.Drawing.Point(0, 90);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1238, 282);
+            this.panel2.Size = new System.Drawing.Size(1238, 248);
             this.panel2.TabIndex = 5;
             // 
-            // emailsList
+            // flowLayoutPanel1
             // 
-            this.emailsList.AllowUserToAddRows = false;
-            this.emailsList.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.emailsList.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.emailsList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.emailsList.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.emailsList.BackgroundColor = System.Drawing.Color.Gainsboro;
-            this.emailsList.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.emailsList.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            this.emailsList.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(0)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Gray;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.emailsList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            this.emailsList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.emailsList.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.emailsList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.emailsList.DoubleBuffered = true;
-            this.emailsList.EnableHeadersVisualStyles = false;
-            this.emailsList.HeaderBgColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(0)))), ((int)(((byte)(40)))));
-            this.emailsList.HeaderForeColor = System.Drawing.Color.Gray;
-            this.emailsList.Location = new System.Drawing.Point(0, 0);
-            this.emailsList.MultiSelect = false;
-            this.emailsList.Name = "emailsList";
-            this.emailsList.ReadOnly = true;
-            this.emailsList.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            this.emailsList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.emailsList.Size = new System.Drawing.Size(1238, 282);
-            this.emailsList.TabIndex = 5;
-            this.emailsList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.emailsList_CellClick_1);
+            this.flowLayoutPanel1.AutoScroll = true;
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1238, 248);
+            this.flowLayoutPanel1.TabIndex = 6;
+            this.flowLayoutPanel1.WrapContents = false;
             // 
             // richTextBox1
             // 
@@ -201,13 +215,15 @@
             this.richTextBox1.Location = new System.Drawing.Point(189, 6);
             this.richTextBox1.Margin = new System.Windows.Forms.Padding(50, 3, 3, 3);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(880, 245);
+            this.richTextBox1.Size = new System.Drawing.Size(880, 211);
             this.richTextBox1.TabIndex = 4;
             this.richTextBox1.Text = "";
+            this.richTextBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.richTextBox1_KeyDown);
+            this.richTextBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.richTextBox1_KeyPress);
             // 
             // timer1
             // 
-            this.timer1.Interval = 3000;
+            this.timer1.Interval = 1;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // inbonTab
@@ -226,7 +242,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.deleteBtn)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.backBtn)).EndInit();
             this.panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.emailsList)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -238,9 +253,11 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.RichTextBox richTextBox1;
-        private Bunifu.Framework.UI.BunifuCustomDataGrid emailsList;
         private Bunifu.Framework.UI.BunifuImageButton backBtn;
         private Bunifu.Framework.UI.BunifuImageButton deleteBtn;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.Label emailNumberLabel;
+        private Bunifu.Framework.UI.BunifuThinButton2 replyBtn;
     }
 }

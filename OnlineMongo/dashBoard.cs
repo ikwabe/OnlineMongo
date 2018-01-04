@@ -19,6 +19,27 @@ namespace OnlineMongo
             InitializeComponent();
         }
 
+      private void muneOnLoad()
+        {
+            timer1.Start();
+            panel2.Visible = false;
+            panel2.Width = 250;
+            mnBtn.Location = new Point(222, mnBtn.Location.Y);
+            panelAnimator.ShowSync(panel2);
+            logo.Visible = true;
+            panel4.Width = 810;
+            pic.Instance.Width = 810;
+            myProfile.Instance.Width = 810;
+            hometb.Instance.Width = 810;
+            aboutb.Instance.Width = 810;
+            postb.Instance.Width = 810;
+            classPage.Instance.Width = 810;
+            friendtb.Instance.Width = 810;
+            hometb.Instance.Dock = DockStyle.Fill;
+            signOutBtn.Location = new Point(1000, signOutBtn.Location.Y);
+
+        }
+
         private void mnBtn_Click(object sender, EventArgs e)
         {
            
@@ -298,9 +319,15 @@ namespace OnlineMongo
         }
         private void dashBoard_Load_1(object sender, EventArgs e)
         {
+            //view full menu size
+            
+
+            //reyrieve new emails
+            emailCheckTimer.Start();
+            check = true;
             //maximize the window
             maximize();
-           
+            emailNumberLabel.Visible = true;
            
 
 
@@ -715,6 +742,91 @@ namespace OnlineMongo
         private void signOutBtn_Click(object sender, EventArgs e)
         {
             Application.Restart();
+        }
+
+        public static bool check = false;
+
+        //afunction to show inbox new emails
+
+        private void loadEmail()
+        {
+            MySqlDataAdapter ad;
+            MySqlConnection con = new MySqlConnection();
+            con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+            string detail = "select * from users where username = '" + login.txt.Text + "'";
+
+            MySqlCommand com = new MySqlCommand(detail, con);
+            try
+            {
+
+                con.Open();
+
+                ad = new MySqlDataAdapter(com);
+                //taking email to the table for searchimg its corresponding messages in sentmail table
+                DataTable table = new DataTable();
+                ad.Fill(table);
+                string userEmail = table.Rows[0][3].ToString();
+                ad.Dispose();
+
+                //reading all emails correspond to the user email
+                string readEmail = "select mailsubject,senderemail from sentmail where receiveremail = '" + userEmail + "'";
+                string readMesage = "select * from sentmail where receiveremail = '" + userEmail + "' order by sentmail_id desc";
+                //for reading the message in the file
+                MySqlCommand com2 = new MySqlCommand(readMesage, con);
+
+                ad = new MySqlDataAdapter(com2);
+                DataTable table2 = new DataTable();
+                ad.Fill(table2);
+                int j = 0;
+
+
+                for (int i = 0; i < table2.Rows.Count; i++)
+                {
+                    //the email is new
+                    if (table2.Rows[i][5].ToString() == "New")
+                    {
+                       
+                        j++;
+                    }
+                    else
+                    {
+                       
+                    }
+
+                }
+                if (j != 0)
+                {
+                    emailNumberLabel.Visible = true;
+                    emailNumberLabel.Text = j.ToString();
+                }
+                else
+                {
+                    emailNumberLabel.Visible = false;
+                }
+                
+                ad.Dispose();
+
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            con.Close();
+        }
+
+        //reading the new emails
+        private void emailCheckTimer_Tick(object sender, EventArgs e)
+        {
+            if(check == true)
+            {
+
+                loadEmail();
+                check = false;
+            }
+            else
+            {
+
+            }
         }
     }
 }

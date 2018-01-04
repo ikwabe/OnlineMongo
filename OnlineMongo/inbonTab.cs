@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using System.Threading;
 using System.IO;
+using Bunifu.Framework.UI;
 
 namespace OnlineMongo
 {
@@ -30,6 +31,9 @@ namespace OnlineMongo
             InitializeComponent();
             
         }
+        public static bool check = false;
+        public static string enumber;
+        public static bool reply = false;
 
         private void loadEmail()
         {
@@ -53,14 +57,82 @@ namespace OnlineMongo
 
                 //reading all emails correspond to the user email
                 string readEmail = "select mailsubject,senderemail from sentmail where receiveremail = '" + userEmail + "'";
-                string readMesage = "select mailsubject Message from sentmail where receiveremail = '" + userEmail + "' order by sentmail_id desc";
+                string readMesage = "select * from sentmail where receiveremail = '" + userEmail + "' order by sentmail_id desc";
                 //for reading the message in the file
                 MySqlCommand com2 = new MySqlCommand(readMesage, con);
 
                 ad = new MySqlDataAdapter(com2);
                 DataTable table2 = new DataTable();
                 ad.Fill(table2);
-                emailsList.DataSource = table2;
+                int j = 0;
+               
+               
+                for (int i = 0; i < table2.Rows.Count; i++)
+                {
+                    //the email is new
+                    if (table2.Rows[i][5].ToString() == "New")
+                    {
+                        Label sign = new Label();
+                        sign.Text = "•";
+                        sign.Font = new Font("Cambria", 20, FontStyle.Bold);
+                        sign.ForeColor = Color.DarkGreen;
+                        j++;
+                        //Take the email
+                        string subject = table2.Rows[i][1].ToString();
+                       
+                        Label email = new Label();
+                        email = new Label();
+                        email.Name = table2.Rows[i][0].ToString();
+                        email.AutoSize = true;
+                        email.ForeColor = Color.Black;
+                        email.Font = new Font("Cambria", 15, FontStyle.Bold);
+                        email.Text = subject;
+                        email.Cursor = Cursors.Hand;
+                        email.Click += new EventHandler(email_Click);
+
+                        //seperator for the emails
+                        BunifuSeparator spr = new BunifuSeparator();
+                        spr.LineThickness = 1;
+                        spr.Height = 1;
+                        spr.Anchor = AnchorStyles.Right;
+                        spr.LineColor = Color.FromArgb(20, 105, 105, 105);
+                        spr.Transparency = 25;
+                        //adding the subjects to the pannel
+                        flowLayoutPanel1.Controls.Add(sign);
+                        flowLayoutPanel1.Controls.Add(email);
+                        flowLayoutPanel1.Controls.Add(spr);
+
+                    }
+                    else
+                    {
+                        //Take the email
+                        string subject = table2.Rows[i][1].ToString();
+                        Label email = new Label();
+                        email = new Label();
+                        email.Name = table2.Rows[i][0].ToString();
+                        email.AutoSize = true;
+                        email.ForeColor = Color.FromArgb(129, 129, 131);
+                        email.Font = new Font("Cambria", 15, FontStyle.Regular);
+                        email.Text = subject;
+                        email.Cursor = Cursors.Hand;
+                        email.Click += new EventHandler(email_Click);
+
+                        //seperator for the emails
+                        BunifuSeparator spr = new BunifuSeparator();
+                        spr.LineThickness = 1;
+                        spr.Height = 1;
+                        spr.Anchor = AnchorStyles.Right;
+                        spr.LineColor = Color.FromArgb(20, 105, 105, 105);
+                        spr.Transparency = 25;
+                        //adding the subjects to the pannel
+                        flowLayoutPanel1.Controls.Add(email);
+                        flowLayoutPanel1.Controls.Add(spr);
+
+                    }
+                       
+                }
+                emailNumberLabel.Text = "(" + j + ")";
+                enumber = j.ToString();
                 ad.Dispose();
 
             }
@@ -76,33 +148,30 @@ namespace OnlineMongo
             timer1.Start();
             refreshBar.Visible = true;
             refreshBar.animated = true;
-            loadEmail();
+            check = true;
             refreshBar.Visible = false;
             refreshBar.animated = false;
         }
 
-       private static string selectedWord;
+      
 
-        private void emailsList_CellClick_1(object sender, DataGridViewCellEventArgs e)
+        public static string selectedMail;
+        
+
+        //function for email labels 
+        private void email_Click(object sender, EventArgs e)
         {
-            int index = e.RowIndex;
-            
-            try
-            {
-                DataGridViewRow selectedIndex = emailsList.Rows[index];
-                selectedWord = selectedIndex.Cells[0].Value.ToString();
-            }
-            catch
-            {
-
-            }
-           
-
+            var email = sender as Label;
+            selectedMail = email.Name;
 
             MySqlDataAdapter ad;
             MySqlConnection con = new MySqlConnection();
             con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
-            string detail = "select * from sentmail where mailsubject = '"+ selectedWord + "' ";
+            string detail = "select * from sentmail where sentmail_id = '" + selectedMail + "' ";
+
+            //the string to update the opened email
+            string opened = "update sentmail set status = 'Read' where sentmail_id = '" + selectedMail + "' ";
+            MySqlCommand com1 = new MySqlCommand(opened, con);
 
             MySqlCommand com = new MySqlCommand(detail, con);
             try
@@ -114,32 +183,45 @@ namespace OnlineMongo
                 //taking email to the table for searchimg its corresponding messages in sentmail table
                 DataTable table = new DataTable();
                 ad.Fill(table);
+                ad.Dispose();
+
+                //a reader to read the email
+                MySqlDataReader rd;
+
                 try
                 {
-                   // MessageBox.Show(table.Rows[0][2].ToString());
-                    if(table.Rows.Count > 0)
+                    // MessageBox.Show(table.Rows[0][2].ToString());
+                    if (table.Rows.Count > 0)
                     {
-                        emailsList.Visible = false;
+                        flowLayoutPanel1.Visible = false;
                         refreshBar.Visible = true;
                         refreshBar.animated = true;
-               
+
                         richTextBox1.AppendText(table.Rows[0][2].ToString());
                         backBtn.Visible = true;
                         refreshBtn.Visible = false;
-                        refreshBar.Visible = false;  
+                        refreshBar.Visible = false;
+                        deleteBtn.Visible = true;
+
+                        //reading the email
+                        rd = com1.ExecuteReader();
+                        rd.Close();
+                        replyBtn.Visible = true;
+                        check = true;
+                        dashBoard.check = true;
                     }
                     else
                     {
                         MessageBox.Show("Sorry, the Email does`nt exist..!");
                     }
-                    
-                   
+
+
                 }
                 catch
                 {
 
                 }
-                ad.Dispose();
+                
 
             }
             catch (MySqlException ex)
@@ -149,30 +231,40 @@ namespace OnlineMongo
             con.Close();
 
         }
+       
 
         private void backBtn_Click(object sender, EventArgs e)
         {
-            emailsList.Visible = true;
-            backBtn.Visible = false;
+            flowLayoutPanel1.Visible = true;
             refreshBtn.Visible = true;
+            replyBtn.Visible = false;
+            backBtn.Visible = false;
+            deleteBtn.Visible = false;
             richTextBox1.Clear();
         }
 
+
+      
+
+        //function to refresh the retrieval of email
         private void refreshBtn_Click(object sender, EventArgs e)
         {
             refreshBar.Visible = true;
             refreshBar.animated = true;
-            loadEmail();
+            check = true;
             refreshBar.Visible = false;
             refreshBar.animated = false;
+            backBtn.Visible = false;
+            deleteBtn.Visible = false;
         }
 
         private void deleteBtn_Click(object sender, EventArgs e)
         {
+            replyBtn.Visible = false;
             MySqlConnection con = new MySqlConnection();
             con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
-            string insert = "insert into trash select * from sentmail where mailsubject = '" + selectedWord + "'";
-            string delete = "delete from sentmail where mailsubject = '" + selectedWord + "' ";
+            string insert = "insert into trash select * from sentmail where sentmail_id = '" + selectedMail + "'";
+            string delete = "delete from sentmail where sentmail_id = '" + selectedMail + "' ";
 
             MySqlCommand com = new MySqlCommand(insert, con);
             MySqlCommand com1 = new MySqlCommand(delete, con);
@@ -192,15 +284,13 @@ namespace OnlineMongo
 
                 MessageBox.Show("Moved to Trash");
                 richTextBox1.Clear();
-                if(emailsList.SelectedRows.Count > 0)
-                {
-                    emailsList.Rows.RemoveAt(emailsList.SelectedRows[0].Index); 
-                }
-                else
-                {
-
-                }
-
+                check = true;
+                trashTab.check = true;
+                flowLayoutPanel1.Visible = true;
+                backBtn.Visible = false;
+                refreshBtn.Visible = true;
+                deleteBtn.Visible = false;
+                replyBtn.Visible = false;
             }
             catch (MySqlException ex)
             {
@@ -211,7 +301,50 @@ namespace OnlineMongo
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            loadEmail();
+            if(check == true)
+            {
+                flowLayoutPanel1.Controls.Clear();
+                loadEmail();
+                check = false;
+            }
+            else
+            {
+
+            }
+            
+        }
+
+        private void richTextBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsDigit(e.KeyChar) || char.IsSeparator(e.KeyChar)|| char.IsLetter(e.KeyChar)||char.IsPunctuation(e.KeyChar)||char.IsSymbol(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+            else
+            {
+                e.Handled = false;
+            }
+        }
+
+        private void richTextBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Back)
+            {
+                e.SuppressKeyPress = true;
+            }
+            else
+            {
+
+            }
+        }
+        
+        private void replyBtn_Click(object sender, EventArgs e)
+        {
+            reply = true;
+            userMenu.reply = false;
+            userInfo.reply = false;
+            instantMessage insMs = new instantMessage();
+            insMs.Show();
         }
     }
 }

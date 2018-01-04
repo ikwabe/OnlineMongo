@@ -30,19 +30,16 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(sentTab));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.backBtn = new Bunifu.Framework.UI.BunifuImageButton();
             this.refreshBtn = new Bunifu.Framework.UI.BunifuImageButton();
             this.label2 = new System.Windows.Forms.Label();
-            this.emailsList = new Bunifu.Framework.UI.BunifuCustomDataGrid();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.backBtn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.refreshBtn)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.emailsList)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -98,45 +95,6 @@
             this.label2.TabIndex = 4;
             this.label2.Text = "Sent Message(s)";
             // 
-            // emailsList
-            // 
-            this.emailsList.AllowUserToAddRows = false;
-            this.emailsList.AllowUserToDeleteRows = false;
-            this.emailsList.AllowUserToResizeColumns = false;
-            this.emailsList.AllowUserToResizeRows = false;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.emailsList.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
-            this.emailsList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.emailsList.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.emailsList.BackgroundColor = System.Drawing.Color.Gainsboro;
-            this.emailsList.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.emailsList.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            this.emailsList.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(0)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.Gray;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.emailsList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
-            this.emailsList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.emailsList.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.emailsList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.emailsList.DoubleBuffered = true;
-            this.emailsList.EnableHeadersVisualStyles = false;
-            this.emailsList.HeaderBgColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(0)))), ((int)(((byte)(40)))));
-            this.emailsList.HeaderForeColor = System.Drawing.Color.Gray;
-            this.emailsList.Location = new System.Drawing.Point(0, 56);
-            this.emailsList.MultiSelect = false;
-            this.emailsList.Name = "emailsList";
-            this.emailsList.ReadOnly = true;
-            this.emailsList.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            this.emailsList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.emailsList.Size = new System.Drawing.Size(814, 293);
-            this.emailsList.TabIndex = 7;
-            this.emailsList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.emailsList_CellClick);
-            // 
             // richTextBox1
             // 
             this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -152,18 +110,31 @@
             this.richTextBox1.Size = new System.Drawing.Size(787, 245);
             this.richTextBox1.TabIndex = 8;
             this.richTextBox1.Text = "";
+            this.richTextBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.richTextBox1_KeyDown);
+            this.richTextBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.richTextBox1_KeyPress);
             // 
             // timer1
             // 
-            this.timer1.Interval = 3000;
+            this.timer1.Interval = 1;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.AutoScroll = true;
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 56);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(814, 293);
+            this.flowLayoutPanel1.TabIndex = 9;
+            this.flowLayoutPanel1.WrapContents = false;
             // 
             // sentTab
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.Controls.Add(this.emailsList);
+            this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.richTextBox1);
             this.Name = "sentTab";
@@ -173,7 +144,6 @@
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.backBtn)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.refreshBtn)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.emailsList)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -183,9 +153,9 @@
         private System.Windows.Forms.Panel panel1;
         private Bunifu.Framework.UI.BunifuImageButton refreshBtn;
         private System.Windows.Forms.Label label2;
-        private Bunifu.Framework.UI.BunifuCustomDataGrid emailsList;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private Bunifu.Framework.UI.BunifuImageButton backBtn;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
     }
 }

@@ -109,11 +109,23 @@
     <Compile Include="hometb.Designer.cs">
       <DependentUpon>hometb.cs</DependentUpon>
     </Compile>
+    <Compile Include="imageOption.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="imageOption.Designer.cs">
+      <DependentUpon>imageOption.cs</DependentUpon>
+    </Compile>
     <Compile Include="inbonTab.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="inbonTab.Designer.cs">
       <DependentUpon>inbonTab.cs</DependentUpon>
+    </Compile>
+    <Compile Include="instantMessage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="instantMessage.Designer.cs">
+      <DependentUpon>instantMessage.cs</DependentUpon>
     </Compile>
     <Compile Include="login.cs">
       <SubType>Form</SubType>
@@ -219,6 +231,12 @@
     <Compile Include="userInfo.Designer.cs">
       <DependentUpon>userInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="userMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="userMenu.Designer.cs">
+      <DependentUpon>userMenu.cs</DependentUpon>
+    </Compile>
     <Compile Include="verifyEmail.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -252,8 +270,14 @@
     <EmbeddedResource Include="hometb.resx">
       <DependentUpon>hometb.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="imageOption.resx">
+      <DependentUpon>imageOption.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="inbonTab.resx">
       <DependentUpon>inbonTab.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="instantMessage.resx">
+      <DependentUpon>instantMessage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="login.resx">
       <DependentUpon>login.cs</DependentUpon>
@@ -314,6 +338,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="userInfo.resx">
       <DependentUpon>userInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="userMenu.resx">
+      <DependentUpon>userMenu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="verifyEmail.resx">
       <DependentUpon>verifyEmail.cs</DependentUpon>

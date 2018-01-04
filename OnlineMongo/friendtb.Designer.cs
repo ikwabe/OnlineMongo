@@ -36,6 +36,12 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.loadFriendTimer = new System.Windows.Forms.Timer(this.components);
+            this.label7 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.reqNumberLabel = new System.Windows.Forms.Label();
+            this.friendNumberLabel = new System.Windows.Forms.Label();
+            this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel4.SuspendLayout();
             this.SuspendLayout();
@@ -46,6 +52,10 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.friendNumberLabel);
+            this.panel1.Controls.Add(this.reqNumberLabel);
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.label7);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
@@ -90,10 +100,57 @@
             // flowLayoutPanel2
             // 
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
             this.flowLayoutPanel2.Size = new System.Drawing.Size(456, 302);
             this.flowLayoutPanel2.TabIndex = 0;
+            // 
+            // loadFriendTimer
+            // 
+            this.loadFriendTimer.Tick += new System.EventHandler(this.loadFriendTimer_Tick);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.label7.Location = new System.Drawing.Point(3, 24);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(84, 20);
+            this.label7.TabIndex = 35;
+            this.label7.Text = "Request(s)";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.label1.Location = new System.Drawing.Point(148, 27);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(59, 20);
+            this.label1.TabIndex = 36;
+            this.label1.Text = "Friends";
+            // 
+            // reqNumberLabel
+            // 
+            this.reqNumberLabel.AutoSize = true;
+            this.reqNumberLabel.Font = new System.Drawing.Font("Cambria", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.reqNumberLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.reqNumberLabel.Location = new System.Drawing.Point(82, 27);
+            this.reqNumberLabel.Name = "reqNumberLabel";
+            this.reqNumberLabel.Size = new System.Drawing.Size(0, 17);
+            this.reqNumberLabel.TabIndex = 37;
+            // 
+            // friendNumberLabel
+            // 
+            this.friendNumberLabel.AutoSize = true;
+            this.friendNumberLabel.Font = new System.Drawing.Font("Cambria", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.friendNumberLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.friendNumberLabel.Location = new System.Drawing.Point(213, 29);
+            this.friendNumberLabel.Name = "friendNumberLabel";
+            this.friendNumberLabel.Size = new System.Drawing.Size(0, 17);
+            this.friendNumberLabel.TabIndex = 38;
             // 
             // friendtb
             // 
@@ -106,6 +163,8 @@
             this.Name = "friendtb";
             this.Size = new System.Drawing.Size(815, 349);
             this.Load += new System.EventHandler(this.friendtb_Load);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -120,5 +179,10 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
+        private System.Windows.Forms.Timer loadFriendTimer;
+        private System.Windows.Forms.Label friendNumberLabel;
+        private System.Windows.Forms.Label reqNumberLabel;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label7;
     }
 }

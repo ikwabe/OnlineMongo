@@ -36,7 +36,7 @@ namespace OnlineMongo
 
         int i = 0 ;
         string[] image;
-        PictureBox [] phot;
+        PictureBox phott;
         private PictureBox photo()
         {
 
@@ -56,7 +56,7 @@ namespace OnlineMongo
             int user_id = int.Parse(user_idc);
 
             //reading images query
-            string readImage = "select * from images where user_id = '" + user_id + "'";
+            string readImage = "select * from images where user_id = '" + user_id + "' order by img_id DESC";
 
             MySqlCommand com = new MySqlCommand(readImage, con);
             ad = new MySqlDataAdapter(com);
@@ -95,7 +95,8 @@ namespace OnlineMongo
             }
             
             ad.Dispose();
-            return phot[table1.Rows.Count - 1];
+            return phott;
+           
         }
 
         //the strig to hold the pic name for retrieving it from the database
@@ -108,15 +109,13 @@ namespace OnlineMongo
 
             //taking the clicked PictureName to the static string
             photName = picName.Name;
-
             //for checking if the is true
             chek = true;
 
             postb.chek = false;
-
-            pictureView picv = new pictureView();
-            picv.Show();
-
+            //testing
+            imageOption img = new imageOption();
+            img.Show();
 
         }
 
@@ -203,6 +202,7 @@ namespace OnlineMongo
         private void pic_Load(object sender, EventArgs e)
         {
             timer1.Start();
+            reLoadTimer.Start();
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -216,6 +216,29 @@ namespace OnlineMongo
         {
             flowLayoutPanel1.Controls.Clear();
             timer1.Start();
+        }
+        //has to be deleted
+        public static int x;
+        public static int y;
+        private void pic_MouseDown(object sender, MouseEventArgs e)
+        {
+            x = e.X;
+            y = e.Y;
+        }
+        public static bool picCheck = false;
+        private void reLoadTimer_Tick(object sender, EventArgs e)
+        {
+            if(picCheck == true)
+            {
+                flowLayoutPanel1.Controls.Clear();
+                timer1.Start();
+                picCheck = false;
+            }
+            else
+            {
+
+            }
+
         }
     }
 

@@ -72,6 +72,7 @@
             this.label18 = new System.Windows.Forms.Label();
             this.userPrflName = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.messageBtn = new Bunifu.Framework.UI.BunifuThinButton2();
             this.Headerpanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.closeBtn)).BeginInit();
             this.panel1.SuspendLayout();
@@ -129,6 +130,7 @@
             // panel1
             // 
             this.panel1.AutoScroll = true;
+            this.panel1.Controls.Add(this.messageBtn);
             this.panel1.Controls.Add(this.channel);
             this.panel1.Controls.Add(this.game);
             this.panel1.Controls.Add(this.series);
@@ -574,6 +576,32 @@
             this.pictureBox1.TabIndex = 66;
             this.pictureBox1.TabStop = false;
             // 
+            // messageBtn
+            // 
+            this.messageBtn.ActiveBorderThickness = 1;
+            this.messageBtn.ActiveCornerRadius = 20;
+            this.messageBtn.ActiveFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(0)))), ((int)(((byte)(40)))));
+            this.messageBtn.ActiveForecolor = System.Drawing.Color.Gray;
+            this.messageBtn.ActiveLineColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.messageBtn.BackColor = System.Drawing.SystemColors.Control;
+            this.messageBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("messageBtn.BackgroundImage")));
+            this.messageBtn.ButtonText = "Send Message";
+            this.messageBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.messageBtn.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.messageBtn.ForeColor = System.Drawing.Color.DimGray;
+            this.messageBtn.IdleBorderThickness = 1;
+            this.messageBtn.IdleCornerRadius = 20;
+            this.messageBtn.IdleFillColor = System.Drawing.Color.Transparent;
+            this.messageBtn.IdleForecolor = System.Drawing.Color.Black;
+            this.messageBtn.IdleLineColor = System.Drawing.Color.DarkSlateBlue;
+            this.messageBtn.Location = new System.Drawing.Point(668, 161);
+            this.messageBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.messageBtn.Name = "messageBtn";
+            this.messageBtn.Size = new System.Drawing.Size(235, 34);
+            this.messageBtn.TabIndex = 102;
+            this.messageBtn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.messageBtn.Click += new System.EventHandler(this.messageBtn_Click);
+            // 
             // userInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -640,5 +668,6 @@
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label userPrflName;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private Bunifu.Framework.UI.BunifuThinButton2 messageBtn;
     }
 }

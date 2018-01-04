@@ -195,8 +195,8 @@ namespace OnlineMongo
         {
             //for renaming the file on inserting in a directory
             int i = 0;
+            
 
-           
             //for the while loop
             Boolean check = true;
 
@@ -225,12 +225,10 @@ namespace OnlineMongo
 
                 }
                 i++;
+
+
             }
 
-           
-
-           
-          
 
             string sendmail = "select * from users where username = '" + login.txt.Text + "'";
 
@@ -248,7 +246,7 @@ namespace OnlineMongo
                 senderEmail =table.Rows[0][3].ToString();                  
                 ad.Dispose();
                 string subject = subjectTextBox1.Text + "(By " + login.txt.Text + ")";
-                string insert = "insert into sentmail (mailsubject,sentmsg,senderemail,receiveremail) values ('" + subject + "', @sentmsg,'" + senderEmail + "', '" + toTextBox1.Text + "')";
+                string insert = "insert into sentmail (mailsubject,sentmsg,senderemail,receiveremail,status) values ('" + subject + "', @sentmsg,'" + senderEmail + "', '" + toTextBox1.Text + "','New')";
 
                
                 byte[] mail = null;
@@ -263,7 +261,7 @@ namespace OnlineMongo
                 //inserting the email text file to the database
                 com1.Parameters.AddWithValue("@sentmsg", mail);
                 com1.ExecuteNonQuery();
-
+                
                 MessageBox.Show("Message Sent. If you need to send the same message, please change the tittle or the email for message safety.");
 
             }
@@ -273,7 +271,8 @@ namespace OnlineMongo
                 MessageBox.Show(ex.Message);
             }
             con.Close();
-
+            inbonTab.check = true;
+            dashBoard.check = true;
 
         }
     }
