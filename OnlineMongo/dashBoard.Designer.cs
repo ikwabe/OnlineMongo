@@ -70,6 +70,7 @@
             this.logoTransition = new BunifuAnimatorNS.BunifuTransition(this.components);
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.emailCheckTimer = new System.Windows.Forms.Timer(this.components);
+            this.soundTimer = new System.Windows.Forms.Timer(this.components);
             this.Headerpanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.restoreDownBtn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.maximizeBtn)).BeginInit();
@@ -897,6 +898,11 @@
             this.emailCheckTimer.Interval = 1;
             this.emailCheckTimer.Tick += new System.EventHandler(this.emailCheckTimer_Tick);
             // 
+            // soundTimer
+            // 
+            this.soundTimer.Interval = 1;
+            this.soundTimer.Tick += new System.EventHandler(this.soundTimer_Tick);
+            // 
             // dashBoard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -972,5 +978,6 @@
         private Bunifu.Framework.UI.BunifuCustomLabel signOutBtn;
         private System.Windows.Forms.Label emailNumberLabel;
         private System.Windows.Forms.Timer emailCheckTimer;
+        private System.Windows.Forms.Timer soundTimer;
     }
 }

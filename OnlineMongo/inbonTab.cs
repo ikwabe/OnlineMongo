@@ -101,8 +101,7 @@ namespace OnlineMongo
                         flowLayoutPanel1.Controls.Add(sign);
                         flowLayoutPanel1.Controls.Add(email);
                         flowLayoutPanel1.Controls.Add(spr);
-                        System.Media.SoundPlayer player = new System.Media.SoundPlayer(@"C:\Users\Shadrack Ikwabe\AppData\Roaming\UdoRead\Ring Tone\tone.wav");
-                        player.Play();
+                        
 
                     }
                     else

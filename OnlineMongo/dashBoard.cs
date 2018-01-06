@@ -19,27 +19,9 @@ namespace OnlineMongo
             InitializeComponent();
         }
 
-      private void muneOnLoad()
-        {
-            timer1.Start();
-            panel2.Visible = false;
-            panel2.Width = 250;
-            mnBtn.Location = new Point(222, mnBtn.Location.Y);
-            panelAnimator.ShowSync(panel2);
-            logo.Visible = true;
-            panel4.Width = 810;
-            pic.Instance.Width = 810;
-            myProfile.Instance.Width = 810;
-            hometb.Instance.Width = 810;
-            aboutb.Instance.Width = 810;
-            postb.Instance.Width = 810;
-            classPage.Instance.Width = 810;
-            friendtb.Instance.Width = 810;
-            hometb.Instance.Dock = DockStyle.Fill;
-            signOutBtn.Location = new Point(1000, signOutBtn.Location.Y);
-
-        }
-
+        //for message noticification
+        public static bool sound = false;
+     
         private void mnBtn_Click(object sender, EventArgs e)
         {
            
@@ -326,6 +308,7 @@ namespace OnlineMongo
             //reyrieve new emails
             emailCheckTimer.Start();
             check = true;
+            soundTimer.Start();
             //maximize the window
             maximize();
             emailNumberLabel.Visible = true;
@@ -748,7 +731,8 @@ namespace OnlineMongo
         public static bool check = false;
 
         //afunction to show inbox new emails
-
+        int k = 0;
+        int numb;
         private void loadEmail()
         {
             MySqlDataAdapter ad;
@@ -779,8 +763,9 @@ namespace OnlineMongo
                 DataTable table2 = new DataTable();
                 ad.Fill(table2);
                 int j = 0;
+                
 
-
+                
                 for (int i = 0; i < table2.Rows.Count; i++)
                 {
                     //the email is new
@@ -795,16 +780,42 @@ namespace OnlineMongo
                     }
 
                 }
+                
                 if (j != 0)
                 {
+                   
+
+                    if (k == 0)
+                    {
+                        numb = j;
+
+                    }
                     emailNumberLabel.Visible = true;
                     emailNumberLabel.Text = j.ToString();
+                    if(numb < j)
+                    {
+
+                        sound = true;
+                        numb = j;
+                    }
+                    else
+                    {
+                        sound = false;
+                        numb = j;
+                    }
                 }
                 else
                 {
                     emailNumberLabel.Visible = false;
+                    numb = j;
                 }
-                
+                k++;
+
+                if(k >= 4)
+                {
+                    k = 1;
+                }
+
                 ad.Dispose();
 
             }
@@ -820,9 +831,23 @@ namespace OnlineMongo
         {
             if(check == true)
             {
-
                 loadEmail();
                 check = false;
+            }
+            else
+            {
+
+            }
+        }
+
+        //a timer for playing new  message sound
+        private void soundTimer_Tick(object sender, EventArgs e)
+        {
+            if(sound == true)
+            {
+                System.Media.SoundPlayer player = new System.Media.SoundPlayer(@"C:\Users\Shadrack Ikwabe\AppData\Roaming\UdoRead\Ring Tone\tone.wav");
+                player.Play();
+                sound = false;
             }
             else
             {
