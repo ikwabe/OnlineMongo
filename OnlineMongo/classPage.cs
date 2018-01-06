@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using Bunifu.Framework.UI;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -9,7 +10,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using MySql.Data.MySqlClient;
-using iTextSharp.text;
+
+
 
 namespace OnlineMongo
 {
@@ -30,27 +32,163 @@ namespace OnlineMongo
             InitializeComponent();
         }
 
-        //function to read books to datagridview
+        private static bool Bcheck = false;
+        private static bool Lcheck = false;
+        private static bool Vcheck = false;
 
-            private void loadBooks()
+        private void loadBooks()
         {
             MySqlConnection con = new MySqlConnection();
             con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
-            string readBooks = "select book_name 'Book Name(s)' from myclass where uname = '"+ login.txt.Text +"'";
-            
+            string readBooks = "select * from myclass where user_id = '"+ login.user_id +"'";
+            MySqlDataAdapter da;
             MySqlCommand com = new MySqlCommand(readBooks, con);
             DataTable table = new DataTable();
-            MySqlDataReader reader;
+            
 
             try
             {
                 con.Open();
                 //Retreaving Book name
-                reader = com.ExecuteReader();
-                table.Load(reader);
-                reader.Close();
-  //appending the book name to the DataGrid view
-                bookDataGrid.DataSource = table;
+                da = new MySqlDataAdapter(com);
+                da.Fill(table);
+                for (int i = 0; i < table.Rows.Count; i++)
+                {
+                    //Take the book
+                    string Tittle = table.Rows[i][3].ToString();
+                    //Button
+                    BunifuFlatButton book = new BunifuFlatButton();
+                    book.Name = table.Rows[i][0].ToString();
+                    book.TextFont = new Font("Cambria", 12, FontStyle.Bold);
+                    book.Textcolor = Color.FromArgb(30,0,40);
+                    book.Text = Tittle;
+                    book.AutoSize = true;
+                    book.Normalcolor = Color.Silver;
+                    book.OnHovercolor = Color.FromArgb(32, 9, 191);
+                    book.Activecolor = Color.DarkGreen;
+                    book.Iconimage = null;
+                    book.TextAlign = ContentAlignment.TopLeft;
+                    book.BorderRadius = 5;
+                    book.Click += new EventHandler(book_Click);
+                    
+                    
+
+                    ////seperator for the books
+                    //BunifuSeparator spr = new BunifuSeparator();
+                    //spr.LineThickness = 1;
+                    //spr.Height = 1;
+                    //spr.Width = 239;
+                    //spr.Anchor = AnchorStyles.Right;
+                    //spr.LineColor = Color.FromArgb(20, 105, 105, 105);
+                    //spr.Transparency = 25;
+                    flowLayoutPanel1.Controls.Add(book);
+                    //flowLayoutPanel1.Controls.Add(spr);
+
+                }
+
+                }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            con.Close();
+
+        }
+
+        //for books
+        private static int book_id;
+       
+        private void book_Click(object sender, EventArgs e)
+        {
+            Lcheck = false;
+            Bcheck = true;
+            Vcheck = false;
+
+            var book = sender as BunifuFlatButton;
+           
+                book_id = int.Parse(book.Name);
+               
+        }
+
+        //for lect
+        private static int lect_id;
+        private void lec_Click(object sender, EventArgs e)
+        {
+
+            Lcheck = true;
+            Bcheck = false;
+            Vcheck = false;
+            var lect = sender as BunifuFlatButton;
+
+            lect_id = int.Parse(lect.Name);
+
+        }
+
+        //for video
+        private static int vid_id;
+        private void video_Click(object sender, EventArgs e)
+        {
+            Lcheck = false;
+            Bcheck = false;
+            Vcheck = true;
+
+            var video = sender as BunifuFlatButton;
+
+            vid_id = int.Parse(video.Name);
+
+        }
+
+        //function to load Lectures
+        private void loadLectures()
+        {
+            MySqlConnection con = new MySqlConnection();
+            con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+            string readBooks = "select * from lecture where user_id = '" + login.user_id + "'";
+            MySqlDataAdapter da;
+            MySqlCommand com = new MySqlCommand(readBooks, con);
+            DataTable table = new DataTable();
+
+
+            try
+            {
+                con.Open();
+                //Retreaving Book name
+                da = new MySqlDataAdapter(com);
+                da.Fill(table);
+                for (int i = 0; i < table.Rows.Count; i++)
+                {
+                    //Take the book
+                    string Tittle = table.Rows[i][3].ToString();
+                    //Button
+                    BunifuFlatButton lecture = new BunifuFlatButton();
+                    lecture.Name = table.Rows[i][0].ToString();
+                    lecture.TextFont = new Font("Cambria", 12, FontStyle.Bold);
+                    lecture.Textcolor = Color.FromArgb(30, 0, 40);
+                    lecture.Text = Tittle;
+                    lecture.AutoSize = true;
+                    lecture.Normalcolor = Color.Silver;
+                    lecture.OnHovercolor = Color.FromArgb(32, 9, 191);
+                    lecture.Activecolor = Color.DarkGreen;
+                    lecture.Iconimage = null;
+                    lecture.TextAlign = ContentAlignment.TopLeft;
+                    lecture.BorderRadius = 5;
+                    lecture.Click += new EventHandler(lec_Click);
+
+
+
+                    ////seperator for the books
+                    //BunifuSeparator spr = new BunifuSeparator();
+                    //spr.LineThickness = 1;
+                    //spr.Height = 1;
+                    //spr.Width = 239;
+                    //spr.Anchor = AnchorStyles.Right;
+                    //spr.LineColor = Color.FromArgb(20, 105, 105, 105);
+                    //spr.Transparency = 25;
+                    flowLayoutPanel2.Controls.Add(lecture);
+                    //flowLayoutPanel1.Controls.Add(spr);
+
+                }
+
             }
             catch (MySqlException ex)
             {
@@ -60,12 +198,67 @@ namespace OnlineMongo
 
         }
 
+        //function to load Lectures
+        private void loadVideos()
+        {
+            MySqlConnection con = new MySqlConnection();
+            con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+            string readBooks = "select * from video where user_id = '" + login.user_id + "'";
+            MySqlDataAdapter da;
+            MySqlCommand com = new MySqlCommand(readBooks, con);
+            DataTable table = new DataTable();
 
+
+            try
+            {
+                con.Open();
+                //Retreaving Book name
+                da = new MySqlDataAdapter(com);
+                da.Fill(table);
+                for (int i = 0; i < table.Rows.Count; i++)
+                {
+                    //Take the book
+                    string Tittle = table.Rows[i][2].ToString();
+                    //Button
+                    BunifuFlatButton video = new BunifuFlatButton();
+                    video.Name = table.Rows[i][0].ToString();
+                    video.TextFont = new Font("Cambria", 12, FontStyle.Bold);
+                    video.Textcolor = Color.FromArgb(30, 0, 40);
+                    video.Text = Tittle;
+                    video.AutoSize = true;
+                    video.Normalcolor = Color.Silver;
+                    video.OnHovercolor = Color.FromArgb(32, 9, 191);
+                    video.Activecolor = Color.DarkGreen;
+                    video.Iconimage = null;
+                    video.TextAlign = ContentAlignment.TopLeft;
+                    video.BorderRadius = 5;
+                    video.Click += new EventHandler(video_Click);
+
+
+
+                    ////seperator for the books
+                    //BunifuSeparator spr = new BunifuSeparator();
+                    //spr.LineThickness = 1;
+                    //spr.Height = 1;
+                    //spr.Width = 239;
+                    //spr.Anchor = AnchorStyles.Right;
+                    //spr.LineColor = Color.FromArgb(20, 105, 105, 105);
+                    //spr.Transparency = 25;
+                    flowLayoutPanel3.Controls.Add(video);
+                    //flowLayoutPanel1.Controls.Add(spr);
+
+                }
+
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            con.Close();
+
+        }
 
         //A function to read data from the Myclass table
-
-
-
         private void addBook_Click(object sender, EventArgs e)
         {
             MySqlConnection con = new MySqlConnection();
@@ -83,7 +276,7 @@ namespace OnlineMongo
                     con.Open();
                     string check = "select book from myclass where book_name = '" + bookDialogBox.SafeFileName + "'";
                     string checkIfEmpty = "select * from myclass";
-                    string insert = "insert into myclass (uname,book,book_name) values ('" + login.txt.Text + "', @book,'"+ bookDialogBox.SafeFileName +"')";
+                    string insert = "insert into myclass (user_id,book,book_name) values ('" + login.user_id + "', @book,'"+ bookDialogBox.SafeFileName +"')";
                     MySqlCommand com = new MySqlCommand(insert, con);
                     MySqlCommand com1 = new MySqlCommand(check, con);
                     MySqlCommand com2 = new MySqlCommand(checkIfEmpty, con);
@@ -114,7 +307,7 @@ namespace OnlineMongo
                             MessageBox.Show("inserting the book " + bookDialogBox.FileName.ToString());
                             com.Parameters.AddWithValue("@book", bytes);
                             com.ExecuteNonQuery();
-                            timer1.Start();
+                            loadBookTimer.Start();
                         }
 
                     }
@@ -124,7 +317,7 @@ namespace OnlineMongo
                         MessageBox.Show("The table contains no books ");
                         com.Parameters.AddWithValue("@book", bytes);
                         com.ExecuteNonQuery();
-                        timer1.Start();
+                        loadBookTimer.Start();
                     }
 
                 }
@@ -161,96 +354,287 @@ namespace OnlineMongo
 
         private void addLecture_Click(object sender, EventArgs e)
         {
-           
-            bookDialogBox.Filter = "(*.txt;*.pdf)|*.TXT;*.PDF";
+
+            MySqlConnection con = new MySqlConnection();
+            con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+
+            bookDialogBox.Filter = "(*.pdf)|*.PDF";
             if (bookDialogBox.ShowDialog() == DialogResult.OK)
             {
-                lectureView.Items.Add(bookDialogBox.FileName);
+                byte[] bytes = null;
+
+                try
+                {
+                    bytes = File.ReadAllBytes(bookDialogBox.FileName);
+
+                    con.Open();
+                    string check = "select book from myclass where book_name = '" + bookDialogBox.SafeFileName + "'";
+                    string checkIfEmpty = "select * from lecture";
+                    string insert = "insert into lecture (user_id,lecture,lecture_name) values ('" + login.user_id + "', @lecture,'" + bookDialogBox.SafeFileName + "')";
+                    MySqlCommand com = new MySqlCommand(insert, con);
+                    MySqlCommand com1 = new MySqlCommand(check, con);
+                    MySqlCommand com2 = new MySqlCommand(checkIfEmpty, con);
+                    DataTable table = new DataTable();
+                    DataTable table1 = new DataTable();
+                    MySqlDataReader reader;
+
+                    reader = com2.ExecuteReader();
+                    table1.Load(reader);
+                    reader.Close();
+                    //checking if the table is empty
+                    if (table1.Rows.Count > 0)
+                    {
+                        MessageBox.Show("The table contains books ");
+                        //check if the insertrd book is present
+                        reader = com1.ExecuteReader();
+                        table.Load(reader);
+                        MessageBox.Show("Ready checked the books ");
+                        reader.Close();
+
+                        if (table.Rows.Count > 0)
+                        {
+                            MessageBox.Show("Sorry, The is book already saved in the Database");
+                        }
+                        else
+                        {
+                            //insert the book in the database
+                            MessageBox.Show("inserting the book " + bookDialogBox.FileName.ToString());
+                            com.Parameters.AddWithValue("@lecture", bytes);
+                            com.ExecuteNonQuery();
+                            loadLectureTimer.Start();
+                        }
+
+                    }
+                    else
+                    {
+                        //insert the book in the database
+                        MessageBox.Show("The table contains no books ");
+                        com.Parameters.AddWithValue("@lecture", bytes);
+                        com.ExecuteNonQuery();
+                        loadLectureTimer.Start();
+                    }
+
+                }
+                catch (MySqlException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                con.Close();
             }
-        }
+            }
 
         private void deleteLecture_Click(object sender, EventArgs e)
         {
-            try
-            {
-                DialogResult dialogResult = MessageBox.Show("Are you sure you want to delete this lecture?", "Alert", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-                if (dialogResult == DialogResult.Yes)
-                {
-                    lectureView.Items.Remove(lectureView.SelectedItem);
-                }
-
-
-
-            }
-            catch
-            {
-                MessageBox.Show("No lecture selected", "Error", MessageBoxButtons.OK);
-            }
+           
 
         }
 
         private void addVideo_Click(object sender, EventArgs e)
         {
+            MySqlConnection con = new MySqlConnection();
+            con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+            //string fileName;
+            //string sourcePath;
+            //string targetPath;
             bookDialogBox.Filter = "(*.mp4;*.mov;*.mkv;*.avi;*.wmv)|*.MP4;*.MOV;*.MKV;*.AVI;*.WMV";
             if (bookDialogBox.ShowDialog() == DialogResult.OK)
             {
-                videoList.Items.Add(bookDialogBox.FileName);
-            }
-        }
+                ////the source of the coppied video
+                //sourcePath = @bookDialogBox.FileName;
 
-        private void deleteVideo_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if(videoList.Items.Count == 1)
+                ////the targetPath
+                //targetPath = @"C:\Users\Shadrack Ikwabe\AppData\Roaming\UdoRead\Videos";
+
+                ////the filename
+                //fileName = bookDialogBox.SafeFileName;
+
+                ////manipulating file and directory path
+                //string sourceFile = Path.Combine(sourcePath, fileName);
+                //string destination = Path.Combine(targetPath, fileName);
+
+                //copying the file to the folder
+                File.Copy(@bookDialogBox.FileName, @"C:\Users\Shadrack Ikwabe\AppData\Roaming\UdoRead\Videos\"+ bookDialogBox.SafeFileName + "",true);
+                try
                 {
-                    DialogResult dialogResult = MessageBox.Show("Are you sure you want to delete this Video?", "Alert", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                  
+                    con.Open();
+                    string check = "select video_name from video where video_name = '" + bookDialogBox.SafeFileName + "'";
+                    string checkIfEmpty = "select * from video";
+                    string insert = "insert into video (user_id,video_name) values ('" + login.user_id + "','" + bookDialogBox.SafeFileName + "')";
+                    MySqlCommand com = new MySqlCommand(insert, con);
+                    MySqlCommand com1 = new MySqlCommand(check, con);
+                    MySqlCommand com2 = new MySqlCommand(checkIfEmpty, con);
+                    DataTable table = new DataTable();
+                    DataTable table1 = new DataTable();
+                    MySqlDataReader reader;
 
-                    if (dialogResult == DialogResult.Yes)
+                    reader = com2.ExecuteReader();
+                    table1.Load(reader);
+                    reader.Close();
+                    //checking if the table is empty
+                    if (table1.Rows.Count > 0)
                     {
-                        videoList.Items.Remove(videoList.SelectedItem);
+                        
+                        //check if the insertrd video is present
+                        reader = com1.ExecuteReader();
+                        table.Load(reader);
+                        reader.Close();
 
+                        if (table.Rows.Count > 0)
+                        {
+                            MessageBox.Show("Sorry, The is book already saved in the Database");
+                        }
+                        else
+                        {
+                            //insert the book in the database
+                           
+                            com.ExecuteNonQuery();
+                            MessageBox.Show("Video uploaded ");
+                            loadVideoTimer.Start();
+                        }
+
+                    }
+                    else
+                    {
+                        //insert the book in the database
+                        
+                        com.ExecuteNonQuery();
+                        MessageBox.Show("Video Uploaded ");
+                        loadVideoTimer.Start();
                     }
 
                 }
+                catch (MySqlException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                con.Close();
+            }
+        }
+
+        //deleting the selected video
+        private void deleteVideo_Click(object sender, EventArgs e)
+        {
+            MySqlConnection con = new MySqlConnection();
+            con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+            string getVideoName = "select * from video where video_id = '" + vid_id + "'";
+            string delete = "delete from video where video_id = '" + vid_id + "'";
+            MySqlDataAdapter da;
+            MySqlCommand com = new MySqlCommand(getVideoName, con);
+            MySqlCommand com1 = new MySqlCommand(delete, con);
+            DataTable table = new DataTable();
+
+            try
+            {
+                con.Open();
+                if(Vcheck == true)
+                {
+                    da = new MySqlDataAdapter(com);
+                    da.Fill(table);
+
+
+                    //taking the file name to be deleted
+                    string filename = table.Rows[0][2].ToString();
+
+                    //if the file exist in the direcory deletion perfomed
+                    if (File.Exists(@"C:\Users\Shadrack Ikwabe\AppData\Roaming\UdoRead\Videos\" + table.Rows[0][2].ToString() + ""))
+                    {
+                        File.Delete(@"C:\Users\Shadrack Ikwabe\AppData\Roaming\UdoRead\Videos\" + table.Rows[0][2].ToString() + "");
+                        com1.ExecuteNonQuery();
+                        loadVideoTimer.Start();
+                    }
+                    //the video name exist only in the database deletion perfomed
+                    else
+                    {
+                        com1.ExecuteNonQuery();
+                        loadVideoTimer.Start();
+                    }
+                }
                 else
                 {
-                    MessageBox.Show("No video selected", "Error", MessageBoxButtons.OK);
+                    MessageBox.Show("Please Select the Video for deletion.");
                 }
-
                
-
-
             }
-            catch
+            catch (MySqlException ex)
             {
-                MessageBox.Show("No video selected","Error",MessageBoxButtons.OK);
+                MessageBox.Show(ex.Message);
             }
+            con.Close();
 
+
+
+            
            
-
         }
 
         private void watchVideo_Click(object sender, EventArgs e)
         {
+
             try
             {
-                
-                videoPlayer.Visible = true;
-                hideVideoBtn.Visible = true;
-                videogroupBox.Visible = false;
-                videoPlayer.BringToFront();
-                videoPlayer.URL = videoList.SelectedItem.ToString();
-                videoPlayer.Ctlcontrols.play();
+                MySqlDataAdapter ad;
+                MySqlConnection con = new MySqlConnection();
+                con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+                string bookdetail = "select * from video where video_id = '" + vid_id + "'";
+                MySqlCommand com = new MySqlCommand(bookdetail, con);
+
+                try
+                {
+
+                    con.Open();
+
+                    if(Vcheck == true)
+                    {
+                        // MySqlDataReader reader;
+                        ad = new MySqlDataAdapter(com);
+                        // reader = com.ExecuteReader();
+                        DataTable table = new DataTable();
+                        ad.Fill(table);
+                        try
+                        {
+                            //byte[] video = (byte[])table.Rows[0][2];
+
+
+                            ////wrinting a Pdf File
+                            //using (Stream file = File.Create("C:/Users/Shadrack Ikwabe/AppData/Roaming/UdoRead/Videos/video.mp4"))
+                            //{
+                            //    file.Write(video, 0, video.Length);
+                            //}
+
+                            //opening the video file
+                            videoPlayer.Visible = true;
+                            hideVideoBtn.Visible = true;
+                            videogroupBox.Visible = false;
+                            videoPlayer.BringToFront();
+                            videoPlayer.URL = @"C:\Users\Shadrack Ikwabe\AppData\Roaming\UdoRead\Videos\" + table.Rows[0][2].ToString() + "";
+                            videoPlayer.Ctlcontrols.play();
+                        }
+                        catch
+                        {
+
+                        }
+
+                        ad.Dispose();
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("Please Select the video to play");
+                    }
+                    
+                }
+                catch (MySqlException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                con.Close();
+
             }
             catch
             {
-                videoPlayer.Visible = false;
-                hideVideoBtn.Visible = false;
-                MessageBox.Show("No video selected", "Error", MessageBoxButtons.OK);
+                MessageBox.Show("No video selected..!", "Alert", MessageBoxButtons.OK);
             }
-            
         }
 
         private void hideVideoBtn_Click(object sender, EventArgs e)
@@ -262,6 +646,7 @@ namespace OnlineMongo
 
         private void requestVideo_Click(object sender, EventArgs e)
         {
+            subjectTextBox3.Text = "VIDEO REQUEST";
             videogroupBox.Visible = true;
             videoPlayer.Visible = false;
             hideVideoBtn.Visible = false;
@@ -272,6 +657,7 @@ namespace OnlineMongo
         private void requestBook_Click(object sender, EventArgs e)
         {
             bookgroupBox.Visible = true;
+            subjectTextBox1.Text = "BOOK REQUEST";
            
         }
 
@@ -293,23 +679,10 @@ namespace OnlineMongo
         private void requestLecture_Click(object sender, EventArgs e)
         {
             lecturegroupBox.Visible = true;
+            subjectTextBox2.Text = "LECTURE REQUEST";
         }
 
-        string selectedWord;
-        private void bookDataGrid_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            int index = e.RowIndex;
 
-            try
-            {
-                DataGridViewRow selectedIndex = bookDataGrid.Rows[index];
-                selectedWord = selectedIndex.Cells[0].Value.ToString();
-            }
-            catch
-            {
-
-            }
-        }
 
         private void openBookBtn_Click(object sender, EventArgs e)
         {
@@ -319,38 +692,46 @@ namespace OnlineMongo
                 MySqlDataAdapter ad;
                 MySqlConnection con = new MySqlConnection();
                 con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
-                string bookdetail = "select * from myclass where book_name = '" + selectedWord + "'";
+                string bookdetail = "select * from myclass where book_id = '" + book_id + "'";
                 MySqlCommand com = new MySqlCommand(bookdetail, con);
 
                 try
                 {
 
                     con.Open();
-                    // MySqlDataReader reader;
-                    ad = new MySqlDataAdapter(com);
-                    // reader = com.ExecuteReader();
-                    DataTable table = new DataTable();
-                    ad.Fill(table);
-                    try
+                    if(Bcheck == true)
                     {
-                        byte[] book = (byte[])table.Rows[0][2];
-                        MemoryStream ms = new MemoryStream(book);
+                        // MySqlDataReader reader;
+                        ad = new MySqlDataAdapter(com);
+                        // reader = com.ExecuteReader();
+                        DataTable table = new DataTable();
+                        ad.Fill(table);
+                        try
+                        {
+                            byte[] book = (byte[])table.Rows[0][2];
 
-                       
-                        //FileStream fstream = new FileStream("book.pdf", FileMode.OpenOrCreate, FileAccess.ReadWrite);
-                        //fstream.Write(book, 0, book.Length);
+                            //wrinting a Pdf File
+                            using (Stream file = File.Create("C:/Users/Shadrack Ikwabe/AppData/Roaming/UdoRead/Books/book.pdf"))
+                            {
+                                file.Write(book, 0, book.Length);
+                            }
 
-                        //rd.axAcroPDF1.LoadDocument(ms);
+                            //opening the pdf file
+                            rd.axAcroPDF1.src = "C:/Users/Shadrack Ikwabe/AppData/Roaming/UdoRead/Books/book.pdf";
+                            rd.Show();
+                        }
+                        catch
+                        {
 
+                        }
 
-                        rd.Show();
+                        ad.Dispose();
                     }
-                    catch
+                    else
                     {
-
+                        MessageBox.Show("Please Select the book to read");
                     }
-
-                    ad.Dispose();
+                    
                 }
                 catch (MySqlException ex)
                 {
@@ -368,39 +749,87 @@ namespace OnlineMongo
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            timer1.Stop();
+            flowLayoutPanel1.Controls.Clear();
+            loadBookTimer.Stop();
             loadBooks();
         }
 
         private void classPage_Load(object sender, EventArgs e)
         {
-            timer1.Start();
+            Lcheck = false;
+            Bcheck = false;
+            Vcheck = false;
+            loadBookTimer.Start();
+            loadLectureTimer.Start();
+            loadVideoTimer.Start();
         }
 
         private void openLectureBtn_Click(object sender, EventArgs e)
         {
+            readerPdf rd = new readerPdf();
             try
             {
-                if (lectureView.SelectedItem != null)
+                MySqlDataAdapter ad;
+                MySqlConnection con = new MySqlConnection();
+                con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+                string bookdetail = "select * from lecture where lecture_id = '" + lect_id + "'";
+                MySqlCommand com = new MySqlCommand(bookdetail, con);
+
+                try
                 {
-                    readerPdf rd = new readerPdf();
-                    rd.axAcroPDF1.src = lectureView.SelectedItem.ToString();
-                    rd.Show();
+
+                    con.Open();
+                    if(Lcheck == true)
+                    {
+                        // MySqlDataReader reader;
+                        ad = new MySqlDataAdapter(com);
+                        // reader = com.ExecuteReader();
+                        DataTable table = new DataTable();
+                        ad.Fill(table);
+                        try
+                        {
+                            byte[] book = (byte[])table.Rows[0][2];
+
+                            //wrinting a Pdf File
+                            using (Stream file = File.Create("C:/Users/Shadrack Ikwabe/AppData/Roaming/UdoRead/Lectures/Lecture.pdf"))
+                            {
+                                file.Write(book, 0, book.Length);
+                            }
+
+                            //opening the pdf file
+                            rd.axAcroPDF1.src = "C:/Users/Shadrack Ikwabe/AppData/Roaming/UdoRead/Lectures/Lecture.pdf";
+                            rd.Show();
+                        }
+                        catch
+                        {
+
+                        }
+
+                        ad.Dispose();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Please Select Lecture to View");
+                    }
+                   
                 }
-                else
+                catch (MySqlException ex)
                 {
-                    MessageBox.Show("Please select the Lecture for open");
+                    MessageBox.Show(ex.Message);
                 }
+                con.Close();
+
             }
             catch
             {
-                MessageBox.Show("Please select the Lecture for open");
+                MessageBox.Show("No book selected..!", "Alert", MessageBoxButtons.OK);
             }
         }
         private static string senderEmail;
         private static string emailLocation;
         private void lectSendBtn_Click(object sender, EventArgs e)
         {
+            //for renaming the file on inserting in a directory
             int i = 0;
 
 
@@ -416,15 +845,14 @@ namespace OnlineMongo
             //checking if the filename exist to avoid overiding
             while (check == true)
             {
-                if (!File.Exists("C:/Users/" + currentComputerUserrName + "/AppData/Roaming/UdoRead/Sent emails/" + subjectTextBox1.Text + " by " + login.txt.Text + "(" + i + ").txt"))
+                if (!File.Exists("C:/Users/" + currentComputerUserrName + "/AppData/Roaming/UdoRead/Sent emails/" + subjectTextBox2.Text + " by " + login.txt.Text + "(" + i + ").txt"))
                 {
 
                     //creating a text file in the app directory
-                    StreamWriter email = new StreamWriter("C:/Users/" + currentComputerUserrName + "/AppData/Roaming/UdoRead/Sent emails/" + subjectTextBox1.Text + " by " + login.txt.Text + "(" + i + ").txt");
-                    //writing to a text file the words from the richtext box.
+                    StreamWriter email = new StreamWriter("C:/Users/" + currentComputerUserrName + "/AppData/Roaming/UdoRead/Sent emails/" + subjectTextBox2.Text + " by " + login.txt.Text + "(" + i + ").txt");
                     email.WriteLine(composetextBox2.Text);
                     email.Close();
-                    emailLocation = "C:/Users/" + currentComputerUserrName + "/AppData/Roaming/UdoRead/Sent emails/" + subjectTextBox1.Text + " by " + login.txt.Text + "(" + i + ").txt";
+                    emailLocation = "C:/Users/" + currentComputerUserrName + "/AppData/Roaming/UdoRead/Sent emails/" + subjectTextBox2.Text + " by " + login.txt.Text + "(" + i + ").txt";
                     check = false;
                 }
                 else
@@ -432,7 +860,10 @@ namespace OnlineMongo
 
                 }
                 i++;
+
+
             }
+
 
             string sendmail = "select * from users where username = '" + login.txt.Text + "'";
 
@@ -465,13 +896,9 @@ namespace OnlineMongo
                 //inserting the email text file to the database
                 com1.Parameters.AddWithValue("@sentmsg", mail);
                 com1.ExecuteNonQuery();
+                composetextBox2.Text = "";
+                MessageBox.Show("Sent.");
 
-                MessageBox.Show("Message Sent.");
-                toTextBox2.Text = null;
-                composetextBox2.Text = null;
-                subjectTextBox2.Text = null;
-                inbonTab.check = true;
-                dashBoard.check = true;
 
             }
 
@@ -480,6 +907,199 @@ namespace OnlineMongo
                 MessageBox.Show(ex.Message);
             }
             con.Close();
+            inbonTab.check = true;
+            dashBoard.check = true;
+
+        }
+
+        private void loadLectureTimer_Tick(object sender, EventArgs e)
+        {
+            flowLayoutPanel2.Controls.Clear();
+            loadLectureTimer.Stop();
+            loadLectures();
+        }
+
+        private void loadVideoTimer_Tick(object sender, EventArgs e)
+        {
+            flowLayoutPanel3.Controls.Clear();
+            loadVideoTimer.Stop();
+            loadVideos();
+        }
+       
+        //a function to request a lecture
+        private void sendBtn1_Click(object sender, EventArgs e)
+        {
+            //for renaming the file on inserting in a directory
+            int i = 0;
+
+
+            //for the while loop
+            Boolean check = true;
+
+            MySqlConnection con = new MySqlConnection();
+            con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+
+            //getting the computer user name for identifying the app directory location
+            string currentComputerUserrName = Environment.UserName;
+
+            //checking if the filename exist to avoid overiding
+            while (check == true)
+            {
+                if (!File.Exists("C:/Users/" + currentComputerUserrName + "/AppData/Roaming/UdoRead/Sent emails/" + subjectTextBox1.Text + " by " + login.txt.Text + "(" + i + ").txt"))
+                {
+
+                    //creating a text file in the app directory
+                    StreamWriter email = new StreamWriter("C:/Users/" + currentComputerUserrName + "/AppData/Roaming/UdoRead/Sent emails/" + subjectTextBox1.Text + " by " + login.txt.Text + "(" + i + ").txt");
+                    email.WriteLine(composetextBox1.Text);
+                    email.Close();
+                    emailLocation = "C:/Users/" + currentComputerUserrName + "/AppData/Roaming/UdoRead/Sent emails/" + subjectTextBox1.Text + " by " + login.txt.Text + "(" + i + ").txt";
+                    check = false;
+                }
+                else
+                {
+
+                }
+                i++;
+
+
+            }
+
+
+            string sendmail = "select * from users where username = '" + login.txt.Text + "'";
+
+            //command for retreiving email from the database
+            MySqlCommand com = new MySqlCommand(sendmail, con);
+            MySqlDataAdapter ad;
+
+            try
+            {
+                con.Open();
+                //retrieving sender email from the database
+                ad = new MySqlDataAdapter(com);
+                DataTable table = new DataTable();
+                ad.Fill(table);
+                senderEmail = table.Rows[0][3].ToString();
+                ad.Dispose();
+                string subject = subjectTextBox1.Text + "(By " + login.txt.Text + ")";
+                string insert = "insert into sentmail (mailsubject,sentmsg,senderemail,receiveremail,status) values ('" + subject + "', @sentmsg,'" + senderEmail + "', '" + toTextBox1.Text + "','New')";
+
+
+                byte[] mail = null;
+
+
+                //fill the sent email to the byte for uploading it to the database
+
+                mail = File.ReadAllBytes(emailLocation);
+                //command for inseting email to the database
+                MySqlCommand com1 = new MySqlCommand(insert, con);
+
+                //inserting the email text file to the database
+                com1.Parameters.AddWithValue("@sentmsg", mail);
+                com1.ExecuteNonQuery();
+                composetextBox1.Text = "";
+                MessageBox.Show("Sent.");
+
+
+            }
+
+            catch (MySqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            con.Close();
+            inbonTab.check = true;
+            dashBoard.check = true;
+        }
+
+       
+        //a function to request a video
+        private void sendBtn3_Click(object sender, EventArgs e)
+        {
+            //for renaming the file on inserting in a directory
+            int i = 0;
+
+
+            //for the while loop
+            Boolean check = true;
+
+            MySqlConnection con = new MySqlConnection();
+            con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+
+            //getting the computer user name for identifying the app directory location
+            string currentComputerUserrName = Environment.UserName;
+
+            //checking if the filename exist to avoid overiding
+            while (check == true)
+            {
+                if (!File.Exists("C:/Users/" + currentComputerUserrName + "/AppData/Roaming/UdoRead/Sent emails/" + subjectTextBox3.Text + " by " + login.txt.Text + "(" + i + ").txt"))
+                {
+
+                    //creating a text file in the app directory
+                    StreamWriter email = new StreamWriter("C:/Users/" + currentComputerUserrName + "/AppData/Roaming/UdoRead/Sent emails/" + subjectTextBox3.Text + " by " + login.txt.Text + "(" + i + ").txt");
+                    email.WriteLine(composetextBox3.Text);
+                    email.Close();
+                    emailLocation = "C:/Users/" + currentComputerUserrName + "/AppData/Roaming/UdoRead/Sent emails/" + subjectTextBox3.Text + " by " + login.txt.Text + "(" + i + ").txt";
+                    check = false;
+                }
+                else
+                {
+
+                }
+                i++;
+
+
+            }
+
+
+            string sendmail = "select * from users where username = '" + login.txt.Text + "'";
+
+            //command for retreiving email from the database
+            MySqlCommand com = new MySqlCommand(sendmail, con);
+            MySqlDataAdapter ad;
+
+            try
+            {
+                con.Open();
+                //retrieving sender email from the database
+                ad = new MySqlDataAdapter(com);
+                DataTable table = new DataTable();
+                ad.Fill(table);
+                senderEmail = table.Rows[0][3].ToString();
+                ad.Dispose();
+                string subject = subjectTextBox3.Text + "(By " + login.txt.Text + ")";
+                string insert = "insert into sentmail (mailsubject,sentmsg,senderemail,receiveremail,status) values ('" + subject + "', @sentmsg,'" + senderEmail + "', '" + toTextBox3.Text + "','New')";
+
+
+                byte[] mail = null;
+
+
+                //fill the sent email to the byte for uploading it to the database
+
+                mail = File.ReadAllBytes(emailLocation);
+                //command for inseting email to the database
+                MySqlCommand com1 = new MySqlCommand(insert, con);
+
+                //inserting the email text file to the database
+                com1.Parameters.AddWithValue("@sentmsg", mail);
+                com1.ExecuteNonQuery();
+                composetextBox3.Text = "";
+                MessageBox.Show("Sent.");
+
+
+            }
+
+            catch (MySqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            con.Close();
+            inbonTab.check = true;
+            dashBoard.check = true;
+
+        }
+
+        private void toTextBox2_OnValueChanged(object sender, EventArgs e)
+        {
 
         }
     }

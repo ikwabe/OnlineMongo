@@ -117,13 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="downloadBtn.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAJUAAAAiCAYAAABWbZuCAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIMSURBVHhe7dtdS1RBAIDhbqMIWaQIEUwt2hY/sE3KsuiD
+        6r+JIoookXRj3kQRRRhR+NMm3pE57Dl7dvWsc6XvxQPr7ujNvszMmXO8MnX1OEg5GZWyMyplZ1TKzqiU
+        nVEpu6FR3bn2L8xPfA0rnf3wfHEvvF7eCu9X13QJ8d3TwLO5j2Fh8kuYuf63thkMjKpz63v8QwRFWA9u
+        /gh3x37XjtXFx3dPA3O3v4Un7U+xDeKqG9sXFQXyS6sLH8LsjT+lz6RkWCelqBj4srszsECpihXtxdJu
+        aRUrRUV5BqWmWBbZb6Wfi6gojqks/Sw18Wj2IDycPoyvY1Rc5bHxcg+lUdEQW6d7raOTqFjyWPqqA6Um
+        mKmYsWJUnD1wqVgdJDVxv/UrzlYxqlfd7ThtVQdJTbAEvnu6fhLV25WNoSek0llx+h6j4kX1Q2kURVRM
+        WUxd1QFSU0VUHCd4X085FFFx6MnhZ3WA1AQXe1z0xajS+UJ1kNREOu+MUbH0UZj7Kp1HOu+MUaE78znq
+        HSSdVXqYk9dFVMxS3Gluj/8sDZZOwz1jVrp01llEBTZa6aZg7/vSIATFZMTjL+m9UlRgpiKs9BiDNAj7
+        J2ao3qDQFxVYCrkapEB29D4So4QlLu2f2JjX3d6rjSqhQC4R3zzejIdaEveJ0z/D1DWDoVFJozAqZWdU
+        ys6olJ1RKbPj8B9Xj9ig/7XeBAAAAABJRU5ErkJggg==
+</value>
+  </data>
   <metadata name="bunifuDragControl1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>292, 31</value>
+    <value>153, 17</value>
   </metadata>
   <metadata name="bunifuElipse1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>452, 31</value>
+    <value>313, 17</value>
   </metadata>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="CancelBtn.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAEwAAAAiCAYAAAD1aT8BAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
@@ -138,4 +153,7 @@
         XQ9t4w5navOnT5oPyBQmJBFhnogwT0SYJyLMi0B9A+i3VigvqgcVAAAAAElFTkSuQmCC
 </value>
   </data>
+  <metadata name="saveFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
 </root>

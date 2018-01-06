@@ -27,16 +27,29 @@ namespace OnlineMongo
         {
             InitializeComponent();
         }
+
+       private static string username;
         private void load_name()
         {
+            MySqlDataAdapter da;
             MySqlConnection con = new MySqlConnection();
             con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
             string detail = "select * from users where username = '" + login.txt.Text + "'";
             MySqlCommand com = new MySqlCommand(detail, con);
+            DataTable table = new DataTable();
 
             try
             {
                 con.Open();
+
+                //taking a username
+                da = new MySqlDataAdapter(com);
+                da.Fill(table);
+                da.Dispose();
+
+                //taking a username of a login user
+                username = table.Rows[0][6].ToString();
+
                 MySqlDataReader reader;
                 reader = com.ExecuteReader();
                 while (reader.Read())
@@ -91,6 +104,7 @@ namespace OnlineMongo
         private void editBtn_Click(object sender, EventArgs e)
         {
             aboutGrp.Visible = true;
+            usernameTxt.Text = username;
             favoriteGrp.Visible = true;
             editBtn.Visible = false;
             cancelBtn.Visible = true;
@@ -125,16 +139,77 @@ namespace OnlineMongo
             MySqlConnection con = new MySqlConnection();
             con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
             string update = "update  users set username = '" + usernameTxt.Text + "', bday = '" + ageDate.Value.ToShortDateString() + "', sex = '" + sex + "', work = '" + workTxt.Text + "', nationality = '" + nationalityTxt.Text + "', education = '" + educationTxt.Text + "', home = '" + fromTxt.Text + "', music = '" + musicTxt.Text + "', video = '" + videoTxt.Text + "', actor = '" + actorTxt.Text + "', book = '" + bookTxt.Text + "', series = '" + seriesTxt.Text + "', game = '" + gameTxt.Text + "', channel =  '" + channelTxt.Text + "' where username = '" + login.txt.Text + "'";
+            string chek2 = "select username from users where username = '" + usernameTxt.Text + "'";
             MySqlCommand com = new MySqlCommand(update, con);
+            MySqlCommand com2 = new MySqlCommand(chek2, con);
             MySqlDataReader reader;
+            MySqlDataReader reader2;
             try
             {
                 con.Open();
-                
-                    
-                    if (usernameTxt.Text == "" || workTxt.Text == "" || nationalityTxt.Text == "" || educationTxt.Text == "" || fromTxt.Text == "" || musicTxt.Text == "" || videoTxt.Text == "" ||actorTxt.Text == "" || bookTxt.Text == "" || seriesTxt.Text == "" || gameTxt.Text == "" || channelTxt.Text == "")
+                //Cheking if the user is already registerd
+
+                DataTable table2 = new DataTable();
+                reader2 = com2.ExecuteReader();
+                table2.Load(reader2);
+                reader2.Close();
+
+                if (usernameTxt.Text == "" || workTxt.Text == "" || nationalityTxt.Text == "" || educationTxt.Text == "" || fromTxt.Text == "" || musicTxt.Text == "" || videoTxt.Text == "" ||actorTxt.Text == "" || bookTxt.Text == "" || seriesTxt.Text == "" || gameTxt.Text == "" || channelTxt.Text == "")
                     {
                         if (MessageBox.Show("Some of the fields are not well filled. Accepting edit will led to inconsistence in your profile Details. Make sure the Birthdate is correct. Are you sure you want to save the details?", "Verify", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                        {
+                            if(usernameTxt.Text == "")
+                            {
+                            MessageBox.Show("Username can not be empty.");
+                            }
+                            else
+                            {
+                            if (table2.Rows.Count > 0)
+                            {
+                                MessageBox.Show("The enterd username, already exist. Please, change username", "Information", MessageBoxButtons.OK);
+
+                            }
+                            else
+                            {
+                                reader = com.ExecuteReader();
+                                reader.Close();
+                                usernameTxt.Text = "";
+                                workTxt.Text = "";
+                                nationalityTxt.Text = "";
+                                educationTxt.Text = "";
+                                fromTxt.Text = "";
+                                musicTxt.Text = "";
+                                videoTxt.Text = "";
+                                actorTxt.Text = "";
+                                bookTxt.Text = "";
+                                seriesTxt.Text = "";
+                                gameTxt.Text = "";
+                                channelTxt.Text = "";
+                                aboutGrp.Visible = false;
+                                favoriteGrp.Visible = false;
+                                saveBtn.Visible = false;
+                                cancelBtn.Visible = false;
+                                editBtn.Visible = true;
+                            }
+                            }
+                           
+                        }
+                        else
+                        {
+                       
+                        }
+
+                    }
+                    else
+                    {
+                    if (MessageBox.Show("Make sure the Birthdate is correct. Are you sure you want to save the details?", "Verify", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    {
+                        if (table2.Rows.Count > 0)
+                        {
+                            MessageBox.Show("The enterd username, already exist. Please, change username", "Information", MessageBoxButtons.OK);
+
+                        }
+                        else
                         {
                             reader = com.ExecuteReader();
                             reader.Close();
@@ -153,38 +228,9 @@ namespace OnlineMongo
                             aboutGrp.Visible = false;
                             favoriteGrp.Visible = false;
                             saveBtn.Visible = false;
-                        cancelBtn.Visible = false;
+                            cancelBtn.Visible = false;
                             editBtn.Visible = true;
                         }
-                        else
-                        {
-                           
-                        }
-
-                    }
-                    else
-                    {
-                    if (MessageBox.Show("Make sure the Birthdate is correct. Are you sure you want to save the details?", "Verify", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                    {
-                        reader = com.ExecuteReader();
-                        reader.Close();
-                        usernameTxt.Text = "";
-                        workTxt.Text = "";
-                        nationalityTxt.Text = "";
-                        educationTxt.Text = "";
-                        fromTxt.Text = "";
-                        musicTxt.Text = "";
-                        videoTxt.Text = "";
-                        actorTxt.Text = "";
-                        bookTxt.Text = "";
-                        seriesTxt.Text = "";
-                        gameTxt.Text = "";
-                        channelTxt.Text = "";
-                        aboutGrp.Visible = false;
-                        favoriteGrp.Visible = false;
-                        saveBtn.Visible = false;
-                        cancelBtn.Visible = false;
-                        editBtn.Visible = true;
                     }
                     else
                     {
@@ -204,5 +250,15 @@ namespace OnlineMongo
 
            
         }
+
+        private void usernameTxt_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Space)
+            {
+                e.SuppressKeyPress = true;
+            }
+        }
+
+       
     }
 }

@@ -340,6 +340,7 @@
             this.usernameTxt.Size = new System.Drawing.Size(354, 31);
             this.usernameTxt.TabIndex = 46;
             this.usernameTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.usernameTxt.KeyDown += new System.Windows.Forms.KeyEventHandler(this.usernameTxt_KeyDown);
             // 
             // ageDate
             // 

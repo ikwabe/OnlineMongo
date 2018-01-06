@@ -37,6 +37,9 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.downloadBtn = new Bunifu.Framework.UI.BunifuThinButton2();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.Headerpanel.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -45,6 +48,7 @@
             // Headerpanel
             // 
             this.Headerpanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(9)))), ((int)(((byte)(191)))));
+            this.Headerpanel.Controls.Add(this.downloadBtn);
             this.Headerpanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.Headerpanel.Location = new System.Drawing.Point(0, 0);
             this.Headerpanel.Name = "Headerpanel";
@@ -120,6 +124,32 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
+            // downloadBtn
+            // 
+            this.downloadBtn.ActiveBorderThickness = 1;
+            this.downloadBtn.ActiveCornerRadius = 20;
+            this.downloadBtn.ActiveFillColor = System.Drawing.Color.Black;
+            this.downloadBtn.ActiveForecolor = System.Drawing.Color.Gray;
+            this.downloadBtn.ActiveLineColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.downloadBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(9)))), ((int)(((byte)(191)))));
+            this.downloadBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("downloadBtn.BackgroundImage")));
+            this.downloadBtn.ButtonText = "Download";
+            this.downloadBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.downloadBtn.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.downloadBtn.ForeColor = System.Drawing.Color.DimGray;
+            this.downloadBtn.IdleBorderThickness = 1;
+            this.downloadBtn.IdleCornerRadius = 20;
+            this.downloadBtn.IdleFillColor = System.Drawing.Color.Transparent;
+            this.downloadBtn.IdleForecolor = System.Drawing.Color.Gainsboro;
+            this.downloadBtn.IdleLineColor = System.Drawing.Color.DarkSlateBlue;
+            this.downloadBtn.Location = new System.Drawing.Point(435, 13);
+            this.downloadBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.downloadBtn.Name = "downloadBtn";
+            this.downloadBtn.Size = new System.Drawing.Size(149, 34);
+            this.downloadBtn.TabIndex = 99;
+            this.downloadBtn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.downloadBtn.Click += new System.EventHandler(this.downloadBtn_Click);
+            // 
             // pictureView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -133,6 +163,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "pictureView";
             this.Load += new System.EventHandler(this.pictureView_Load);
+            this.Headerpanel.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -149,5 +180,7 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Panel panel1;
+        private Bunifu.Framework.UI.BunifuThinButton2 downloadBtn;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
 }

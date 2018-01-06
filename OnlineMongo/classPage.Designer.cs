@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(classPage));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.bunifuSeparator3 = new Bunifu.Framework.UI.BunifuSeparator();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -54,8 +53,6 @@
             this.bookDialogBox = new System.Windows.Forms.OpenFileDialog();
             this.watchVideo = new Bunifu.Framework.UI.BunifuFlatButton();
             this.hideVideoBtn = new Bunifu.Framework.UI.BunifuFlatButton();
-            this.videoList = new System.Windows.Forms.ListBox();
-            this.lectureView = new System.Windows.Forms.ListBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
@@ -85,16 +82,23 @@
             this.lectSendBtn = new Bunifu.Framework.UI.BunifuThinButton2();
             this.videoPlayer = new AxWMPLib.AxWindowsMediaPlayer();
             this.openBookBtn = new Bunifu.Framework.UI.BunifuFlatButton();
-            this.bookDataGrid = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.loadBookTimer = new System.Windows.Forms.Timer(this.components);
             this.openLectureBtn = new Bunifu.Framework.UI.BunifuFlatButton();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
+            this.loadLectureTimer = new System.Windows.Forms.Timer(this.components);
+            this.loadVideoTimer = new System.Windows.Forms.Timer(this.components);
             this.bookgroupBox.SuspendLayout();
             this.videogroupBox.SuspendLayout();
             this.lecturegroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.videoPlayer)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bookDataGrid)).BeginInit();
             this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // bunifuSeparator3
@@ -106,7 +110,7 @@
             this.bunifuSeparator3.LineThickness = 3;
             this.bunifuSeparator3.Location = new System.Drawing.Point(1, 693);
             this.bunifuSeparator3.Name = "bunifuSeparator3";
-            this.bunifuSeparator3.Size = new System.Drawing.Size(1019, 3);
+            this.bunifuSeparator3.Size = new System.Drawing.Size(1367, 3);
             this.bunifuSeparator3.TabIndex = 47;
             this.bunifuSeparator3.Transparency = 255;
             this.bunifuSeparator3.Vertical = false;
@@ -144,7 +148,7 @@
             this.bunifuSeparator1.LineThickness = 3;
             this.bunifuSeparator1.Location = new System.Drawing.Point(1, 416);
             this.bunifuSeparator1.Name = "bunifuSeparator1";
-            this.bunifuSeparator1.Size = new System.Drawing.Size(1019, 3);
+            this.bunifuSeparator1.Size = new System.Drawing.Size(1367, 3);
             this.bunifuSeparator1.TabIndex = 37;
             this.bunifuSeparator1.Transparency = 255;
             this.bunifuSeparator1.Vertical = false;
@@ -158,7 +162,7 @@
             this.bunifuSeparator2.LineThickness = 3;
             this.bunifuSeparator2.Location = new System.Drawing.Point(1, 141);
             this.bunifuSeparator2.Name = "bunifuSeparator2";
-            this.bunifuSeparator2.Size = new System.Drawing.Size(1019, 3);
+            this.bunifuSeparator2.Size = new System.Drawing.Size(1367, 3);
             this.bunifuSeparator2.TabIndex = 36;
             this.bunifuSeparator2.Transparency = 255;
             this.bunifuSeparator2.Vertical = false;
@@ -625,7 +629,7 @@
             this.bunifuSeparator4.LineThickness = 3;
             this.bunifuSeparator4.Location = new System.Drawing.Point(-2, 968);
             this.bunifuSeparator4.Name = "bunifuSeparator4";
-            this.bunifuSeparator4.Size = new System.Drawing.Size(1019, 3);
+            this.bunifuSeparator4.Size = new System.Drawing.Size(1367, 3);
             this.bunifuSeparator4.TabIndex = 60;
             this.bunifuSeparator4.Transparency = 255;
             this.bunifuSeparator4.Vertical = false;
@@ -707,22 +711,6 @@
             this.hideVideoBtn.Visible = false;
             this.hideVideoBtn.Click += new System.EventHandler(this.hideVideoBtn_Click);
             // 
-            // videoList
-            // 
-            this.videoList.FormattingEnabled = true;
-            this.videoList.Location = new System.Drawing.Point(19, 716);
-            this.videoList.Name = "videoList";
-            this.videoList.Size = new System.Drawing.Size(231, 199);
-            this.videoList.TabIndex = 67;
-            // 
-            // lectureView
-            // 
-            this.lectureView.FormattingEnabled = true;
-            this.lectureView.Location = new System.Drawing.Point(19, 425);
-            this.lectureView.Name = "lectureView";
-            this.lectureView.Size = new System.Drawing.Size(231, 199);
-            this.lectureView.TabIndex = 69;
-            // 
             // label8
             // 
             this.label8.AutoSize = true;
@@ -780,6 +768,7 @@
             this.sendBtn1.Size = new System.Drawing.Size(76, 34);
             this.sendBtn1.TabIndex = 88;
             this.sendBtn1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.sendBtn1.Click += new System.EventHandler(this.sendBtn1_Click);
             // 
             // composetextBox1
             // 
@@ -1024,6 +1013,7 @@
             this.sendBtn3.Size = new System.Drawing.Size(76, 34);
             this.sendBtn3.TabIndex = 88;
             this.sendBtn3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.sendBtn3.Click += new System.EventHandler(this.sendBtn3_Click);
             // 
             // lecturegroupBox
             // 
@@ -1109,6 +1099,7 @@
             this.toTextBox2.Size = new System.Drawing.Size(323, 27);
             this.toTextBox2.TabIndex = 85;
             this.toTextBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.toTextBox2.OnValueChanged += new System.EventHandler(this.toTextBox2_OnValueChanged);
             // 
             // label3
             // 
@@ -1223,37 +1214,30 @@
             this.openBookBtn.TextFont = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.openBookBtn.Click += new System.EventHandler(this.openBookBtn_Click);
             // 
-            // bookDataGrid
-            // 
-            this.bookDataGrid.AllowUserToAddRows = false;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Cambria", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
-            this.bookDataGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.bookDataGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.bookDataGrid.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.bookDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.bookDataGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.bookDataGrid.Location = new System.Drawing.Point(0, 0);
-            this.bookDataGrid.Name = "bookDataGrid";
-            this.bookDataGrid.ReadOnly = true;
-            this.bookDataGrid.Size = new System.Drawing.Size(243, 221);
-            this.bookDataGrid.TabIndex = 96;
-            this.bookDataGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.bookDataGrid_CellClick);
-            // 
             // panel1
             // 
             this.panel1.AutoScroll = true;
             this.panel1.BackColor = System.Drawing.Color.Transparent;
-            this.panel1.Controls.Add(this.bookDataGrid);
+            this.panel1.Controls.Add(this.flowLayoutPanel1);
             this.panel1.Location = new System.Drawing.Point(19, 150);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(243, 221);
             this.panel1.TabIndex = 97;
             // 
-            // timer1
+            // flowLayoutPanel1
             // 
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(243, 221);
+            this.flowLayoutPanel1.TabIndex = 0;
+            this.flowLayoutPanel1.WrapContents = false;
+            // 
+            // loadBookTimer
+            // 
+            this.loadBookTimer.Interval = 1;
+            this.loadBookTimer.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // openLectureBtn
             // 
@@ -1291,20 +1275,68 @@
             this.openLectureBtn.TextFont = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.openLectureBtn.Click += new System.EventHandler(this.openLectureBtn_Click);
             // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.flowLayoutPanel2);
+            this.panel2.Location = new System.Drawing.Point(19, 435);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(243, 198);
+            this.panel2.TabIndex = 99;
+            // 
+            // flowLayoutPanel2
+            // 
+            this.flowLayoutPanel2.AutoScroll = true;
+            this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(243, 198);
+            this.flowLayoutPanel2.TabIndex = 0;
+            this.flowLayoutPanel2.WrapContents = false;
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.flowLayoutPanel3);
+            this.panel3.Location = new System.Drawing.Point(19, 712);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(243, 198);
+            this.panel3.TabIndex = 100;
+            // 
+            // flowLayoutPanel3
+            // 
+            this.flowLayoutPanel3.AutoScroll = true;
+            this.flowLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel3.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanel3.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanel3.Name = "flowLayoutPanel3";
+            this.flowLayoutPanel3.Size = new System.Drawing.Size(243, 198);
+            this.flowLayoutPanel3.TabIndex = 0;
+            this.flowLayoutPanel3.WrapContents = false;
+            // 
+            // loadLectureTimer
+            // 
+            this.loadLectureTimer.Interval = 1;
+            this.loadLectureTimer.Tick += new System.EventHandler(this.loadLectureTimer_Tick);
+            // 
+            // loadVideoTimer
+            // 
+            this.loadVideoTimer.Interval = 1;
+            this.loadVideoTimer.Tick += new System.EventHandler(this.loadVideoTimer_Tick);
+            // 
             // classPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
+            this.Controls.Add(this.panel3);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.openLectureBtn);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.openBookBtn);
             this.Controls.Add(this.lecturegroupBox);
             this.Controls.Add(this.videogroupBox);
             this.Controls.Add(this.bookgroupBox);
-            this.Controls.Add(this.lectureView);
             this.Controls.Add(this.videoPlayer);
-            this.Controls.Add(this.videoList);
             this.Controls.Add(this.hideVideoBtn);
             this.Controls.Add(this.watchVideo);
             this.Controls.Add(this.bunifuSeparator4);
@@ -1328,7 +1360,7 @@
             this.Controls.Add(this.userPrflName);
             this.Controls.Add(this.addBook);
             this.Name = "classPage";
-            this.Size = new System.Drawing.Size(696, 230);
+            this.Size = new System.Drawing.Size(645, 179);
             this.Load += new System.EventHandler(this.classPage_Load);
             this.bookgroupBox.ResumeLayout(false);
             this.bookgroupBox.PerformLayout();
@@ -1337,8 +1369,9 @@
             this.lecturegroupBox.ResumeLayout(false);
             this.lecturegroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.videoPlayer)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bookDataGrid)).EndInit();
             this.panel1.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1369,9 +1402,7 @@
         private System.Windows.Forms.OpenFileDialog bookDialogBox;
         private Bunifu.Framework.UI.BunifuFlatButton watchVideo;
         private Bunifu.Framework.UI.BunifuFlatButton hideVideoBtn;
-        private System.Windows.Forms.ListBox videoList;
         private AxWMPLib.AxWindowsMediaPlayer videoPlayer;
-        private System.Windows.Forms.ListBox lectureView;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
@@ -1400,9 +1431,15 @@
         private System.Windows.Forms.Label label4;
         private Bunifu.Framework.UI.BunifuThinButton2 lectSendBtn;
         private Bunifu.Framework.UI.BunifuFlatButton openBookBtn;
-        private System.Windows.Forms.DataGridView bookDataGrid;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Timer loadBookTimer;
         private Bunifu.Framework.UI.BunifuFlatButton openLectureBtn;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
+        private System.Windows.Forms.Timer loadLectureTimer;
+        private System.Windows.Forms.Timer loadVideoTimer;
     }
 }

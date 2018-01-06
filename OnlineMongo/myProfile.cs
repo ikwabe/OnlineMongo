@@ -118,6 +118,8 @@ namespace OnlineMongo
                     byte[] img = (byte[])table.Rows[0][7];
                     MemoryStream ms = new MemoryStream(img);
                     pictureBox1.Image = Image.FromStream(ms);
+
+                   
                 }
                 catch
                 {
@@ -143,6 +145,10 @@ namespace OnlineMongo
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
+          
+           
+
+            
             picPreview pc = new picPreview();
             pc.Show(); 
         }

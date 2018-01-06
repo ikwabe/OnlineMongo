@@ -309,6 +309,7 @@ namespace OnlineMongo
                 if (!Directory.Exists(rootDirectory + "\\Lectures")) { Directory.CreateDirectory(rootDirectory + "\\Lectures"); }
                 if (!Directory.Exists(rootDirectory + "\\Books")) { Directory.CreateDirectory(rootDirectory + "\\Books"); }
                 if (!Directory.Exists(rootDirectory + "\\Profile Photo(s)")) { Directory.CreateDirectory(rootDirectory + "\\Profile Photo(s)"); }
+                if (!Directory.Exists(rootDirectory + "\\Ring Tone")) { Directory.CreateDirectory(rootDirectory + "\\Ring Tone"); }
             }
             catch
             {

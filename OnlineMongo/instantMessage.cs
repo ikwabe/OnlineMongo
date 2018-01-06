@@ -224,8 +224,6 @@ namespace OnlineMongo
                 ad.Dispose();
                 string subject = subjectTextBox1 + "(By " + login.txt.Text + ")";
                 string insert = "insert into sentmail (mailsubject,sentmsg,senderemail,receiveremail,status) values ('" + subject + "', @sentmsg,'" + senderEmail + "', '" + toLabel.Text + "','New')";
-
-
                 byte[] mail = null;
 
 

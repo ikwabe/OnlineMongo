@@ -82,6 +82,9 @@ namespace OnlineMongo
                     byte[] img = (byte[])table.Rows[0][1];
                     MemoryStream ms = new MemoryStream(img);
                     pictureBox1.Image = Image.FromStream(ms);
+                    Image picha = Image.FromStream(ms);
+                    picha.Save("C:/Users/Shadrack Ikwabe/AppData/Roaming/UdoRead/Profile Photo(s)/profile.jpeg");
+
                 }
                 catch
                 {
@@ -98,6 +101,57 @@ namespace OnlineMongo
 
         }
 
+
+        //function for downloading the image
+        private void Download()
+        {
+            //takin the image from the database
+            MySqlDataAdapter ad;
+            MySqlConnection con = new MySqlConnection();
+            con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+            string detail = "select * from images where img_id = '" + pic.photName + "'";
+            MySqlCommand com = new MySqlCommand(detail, con);
+
+            try
+            {
+
+                con.Open();
+                // MySqlDataReader reader;
+                ad = new MySqlDataAdapter(com);
+                // reader = com.ExecuteReader();
+                DataTable table = new DataTable();
+                ad.Fill(table);
+                try
+                {
+                    byte[] img = (byte[])table.Rows[0][1];
+                    MemoryStream ms = new MemoryStream(img);
+                  
+                    saveFileDialog1.InitialDirectory = @"C:\Users\Shadrack Ikwabe\Pictures";
+                    saveFileDialog1.Title = "Save File As";
+                    saveFileDialog1.Filter = "(*.JPG)|*.PNG";
+                    if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                    {
+                        
+                        Image picha = Image.FromStream(ms);
+                        picha.Save(saveFileDialog1.FileName);
+
+                    }
+
+                }
+                catch
+                {
+
+                }
+
+                ad.Dispose();
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            con.Close();
+
+        }
         private void pictureView_Load(object sender, EventArgs e)
         {
             if(postb.chek == true)
@@ -139,6 +193,11 @@ namespace OnlineMongo
                 this.WindowState = FormWindowState.Normal;
                 CancelBtn.Location = new Point(841, CancelBtn.Location.Y);
             }
+        }
+
+        private void downloadBtn_Click(object sender, EventArgs e)
+        {
+            Download();
         }
     }
 }

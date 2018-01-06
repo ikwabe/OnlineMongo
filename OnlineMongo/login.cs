@@ -15,6 +15,7 @@ namespace OnlineMongo
     public partial class login : Form
     {
         public static BunifuMaterialTextbox txt = new BunifuMaterialTextbox();
+        public static string user_id;
         public login()
         {
             InitializeComponent();
@@ -52,6 +53,7 @@ namespace OnlineMongo
 
         }
 
+
         private void signUpLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
            
@@ -73,13 +75,29 @@ namespace OnlineMongo
             con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
             string signIn = "select username,password from users where username = '" + txt.Text + "' and password = '" + pwd.Text + "'";
             string chekSecWord = "select secword from users where username = '" + txt.Text + "' and password = '" + pwd.Text + "'";
+            string usertake = "select * from users where username = '" + txt.Text + "' and password = '" + pwd.Text + "'";
             MySqlCommand com = new MySqlCommand(signIn, con);
             MySqlCommand com1 = new MySqlCommand(chekSecWord, con);
+            MySqlCommand com2 = new MySqlCommand(usertake, con);
+            MySqlDataAdapter da;
+            DataTable usertable = new DataTable();
             try
             {
                 con.Open();
+
                 MySqlDataReader reader;
                 DataTable table = new DataTable();
+                if (txt.Text == "")
+                {
+                    label3.Text = "Username field can not be empty.";
+                }
+                else if (pwd.Text == "")
+                {
+                    label3.Text = "Password field can not be empty.";
+
+                }
+                else
+                {
                 reader = com.ExecuteReader();
                 table.Load(reader);
                 reader.Close();
@@ -93,13 +111,23 @@ namespace OnlineMongo
                     if (nullValue == null || nullValue == DBNull.Value)
                     {
                         MessageBox.Show("Please remember to set your SECRET WORD for password recovery and security purposes.");
-                        dashBoard dsb = new dashBoard();
+                            //capturing user id for public purposes
+                            da = new MySqlDataAdapter(com2);
+                            da.Fill(usertable);
+                            user_id = usertable.Rows[0][0].ToString();
+                            da.Dispose();
+                            dashBoard dsb = new dashBoard();
                         dsb.Show();
                         this.Hide();
                     }
                     else
                     {
-                        dashBoard dsb = new dashBoard();
+                            //capturing user id for public purposes
+                            da = new MySqlDataAdapter(com2);
+                            da.Fill(usertable);
+                            user_id = usertable.Rows[0][0].ToString();
+                            da.Dispose();
+                            dashBoard dsb = new dashBoard();
                         dsb.Show();
                         this.Hide();
 
@@ -111,6 +139,7 @@ namespace OnlineMongo
                 {
                     label3.Text = "You have enterd a wrong Password or Username";
                 }
+            }
             }
             catch (MySqlException ex)
             {
@@ -127,43 +156,69 @@ namespace OnlineMongo
                 con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
                 string signIn = "select username,password from users where username = '" + txt.Text + "' and password = '" + pwd.Text + "'";
                 string chekSecWord = "select secword from users where username = '" + txt.Text + "' and password = '" + pwd.Text + "'";
+                string usertake = "select * from users where username = '" + txt.Text + "' and password = '" + pwd.Text + "'";
                 MySqlCommand com = new MySqlCommand(signIn, con);
                 MySqlCommand com1 = new MySqlCommand(chekSecWord, con);
+                MySqlCommand com2 = new MySqlCommand(usertake, con);
+                MySqlDataAdapter da;
+                DataTable usertable = new DataTable();
                 try
                 {
                     con.Open();
                     MySqlDataReader reader;
                     DataTable table = new DataTable();
-                    reader = com.ExecuteReader();
-                    table.Load(reader);
-                    reader.Close();
-
-                    //execute ones to check if the database is empty or not
-                    object nullValue = com1.ExecuteScalar();
-
-                    if (table.Rows.Count > 0)
+                    if (txt.Text == "")
                     {
-                        pwd.Enabled = false;
-                        if (nullValue == null || nullValue == DBNull.Value)
-                        {
-                            MessageBox.Show("Please remember to set your SECRET WORD for password recovery and security purposes.");
-                            dashBoard dsb = new dashBoard();
-                            dsb.Show();
-                            this.Hide();
-                        }
-                        else
-                        {
-                            dashBoard dsb = new dashBoard();
-                            dsb.Show();
-                            this.Hide();
+                        label3.Text = "Username field can not be empty.";
+                    }
+                    else if (pwd.Text == "")
+                    {
+                        label3.Text = "Password field can not be empty.";
 
-                        }
-                           
-                        
                     }
                     else
                     {
-                        label3.Text = "You have enterd a wrong Password or Username";
+                        reader = com.ExecuteReader();
+                        table.Load(reader);
+                        reader.Close();
+
+                        //execute ones to check if the database is empty or not
+                        object nullValue = com1.ExecuteScalar();
+
+                        if (table.Rows.Count > 0)
+                        {
+                            pwd.Enabled = false;
+                            if (nullValue == null || nullValue == DBNull.Value)
+                            {
+                                MessageBox.Show("Please remember to set your SECRET WORD for password recovery and security purposes.");
+                                //capturing user id for public purposes
+                                da = new MySqlDataAdapter(com2);
+                                da.Fill(usertable);
+                                user_id = usertable.Rows[0][0].ToString();
+                                da.Dispose();
+                                dashBoard dsb = new dashBoard();
+                                dsb.Show();
+                                this.Hide();
+                            }
+                            else
+                            {
+                                //capturing user id for public purposes
+                                da = new MySqlDataAdapter(com2);
+                                da.Fill(usertable);
+                                user_id = usertable.Rows[0][0].ToString();
+                                da.Dispose();
+                                dashBoard dsb = new dashBoard();
+                                dsb.Show();
+                                this.Hide();
+
+                            }
+
+
+                        }
+                        else
+                        {
+                            label3.Text = "You have enterd a wrong Password or Username";
+                        }
                     }
                 }
                 catch (MySqlException ex)

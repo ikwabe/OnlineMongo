@@ -69,72 +69,84 @@ namespace OnlineMongo
                 MySqlDataReader reader;
                 MySqlDataReader reader1;
                 MySqlDataReader reader2;
-                //verifying if the password is correct
-                if (pwd.Text == rtPwd.Text)
+
+                //checking if the username empty
+                if (username.Text == "")
                 {
-
-                    DataTable table1 = new DataTable();
-                    reader1 = com1.ExecuteReader();
-                    table1.Load(reader1);
-                    reader1.Close();
-                    //checking if the email exist in the database
-                    if (table1.Rows.Count > 0)
-                    {
-                        MessageBox.Show("The enterd email, already exist. Please login", "Information", MessageBoxButtons.OK);
-                        email.Text = "";
-                    }
-                    else
-                    {
-                        //Cheking if the user is already registerd
-
-                        DataTable table2 = new DataTable();
-                        reader2 = com2.ExecuteReader();
-                        table2.Load(reader2);
-                        reader2.Close();
-                        if (table2.Rows.Count > 0)
-                        {
-                            MessageBox.Show("The enterd username, already exist. Please, change username", "Information", MessageBoxButtons.OK);
-                            username.Text = "";
-                        }
-                        else
-                        {
-                            //verifying the email if is valid
-
-                            Regex reg = new Regex(@"\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*");
-                            if (!reg.IsMatch(email.Text))
-                            {
-                                MessageBox.Show("Please enter the valid email");
-                            }
-                            else
-                            {
-                                string password = pwd.Text;
-                                //check if the password is strong 
-                                bool validPassword = password.Any(char.IsDigit) && !password.All(char.IsLetterOrDigit) && password.Length >= 6;
-
-                                if(validPassword == true)
-                                {
-                                    //creating the account
-
-                                    reader = com.ExecuteReader();
-                                    reader.Close();
-                                    MessageBox.Show("Welcome,You have been added", "User added", MessageBoxButtons.OK);
-                                    this.Close();
-                                    login lgn = new login();
-                                    lgn.Show();
-
-                                }
-                                else
-                                {
-                                    MessageBox.Show("The Password should contain at least later, number,special character and more than 6 characters ");
-                                }
-                            } 
-                        }
-                    }
-                    
+                    MessageBox.Show("Username Field can not be empty");
                 }
                 else
                 {
-                    MessageBox.Show("Password did not match");
+
+
+                    //verifying if the password is correct
+                    if (pwd.Text == rtPwd.Text)
+                    {
+
+                        DataTable table1 = new DataTable();
+                        reader1 = com1.ExecuteReader();
+                        table1.Load(reader1);
+                        reader1.Close();
+                        //checking if the email exist in the database
+                        if (table1.Rows.Count > 0)
+                        {
+                            MessageBox.Show("The enterd email, already exist. Please login", "Information", MessageBoxButtons.OK);
+                            email.Text = "";
+                        }
+                        else
+                        {
+                            //Cheking if the user is already registerd
+
+                            DataTable table2 = new DataTable();
+                            reader2 = com2.ExecuteReader();
+                            table2.Load(reader2);
+                            reader2.Close();
+
+                            if (table2.Rows.Count > 0)
+                            {
+                                MessageBox.Show("The enterd username, already exist. Please, change username", "Information", MessageBoxButtons.OK);
+                                username.Text = "";
+                            }
+                            else
+                            {
+                                //verifying the email if is valid
+
+                                Regex reg = new Regex(@"\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*");
+                                if (!reg.IsMatch(email.Text))
+                                {
+                                    MessageBox.Show("Please enter the valid email");
+                                }
+                                else
+                                {
+                                    string password = pwd.Text;
+                                    //check if the password is strong 
+                                    bool validPassword = password.Any(char.IsDigit) && !password.All(char.IsLetterOrDigit) && password.Length >= 6;
+
+                                    if (validPassword == true)
+                                    {
+                                        //creating the account
+
+                                        reader = com.ExecuteReader();
+                                        reader.Close();
+                                        MessageBox.Show("Welcome,You have been added", "User added", MessageBoxButtons.OK);
+                                        this.Close();
+                                        login lgn = new login();
+                                        lgn.Show();
+
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("The Password should contain at least later, number,special character and more than 6 characters ");
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("Password did not match");
+                    }
                 }
                
             }
@@ -148,13 +160,21 @@ namespace OnlineMongo
         //a function handle the entrace of number in first name and last name
         private void fname_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsDigit(e.KeyChar))
+            if (!char.IsDigit(e.KeyChar) && !char.IsSeparator(e.KeyChar) && !char.IsPunctuation(e.KeyChar)&& !char.IsSymbol(e.KeyChar))
             {
                 e.Handled = false;
             }
             else
             {
                 e.Handled = true;
+            }
+        }
+
+        private void username_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Space)
+            {
+                e.SuppressKeyPress = true;
             }
         }
     }
