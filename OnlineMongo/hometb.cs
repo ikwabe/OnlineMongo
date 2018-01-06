@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
 
 namespace OnlineMongo
 {
@@ -23,6 +24,8 @@ namespace OnlineMongo
             }
 
         }
+
+       
         public hometb()
         {
             InitializeComponent();
@@ -105,7 +108,9 @@ namespace OnlineMongo
 
         private void webBrowser1_Navigated(object sender, WebBrowserNavigatedEventArgs e)
         {
+            webBrowser1.ScriptErrorsSuppressed = true;
             searchTxt.Text = webBrowser1.Url.ToString();
+           
         }
 
         private void searchTxt_KeyDown(object sender, KeyEventArgs e)
@@ -113,6 +118,29 @@ namespace OnlineMongo
             if (e.KeyCode == Keys.Enter)
             {
                 searchBtn_Click(this, new EventArgs());
+            }
+        }
+
+        private void hometb_Load(object sender, EventArgs e)
+        {
+
+            webBrowser1.ScriptErrorsSuppressed = true;  
+        }
+
+       
+        private void webBrowser1_ProgressChanged(object sender, WebBrowserProgressChangedEventArgs e)
+        {
+            try
+            {
+                progressBar1.Increment(Convert.ToInt32(e.CurrentProgress));
+                progressBar1.Maximum = Convert.ToInt32(e.MaximumProgress);
+
+               
+
+            }
+            catch
+            {
+
             }
         }
     }

@@ -811,7 +811,7 @@ namespace OnlineMongo
             photName = picName.Name;
             chek = true;
             pic.chek = false;
-            pictureView picv = new pictureView();
+            postOption picv = new postOption();
             picv.Show();
 
 

@@ -46,6 +46,8 @@
             this.fowardBtn = new Bunifu.Framework.UI.BunifuImageButton();
             this.refreshBtn = new Bunifu.Framework.UI.BunifuImageButton();
             this.ymailBtn = new Bunifu.Framework.UI.BunifuImageButton();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             ((System.ComponentModel.ISupportInitialize)(this.youTubeBtn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.googleBtn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.whatsappBtn)).BeginInit();
@@ -60,6 +62,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.fowardBtn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.refreshBtn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ymailBtn)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // searchTxt
@@ -88,9 +91,10 @@
             this.webBrowser1.Location = new System.Drawing.Point(3, 140);
             this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.Size = new System.Drawing.Size(809, 248);
+            this.webBrowser1.Size = new System.Drawing.Size(946, 231);
             this.webBrowser1.TabIndex = 1;
             this.webBrowser1.Navigated += new System.Windows.Forms.WebBrowserNavigatedEventHandler(this.webBrowser1_Navigated);
+            this.webBrowser1.ProgressChanged += new System.Windows.Forms.WebBrowserProgressChangedEventHandler(this.webBrowser1_ProgressChanged);
             // 
             // searchBtn
             // 
@@ -328,11 +332,29 @@
             this.ymailBtn.Zoom = 10;
             this.ymailBtn.Click += new System.EventHandler(this.ymailBtn_Click);
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.progressBar1);
+            this.panel1.Location = new System.Drawing.Point(785, 13);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(167, 31);
+            this.panel1.TabIndex = 111;
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(1, 11);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(152, 13);
+            this.progressBar1.Step = 1;
+            this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.progressBar1.TabIndex = 0;
+            // 
             // hometb
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.ymailBtn);
             this.Controls.Add(this.refreshBtn);
             this.Controls.Add(this.fowardBtn);
@@ -351,7 +373,8 @@
             this.Controls.Add(this.webBrowser1);
             this.Controls.Add(this.searchTxt);
             this.Name = "hometb";
-            this.Size = new System.Drawing.Size(815, 391);
+            this.Size = new System.Drawing.Size(941, 374);
+            this.Load += new System.EventHandler(this.hometb_Load);
             ((System.ComponentModel.ISupportInitialize)(this.youTubeBtn)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.googleBtn)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.whatsappBtn)).EndInit();
@@ -366,6 +389,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.fowardBtn)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.refreshBtn)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ymailBtn)).EndInit();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -389,5 +413,7 @@
         private Bunifu.Framework.UI.BunifuImageButton refreshBtn;
         private Bunifu.Framework.UI.BunifuImageButton ymailBtn;
         public System.Windows.Forms.WebBrowser webBrowser1;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.ProgressBar progressBar1;
     }
 }

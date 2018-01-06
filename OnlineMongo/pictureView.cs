@@ -100,7 +100,7 @@ namespace OnlineMongo
             con.Close();
 
         }
-
+        string detail;
 
         //function for downloading the image
         private void Download()
@@ -109,7 +109,17 @@ namespace OnlineMongo
             MySqlDataAdapter ad;
             MySqlConnection con = new MySqlConnection();
             con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
-            string detail = "select * from images where img_id = '" + pic.photName + "'";
+            
+            if (postb.chek == true)
+            {
+                detail = "select * from post where post_id = '" + postb.photName + "'";
+            }
+            if(pic.chek == true)
+            {
+                detail = "select * from images where img_id = '" + pic.photName + "'";
+
+            }
+            
             MySqlCommand com = new MySqlCommand(detail, con);
 
             try
