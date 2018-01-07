@@ -201,6 +201,7 @@
             this.Controls.Add(this.openBtn);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "userMenu";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "userMenu";
             this.ResumeLayout(false);
 

@@ -71,6 +71,7 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.emailCheckTimer = new System.Windows.Forms.Timer(this.components);
             this.soundTimer = new System.Windows.Forms.Timer(this.components);
+            this.chatBtn = new Bunifu.Framework.UI.BunifuFlatButton();
             this.Headerpanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.restoreDownBtn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.maximizeBtn)).BeginInit();
@@ -680,6 +681,7 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.Black;
+            this.panel2.Controls.Add(this.chatBtn);
             this.panel2.Controls.Add(this.emailNumberLabel);
             this.panel2.Controls.Add(this.logo);
             this.panel2.Controls.Add(this.myClassBtn);
@@ -698,7 +700,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel2.Location = new System.Drawing.Point(0, 52);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(254, 433);
+            this.panel2.Size = new System.Drawing.Size(254, 498);
             this.panel2.TabIndex = 47;
             // 
             // emailNumberLabel
@@ -903,12 +905,53 @@
             this.soundTimer.Interval = 1;
             this.soundTimer.Tick += new System.EventHandler(this.soundTimer_Tick);
             // 
+            // chatBtn
+            // 
+            this.chatBtn.Activecolor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.chatBtn.BackColor = System.Drawing.Color.Transparent;
+            this.chatBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.chatBtn.BorderRadius = 0;
+            this.chatBtn.ButtonText = "   Chat Room";
+            this.chatBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.logoTransition.SetDecoration(this.chatBtn, BunifuAnimatorNS.DecorationType.None);
+            this.tabAnimator.SetDecoration(this.chatBtn, BunifuAnimatorNS.DecorationType.None);
+            this.panelAnimator.SetDecoration(this.chatBtn, BunifuAnimatorNS.DecorationType.None);
+            this.picAnimation.SetDecoration(this.chatBtn, BunifuAnimatorNS.DecorationType.None);
+            this.chatBtn.DisabledColor = System.Drawing.Color.Gray;
+            this.chatBtn.Font = new System.Drawing.Font("Century Gothic", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chatBtn.Iconcolor = System.Drawing.Color.Transparent;
+            this.chatBtn.Iconimage = ((System.Drawing.Image)(resources.GetObject("chatBtn.Iconimage")));
+            this.chatBtn.Iconimage_right = null;
+            this.chatBtn.Iconimage_right_Selected = null;
+            this.chatBtn.Iconimage_Selected = null;
+            this.chatBtn.IconMarginLeft = 0;
+            this.chatBtn.IconMarginRight = 0;
+            this.chatBtn.IconRightVisible = true;
+            this.chatBtn.IconRightZoom = 0D;
+            this.chatBtn.IconVisible = true;
+            this.chatBtn.IconZoom = 70D;
+            this.chatBtn.IsTab = false;
+            this.chatBtn.Location = new System.Drawing.Point(3, 435);
+            this.chatBtn.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.chatBtn.Name = "chatBtn";
+            this.chatBtn.Normalcolor = System.Drawing.Color.Transparent;
+            this.chatBtn.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(9)))), ((int)(((byte)(191)))));
+            this.chatBtn.OnHoverTextColor = System.Drawing.Color.White;
+            this.chatBtn.selected = false;
+            this.chatBtn.Size = new System.Drawing.Size(245, 45);
+            this.chatBtn.TabIndex = 10;
+            this.chatBtn.Text = "   Chat Room";
+            this.chatBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.chatBtn.Textcolor = System.Drawing.Color.DimGray;
+            this.chatBtn.TextFont = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chatBtn.Click += new System.EventHandler(this.chatBtn_Click);
+            // 
             // dashBoard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.ClientSize = new System.Drawing.Size(1091, 485);
+            this.ClientSize = new System.Drawing.Size(1091, 550);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
@@ -979,5 +1022,6 @@
         private System.Windows.Forms.Label emailNumberLabel;
         private System.Windows.Forms.Timer emailCheckTimer;
         private System.Windows.Forms.Timer soundTimer;
+        private Bunifu.Framework.UI.BunifuFlatButton chatBtn;
     }
 }

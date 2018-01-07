@@ -207,7 +207,7 @@ namespace OnlineMongo
             }
 
 
-            string sendmail = "select * from users where username = '" + login.txt.Text + "'";
+            string sendmail = "select * from users where user_id = '" + login.user_id + "'";
 
             //command for retreiving email from the database
             MySqlCommand com = new MySqlCommand(sendmail, con);

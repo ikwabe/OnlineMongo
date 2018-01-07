@@ -113,6 +113,7 @@ namespace OnlineMongo
             chek = true;
 
             postb.chek = false;
+            myProfile.chek = false;
             //testing
             imageOption img = new imageOption();
             img.Show();

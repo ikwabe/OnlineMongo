@@ -36,7 +36,7 @@ namespace OnlineMongo
 
             MySqlConnection con = new MySqlConnection();
             con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
-            string pic = "update users set prfpic = @prfpic where username = '" + login.txt.Text + "'";
+            string pic = "update users set prfpic = @prfpic where user_id = '" + login.user_id + "'";
             try
             {
                 openFileDialog1.Filter = "(*.JPG)|*.JPG";
@@ -85,7 +85,7 @@ namespace OnlineMongo
             MySqlDataAdapter ad;
             MySqlConnection con = new MySqlConnection();
             con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
-            string detail = "select * from users where username = '" + login.txt.Text + "'";
+            string detail = "select * from users where user_id = '" + login.user_id + "'";
             MySqlCommand com = new MySqlCommand(detail, con);
 
             try
@@ -142,14 +142,13 @@ namespace OnlineMongo
             timer1.Start();
             profile();
         }
-
+        public static bool chek = false;
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-          
-           
-
-            
-            picPreview pc = new picPreview();
+            chek = true;
+            pic.chek = false;
+            postb.chek = false;
+            pictureView pc = new pictureView();
             pc.Show(); 
         }
 

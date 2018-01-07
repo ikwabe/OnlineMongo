@@ -854,5 +854,12 @@ namespace OnlineMongo
 
             }
         }
+
+        //a button for chat room
+        private void chatBtn_Click(object sender, EventArgs e)
+        {
+            chatRoom cht = new chatRoom();
+            cht.Show();
+        }
     }
 }

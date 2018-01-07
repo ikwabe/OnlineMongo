@@ -73,6 +73,12 @@
     <Compile Include="changePwd.Designer.cs">
       <DependentUpon>changePwd.cs</DependentUpon>
     </Compile>
+    <Compile Include="chatRoom.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="chatRoom.Designer.cs">
+      <DependentUpon>chatRoom.cs</DependentUpon>
+    </Compile>
     <Compile Include="classPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -150,12 +156,6 @@
     </Compile>
     <Compile Include="pic.Designer.cs">
       <DependentUpon>pic.cs</DependentUpon>
-    </Compile>
-    <Compile Include="picPreview.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="picPreview.Designer.cs">
-      <DependentUpon>picPreview.cs</DependentUpon>
     </Compile>
     <Compile Include="pictureView.cs">
       <SubType>Form</SubType>
@@ -258,6 +258,9 @@
     <EmbeddedResource Include="changePwd.resx">
       <DependentUpon>changePwd.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="chatRoom.resx">
+      <DependentUpon>chatRoom.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="classPage.resx">
       <DependentUpon>classPage.cs</DependentUpon>
     </EmbeddedResource>
@@ -296,9 +299,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="pic.resx">
       <DependentUpon>pic.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="picPreview.resx">
-      <DependentUpon>picPreview.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="pictureView.resx">
       <DependentUpon>pictureView.cs</DependentUpon>

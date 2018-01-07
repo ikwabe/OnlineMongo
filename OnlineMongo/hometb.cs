@@ -135,8 +135,6 @@ namespace OnlineMongo
                 progressBar1.Increment(Convert.ToInt32(e.CurrentProgress));
                 progressBar1.Maximum = Convert.ToInt32(e.MaximumProgress);
 
-               
-
             }
             catch
             {

@@ -100,6 +100,50 @@ namespace OnlineMongo
             con.Close();
 
         }
+
+        //viewing profile picture
+        private void ProfilePicture()
+        {
+            //takin the image from the database
+            MySqlDataAdapter ad;
+            MySqlConnection con = new MySqlConnection();
+            con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+            string detail = "select * from users where user_id = '" + login.user_id + "'";
+            MySqlCommand com = new MySqlCommand(detail, con);
+
+            try
+            {
+
+                con.Open();
+                // MySqlDataReader reader;
+                ad = new MySqlDataAdapter(com);
+                // reader = com.ExecuteReader();
+                DataTable table = new DataTable();
+                ad.Fill(table);
+                try
+                {
+                    byte[] img = (byte[])table.Rows[0][7];
+                    MemoryStream ms = new MemoryStream(img);
+                    pictureBox1.Image = Image.FromStream(ms);
+                    Image picha = Image.FromStream(ms);
+                    picha.Save("C:/Users/Shadrack Ikwabe/AppData/Roaming/UdoRead/Profile Photo(s)/profile.jpeg");
+
+                }
+                catch
+                {
+
+                }
+
+                ad.Dispose();
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            con.Close();
+
+        }
+
         string detail;
 
         //function for downloading the image
@@ -119,6 +163,10 @@ namespace OnlineMongo
                 detail = "select * from images where img_id = '" + pic.photName + "'";
 
             }
+            if(myProfile.chek == true)
+            {
+                detail = "select * from users where user_id = '" + login.user_id + "'";
+            }
             
             MySqlCommand com = new MySqlCommand(detail, con);
 
@@ -133,19 +181,43 @@ namespace OnlineMongo
                 ad.Fill(table);
                 try
                 {
-                    byte[] img = (byte[])table.Rows[0][1];
-                    MemoryStream ms = new MemoryStream(img);
-                  
-                    saveFileDialog1.InitialDirectory = @"C:\Users\Shadrack Ikwabe\Pictures";
-                    saveFileDialog1.Title = "Save File As";
-                    saveFileDialog1.Filter = "(*.JPG)|*.PNG";
-                    if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                    if(myProfile.chek == true)
                     {
-                        
-                        Image picha = Image.FromStream(ms);
-                        picha.Save(saveFileDialog1.FileName);
+                        byte[] img = (byte[])table.Rows[0][7];
+                        MemoryStream ms = new MemoryStream(img);
+
+                        saveFileDialog1.InitialDirectory = @"C:\Users\Shadrack Ikwabe\Pictures";
+                        saveFileDialog1.Title = "Save File As";
+                        saveFileDialog1.Filter = "(*.JPG)|*.PNG";
+                        if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                        {
+
+                            Image picha = Image.FromStream(ms);
+                            picha.Save(saveFileDialog1.FileName);
+
+                        }
+
+
 
                     }
+                    else
+                    {
+                        byte[] img = (byte[])table.Rows[0][1];
+                        MemoryStream ms = new MemoryStream(img);
+
+                        saveFileDialog1.InitialDirectory = @"C:\Users\Shadrack Ikwabe\Pictures";
+                        saveFileDialog1.Title = "Save File As";
+                        saveFileDialog1.Filter = "(*.JPG)|*.PNG";
+                        if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                        {
+
+                            Image picha = Image.FromStream(ms);
+                            picha.Save(saveFileDialog1.FileName);
+
+                        }
+
+                    }
+                   
 
                 }
                 catch
@@ -173,6 +245,11 @@ namespace OnlineMongo
             {
                 //view the clicked useruploaded image
                 userUploadedImages();
+            }
+            else if(myProfile.chek == true)
+            {
+                //view the profile photo
+                ProfilePicture();
             }
             else
             {
