@@ -305,25 +305,41 @@ namespace OnlineMongo
 
         private void deleteBook_Click(object sender, EventArgs e)
         {
+            MySqlConnection con = new MySqlConnection();
+            con.ConnectionString = login.dbConnection;
+            string delete = "delete from myclass where book_id = '" + book_id + "'";
+            MySqlCommand com = new MySqlCommand(delete, con);
+            MySqlDataReader rd;
             try
             {
-                DialogResult dialogResult = MessageBox.Show("Are you sure you want to delete this book?", "Alert", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-                    if(dialogResult == DialogResult.Yes)
+                con.Open();
+                if (Bcheck == true)
                 {
-                    //bookView.Items.Remove(bookView.SelectedItem);
+                    if (MessageBox.Show("Delete this book?", "Alert", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                    {
+                        rd = com.ExecuteReader();
+                        rd.Close();
+                        loadBookTimer.Start();
+                    }
+                    else
+                    {
+
+                    }
+
                 }
-                
-                
-               
+                else
+                {
+                    MessageBox.Show("Please Select the Book.");
+                }
+
             }
-            catch{
-                MessageBox.Show("No Book selected", "Error", MessageBoxButtons.OK);
+            catch (MySqlException ex)
+            {
+                MessageBox.Show(ex.Message);
             }
- 
+            con.Close();
 
 
-           
         }
 
         private void addLecture_Click(object sender, EventArgs e)
@@ -358,21 +374,21 @@ namespace OnlineMongo
                     //checking if the table is empty
                     if (table1.Rows.Count > 0)
                     {
-                        MessageBox.Show("The table contains books ");
-                        //check if the insertrd book is present
+                       
+                        //check if the insertrd lecture is present
                         reader = com1.ExecuteReader();
                         table.Load(reader);
-                        MessageBox.Show("Ready checked the books ");
+                       
                         reader.Close();
 
                         if (table.Rows.Count > 0)
                         {
-                            MessageBox.Show("Sorry, The is book already saved in the Database");
+                            MessageBox.Show("Sorry, The is lecture already saved in the Database");
                         }
                         else
                         {
                             //insert the book in the database
-                            MessageBox.Show("inserting the book " + bookDialogBox.FileName.ToString());
+                           
                             com.Parameters.AddWithValue("@lecture", bytes);
                             com.ExecuteNonQuery();
                             loadLectureTimer.Start();
@@ -381,8 +397,8 @@ namespace OnlineMongo
                     }
                     else
                     {
-                        //insert the book in the database
-                        MessageBox.Show("The table contains no books ");
+                        //insert the lecture in the database
+                       
                         com.Parameters.AddWithValue("@lecture", bytes);
                         com.ExecuteNonQuery();
                         loadLectureTimer.Start();
@@ -399,7 +415,39 @@ namespace OnlineMongo
 
         private void deleteLecture_Click(object sender, EventArgs e)
         {
-           
+            MySqlConnection con = new MySqlConnection();
+            con.ConnectionString = login.dbConnection;
+            string delete = "delete from lecture where lecture_id = '" + lect_id + "'";
+            MySqlCommand com = new MySqlCommand(delete, con);
+            MySqlDataReader rd;
+            try
+            {
+                con.Open();
+                if(Lcheck == true)
+                {
+                    if(MessageBox.Show("Delete this Lecture?", "Alert", MessageBoxButtons.YesNo, MessageBoxIcon.Warning)== DialogResult.Yes)
+                    {
+                        rd = com.ExecuteReader();
+                        rd.Close();
+                        loadLectureTimer.Start();
+                    }
+                    else
+                    {
+
+                    }
+                    
+                }
+                else
+                {
+                    MessageBox.Show("Please Select Lecture.");
+                }
+
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            con.Close();
 
         }
 
@@ -411,9 +459,16 @@ namespace OnlineMongo
             bookDialogBox.Filter = "(*.mp4;*.mov;*.avi;*.wmv)|*.MP4;*.MOV;*.AVI;*.WMV";
             if (bookDialogBox.ShowDialog() == DialogResult.OK)
             {
+
+                try
+                {
+                    File.Copy(@bookDialogBox.FileName, "C:/Users/" + currentComputerUserName + "/AppData/Roaming/UdoRead/Videos/" + bookDialogBox.SafeFileName + "", true);
+                }
+                catch
+                {
+
+                }
                
-                
-                File.Copy(@bookDialogBox.FileName, "C:/Users/"+currentComputerUserName+"/AppData/Roaming/UdoRead/Videos/" + bookDialogBox.SafeFileName + "",true);
                 try
                 {
                   
@@ -494,21 +549,38 @@ namespace OnlineMongo
 
 
                     //taking the file name to be deleted
-                    string filename = table.Rows[0][2].ToString();
+                    try
+                    {
+                        string filename = table.Rows[0][2].ToString();
+                        //if the file exist in the direcory deletion perfomed
+                        if (File.Exists("C:/Users/" + currentComputerUserName + "/AppData/Roaming/UdoRead/Videos/" + table.Rows[0][2].ToString() + ""))
+                        {
+                            File.Delete("C:/Users/" + currentComputerUserName + "/AppData/Roaming/UdoRead/Videos/" + table.Rows[0][2].ToString() + "");
+                            com1.ExecuteNonQuery();
+                            loadVideoTimer.Start();
+                            videoPlayer.Visible = false;
+                            hideVideoBtn.Visible = false;
+                            videoPlayer.Ctlcontrols.stop();
+
+                        }
+                        //the video name exist only in the database deletion perfomed
+                        else
+                        {
+                            com1.ExecuteNonQuery();
+                            loadVideoTimer.Start();
+                            videoPlayer.Visible = false;
+                            hideVideoBtn.Visible = false;
+                            videoPlayer.Ctlcontrols.stop();
+
+                        }
+                    }
+                    catch
+                    {
+
+                    }
+                    
                    
-                    //if the file exist in the direcory deletion perfomed
-                    if (File.Exists("C:/Users/"+currentComputerUserName+"/AppData/Roaming/UdoRead/Videos/" + table.Rows[0][2].ToString() + ""))
-                    {
-                        File.Delete("C:/Users/" + currentComputerUserName + "/AppData/Roaming/UdoRead/Videos/" + table.Rows[0][2].ToString() + "");
-                        com1.ExecuteNonQuery();
-                        loadVideoTimer.Start();
-                    }
-                    //the video name exist only in the database deletion perfomed
-                    else
-                    {
-                        com1.ExecuteNonQuery();
-                        loadVideoTimer.Start();
-                    }
+                   
                 }
                 else
                 {
