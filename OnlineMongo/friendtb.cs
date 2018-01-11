@@ -37,7 +37,7 @@ namespace OnlineMongo
         private void fetchRequest()
         {
             MySqlConnection con = new MySqlConnection();
-            con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+            con.ConnectionString = login.dbConnection;
             MySqlDataAdapter ad;
 
             string readLoginAccount = "select * from users where username = '" + login.txt.Text + "'";
@@ -192,7 +192,7 @@ namespace OnlineMongo
         {
             MySqlDataAdapter ad;
             MySqlConnection con = new MySqlConnection();
-            con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+            con.ConnectionString = login.dbConnection;
             string detail = "select * from requests where request_id = '"+ btnName + "'";
             string deleteReq = "delete from requests where request_id = '" + btnName + "'";
            
@@ -258,7 +258,7 @@ namespace OnlineMongo
         {
             MySqlDataAdapter ad;
             MySqlConnection con = new MySqlConnection();
-            con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+            con.ConnectionString = login.dbConnection;
             string detail = "select * from requests where request_id = '" + btnName + "'";
             string deleteReq = "delete from requests where request_id = '" + btnName + "'";
             MySqlCommand com = new MySqlCommand(detail, con);
@@ -297,7 +297,7 @@ namespace OnlineMongo
         {
             MySqlDataAdapter ad;
             MySqlConnection con = new MySqlConnection();
-            con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+            con.ConnectionString = login.dbConnection;
 
             //reading data query
             string userId = "select * from users where username = '" + login.txt.Text + "'";

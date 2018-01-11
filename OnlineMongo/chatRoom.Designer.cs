@@ -32,20 +32,20 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(chatRoom));
             this.bunifuElipse1 = new Bunifu.Framework.UI.BunifuElipse(this.components);
             this.headerPanel = new System.Windows.Forms.Panel();
-            this.bunifuDragControl1 = new Bunifu.Framework.UI.BunifuDragControl(this.components);
-            this.footerPanel = new System.Windows.Forms.Panel();
-            this.mainPanel = new System.Windows.Forms.Panel();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.label1 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.CloseBtn = new Bunifu.Framework.UI.BunifuThinButton2();
             this.label7 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.bunifuDragControl1 = new Bunifu.Framework.UI.BunifuDragControl(this.components);
+            this.footerPanel = new System.Windows.Forms.Panel();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.mainPanel = new System.Windows.Forms.Panel();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.headerPanel.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.footerPanel.SuspendLayout();
             this.mainPanel.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // bunifuElipse1
@@ -64,55 +64,14 @@
             this.headerPanel.Size = new System.Drawing.Size(813, 69);
             this.headerPanel.TabIndex = 0;
             // 
-            // bunifuDragControl1
+            // panel1
             // 
-            this.bunifuDragControl1.Fixed = true;
-            this.bunifuDragControl1.Horizontal = true;
-            this.bunifuDragControl1.TargetControl = this.headerPanel;
-            this.bunifuDragControl1.Vertical = true;
-            // 
-            // footerPanel
-            // 
-            this.footerPanel.BackColor = System.Drawing.Color.Silver;
-            this.footerPanel.Controls.Add(this.richTextBox1);
-            this.footerPanel.Controls.Add(this.label1);
-            this.footerPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.footerPanel.Location = new System.Drawing.Point(0, 237);
-            this.footerPanel.Name = "footerPanel";
-            this.footerPanel.Size = new System.Drawing.Size(813, 85);
-            this.footerPanel.TabIndex = 1;
-            // 
-            // mainPanel
-            // 
-            this.mainPanel.Controls.Add(this.flowLayoutPanel1);
-            this.mainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mainPanel.Location = new System.Drawing.Point(0, 69);
-            this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(813, 168);
-            this.mainPanel.TabIndex = 2;
-            // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.AutoScroll = true;
-            this.flowLayoutPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.BottomUp;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(813, 168);
-            this.flowLayoutPanel1.TabIndex = 0;
-            this.flowLayoutPanel1.WrapContents = false;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label1.Location = new System.Drawing.Point(9, 3);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(116, 20);
-            this.label1.TabIndex = 63;
-            this.label1.Text = "Chat Message";
+            this.panel1.Controls.Add(this.CloseBtn);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel1.Location = new System.Drawing.Point(637, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(176, 69);
+            this.panel1.TabIndex = 68;
             // 
             // CloseBtn
             // 
@@ -151,19 +110,23 @@
             this.label7.TabIndex = 67;
             this.label7.Text = "Chat Room";
             // 
-            // panel1
+            // bunifuDragControl1
             // 
-            this.panel1.Controls.Add(this.CloseBtn);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel1.Location = new System.Drawing.Point(637, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(176, 69);
-            this.panel1.TabIndex = 68;
+            this.bunifuDragControl1.Fixed = true;
+            this.bunifuDragControl1.Horizontal = true;
+            this.bunifuDragControl1.TargetControl = this.headerPanel;
+            this.bunifuDragControl1.Vertical = true;
             // 
-            // timer1
+            // footerPanel
             // 
-            this.timer1.Interval = 1;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.footerPanel.BackColor = System.Drawing.Color.Silver;
+            this.footerPanel.Controls.Add(this.richTextBox1);
+            this.footerPanel.Controls.Add(this.label1);
+            this.footerPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.footerPanel.Location = new System.Drawing.Point(0, 237);
+            this.footerPanel.Name = "footerPanel";
+            this.footerPanel.Size = new System.Drawing.Size(813, 85);
+            this.footerPanel.TabIndex = 1;
             // 
             // richTextBox1
             // 
@@ -177,6 +140,43 @@
             this.richTextBox1.TabIndex = 64;
             this.richTextBox1.Text = "";
             this.richTextBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.richTextBox1_KeyDown);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.label1.Location = new System.Drawing.Point(9, 3);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(116, 20);
+            this.label1.TabIndex = 63;
+            this.label1.Text = "Chat Message";
+            // 
+            // mainPanel
+            // 
+            this.mainPanel.Controls.Add(this.flowLayoutPanel1);
+            this.mainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mainPanel.Location = new System.Drawing.Point(0, 69);
+            this.mainPanel.Name = "mainPanel";
+            this.mainPanel.Size = new System.Drawing.Size(813, 168);
+            this.mainPanel.TabIndex = 2;
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.AutoScroll = true;
+            this.flowLayoutPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.BottomUp;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(813, 168);
+            this.flowLayoutPanel1.TabIndex = 0;
+            this.flowLayoutPanel1.WrapContents = false;
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 1;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // chatRoom
             // 
@@ -193,10 +193,10 @@
             this.Load += new System.EventHandler(this.chatRoom_Load);
             this.headerPanel.ResumeLayout(false);
             this.headerPanel.PerformLayout();
+            this.panel1.ResumeLayout(false);
             this.footerPanel.ResumeLayout(false);
             this.footerPanel.PerformLayout();
             this.mainPanel.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

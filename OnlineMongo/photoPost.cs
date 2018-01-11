@@ -65,7 +65,7 @@ namespace OnlineMongo
         {
             DateTime pst_date = DateTime.Today;
             MySqlConnection con = new MySqlConnection();
-            con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+            con.ConnectionString = login.dbConnection;
             string userId = "select * from users where username = '" + login.txt.Text + "'";
 
 

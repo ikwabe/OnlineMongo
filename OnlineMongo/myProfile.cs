@@ -35,7 +35,7 @@ namespace OnlineMongo
         {
 
             MySqlConnection con = new MySqlConnection();
-            con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+            con.ConnectionString = login.dbConnection;
             string pic = "update users set prfpic = @prfpic where user_id = '" + login.user_id + "'";
             try
             {
@@ -84,7 +84,7 @@ namespace OnlineMongo
         {
             MySqlDataAdapter ad;
             MySqlConnection con = new MySqlConnection();
-            con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+            con.ConnectionString = login.dbConnection;
             string detail = "select * from users where user_id = '" + login.user_id + "'";
             MySqlCommand com = new MySqlCommand(detail, con);
 

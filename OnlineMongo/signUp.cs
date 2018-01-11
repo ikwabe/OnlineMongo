@@ -54,7 +54,7 @@ namespace OnlineMongo
             //sign up button
 
             MySqlConnection con = new MySqlConnection();
-            con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+            con.ConnectionString = login.dbConnection;
             string query = "insert into users(fname,lname,email,password,username,pin) values ('"+ fname.Text +"', '"+ lname.Text +"', '"+ email.Text +"','"+ pwd.Text +"','"+ username.Text + "','" + pinLb.Text + "')";
             string chek = "select email from users where email = '"+ email.Text +"'";
             string chek2 = "select username from users where username = '"+ username.Text +"'";

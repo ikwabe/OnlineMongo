@@ -38,7 +38,7 @@ namespace OnlineMongo
         {
             MySqlDataAdapter ad;
             MySqlConnection con = new MySqlConnection();
-            con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+            con.ConnectionString = login.dbConnection;
             string detail = "select * from users where username = '" + login.txt.Text + "'";
 
             MySqlCommand com = new MySqlCommand(detail, con);
@@ -137,7 +137,7 @@ namespace OnlineMongo
 
             MySqlDataAdapter ad;
             MySqlConnection con = new MySqlConnection();
-            con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+            con.ConnectionString = login.dbConnection;
             string detail = "select * from trash where sentmail_id = '" + selectedMail + "' ";
             MySqlCommand com = new MySqlCommand(detail, con);
             try
@@ -188,7 +188,7 @@ namespace OnlineMongo
         private void deleteBtn_Click(object sender, EventArgs e)
         {
             MySqlConnection con = new MySqlConnection();
-            con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+            con.ConnectionString = login.dbConnection;
             string delete = "delete from trash where sentmail_id = '" + selectedMail + "' ";
             MySqlCommand com1 = new MySqlCommand(delete, con);
             MySqlDataReader reader;

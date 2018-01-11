@@ -31,7 +31,7 @@ namespace OnlineMongo
         {
             MySqlDataAdapter ad;
             MySqlConnection con = new MySqlConnection();
-            con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+            con.ConnectionString = login.dbConnection;
             string detail = "select * from users where user_id = '" + friendtb.user_id + "'";
             MySqlCommand com = new MySqlCommand(detail, con);
 
@@ -86,7 +86,7 @@ namespace OnlineMongo
         {
             MySqlDataAdapter ad;
             MySqlConnection con = new MySqlConnection();
-            con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+            con.ConnectionString = login.dbConnection;
             string detail = "select * from users where user_id = '" + postb.user_id + "'";
             MySqlCommand com = new MySqlCommand(detail, con);
 

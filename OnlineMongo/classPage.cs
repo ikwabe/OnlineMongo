@@ -35,11 +35,11 @@ namespace OnlineMongo
         private static bool Bcheck = false;
         private static bool Lcheck = false;
         private static bool Vcheck = false;
-
+        string currentComputerUserName = Environment.UserName;
         private void loadBooks()
         {
             MySqlConnection con = new MySqlConnection();
-            con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+            con.ConnectionString = login.dbConnection;
             string readBooks = "select * from myclass where user_id = '"+ login.user_id +"'";
             MySqlDataAdapter da;
             MySqlCommand com = new MySqlCommand(readBooks, con);
@@ -73,16 +73,8 @@ namespace OnlineMongo
                     
                     
 
-                    ////seperator for the books
-                    //BunifuSeparator spr = new BunifuSeparator();
-                    //spr.LineThickness = 1;
-                    //spr.Height = 1;
-                    //spr.Width = 239;
-                    //spr.Anchor = AnchorStyles.Right;
-                    //spr.LineColor = Color.FromArgb(20, 105, 105, 105);
-                    //spr.Transparency = 25;
                     flowLayoutPanel1.Controls.Add(book);
-                    //flowLayoutPanel1.Controls.Add(spr);
+                   
 
                 }
 
@@ -142,7 +134,7 @@ namespace OnlineMongo
         private void loadLectures()
         {
             MySqlConnection con = new MySqlConnection();
-            con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+            con.ConnectionString = login.dbConnection;
             string readBooks = "select * from lecture where user_id = '" + login.user_id + "'";
             MySqlDataAdapter da;
             MySqlCommand com = new MySqlCommand(readBooks, con);
@@ -176,16 +168,8 @@ namespace OnlineMongo
 
 
 
-                    ////seperator for the books
-                    //BunifuSeparator spr = new BunifuSeparator();
-                    //spr.LineThickness = 1;
-                    //spr.Height = 1;
-                    //spr.Width = 239;
-                    //spr.Anchor = AnchorStyles.Right;
-                    //spr.LineColor = Color.FromArgb(20, 105, 105, 105);
-                    //spr.Transparency = 25;
                     flowLayoutPanel2.Controls.Add(lecture);
-                    //flowLayoutPanel1.Controls.Add(spr);
+                    
 
                 }
 
@@ -202,7 +186,7 @@ namespace OnlineMongo
         private void loadVideos()
         {
             MySqlConnection con = new MySqlConnection();
-            con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+            con.ConnectionString = login.dbConnection;
             string readBooks = "select * from video where user_id = '" + login.user_id + "'";
             MySqlDataAdapter da;
             MySqlCommand com = new MySqlCommand(readBooks, con);
@@ -236,16 +220,9 @@ namespace OnlineMongo
 
 
 
-                    ////seperator for the books
-                    //BunifuSeparator spr = new BunifuSeparator();
-                    //spr.LineThickness = 1;
-                    //spr.Height = 1;
-                    //spr.Width = 239;
-                    //spr.Anchor = AnchorStyles.Right;
-                    //spr.LineColor = Color.FromArgb(20, 105, 105, 105);
-                    //spr.Transparency = 25;
+                   
                     flowLayoutPanel3.Controls.Add(video);
-                    //flowLayoutPanel1.Controls.Add(spr);
+                   
 
                 }
 
@@ -262,8 +239,8 @@ namespace OnlineMongo
         private void addBook_Click(object sender, EventArgs e)
         {
             MySqlConnection con = new MySqlConnection();
-            con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
-            
+            con.ConnectionString = login.dbConnection;
+
             bookDialogBox.Filter = "(*.pdf)|*.PDF";
             if (bookDialogBox.ShowDialog() == DialogResult.OK)
             {
@@ -356,7 +333,7 @@ namespace OnlineMongo
         {
 
             MySqlConnection con = new MySqlConnection();
-            con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+            con.ConnectionString = login.dbConnection;
 
             bookDialogBox.Filter = "(*.pdf)|*.PDF";
             if (bookDialogBox.ShowDialog() == DialogResult.OK)
@@ -432,28 +409,14 @@ namespace OnlineMongo
         private void addVideo_Click(object sender, EventArgs e)
         {
             MySqlConnection con = new MySqlConnection();
-            con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
-            //string fileName;
-            //string sourcePath;
-            //string targetPath;
-            bookDialogBox.Filter = "(*.mp4;*.mov;*.mkv;*.avi;*.wmv)|*.MP4;*.MOV;*.MKV;*.AVI;*.WMV";
+            con.ConnectionString = login.dbConnection;
+
+            bookDialogBox.Filter = "(*.mp4;*.mov;*.avi;*.wmv)|*.MP4;*.MOV;*.AVI;*.WMV";
             if (bookDialogBox.ShowDialog() == DialogResult.OK)
             {
-                ////the source of the coppied video
-                //sourcePath = @bookDialogBox.FileName;
-
-                ////the targetPath
-                //targetPath = @"C:\Users\Shadrack Ikwabe\AppData\Roaming\UdoRead\Videos";
-
-                ////the filename
-                //fileName = bookDialogBox.SafeFileName;
-
-                ////manipulating file and directory path
-                //string sourceFile = Path.Combine(sourcePath, fileName);
-                //string destination = Path.Combine(targetPath, fileName);
-
-                //copying the file to the folder
-                File.Copy(@bookDialogBox.FileName, @"C:\Users\Shadrack Ikwabe\AppData\Roaming\UdoRead\Videos\"+ bookDialogBox.SafeFileName + "",true);
+               
+                
+                File.Copy(@bookDialogBox.FileName, "C:/Users/"+currentComputerUserName+"/AppData/Roaming/UdoRead/Videos/" + bookDialogBox.SafeFileName + "",true);
                 try
                 {
                   
@@ -516,7 +479,7 @@ namespace OnlineMongo
         private void deleteVideo_Click(object sender, EventArgs e)
         {
             MySqlConnection con = new MySqlConnection();
-            con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+            con.ConnectionString = login.dbConnection;
             string getVideoName = "select * from video where video_id = '" + vid_id + "'";
             string delete = "delete from video where video_id = '" + vid_id + "'";
             MySqlDataAdapter da;
@@ -535,11 +498,11 @@ namespace OnlineMongo
 
                     //taking the file name to be deleted
                     string filename = table.Rows[0][2].ToString();
-
+                   
                     //if the file exist in the direcory deletion perfomed
-                    if (File.Exists(@"C:\Users\Shadrack Ikwabe\AppData\Roaming\UdoRead\Videos\" + table.Rows[0][2].ToString() + ""))
+                    if (File.Exists("C:/Users/"+currentComputerUserName+"/AppData/Roaming/UdoRead/Videos/" + table.Rows[0][2].ToString() + ""))
                     {
-                        File.Delete(@"C:\Users\Shadrack Ikwabe\AppData\Roaming\UdoRead\Videos\" + table.Rows[0][2].ToString() + "");
+                        File.Delete("C:/Users/" + currentComputerUserName + "/AppData/Roaming/UdoRead/Videos/" + table.Rows[0][2].ToString() + "");
                         com1.ExecuteNonQuery();
                         loadVideoTimer.Start();
                     }
@@ -575,7 +538,7 @@ namespace OnlineMongo
             {
                 MySqlDataAdapter ad;
                 MySqlConnection con = new MySqlConnection();
-                con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+                con.ConnectionString = login.dbConnection;
                 string bookdetail = "select * from video where video_id = '" + vid_id + "'";
                 MySqlCommand com = new MySqlCommand(bookdetail, con);
 
@@ -607,7 +570,8 @@ namespace OnlineMongo
                             hideVideoBtn.Visible = true;
                             videogroupBox.Visible = false;
                             videoPlayer.BringToFront();
-                            videoPlayer.URL = @"C:\Users\Shadrack Ikwabe\AppData\Roaming\UdoRead\Videos\" + table.Rows[0][2].ToString() + "";
+                            
+                            videoPlayer.URL = "C:/Users/" + currentComputerUserName + "/AppData/Roaming/UdoRead/Videos/" + table.Rows[0][2].ToString() + "";
                             videoPlayer.Ctlcontrols.play();
                         }
                         catch
@@ -691,7 +655,7 @@ namespace OnlineMongo
             {
                 MySqlDataAdapter ad;
                 MySqlConnection con = new MySqlConnection();
-                con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+                con.ConnectionString = login.dbConnection;
                 string bookdetail = "select * from myclass where book_id = '" + book_id + "'";
                 MySqlCommand com = new MySqlCommand(bookdetail, con);
 
@@ -710,14 +674,14 @@ namespace OnlineMongo
                         {
                             byte[] book = (byte[])table.Rows[0][2];
 
-                            //wrinting a Pdf File
-                            using (Stream file = File.Create("C:/Users/Shadrack Ikwabe/AppData/Roaming/UdoRead/Books/book.pdf"))
+                            //wrinting a Pdf File C:/Users/"+currentComputerUserName+"/AppData/Roaming/UdoRead/Videos/
+                            using (Stream file = File.Create("C:/Users/" + currentComputerUserName + "/AppData/Roaming/UdoRead/Books/book.pdf"))
                             {
                                 file.Write(book, 0, book.Length);
                             }
 
                             //opening the pdf file
-                            rd.axAcroPDF1.src = "C:/Users/Shadrack Ikwabe/AppData/Roaming/UdoRead/Books/book.pdf";
+                            rd.axAcroPDF1.src = "C:/Users/" + currentComputerUserName + "/AppData/Roaming/UdoRead/Books/book.pdf";
                             rd.Show();
                         }
                         catch
@@ -771,7 +735,7 @@ namespace OnlineMongo
             {
                 MySqlDataAdapter ad;
                 MySqlConnection con = new MySqlConnection();
-                con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+                con.ConnectionString = login.dbConnection;
                 string bookdetail = "select * from lecture where lecture_id = '" + lect_id + "'";
                 MySqlCommand com = new MySqlCommand(bookdetail, con);
 
@@ -791,13 +755,13 @@ namespace OnlineMongo
                             byte[] book = (byte[])table.Rows[0][2];
 
                             //wrinting a Pdf File
-                            using (Stream file = File.Create("C:/Users/Shadrack Ikwabe/AppData/Roaming/UdoRead/Lectures/Lecture.pdf"))
+                            using (Stream file = File.Create("C:/Users/" + currentComputerUserName + "/AppData/Roaming/UdoRead/Lectures/Lecture.pdf"))
                             {
                                 file.Write(book, 0, book.Length);
                             }
 
                             //opening the pdf file
-                            rd.axAcroPDF1.src = "C:/Users/Shadrack Ikwabe/AppData/Roaming/UdoRead/Lectures/Lecture.pdf";
+                            rd.axAcroPDF1.src = "C:/Users/" + currentComputerUserName + "/AppData/Roaming/UdoRead/Lectures/Lecture.pdf";
                             rd.Show();
                         }
                         catch
@@ -837,7 +801,7 @@ namespace OnlineMongo
             Boolean check = true;
 
             MySqlConnection con = new MySqlConnection();
-            con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+            con.ConnectionString = login.dbConnection;
 
             //getting the computer user name for identifying the app directory location
             string currentComputerUserrName = Environment.UserName;
@@ -937,7 +901,7 @@ namespace OnlineMongo
             Boolean check = true;
 
             MySqlConnection con = new MySqlConnection();
-            con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+            con.ConnectionString = login.dbConnection;
 
             //getting the computer user name for identifying the app directory location
             string currentComputerUserrName = Environment.UserName;
@@ -1023,7 +987,7 @@ namespace OnlineMongo
             Boolean check = true;
 
             MySqlConnection con = new MySqlConnection();
-            con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+            con.ConnectionString = login.dbConnection;
 
             //getting the computer user name for identifying the app directory location
             string currentComputerUserrName = Environment.UserName;

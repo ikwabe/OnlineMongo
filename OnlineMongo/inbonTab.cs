@@ -39,7 +39,7 @@ namespace OnlineMongo
         {
             MySqlDataAdapter ad;
             MySqlConnection con = new MySqlConnection();
-            con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+            con.ConnectionString = login.dbConnection;
             string detail = "select * from users where username = '" + login.txt.Text + "'";
 
             MySqlCommand com = new MySqlCommand(detail, con);
@@ -94,7 +94,7 @@ namespace OnlineMongo
                         BunifuSeparator spr = new BunifuSeparator();
                         spr.LineThickness = 1;
                         spr.Height = 1;
-                        spr.Anchor = AnchorStyles.Right;
+                        spr.Anchor = (AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right);
                         spr.LineColor = Color.FromArgb(20, 105, 105, 105);
                         spr.Transparency = 25;
                         //adding the subjects to the pannel
@@ -122,7 +122,7 @@ namespace OnlineMongo
                         BunifuSeparator spr = new BunifuSeparator();
                         spr.LineThickness = 1;
                         spr.Height = 1;
-                        spr.Anchor = AnchorStyles.Right;
+                        spr.Anchor = (AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right);
                         spr.LineColor = Color.FromArgb(20, 105, 105, 105);
                         spr.Transparency = 25;
                         //adding the subjects to the pannel
@@ -167,7 +167,7 @@ namespace OnlineMongo
 
             MySqlDataAdapter ad;
             MySqlConnection con = new MySqlConnection();
-            con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+            con.ConnectionString = login.dbConnection;
             string detail = "select * from sentmail where sentmail_id = '" + selectedMail + "' ";
 
             //the string to update the opened email
@@ -263,7 +263,7 @@ namespace OnlineMongo
         {
             replyBtn.Visible = false;
             MySqlConnection con = new MySqlConnection();
-            con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+            con.ConnectionString = login.dbConnection;
             string insert = "insert into trash select * from sentmail where sentmail_id = '" + selectedMail + "'";
             string delete = "delete from sentmail where sentmail_id = '" + selectedMail + "' ";
 

@@ -201,7 +201,7 @@ namespace OnlineMongo
             Boolean check = true;
 
             MySqlConnection con = new MySqlConnection();
-            con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+            con.ConnectionString = login.dbConnection;
 
             //getting the computer user name for identifying the app directory location
             string currentComputerUserrName = Environment.UserName;

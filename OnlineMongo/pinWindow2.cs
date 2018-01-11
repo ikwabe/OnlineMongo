@@ -29,7 +29,7 @@ namespace OnlineMongo
             if (e.KeyCode == Keys.Enter)
             {
                 MySqlConnection con = new MySqlConnection();
-                con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+                con.ConnectionString = login.dbConnection;
                 string schPIN = "select pin from users where  username = '" + login.txt.Text + "'";
                 MySqlCommand com = new MySqlCommand(schPIN, con);
                 MySqlDataReader reader;

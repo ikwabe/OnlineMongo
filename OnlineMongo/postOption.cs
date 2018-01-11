@@ -37,7 +37,7 @@ namespace OnlineMongo
             //takin the image from the database
             MySqlDataAdapter ad;
             MySqlConnection con = new MySqlConnection();
-            con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+            con.ConnectionString = login.dbConnection;
             string detail = "select * from post where post_id = '" + postb.photName + "'";
             MySqlCommand com = new MySqlCommand(detail, con);
 
@@ -45,9 +45,9 @@ namespace OnlineMongo
             {
 
                 con.Open();
-                // MySqlDataReader reader;
+               
                 ad = new MySqlDataAdapter(com);
-                // reader = com.ExecuteReader();
+               
                 DataTable table = new DataTable();
                 ad.Fill(table);
                 try

@@ -41,7 +41,7 @@ namespace OnlineMongo
         {
 
             MySqlConnection con = new MySqlConnection();
-            con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+            con.ConnectionString = login.dbConnection;
             string userId = "select * from users where username = '" + login.txt.Text + "'";
             MySqlDataAdapter ad;
 
@@ -142,7 +142,7 @@ namespace OnlineMongo
         {
             DateTime img_date = DateTime.Today;
             MySqlConnection con = new MySqlConnection();
-            con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+            con.ConnectionString = login.dbConnection;
             string userId = "select * from users where username = '" + login.txt.Text + "'";
 
            

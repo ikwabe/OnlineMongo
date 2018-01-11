@@ -32,7 +32,7 @@ namespace OnlineMongo
         private void emailCheck()
         {
             MySqlConnection con = new MySqlConnection();
-            con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+            con.ConnectionString = login.dbConnection;
 
             string emails = "select email  from users where email = '" + emailTxt.Text +"'";
             MySqlDataReader ad;

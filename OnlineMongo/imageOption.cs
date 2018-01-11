@@ -42,7 +42,7 @@ namespace OnlineMongo
         {
             
             MySqlConnection con = new MySqlConnection();
-            con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+            con.ConnectionString = login.dbConnection;
             string delete = "delete from images where img_id = '" + pic.photName + "'";
             MySqlCommand com = new MySqlCommand(delete, con);
             MySqlDataReader rd;

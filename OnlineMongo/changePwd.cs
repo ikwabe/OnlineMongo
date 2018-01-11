@@ -37,7 +37,7 @@ namespace OnlineMongo
         private void changePwdBtn_Click(object sender, EventArgs e)
         {
             MySqlConnection con = new MySqlConnection();
-            con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+            con.ConnectionString = login.dbConnection;
 
             string query = "select email,password from users where  email = '" + email.Text + "' and password = '" + oldPwd.Text + "'";
             string update = "update  users set password = '" + newPwd.Text + "' where email = '" + email.Text + "'";

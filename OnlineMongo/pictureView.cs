@@ -25,7 +25,7 @@ namespace OnlineMongo
             //takin the image from the database
             MySqlDataAdapter ad;
             MySqlConnection con = new MySqlConnection();
-            con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+            con.ConnectionString = login.dbConnection;
             string detail = "select * from post where post_id = '" + postb.photName + "'";
             MySqlCommand com = new MySqlCommand(detail, con);
 
@@ -64,7 +64,7 @@ namespace OnlineMongo
             //takin the image from the database
             MySqlDataAdapter ad;
             MySqlConnection con = new MySqlConnection();
-            con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+            con.ConnectionString = login.dbConnection;
             string detail = "select * from images where img_id = '" + pic.photName + "'";
             MySqlCommand com = new MySqlCommand(detail, con);
 
@@ -107,7 +107,7 @@ namespace OnlineMongo
             //takin the image from the database
             MySqlDataAdapter ad;
             MySqlConnection con = new MySqlConnection();
-            con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+            con.ConnectionString = login.dbConnection;
             string detail = "select * from users where user_id = '" + login.user_id + "'";
             MySqlCommand com = new MySqlCommand(detail, con);
 
@@ -152,7 +152,7 @@ namespace OnlineMongo
             //takin the image from the database
             MySqlDataAdapter ad;
             MySqlConnection con = new MySqlConnection();
-            con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+            con.ConnectionString = login.dbConnection;
             
             if (postb.chek == true)
             {

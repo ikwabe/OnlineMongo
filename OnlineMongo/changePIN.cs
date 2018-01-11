@@ -28,7 +28,7 @@ namespace OnlineMongo
         {
             
             MySqlConnection con = new MySqlConnection();
-            con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+            con.ConnectionString = login.dbConnection;
             string update = "update  users set pin = '" + pinTextBox1.Text + "' where  username = '" + login.txt.Text + "'";
             MySqlCommand com1 = new MySqlCommand(update, con);
             MySqlDataReader reader;

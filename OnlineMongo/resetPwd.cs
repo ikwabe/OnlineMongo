@@ -64,7 +64,7 @@ namespace OnlineMongo
         {
            
             MySqlConnection con = new MySqlConnection();
-            con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+            con.ConnectionString = login.dbConnection;
 
              string email = "select email, secword,secqn from users where email = '"+ verifyEmail.email +"'";
             MySqlDataReader ad;
@@ -174,7 +174,7 @@ namespace OnlineMongo
         private void resetPwdBtn_Click(object sender, EventArgs e)
         {
             MySqlConnection con = new MySqlConnection();
-            con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+            con.ConnectionString = login.dbConnection;
 
             string update = "update users set password = '"+"UdoRead1234" +"' where email = '"+ email.Text +"'";
 

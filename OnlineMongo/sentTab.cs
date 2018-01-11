@@ -34,7 +34,7 @@ namespace OnlineMongo
         {
             MySqlDataAdapter ad;
             MySqlConnection con = new MySqlConnection();
-            con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+            con.ConnectionString = login.dbConnection;
             string detail = "select * from users where username = '" + login.txt.Text + "'";
 
             MySqlCommand com = new MySqlCommand(detail, con);
@@ -153,7 +153,7 @@ namespace OnlineMongo
 
             MySqlDataAdapter ad;
             MySqlConnection con = new MySqlConnection();
-            con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+            con.ConnectionString = login.dbConnection;
             string detail = "select * from sentmail where sentmail_id = '" + selectedMail + "' ";
 
             //the string to update the opened email

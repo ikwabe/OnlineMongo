@@ -21,6 +21,7 @@ namespace OnlineMongo
             InitializeComponent();
         }
 
+        public static string dbConnection = "server = localhost; user = root; password = ikwabe04; database = udoread;";
         private void bunifuImageButton1_Click(object sender, EventArgs e)
         {
            if(MessageBox.Show("Are you sure you want to close?","Close",MessageBoxButtons.YesNo) == DialogResult.Yes){
@@ -72,7 +73,7 @@ namespace OnlineMongo
         private void loginBtn_Click(object sender, EventArgs e)
         {
             MySqlConnection con = new MySqlConnection();
-            con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+            con.ConnectionString = dbConnection;
             string signIn = "select username,password from users where username = '" + txt.Text + "' and password = '" + pwd.Text + "'";
             string chekSecWord = "select secword from users where username = '" + txt.Text + "' and password = '" + pwd.Text + "'";
             string usertake = "select * from users where username = '" + txt.Text + "' and password = '" + pwd.Text + "'";
@@ -153,7 +154,7 @@ namespace OnlineMongo
             if(e.KeyCode == Keys.Enter)
             {
                 MySqlConnection con = new MySqlConnection();
-                con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+                con.ConnectionString = dbConnection;
                 string signIn = "select username,password from users where username = '" + txt.Text + "' and password = '" + pwd.Text + "'";
                 string chekSecWord = "select secword from users where username = '" + txt.Text + "' and password = '" + pwd.Text + "'";
                 string usertake = "select * from users where username = '" + txt.Text + "' and password = '" + pwd.Text + "'";

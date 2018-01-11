@@ -33,11 +33,12 @@ namespace OnlineMongo
         }
         DateTime date;
         private string username;
-       
-             private void loadChats()
+        int changeUsernameColor1 = 0;
+        int changeUsernameColor2 = 0;
+        private void loadChats()
         {
             MySqlConnection con = new MySqlConnection();
-            con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+            con.ConnectionString = login.dbConnection;
             MySqlDataAdapter ad;
 
             //query to check if the chat is added at instant
@@ -54,7 +55,66 @@ namespace OnlineMongo
                 uname = new Label();
                 uname.Name = table1.Rows[j][0].ToString();
                 uname.AutoSize = true;
-                uname.ForeColor = Color.DarkGreen;
+                if(changeUsernameColor1 == 0)
+                {
+                    uname.ForeColor = Color.Indigo;
+                    changeUsernameColor1++;
+                }
+                else if (changeUsernameColor1 == 1)
+                {
+                    uname.ForeColor = Color.Green;
+                    changeUsernameColor1++;
+                }
+                else if (changeUsernameColor1 == 2)
+                {
+                    uname.ForeColor = Color.Yellow;
+                    changeUsernameColor1++;
+                }
+                else if (changeUsernameColor1 == 3)
+                {
+                    uname.ForeColor = Color.Aqua;
+                    changeUsernameColor1++;
+                }
+                else if (changeUsernameColor1 == 4)
+                {
+                    uname.ForeColor = Color.Brown;
+                    changeUsernameColor1++;
+                }
+                else if (changeUsernameColor1 == 5)
+                {
+                    uname.ForeColor = Color.FromArgb(30,0,40);
+                    changeUsernameColor1++;
+                }
+                else if (changeUsernameColor1 == 6)
+                {
+                    uname.ForeColor = Color.Chocolate;
+                    changeUsernameColor1++;
+                }
+                else if (changeUsernameColor1 == 7)
+                {
+                    uname.ForeColor = Color.LightGreen;
+                    changeUsernameColor1++;
+                }
+                else if (changeUsernameColor1 == 8)
+                {
+                    uname.ForeColor = Color.LightPink;
+                    changeUsernameColor1++;
+                }
+                else if (changeUsernameColor1 == 9)
+                {
+                    uname.ForeColor = Color.LightYellow;
+                    changeUsernameColor1++;
+                }
+                else if (changeUsernameColor1 == 10)
+                {
+                    uname.ForeColor = Color.Magenta;
+                    changeUsernameColor1++;
+                }
+                else
+                {
+                    changeUsernameColor1 = 0;
+
+                }
                 uname.Font = new Font("Cambria", 12,FontStyle.Bold);
                 uname.Text = username ;
 
@@ -62,22 +122,25 @@ namespace OnlineMongo
                 Label chatSms = new Label();
                 chatSms.Name = table1.Rows[j][0].ToString();
                 chatSms.AutoSize = true;
-                chatSms.ForeColor = Color.Black;
+                chatSms.ForeColor = Color.LightGray;
                 chatSms.Font = new Font("Cambria", 12);
                 chatSms.Text = table1.Rows[j][2].ToString();
 
                 //separater
                 BunifuSeparator spr = new BunifuSeparator();
-                spr.LineThickness = 1;
+                spr.LineThickness = 2;
                 spr.Height = 1;
-                spr.Anchor = AnchorStyles.Right;
-                spr.LineColor = Color.FromArgb(20, 105, 105, 105);
-                spr.Transparency = 25;
+                spr.Anchor = (AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right);
+                spr.LineColor = Color.DarkBlue;
+                spr.Transparency = 30;
 
                 //adding user name to the panel
+           
                 flowLayoutPanel1.Controls.Add(chatSms);
                 flowLayoutPanel1.Controls.Add(uname);
                 flowLayoutPanel1.Controls.Add(spr);
+
+               
 
             }
             
@@ -88,11 +151,11 @@ namespace OnlineMongo
         private void todayChats()
         {
             MySqlConnection con = new MySqlConnection();
-            con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+            con.ConnectionString = login.dbConnection;
             MySqlDataAdapter ad;
             date = DateTime.Today;
             //query to check if the post is added at instant
-            string chat = "SELECT * FROM chats where date = '"+date.ToShortDateString()+"' order by chat_id DESC";
+            string chat = "SELECT * FROM chats where date = '"+date.ToShortDateString()+"'";
            
             MySqlCommand com = new MySqlCommand(chat, con);
             DataTable table1 = new DataTable();
@@ -110,7 +173,7 @@ namespace OnlineMongo
                     Label chatSms = new Label();
                     chatSms.Name = table1.Rows[j][0].ToString();
                     chatSms.AutoSize = true;
-                    chatSms.ForeColor = Color.Black;
+                    chatSms.ForeColor = Color.LightGray;
                     chatSms.Font = new Font("Cambria", 12);
                     chatSms.Text = table1.Rows[j][2].ToString();
 
@@ -119,22 +182,84 @@ namespace OnlineMongo
                     uname = new Label();
                     uname.Name = table1.Rows[j][0].ToString();
                     uname.AutoSize = true;
-                    uname.ForeColor = Color.DarkGreen;
+                    if (changeUsernameColor2 == 0)
+                    {
+                        uname.ForeColor = Color.Indigo;
+                        changeUsernameColor2++;
+                    }
+                    else if (changeUsernameColor2 == 1)
+                    {
+                        uname.ForeColor = Color.Green;
+                        changeUsernameColor2++;
+                    }
+                    else if (changeUsernameColor2 == 2)
+                    {
+                        uname.ForeColor = Color.Yellow;
+                        changeUsernameColor2++;
+                    }
+                    else if (changeUsernameColor2 == 3)
+                    {
+                        uname.ForeColor = Color.Aqua;
+                        changeUsernameColor2++;
+                    }
+                    else if (changeUsernameColor2 == 4)
+                    {
+                        uname.ForeColor = Color.Brown;
+                        changeUsernameColor2++;
+                    }
+                    else if (changeUsernameColor2 == 5)
+                    {
+                        uname.ForeColor = Color.FromArgb(30, 0, 40);
+                        changeUsernameColor2++;
+                    }
+                    else if (changeUsernameColor2 == 6)
+                    {
+                        uname.ForeColor = Color.Chocolate;
+                        changeUsernameColor2++;
+                    }
+                    else if (changeUsernameColor2 == 7)
+                    {
+                        uname.ForeColor = Color.LightGreen;
+                        changeUsernameColor2++;
+                    }
+                    else if (changeUsernameColor2 == 8)
+                    {
+                        uname.ForeColor = Color.LightPink;
+                        changeUsernameColor2++;
+                    }
+                    else if (changeUsernameColor2 == 9)
+                    {
+                        uname.ForeColor = Color.LightYellow;
+                        changeUsernameColor2++;
+                    }
+                    else if (changeUsernameColor2 == 10)
+                    {
+                        uname.ForeColor = Color.Magenta;
+                        changeUsernameColor2++;
+                    }
+                    else
+                    {
+                        changeUsernameColor2 = 0;
+
+                    }
                     uname.Font = new Font("Cambria", 12, FontStyle.Bold);
                     uname.Text = table1.Rows[j][4].ToString();
 
                     //separater
                     BunifuSeparator spr = new BunifuSeparator();
-                    spr.LineThickness = 1;
-                    spr.Height = 1;
-                    spr.Anchor = AnchorStyles.Right;
-                    spr.LineColor = Color.FromArgb(20, 105, 105, 105);
-                    spr.Transparency = 25;
+                    spr.LineThickness = 3;
+                    spr.Height = 2;
+                    spr.Anchor = (AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right);
+                    spr.LineColor = Color.DarkBlue;
+                    spr.Transparency = 30;
 
                     //adding user name to the panel
+                    
                     flowLayoutPanel1.Controls.Add(chatSms);
                     flowLayoutPanel1.Controls.Add(uname);
                     flowLayoutPanel1.Controls.Add(spr);
+
+                  
 
                 }
                 ad.Dispose();
@@ -164,7 +289,7 @@ namespace OnlineMongo
         private void richTextBox1_KeyDown(object sender, KeyEventArgs e)
         {
             MySqlConnection con = new MySqlConnection();
-            con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+            con.ConnectionString = login.dbConnection;
             if (e.KeyCode == Keys.Enter)
             {
                 date = DateTime.Today;

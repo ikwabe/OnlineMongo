@@ -21,7 +21,9 @@ namespace OnlineMongo
 
         //for message noticification
         public static bool sound = false;
-     
+        string currentComputerUserName = Environment.UserName;
+        //a function to download the tone from the database
+       
         private void mnBtn_Click(object sender, EventArgs e)
         {
            
@@ -312,8 +314,6 @@ namespace OnlineMongo
             //maximize the window
             maximize();
             emailNumberLabel.Visible = true;
-           
-
 
             //creating Directory for the app Data.
             createDirectory();
@@ -737,7 +737,7 @@ namespace OnlineMongo
         {
             MySqlDataAdapter ad;
             MySqlConnection con = new MySqlConnection();
-            con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+            con.ConnectionString = login.dbConnection;
             string detail = "select * from users where username = '" + login.txt.Text + "'";
 
             MySqlCommand com = new MySqlCommand(detail, con);
@@ -840,12 +840,14 @@ namespace OnlineMongo
             }
         }
 
+
         //a timer for playing new  message sound
         private void soundTimer_Tick(object sender, EventArgs e)
         {
-            if(sound == true)
+           
+            if (sound == true)
             {
-                System.Media.SoundPlayer player = new System.Media.SoundPlayer(@"C:\Users\Shadrack Ikwabe\AppData\Roaming\UdoRead\Ring Tone\tone.wav");
+                System.Media.SoundPlayer player = new System.Media.SoundPlayer(Properties.Resources.tone);
                 player.Play();
                 sound = false;
             }

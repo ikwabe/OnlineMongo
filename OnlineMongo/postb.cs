@@ -62,7 +62,7 @@ namespace OnlineMongo
         private void showFriend()
         {
             MySqlConnection con = new MySqlConnection();
-            con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+            con.ConnectionString = login.dbConnection;
             MySqlDataAdapter ad;
 
             //reading data query
@@ -277,7 +277,7 @@ namespace OnlineMongo
         {
            
             MySqlConnection con = new MySqlConnection();
-            con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+            con.ConnectionString = login.dbConnection;
             MySqlDataAdapter ad;
 
             //reading data query
@@ -421,7 +421,7 @@ namespace OnlineMongo
         private void instLoadPost()
         {
             MySqlConnection con = new MySqlConnection();
-            con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+            con.ConnectionString = login.dbConnection;
             MySqlDataAdapter ad;
 
             //query to check if the post is added at instant
@@ -539,7 +539,7 @@ namespace OnlineMongo
         private void loadPost()
         {
             MySqlConnection con = new MySqlConnection();
-            con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+            con.ConnectionString = login.dbConnection;
             MySqlDataAdapter ad;
 
             //reading data query
@@ -678,7 +678,7 @@ namespace OnlineMongo
         {
             DateTime date = DateTime.Now;
             MySqlConnection con = new MySqlConnection();
-            con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+            con.ConnectionString = login.dbConnection;
             MySqlDataAdapter ad;
 
             try
@@ -760,7 +760,7 @@ namespace OnlineMongo
             var button = sender as BunifuFlatButton;
             
             MySqlConnection con = new MySqlConnection();
-            con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+            con.ConnectionString = login.dbConnection;
             MySqlDataAdapter ad;
 
             //reading data query
@@ -833,7 +833,7 @@ namespace OnlineMongo
             {
                 int check1;
                 MySqlConnection con = new MySqlConnection();
-                con.ConnectionString = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+                con.ConnectionString = login.dbConnection;
                 MySqlDataAdapter ad;
 
                 //reading data query
