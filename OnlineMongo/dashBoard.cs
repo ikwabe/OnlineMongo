@@ -21,6 +21,8 @@ namespace OnlineMongo
 
         //for message noticification
         public static bool sound = false;
+        //for item check
+        public static bool iCheck = false;
         string currentComputerUserName = Environment.UserName;
         //a function to download the tone from the database
        
@@ -304,12 +306,13 @@ namespace OnlineMongo
         }
         private void dashBoard_Load_1(object sender, EventArgs e)
         {
-            //view full menu size
+            
             
 
             //reyrieve new emails
             emailCheckTimer.Start();
             check = true;
+            iCheck = true;
             soundTimer.Start();
             //maximize the window
             maximize();
@@ -826,6 +829,48 @@ namespace OnlineMongo
             }
             con.Close();
         }
+        private void checkItems()
+        {
+            MySqlConnection con = new MySqlConnection();
+            con.ConnectionString = login.dbConnection;
+
+        }
+
+
+        private void loadItems()
+        {
+            MySqlConnection con = new MySqlConnection();
+            con.ConnectionString = login.dbConnection;
+            string load = "select * from sentitems where status = 'New'";
+            MySqlCommand com = new MySqlCommand(load, con);
+            MySqlDataAdapter da;
+            DataTable table = new DataTable();
+            try
+            {
+                con.Open();
+                //taking the items from the database
+                da = new MySqlDataAdapter(com);
+                da.Fill(table);
+                //checking if the new item exist
+                if(table.Rows.Count > 0)
+                {
+                    onlinePic.Visible = true;
+
+                }
+                else
+                {
+                    onlinePic.Visible = false;
+                }
+                da.Dispose();
+
+            }
+            catch(MySqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
+        }
+
 
         //reading the new emails
         private void emailCheckTimer_Tick(object sender, EventArgs e)
@@ -839,6 +884,16 @@ namespace OnlineMongo
             {
 
             }
+            if(iCheck == true)
+            {
+                loadItems();
+                iCheck = false;
+            }
+            else
+            {
+
+            }
+            
         }
 
 
@@ -863,6 +918,12 @@ namespace OnlineMongo
         {
             chatRoom cht = new chatRoom();
             cht.Show();
+        }
+
+        private void itemBtn_Click(object sender, EventArgs e)
+        {
+            items item = new items();
+            item.Show();
         }
     }
 }

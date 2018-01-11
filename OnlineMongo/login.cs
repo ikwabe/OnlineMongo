@@ -36,7 +36,7 @@ namespace OnlineMongo
             animate.Stop();
                 annimator.ShowSync(logopic);
         }
-
+        public static string user_email;
         private void login_Load(object sender, EventArgs e)
         {
             logopic.Visible = false;
@@ -116,6 +116,7 @@ namespace OnlineMongo
                             da = new MySqlDataAdapter(com2);
                             da.Fill(usertable);
                             user_id = usertable.Rows[0][0].ToString();
+                            user_email = usertable.Rows[0][3].ToString();
                             da.Dispose();
                             dashBoard dsb = new dashBoard();
                         dsb.Show();
@@ -127,6 +128,7 @@ namespace OnlineMongo
                             da = new MySqlDataAdapter(com2);
                             da.Fill(usertable);
                             user_id = usertable.Rows[0][0].ToString();
+                            user_email = usertable.Rows[0][3].ToString();
                             da.Dispose();
                             dashBoard dsb = new dashBoard();
                         dsb.Show();
@@ -196,6 +198,7 @@ namespace OnlineMongo
                                 da = new MySqlDataAdapter(com2);
                                 da.Fill(usertable);
                                 user_id = usertable.Rows[0][0].ToString();
+                                user_email = usertable.Rows[0][3].ToString();
                                 da.Dispose();
                                 dashBoard dsb = new dashBoard();
                                 dsb.Show();
@@ -207,6 +210,7 @@ namespace OnlineMongo
                                 da = new MySqlDataAdapter(com2);
                                 da.Fill(usertable);
                                 user_id = usertable.Rows[0][0].ToString();
+                                user_email = usertable.Rows[0][3].ToString();
                                 da.Dispose();
                                 dashBoard dsb = new dashBoard();
                                 dsb.Show();

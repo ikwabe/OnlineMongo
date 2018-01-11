@@ -59,18 +59,7 @@ namespace OnlineMongo
             try
             {
                 con.Open();
-                MySqlDataAdapter da;
-                DataTable table = new DataTable();
-                string emailTake = "select * from users where user_id = '" + login.user_id + "'";
-
-                MySqlCommand com1 = new MySqlCommand(emailTake, con);
-
-                //taking the login email
-                da = new MySqlDataAdapter(com1);
-                da.Fill(table);
-                da.Dispose();
-
-                string insert = "insert into sentitems(item,item_name,sender_email,receiver_email,date,status) values ( @item,'" + openFileDialog1.SafeFileName + "','" + table.Rows[0][3].ToString() + "','" + emailTxt.Text + "','" + date.ToShortDateString() + "','New')";
+                string insert = "insert into sentitems(item,item_name,sender_email,receiver_email,date,status) values ( @item,'" + openFileDialog1.SafeFileName + "','" + login.user_email + "','" + emailTxt.Text + "','" + date.ToShortDateString() + "','New')";
 
 
                 MySqlCommand com = new MySqlCommand(insert, con);
@@ -99,6 +88,8 @@ namespace OnlineMongo
                         emailTxt.Text = null;
                         textBox1.Text = null;
                         openFileDialog1.FileName = null;
+                        items.check = true;
+                        dashBoard.iCheck = true;
                         MessageBox.Show("Sent");
 
                     }

@@ -662,9 +662,9 @@ namespace OnlineMongo
                     con.Open();
                     if(Bcheck == true)
                     {
-                        // MySqlDataReader reader;
+                       
                         ad = new MySqlDataAdapter(com);
-                        // reader = com.ExecuteReader();
+                        
                         DataTable table = new DataTable();
                         ad.Fill(table);
                         try
@@ -1065,6 +1065,12 @@ namespace OnlineMongo
         }
 
         private void sendBook_Click(object sender, EventArgs e)
+        {
+            sendLectOrBook send = new sendLectOrBook();
+            send.ShowDialog();
+        }
+
+        private void sendLecture_Click(object sender, EventArgs e)
         {
             sendLectOrBook send = new sendLectOrBook();
             send.ShowDialog();
