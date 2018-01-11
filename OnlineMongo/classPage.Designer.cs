@@ -110,7 +110,7 @@
             this.bunifuSeparator3.LineThickness = 3;
             this.bunifuSeparator3.Location = new System.Drawing.Point(1, 693);
             this.bunifuSeparator3.Name = "bunifuSeparator3";
-            this.bunifuSeparator3.Size = new System.Drawing.Size(1367, 3);
+            this.bunifuSeparator3.Size = new System.Drawing.Size(1517, 3);
             this.bunifuSeparator3.TabIndex = 47;
             this.bunifuSeparator3.Transparency = 255;
             this.bunifuSeparator3.Vertical = false;
@@ -148,7 +148,7 @@
             this.bunifuSeparator1.LineThickness = 3;
             this.bunifuSeparator1.Location = new System.Drawing.Point(1, 416);
             this.bunifuSeparator1.Name = "bunifuSeparator1";
-            this.bunifuSeparator1.Size = new System.Drawing.Size(1367, 3);
+            this.bunifuSeparator1.Size = new System.Drawing.Size(1517, 3);
             this.bunifuSeparator1.TabIndex = 37;
             this.bunifuSeparator1.Transparency = 255;
             this.bunifuSeparator1.Vertical = false;
@@ -162,7 +162,7 @@
             this.bunifuSeparator2.LineThickness = 3;
             this.bunifuSeparator2.Location = new System.Drawing.Point(1, 141);
             this.bunifuSeparator2.Name = "bunifuSeparator2";
-            this.bunifuSeparator2.Size = new System.Drawing.Size(1367, 3);
+            this.bunifuSeparator2.Size = new System.Drawing.Size(1517, 3);
             this.bunifuSeparator2.TabIndex = 36;
             this.bunifuSeparator2.Transparency = 255;
             this.bunifuSeparator2.Vertical = false;
@@ -321,6 +321,7 @@
             this.sendBook.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.sendBook.Textcolor = System.Drawing.SystemColors.InactiveCaptionText;
             this.sendBook.TextFont = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sendBook.Click += new System.EventHandler(this.sendBook_Click);
             // 
             // sendLecture
             // 
@@ -629,7 +630,7 @@
             this.bunifuSeparator4.LineThickness = 3;
             this.bunifuSeparator4.Location = new System.Drawing.Point(-2, 968);
             this.bunifuSeparator4.Name = "bunifuSeparator4";
-            this.bunifuSeparator4.Size = new System.Drawing.Size(1367, 3);
+            this.bunifuSeparator4.Size = new System.Drawing.Size(1517, 3);
             this.bunifuSeparator4.TabIndex = 60;
             this.bunifuSeparator4.Transparency = 255;
             this.bunifuSeparator4.Vertical = false;
@@ -1360,7 +1361,7 @@
             this.Controls.Add(this.userPrflName);
             this.Controls.Add(this.addBook);
             this.Name = "classPage";
-            this.Size = new System.Drawing.Size(645, 179);
+            this.Size = new System.Drawing.Size(628, 162);
             this.Load += new System.EventHandler(this.classPage_Load);
             this.bookgroupBox.ResumeLayout(false);
             this.bookgroupBox.PerformLayout();

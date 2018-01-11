@@ -207,6 +207,12 @@
     <Compile Include="secretWord.Designer.cs">
       <DependentUpon>secretWord.cs</DependentUpon>
     </Compile>
+    <Compile Include="sendLectOrBook.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sendLectOrBook.Designer.cs">
+      <DependentUpon>sendLectOrBook.cs</DependentUpon>
+    </Compile>
     <Compile Include="sentTab.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -333,6 +339,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="secretWord.resx">
       <DependentUpon>secretWord.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sendLectOrBook.resx">
+      <DependentUpon>sendLectOrBook.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sentTab.resx">
       <DependentUpon>sentTab.cs</DependentUpon>

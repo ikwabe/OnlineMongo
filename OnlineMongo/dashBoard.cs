@@ -333,8 +333,7 @@ namespace OnlineMongo
             trashTab.Instance.Visible = false;
             settingTab.Instance.Visible = false;
             sentTab.Instance.Visible = false;
-            //restoreDownBtn.Visible = false;
-            //restoreDownBtn.Location = new Point(1260, restoreDownBtn.Location.Y);
+           
             hometb.Instance.BringToFront();
             panel4.Controls.Add(hometb.Instance);
             hometb.Instance.Dock = DockStyle.Fill;
@@ -676,6 +675,7 @@ namespace OnlineMongo
             private void maximize()
         {
             this.WindowState = FormWindowState.Maximized;
+            panel2.AutoScroll = false;
             panel4.Height = 600;
             restoreDownBtn.Visible = true;
             restoreDownBtn.BringToFront();
@@ -692,6 +692,7 @@ namespace OnlineMongo
         {
             panel4.Height = 336;
             this.WindowState = FormWindowState.Normal;
+            panel2.AutoScroll = true;
             maximizeBtn.Visible = true;
             restoreDownBtn.Visible = false;
             closeBtn.Location = new Point(1063, closeBtn.Location.Y);

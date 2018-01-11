@@ -267,11 +267,10 @@ namespace OnlineMongo
                     //checking if the table is empty
                     if (table1.Rows.Count > 0)
                     {
-                        MessageBox.Show("The table contains books ");
+                       
                         //check if the insertrd book is present
                         reader = com1.ExecuteReader();
                         table.Load(reader);
-                        MessageBox.Show("Ready checked the books ");
                         reader.Close();
 
                         if (table.Rows.Count > 0)
@@ -281,7 +280,6 @@ namespace OnlineMongo
                         else
                         {
                             //insert the book in the database
-                            MessageBox.Show("inserting the book " + bookDialogBox.FileName.ToString());
                             com.Parameters.AddWithValue("@book", bytes);
                             com.ExecuteNonQuery();
                             loadBookTimer.Start();
@@ -291,7 +289,6 @@ namespace OnlineMongo
                     else
                     {
                         //insert the book in the database
-                        MessageBox.Show("The table contains no books ");
                         com.Parameters.AddWithValue("@book", bytes);
                         com.ExecuteNonQuery();
                         loadBookTimer.Start();
@@ -1065,6 +1062,12 @@ namespace OnlineMongo
         private void toTextBox2_OnValueChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void sendBook_Click(object sender, EventArgs e)
+        {
+            sendLectOrBook send = new sendLectOrBook();
+            send.ShowDialog();
         }
     }
 }
