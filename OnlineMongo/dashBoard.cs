@@ -66,7 +66,7 @@ namespace OnlineMongo
                 postb.Instance.Width = 1015;
                 classPage.Instance.Width = 1015;
                 friendtb.Instance.Width = 1015;
-               
+                postb.postCheck = false;
 
 
             }
@@ -84,7 +84,8 @@ namespace OnlineMongo
 
         private void photos_Click(object sender, EventArgs e)
         {
-                line.Width = photos.Width;
+            postb.postCheck = false;
+            line.Width = photos.Width;
                 line.Left = photos.Left;
             line.Visible = true;
             classPage.Instance.Visible = false;
@@ -121,11 +122,13 @@ namespace OnlineMongo
                 pic.Instance.Dock = DockStyle.Fill;
                 picAnimation.ShowSync(pic.Instance);
             }
-           
+            
+
         }
 
         private void post_Click(object sender, EventArgs e)
         {
+            postb.postCheck = true;
             line.Width = post.Width;
             line.Left = post.Left;
             line.Visible = true;
@@ -165,6 +168,7 @@ namespace OnlineMongo
 
         private void friends_Click(object sender, EventArgs e)
         {
+            postb.postCheck = false;
             line.Visible = true;
             line.Width = friends.Width;
             line.Left = friends.Left;
@@ -203,6 +207,7 @@ namespace OnlineMongo
 
         private void about_Click(object sender, EventArgs e)
         {
+            postb.postCheck = false;
             line.Visible = true;
             line.Width = about.Width;
             line.Left = about.Left;
@@ -243,6 +248,7 @@ namespace OnlineMongo
 
         private void home_Click(object sender, EventArgs e)
         {
+            postb.postCheck = false;
             line.Visible = true;
             line.Width = home.Width;
             line.Left = home.Left;
@@ -354,6 +360,7 @@ namespace OnlineMongo
 
         private void myProfileBtn_Click(object sender, EventArgs e)
         {
+            postb.postCheck = false;
             pic.Instance.Visible = false;
             line.Visible = false;
             aboutb.Instance.Visible = false;
@@ -392,6 +399,7 @@ namespace OnlineMongo
 
         private void myClassBtn_Click(object sender, EventArgs e)
         {
+            postb.postCheck = false;
             pic.Instance.Visible = false;
             line.Visible = false;
             aboutb.Instance.Visible = false;
@@ -435,6 +443,7 @@ namespace OnlineMongo
 
         private void bunifuImageButton2_Click(object sender, EventArgs e)
         {
+            postb.postCheck = false;
             this.WindowState = FormWindowState.Minimized;
             pinWindow pinwd = new pinWindow();
             pinwd.Show();
@@ -445,6 +454,7 @@ namespace OnlineMongo
 
         private void composeBtn_Click(object sender, EventArgs e)
         {
+            postb.postCheck = false;
             pic.Instance.Visible = false;
             line.Visible = false;
             aboutb.Instance.Visible = false;
@@ -483,6 +493,7 @@ namespace OnlineMongo
 
         private void inboxBtn_Click(object sender, EventArgs e)
         {
+            postb.postCheck = false;
             pic.Instance.Visible = false;
             line.Visible = false;
             aboutb.Instance.Visible = false;
@@ -521,6 +532,7 @@ namespace OnlineMongo
 
         private void draftBtn_Click(object sender, EventArgs e)
         {
+            postb.postCheck = false;
             pic.Instance.Visible = false;
             line.Visible = false;
             aboutb.Instance.Visible = false;
@@ -559,6 +571,7 @@ namespace OnlineMongo
 
         private void trashBtn_Click(object sender, EventArgs e)
         {
+            postb.postCheck = false;
             pic.Instance.Visible = false;
             line.Visible = false;
             aboutb.Instance.Visible = false;
@@ -597,6 +610,7 @@ namespace OnlineMongo
 
         private void settingBtn_Click(object sender, EventArgs e)
         {
+            postb.postCheck = false;
             pic.Instance.Visible = false;
             line.Visible = false;
             aboutb.Instance.Visible = false;
@@ -637,6 +651,7 @@ namespace OnlineMongo
 
         private void sentBtn_Click(object sender, EventArgs e)
         {
+            postb.postCheck = false;
             pic.Instance.Visible = false;
             line.Visible = false;
             aboutb.Instance.Visible = false;
@@ -718,12 +733,14 @@ namespace OnlineMongo
         //restoreDown Button
         private void restoreDownBtn_Click(object sender, EventArgs e)
         {
+            postb.postCheck = false;
             restoreDown();
         }
 
         //maximize button
         private void maximizeBtn_Click(object sender, EventArgs e)
         {
+            postb.postCheck = false;
             maximize();
         }
 
@@ -890,12 +907,14 @@ namespace OnlineMongo
         //a button for chat room
         private void chatBtn_Click(object sender, EventArgs e)
         {
+            postb.postCheck = false;
             chatRoom cht = new chatRoom();
             cht.Show();
         }
 
         private void itemBtn_Click(object sender, EventArgs e)
         {
+            postb.postCheck = false;
             items item = new items();
             item.Show();
         }

@@ -30,6 +30,7 @@ namespace OnlineMongo
         private void CancelBtn_Click(object sender, EventArgs e)
         {
             this.Hide();
+            postb.postCheck = true;
         }
         //function for downloading the image
         private void Download()
@@ -85,6 +86,7 @@ namespace OnlineMongo
         {
             Download();
             this.Hide();
+            postb.postCheck = true;
         }
     }
 }

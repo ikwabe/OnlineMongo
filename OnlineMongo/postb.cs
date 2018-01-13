@@ -37,6 +37,8 @@ namespace OnlineMongo
        
         int i = 0;
         int k = 0;
+
+        public static bool postCheck = false;
         private void photo_Click(object sender, EventArgs e)
         {
             line.Visible = true;
@@ -416,7 +418,7 @@ namespace OnlineMongo
         int count;
 
         //boolean for activating the instant post
-        public static bool check = false;
+       
         //add posted post at instant
         private void instLoadPost()
         {
@@ -425,113 +427,139 @@ namespace OnlineMongo
             MySqlDataAdapter ad;
 
             //query to check if the post is added at instant
-            string readpost = "SELECT * FROM post order by post_id DESC LIMIT 1";
+            string readpost = "SELECT * FROM  post where chek = 'New' order by post_id DESC LIMIT 1";
 
             MySqlCommand com = new MySqlCommand(readpost, con);
             ad = new MySqlDataAdapter(com);
             DataTable table1 = new DataTable();
             ad.Fill(table1);
+            ad.Dispose();
 
             bt = new BunifuFlatButton[table1.Rows.Count];
             phot = new PictureBox[table1.Rows.Count];
             btnName = new string[table1.Rows.Count];
-            for (int j = 0; j < table1.Rows.Count; j++)
+            try
             {
-
-                i++;
-                string post_id = table1.Rows[j][0].ToString();
-                //Image
-                phot[j] = new PictureBox();
-                phot[j].Width = 300;
-                phot[j].Height = 172;
-                phot[j].Name = post_id;
-                phot[j].SizeMode = PictureBoxSizeMode.Zoom;
-                phot[j].Cursor = Cursors.Hand;
-                phot[j].Click += new EventHandler(photoClickBtn_Click);
-                //takking photo to the panel
-                try
+                con.Open();
+                if (table1.Rows.Count > 0)
                 {
-                    byte[] img = (byte[])table1.Rows[j][1];
-                    MemoryStream ms = new MemoryStream(img);
-                    phot[j].Image = Image.FromStream(ms);
+                    
+                    for (int j = 0; j < table1.Rows.Count; j++)
+                    {
+                        i++;
+                        string post_id = table1.Rows[j][0].ToString();
+                        //Image
+                        phot[j] = new PictureBox();
+                        phot[j].Width = 300;
+                        phot[j].Height = 172;
+                        phot[j].Name = post_id;
+                        phot[j].SizeMode = PictureBoxSizeMode.Zoom;
+                        phot[j].Cursor = Cursors.Hand;
+                        phot[j].Click += new EventHandler(photoClickBtn_Click);
+                        //takking photo to the panel
+                        try
+                        {
+                            byte[] img = (byte[])table1.Rows[j][1];
+                            MemoryStream ms = new MemoryStream(img);
+                            phot[j].Image = Image.FromStream(ms);
 
 
+                        }
+                        catch
+                        {
+
+                        }
+
+                        //Label
+                        lb = new Label();
+                        lb.Name = "lable" + k;
+                        lb.AutoSize = true;
+                        lb.Font = new Font("Cambria", 16);
+                        try
+                        {
+                            lb.Text = table1.Rows[j][2].ToString();
+
+                        }
+                        catch
+                        {
+
+                        }
+                        //User Full name
+                        string fullname = table1.Rows[j][5].ToString();
+                        Label uname = new Label();
+                        uname = new Label();
+                        uname.Name = table1.Rows[j][3].ToString();
+                        uname.AutoSize = true;
+                        uname.ForeColor = Color.DarkGreen;
+                        uname.Font = new Font("Cambria", 14);
+                        uname.Cursor = Cursors.Hand;
+                        uname.Text = "Posted by: " + fullname;
+                        uname.Click += new EventHandler(uname_Click);
+                        //Button
+
+                        bt[j] = new BunifuFlatButton();
+                        bt[j].Text = "Comment";
+                        bt[j].Name = post_id;
+                        bt[j].Height = 40;
+                        bt[j].Width = 300;
+                        bt[j].Normalcolor = Color.FromArgb(0, 122, 204);
+                        bt[j].OnHovercolor = Color.FromArgb(32, 9, 191);
+                        bt[j].Activecolor = Color.FromArgb(0, 122, 204);
+                        bt[j].Iconimage = null;
+                        bt[j].TextAlign = ContentAlignment.MiddleCenter;
+                        bt[j].BorderRadius = 5;
+                        bt[j].Click += new EventHandler(commentPostBtn_Click);
+
+                        //TextBox
+                        BunifuCustomTextbox txt = new BunifuCustomTextbox();
+                        txt.Name = "TextBox" + i;
+                        txt.Width = 300;
+                        txt.Height = 30;
+                        txt.Multiline = true;
+                        txt.Font = new Font("Cambria", 14);
+                        txt.BackColor = Color.FromArgb(240, 240, 240);
+                        txt.BorderStyle = BorderStyle.FixedSingle;
+                        txt.ForeColor = Color.Black;
+                        txt.BorderColor = Color.FromArgb(32, 9, 191);
+                        txt.TextChanged += new EventHandler(txt_TextChanged);
+
+                        //adding button to the panel
+                        flowLayoutPanel1.Controls.Add(bt[j]);
+
+                        //adding Textbox
+                        flowLayoutPanel1.Controls.Add(txt);
+
+                        //taking photo to panel
+                        flowLayoutPanel1.Controls.Add(phot[j]);
+
+                        //taking lable to the panel
+                        flowLayoutPanel1.Controls.Add(lb);
+
+                        //adding user name to the panel
+                        flowLayoutPanel1.Controls.Add(uname);
+
+
+                        //update the poast
+                        string update = "update post set chek = 'Posted' where post_id = '" + post_id + "'";
+                        MySqlCommand com1 = new MySqlCommand(update, con);
+                        MySqlDataReader rd;
+
+                        rd = com1.ExecuteReader();
+                        rd.Close();
+
+                    }
+                   
                 }
-                catch
-                {
-
-                }
-
-                //Label
-                lb = new Label();
-                lb.Name = "lable" + k;
-                lb.AutoSize = true;
-                lb.Font = new Font("Cambria", 16);
-                try
-                {
-                    lb.Text = table1.Rows[j][2].ToString();
-
-                }
-                catch
-                {
-
-                }
-                //User Full name
-                string fullname = table1.Rows[j][5].ToString();
-                Label uname = new Label();
-                uname = new Label();
-                uname.Name = table1.Rows[j][3].ToString();
-                uname.AutoSize = true;
-                uname.ForeColor = Color.DarkGreen;
-                uname.Font = new Font("Cambria", 14);
-                uname.Cursor = Cursors.Hand;
-                uname.Text = "Posted by: " + fullname;
-                uname.Click += new EventHandler(uname_Click);
-                //Button
-
-                bt[j] = new BunifuFlatButton();
-                bt[j].Text = "Comment";
-                bt[j].Name = post_id;
-                bt[j].Height = 40;
-                bt[j].Width = 300;
-                bt[j].Normalcolor = Color.FromArgb(0, 122, 204);
-                bt[j].OnHovercolor = Color.FromArgb(32, 9, 191);
-                bt[j].Activecolor = Color.FromArgb(0, 122, 204);
-                bt[j].Iconimage = null;
-                bt[j].TextAlign = ContentAlignment.MiddleCenter;
-                bt[j].BorderRadius = 5;
-                bt[j].Click += new EventHandler(commentPostBtn_Click);
-
-                //TextBox
-                BunifuCustomTextbox txt = new BunifuCustomTextbox();
-                txt.Name = "TextBox" + i;
-                txt.Width = 300;
-                txt.Height = 30;
-                txt.Multiline = true;
-                txt.Font = new Font("Cambria", 14);
-                txt.BackColor = Color.FromArgb(240, 240, 240);
-                txt.BorderStyle = BorderStyle.FixedSingle;
-                txt.ForeColor = Color.Black;
-                txt.BorderColor = Color.FromArgb(32, 9, 191);
-                txt.TextChanged += new EventHandler(txt_TextChanged);
-
-                //adding button to the panel
-                flowLayoutPanel1.Controls.Add(bt[j]);
-
-                //adding Textbox
-                flowLayoutPanel1.Controls.Add(txt);
-
-                //taking photo to panel
-                flowLayoutPanel1.Controls.Add(phot[j]);
-
-                //taking lable to the panel
-                flowLayoutPanel1.Controls.Add(lb);
-
-                //adding user name to the panel
-                flowLayoutPanel1.Controls.Add(uname);
 
             }
-            ad.Dispose();
+            catch (MySqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            con.Close();
+
+
+
 
 
         }
@@ -660,9 +688,9 @@ namespace OnlineMongo
 
         private void postTimer_Tick(object sender, EventArgs e)
         {
-
-            loadPost();
             postTimer.Stop();
+            loadPost();
+           
         }
 
         private void friendTimer_Tick(object sender, EventArgs e)
@@ -805,6 +833,7 @@ namespace OnlineMongo
         //function for handling picture click
         private void photoClickBtn_Click(object sender, EventArgs e)
         {
+            postb.postCheck = false;
             var picName = sender as PictureBox;
 
             //taking the clicked PictureName to the static string
@@ -828,48 +857,16 @@ namespace OnlineMongo
 
         //timer for instant post
         private void instPostTimer_Tick(object sender, EventArgs e)
-        {
-            if(check == true)
+        {   
+            if(postCheck == true)
             {
-                int check1;
-                MySqlConnection con = new MySqlConnection();
-                con.ConnectionString = login.dbConnection;
-                MySqlDataAdapter ad;
-
-                //reading data query
-                string readpost = "select * from post";
-                try
-                {
-                    MySqlCommand com = new MySqlCommand(readpost, con);
-                    ad = new MySqlDataAdapter(com);
-                    DataTable table1 = new DataTable();
-                    ad.Fill(table1);
-                    check1 = table1.Rows.Count;
-
-                    //check if there is an update of post
-                    if (check1 > count)
-                    {
-                        instLoadPost();
-                        count = table1.Rows.Count;
-                    }
-                    else
-                    {
-
-                    }
-
-                }
-                catch (MySqlException ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-                con.Close();
-                check = false;
+                instLoadPost();
             }
             else
             {
 
-            }
-            
+            }    
+         
         }
 
         private void friendRequestTimer_Tick(object sender, EventArgs e)

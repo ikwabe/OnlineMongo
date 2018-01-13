@@ -66,7 +66,7 @@ namespace OnlineMongo
             DateTime pst_date = DateTime.Today;
             MySqlConnection con = new MySqlConnection();
             con.ConnectionString = login.dbConnection;
-            string userId = "select * from users where username = '" + login.txt.Text + "'";
+            string userId = "select fname,lname from users where user_id = '" + login.user_id + "'";
 
 
 
@@ -77,35 +77,24 @@ namespace OnlineMongo
                         byte[] images = null;
                         FileStream stream = new FileStream(openFileDialog1.FileName, FileMode.Open, FileAccess.Read);
                         BinaryReader brs = new BinaryReader(stream);
-                        images = brs.ReadBytes((int)stream.Length);
+                        images = brs.ReadBytes((int)stream.Length);   
+                MySqlDataReader reader;
 
-
-
-
-                        MySqlDataAdapter ad;
-
-
-                        //taking user id from the database
-                        MySqlCommand com1 = new MySqlCommand(userId, con);
-                        ad = new MySqlDataAdapter(com1);
-                        DataTable table = new DataTable();
-                        ad.Fill(table);
-                        string user_idc = table.Rows[0][0].ToString();
-                        string fullname = table.Rows[0][1].ToString() + " " + table.Rows[0][2].ToString();
-                        ad.Dispose();
-
-                        int user_id = int.Parse(user_idc);
-                        //
+                //taking user id from the database
+                MySqlCommand com1 = new MySqlCommand(userId, con);
+                DataTable table = new DataTable();
+                reader = com1.ExecuteReader();
+                table.Load(reader);
+                reader.Close();       
+                string fullname = table.Rows[0][0].ToString() + " " + table.Rows[0][1].ToString();
+             
                         //string to insert data
-                        string pic = "insert into post(image,status,user_id,pst_date,fullname) values(@image,'" + photoSttsTxt.Text + "','" + user_id + "','" + pst_date.ToShortDateString() + "', '"+ fullname +"')";
+                        string pic = "insert into post(image,status,user_id,pst_date,fullname,chek) values(@image,'" + photoSttsTxt.Text + "','" + login.user_id + "','" + pst_date.ToShortDateString() + "', '"+ fullname +"','New')";
 
                         //command to insert photos
                         MySqlCommand com = new MySqlCommand(pic, con);
                         com.Parameters.Add(new MySqlParameter("@image", images));
-                        com.ExecuteNonQuery();
-                   
-
-               
+                        com.ExecuteNonQuery();  
             }
             catch (MySqlException ex)
             {
@@ -130,7 +119,7 @@ namespace OnlineMongo
                         addPostToDb();
                         panelCont();
                         MessageBox.Show("Posted");
-                        postb.check = true;
+                       
 
                     }
                     else
@@ -146,7 +135,7 @@ namespace OnlineMongo
                 addPostToDb();
                 panelCont();
                 MessageBox.Show("Posted");
-                postb.check = true;
+                
 
             }
 
