@@ -28,12 +28,14 @@ namespace OnlineMongo
             string detail = "select email from users where user_id = '" + friendtb.user_id + "'";
             MySqlCommand com = new MySqlCommand(detail, con);
             MySqlDataReader reader;
+            DataTable table = new DataTable();
             try
             {
 
                 con.Open();
                //reading the email.
                 reader = com.ExecuteReader();
+
                 while (reader.Read())
                 {
                     string email = reader.GetString("email");
@@ -56,19 +58,16 @@ namespace OnlineMongo
             con.ConnectionString = login.dbConnection;
             string detail = "select senderemail from sentmail where sentmail_id = '" + inbonTab.selectedMail + "' ";
             MySqlCommand com = new MySqlCommand(detail, con);
-
             MySqlDataReader reader;
+            DataTable table = new DataTable();
             try
             {
 
                 con.Open();
                 //reading the email.
                 reader = com.ExecuteReader();
-                while (reader.Read())
-                {
-                    string email = reader.GetString("senderemail");
-                    toLabel.Text = email;
-                }
+                table.Load(reader);
+                toLabel.Text = table.Rows[0][0].ToString();
                 reader.Close();
             }
             catch (MySqlException ex)
@@ -88,17 +87,15 @@ namespace OnlineMongo
             MySqlCommand com = new MySqlCommand(detail, con);
 
             MySqlDataReader reader;
+            DataTable table = new DataTable();
             try
             {
 
                 con.Open();
                 //reading the email.
                 reader = com.ExecuteReader();
-                while (reader.Read())
-                {
-                    string email = reader.GetString("email");
-                    toLabel.Text = email;
-                }
+                table.Load(reader);
+                toLabel.Text = table.Rows[0][0].ToString();
                 reader.Close();
             }
             catch (MySqlException ex)
@@ -116,19 +113,16 @@ namespace OnlineMongo
             con.ConnectionString = login.dbConnection;
             string detail = "select email from users where user_id = '" + postb.user_id + "'";
             MySqlCommand com = new MySqlCommand(detail, con);
-
             MySqlDataReader reader;
+            DataTable table = new DataTable();
             try
             {
 
                 con.Open();
                 //reading the email.
                 reader = com.ExecuteReader();
-                while (reader.Read())
-                {
-                    string email = reader.GetString("email");
-                    toLabel.Text = email;
-                }
+                table.Load(reader);
+                toLabel.Text = table.Rows[0][0].ToString();
                 reader.Close();
             }
             catch (MySqlException ex)
