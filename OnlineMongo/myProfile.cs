@@ -30,7 +30,7 @@ namespace OnlineMongo
             InitializeComponent();
            
         }
-
+        public static bool check = false;
         private void changePrflPhoto_Click(object sender, EventArgs e)
         {
 
@@ -67,7 +67,7 @@ namespace OnlineMongo
                 con.Open();
                 com.Parameters.AddWithValue("@prfpic", arrImg);
                 com.ExecuteNonQuery();
-                
+                check = true;
              
             }
             catch (MySqlException ex)
@@ -140,7 +140,7 @@ namespace OnlineMongo
         private void myProfile_Load(object sender, EventArgs e)
         {
             timer1.Start();
-            profile();
+            check = true;
         }
         public static bool chek = false;
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -154,7 +154,16 @@ namespace OnlineMongo
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            profile();
+            if(check == true)
+            {
+                profile();
+                check = false;
+            }
+            else
+            {
+
+            }
+           
         }
     }
 }

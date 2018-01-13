@@ -21,7 +21,7 @@ namespace OnlineMongo
             InitializeComponent();
         }
 
-        public static string dbConnection = "server = localhost; user = root; password = ikwabe04; database = udoread;";
+        public static string dbConnection = "server = 172.20.10.5; user = root; password =ikwabe04; database = udoread";
         private void bunifuImageButton1_Click(object sender, EventArgs e)
         {
            if(MessageBox.Show("Are you sure you want to close?","Close",MessageBoxButtons.YesNo) == DialogResult.Yes){
@@ -34,7 +34,7 @@ namespace OnlineMongo
         private void animate_Tick(object sender, EventArgs e)
         {
             animate.Stop();
-                annimator.ShowSync(logopic);
+            annimator.ShowSync(logopic);
         }
         public static string user_email;
         private void login_Load(object sender, EventArgs e)
@@ -74,14 +74,8 @@ namespace OnlineMongo
         {
             MySqlConnection con = new MySqlConnection();
             con.ConnectionString = dbConnection;
-            string signIn = "select username,password from users where username = '" + txt.Text + "' and password = '" + pwd.Text + "'";
-            string chekSecWord = "select secword from users where username = '" + txt.Text + "' and password = '" + pwd.Text + "'";
-            string usertake = "select * from users where username = '" + txt.Text + "' and password = '" + pwd.Text + "'";
+            string signIn = "select user_id, email, password,username,secword from users where username = '" + txt.Text + "' and password = '" + pwd.Text + "'";
             MySqlCommand com = new MySqlCommand(signIn, con);
-            MySqlCommand com1 = new MySqlCommand(chekSecWord, con);
-            MySqlCommand com2 = new MySqlCommand(usertake, con);
-            MySqlDataAdapter da;
-            DataTable usertable = new DataTable();
             try
             {
                 con.Open();
@@ -99,42 +93,36 @@ namespace OnlineMongo
                 }
                 else
                 {
+                    //checking the database
                 reader = com.ExecuteReader();
                 table.Load(reader);
                 reader.Close();
 
-                //execute ones to check if the database is empty or not
-                object nullValue = com1.ExecuteScalar();
-
                 if (table.Rows.Count > 0)
                 {
                     pwd.Enabled = false;
-                    if (nullValue == null || nullValue == DBNull.Value)
+                    if (table.Rows[0][4] == null || table.Rows[0][4] == DBNull.Value)
                     {
                         MessageBox.Show("Please remember to set your SECRET WORD for password recovery and security purposes.");
                             //capturing user id for public purposes
-                            da = new MySqlDataAdapter(com2);
-                            da.Fill(usertable);
-                            user_id = usertable.Rows[0][0].ToString();
-                            user_email = usertable.Rows[0][3].ToString();
-                            da.Dispose();
+                            user_id = table.Rows[0][0].ToString();
+                            user_email = table.Rows[0][1].ToString();
+                            this.Hide();
                             dashBoard dsb = new dashBoard();
-                        dsb.Show();
-                        this.Hide();
+                            dsb.Show();
+                       
                     }
                     else
                     {
                             //capturing user id for public purposes
-                            da = new MySqlDataAdapter(com2);
-                            da.Fill(usertable);
-                            user_id = usertable.Rows[0][0].ToString();
-                            user_email = usertable.Rows[0][3].ToString();
-                            da.Dispose();
+                            user_id = table.Rows[0][0].ToString();
+                            user_email = table.Rows[0][1].ToString();
+                            this.Hide();
                             dashBoard dsb = new dashBoard();
-                        dsb.Show();
-                        this.Hide();
+                            dsb.Show();
 
-                    }
+
+                        }
 
 
                 }
@@ -157,17 +145,12 @@ namespace OnlineMongo
             {
                 MySqlConnection con = new MySqlConnection();
                 con.ConnectionString = dbConnection;
-                string signIn = "select username,password from users where username = '" + txt.Text + "' and password = '" + pwd.Text + "'";
-                string chekSecWord = "select secword from users where username = '" + txt.Text + "' and password = '" + pwd.Text + "'";
-                string usertake = "select * from users where username = '" + txt.Text + "' and password = '" + pwd.Text + "'";
+                string signIn = "select user_id, email, password,username,secword from users where username = '" + txt.Text + "' and password = '" + pwd.Text + "'";
                 MySqlCommand com = new MySqlCommand(signIn, con);
-                MySqlCommand com1 = new MySqlCommand(chekSecWord, con);
-                MySqlCommand com2 = new MySqlCommand(usertake, con);
-                MySqlDataAdapter da;
-                DataTable usertable = new DataTable();
                 try
                 {
                     con.Open();
+
                     MySqlDataReader reader;
                     DataTable table = new DataTable();
                     if (txt.Text == "")
@@ -177,48 +160,37 @@ namespace OnlineMongo
                     else if (pwd.Text == "")
                     {
                         label3.Text = "Password field can not be empty.";
-
                     }
                     else
                     {
+                        //checking the database
                         reader = com.ExecuteReader();
                         table.Load(reader);
                         reader.Close();
 
-                        //execute ones to check if the database is empty or not
-                        object nullValue = com1.ExecuteScalar();
-
                         if (table.Rows.Count > 0)
                         {
                             pwd.Enabled = false;
-                            if (nullValue == null || nullValue == DBNull.Value)
+                            if (table.Rows[0][4] == null || table.Rows[0][4] == DBNull.Value)
                             {
                                 MessageBox.Show("Please remember to set your SECRET WORD for password recovery and security purposes.");
                                 //capturing user id for public purposes
-                                da = new MySqlDataAdapter(com2);
-                                da.Fill(usertable);
-                                user_id = usertable.Rows[0][0].ToString();
-                                user_email = usertable.Rows[0][3].ToString();
-                                da.Dispose();
+                                user_id = table.Rows[0][0].ToString();
+                                user_email = table.Rows[0][1].ToString();
+                                this.Hide();
                                 dashBoard dsb = new dashBoard();
                                 dsb.Show();
-                                this.Hide();
+
                             }
                             else
                             {
                                 //capturing user id for public purposes
-                                da = new MySqlDataAdapter(com2);
-                                da.Fill(usertable);
-                                user_id = usertable.Rows[0][0].ToString();
-                                user_email = usertable.Rows[0][3].ToString();
-                                da.Dispose();
+                                user_id = table.Rows[0][0].ToString();
+                                user_email = table.Rows[0][1].ToString();
+                                this.Hide();
                                 dashBoard dsb = new dashBoard();
                                 dsb.Show();
-                                this.Hide();
-
                             }
-
-
                         }
                         else
                         {

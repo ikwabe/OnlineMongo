@@ -59,6 +59,7 @@
             this.photos = new Bunifu.Framework.UI.BunifuCustomLabel();
             this.panelAnimator = new BunifuAnimatorNS.BunifuTransition(this.components);
             this.panel2 = new System.Windows.Forms.Panel();
+            this.onlinePic = new System.Windows.Forms.PictureBox();
             this.itemBtn = new Bunifu.Framework.UI.BunifuFlatButton();
             this.chatBtn = new Bunifu.Framework.UI.BunifuFlatButton();
             this.emailNumberLabel = new System.Windows.Forms.Label();
@@ -73,7 +74,7 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.emailCheckTimer = new System.Windows.Forms.Timer(this.components);
             this.soundTimer = new System.Windows.Forms.Timer(this.components);
-            this.onlinePic = new System.Windows.Forms.PictureBox();
+            this.itemTimer = new System.Windows.Forms.Timer(this.components);
             this.Headerpanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.restoreDownBtn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.maximizeBtn)).BeginInit();
@@ -82,9 +83,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.mnBtn)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.onlinePic)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.onlinePic)).BeginInit();
             this.SuspendLayout();
             // 
             // bunifuElipse1
@@ -709,6 +710,22 @@
             this.panel2.Size = new System.Drawing.Size(254, 498);
             this.panel2.TabIndex = 47;
             // 
+            // onlinePic
+            // 
+            this.onlinePic.BackColor = System.Drawing.Color.Transparent;
+            this.picAnimation.SetDecoration(this.onlinePic, BunifuAnimatorNS.DecorationType.None);
+            this.logoTransition.SetDecoration(this.onlinePic, BunifuAnimatorNS.DecorationType.None);
+            this.tabAnimator.SetDecoration(this.onlinePic, BunifuAnimatorNS.DecorationType.None);
+            this.panelAnimator.SetDecoration(this.onlinePic, BunifuAnimatorNS.DecorationType.None);
+            this.onlinePic.Image = ((System.Drawing.Image)(resources.GetObject("onlinePic.Image")));
+            this.onlinePic.Location = new System.Drawing.Point(3, 488);
+            this.onlinePic.Name = "onlinePic";
+            this.onlinePic.Size = new System.Drawing.Size(16, 17);
+            this.onlinePic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.onlinePic.TabIndex = 0;
+            this.onlinePic.TabStop = false;
+            this.onlinePic.Visible = false;
+            // 
             // itemBtn
             // 
             this.itemBtn.Activecolor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
@@ -993,21 +1010,10 @@
             this.soundTimer.Interval = 1;
             this.soundTimer.Tick += new System.EventHandler(this.soundTimer_Tick);
             // 
-            // onlinePic
+            // itemTimer
             // 
-            this.onlinePic.BackColor = System.Drawing.Color.Transparent;
-            this.picAnimation.SetDecoration(this.onlinePic, BunifuAnimatorNS.DecorationType.None);
-            this.logoTransition.SetDecoration(this.onlinePic, BunifuAnimatorNS.DecorationType.None);
-            this.tabAnimator.SetDecoration(this.onlinePic, BunifuAnimatorNS.DecorationType.None);
-            this.panelAnimator.SetDecoration(this.onlinePic, BunifuAnimatorNS.DecorationType.None);
-            this.onlinePic.Image = ((System.Drawing.Image)(resources.GetObject("onlinePic.Image")));
-            this.onlinePic.Location = new System.Drawing.Point(3, 488);
-            this.onlinePic.Name = "onlinePic";
-            this.onlinePic.Size = new System.Drawing.Size(16, 17);
-            this.onlinePic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.onlinePic.TabIndex = 0;
-            this.onlinePic.TabStop = false;
-            this.onlinePic.Visible = false;
+            this.itemTimer.Interval = 1;
+            this.itemTimer.Tick += new System.EventHandler(this.itemTimer_Tick);
             // 
             // dashBoard
             // 
@@ -1039,10 +1045,10 @@
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.onlinePic)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.onlinePic)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1089,5 +1095,6 @@
         private Bunifu.Framework.UI.BunifuFlatButton chatBtn;
         private Bunifu.Framework.UI.BunifuFlatButton itemBtn;
         private System.Windows.Forms.PictureBox onlinePic;
+        private System.Windows.Forms.Timer itemTimer;
     }
 }

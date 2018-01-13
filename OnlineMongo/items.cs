@@ -25,51 +25,96 @@ namespace OnlineMongo
             this.Close();
         }
         public static bool check = false;
-     
+        private int count;
         private void loadItems()
         {
             MySqlConnection con = new MySqlConnection();
             con.ConnectionString = login.dbConnection;
            
-            string load = "select * from sentitems where receiver_email = '" + login.user_email + "' order by item_id DESC";
+            string load = "select item_id,item_name,status from sentitems where receiver_email = '" + login.user_email + "' order by item_id DESC";
             MySqlCommand com = new MySqlCommand(load, con);
-            MySqlDataAdapter da;
+           
             DataTable table = new DataTable();
+            MySqlDataReader reader;
             try
             {
                 con.Open();
-                //taking the items from the database
-                da = new MySqlDataAdapter(com);
-                da.Fill(table);
-               
-                for(int j=0; j<table.Rows.Count; j++)
+                reader = com.ExecuteReader();
+                table.Load(reader);
+                reader.Close();
+                count = table.Rows.Count;
+                if (count == 0)
                 {
+                    //a lable to hold the name of the item
+                    Label item = new Label();
+                    item = new Label();
+                    item.AutoSize = true;
+                    item.ForeColor = Color.FromArgb(235, 60, 0);
+                    item.Font = new Font("Cambria", 15, FontStyle.Bold);
+                    item.Text = "Sorry, You Have No Items To View -:)";
+
+                    //seperator for the emails
+                    BunifuSeparator spr = new BunifuSeparator();
+                    spr.LineThickness = 2;
+                    spr.Height = 1;
+                    spr.Anchor = (AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right);
+                    spr.LineColor = Color.FromArgb(0, 122, 204);
+                    spr.Transparency = 50;
+
+                    //a panel to catch the rows
+                    FlowLayoutPanel fly = new FlowLayoutPanel();
+                    fly.Height = 40;
+                    fly.Width = 850;
+                    fly.AutoSize = true;
+                    fly.FlowDirection = FlowDirection.LeftToRight;
+                    fly.WrapContents = false;
+
+                    //adding the controls to the dynamic panel
+                    fly.Controls.Add(item);
+
+                    //adding the pannel to the mother flowpanel
+                    flowLayoutPanel1.Controls.Add(fly);
+                    flowLayoutPanel1.Controls.Add(spr);
+
+                }
+                else
+                {
+                reader = com.ExecuteReader();
+                while (reader.Read())
+                {
+                    //taking the item id
+                    string item_id = reader.GetString("item_id");
+                    //taking th enam of the item
+                    string item_name = reader.GetString("item_name");
+                    //checking the status of the item
+                    string status = reader.GetString("status");
+
                     //checking if the item is new(never opened)
-                    if(table.Rows[j][6].ToString() == "New")
+                    if (status == "New")
                     {
                         //creating a sign to show the item is new
                         Label sign = new Label();
                         sign.Text = "New";
                         sign.Font = new Font("Cambria", 8, FontStyle.Bold);
                         sign.ForeColor = Color.DarkGreen;
-                       
+
                         //a lable to hold the name of the item
                         Label item = new Label();
                         item = new Label();
-                        item.Name = table.Rows[j][0].ToString();
-                      
-                        item.ForeColor = Color.FromArgb(30,0,40);
+                        item.Name = item_id;
+                        item.Width = 500;
+                        item.ForeColor = Color.FromArgb(30, 0, 40);
                         item.Font = new Font("Cambria", 12, FontStyle.Bold);
-                        item.Text = table.Rows[j][2].ToString();
+                        item.Text = item_name;
 
                         //creating the butto to download the item
                         // Download Button
                         BunifuFlatButton bt = new BunifuFlatButton();
-                        bt.Name = table.Rows[j][0].ToString();
+                        bt.Name = item_id;
                         bt.Text = "Download";
                         bt.Height = 30;
                         bt.Width = 120;
-                       
+
                         bt.Normalcolor = Color.FromArgb(0, 122, 204);
                         bt.OnHovercolor = Color.FromArgb(32, 9, 191);
                         bt.Activecolor = Color.FromArgb(0, 122, 204);
@@ -80,7 +125,7 @@ namespace OnlineMongo
 
                         // Delete Button
                         BunifuFlatButton bt1 = new BunifuFlatButton();
-                        bt1.Name = table.Rows[j][0].ToString();
+                        bt1.Name = item_id;
                         bt1.Text = "Delete";
                         bt1.Height = 30;
                         bt1.Width = 120;
@@ -91,6 +136,14 @@ namespace OnlineMongo
                         bt1.TextAlign = ContentAlignment.MiddleCenter;
                         bt1.BorderRadius = 5;
                         bt1.Click += new EventHandler(deletebtn_Click);
+
+                        //seperator for the emails
+                        BunifuSeparator spr = new BunifuSeparator();
+                        spr.LineThickness = 2;
+                        spr.Height = 1;
+                        spr.Anchor = (AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right);
+                        spr.LineColor = Color.FromArgb(235, 60, 0);
+                        spr.Transparency = 50;
 
                         //a panel to catch the rows
                         FlowLayoutPanel fly = new FlowLayoutPanel();
@@ -108,8 +161,9 @@ namespace OnlineMongo
 
                         //adding the pannel to the mother flowpanel
                         flowLayoutPanel1.Controls.Add(fly);
+                        flowLayoutPanel1.Controls.Add(spr);
 
-                      
+
 
                     }
                     else
@@ -122,23 +176,23 @@ namespace OnlineMongo
                         //a lable to hold the name of the item
                         Label item = new Label();
                         item = new Label();
-                        item.Name = table.Rows[j][0].ToString();
-                      
-                        item.ForeColor = Color.FromArgb(30, 0, 40);
-                        item.Font = new Font("Cambria", 12, FontStyle.Bold);
-                        item.Text = table.Rows[j][2].ToString();
+                        item.Name = item_id;
+                        item.Width = 500;
+                        item.ForeColor = Color.FromArgb(129, 129, 131);
+                        item.Font = new Font("Cambria", 12, FontStyle.Regular);
+                        item.Text = item_name;
 
                         //creating the butto to download the item
                         //Button
                         BunifuFlatButton bt = new BunifuFlatButton();
-                        bt.Name = table.Rows[j][0].ToString();
+                        bt.Name = item_id;
                         bt.Text = "Download";
                         bt.Height = 30;
                         bt.Width = 120;
-                       
-                        bt.Normalcolor = Color.FromArgb(0, 122, 204);
-                        bt.OnHovercolor = Color.FromArgb(32, 9, 191);
-                        bt.Activecolor = Color.FromArgb(0, 122, 204);
+
+                        bt.Normalcolor = Color.DarkGray;
+                        bt.OnHovercolor = Color.DimGray;
+                        bt.Activecolor = Color.DarkGray;
                         bt.Iconimage = null;
                         bt.TextAlign = ContentAlignment.MiddleCenter;
                         bt.BorderRadius = 5;
@@ -146,17 +200,26 @@ namespace OnlineMongo
 
                         // Delete Button
                         BunifuFlatButton bt1 = new BunifuFlatButton();
-                        bt1.Name = table.Rows[j][0].ToString();
+                        bt1.Name = item_id;
                         bt1.Text = "Delete";
                         bt1.Height = 30;
                         bt1.Width = 120;
-                        bt1.Normalcolor = Color.FromArgb(0, 122, 204);
-                        bt1.OnHovercolor = Color.FromArgb(32, 9, 191);
-                        bt1.Activecolor = Color.FromArgb(0, 122, 204);
+                        bt1.Normalcolor = Color.DarkGray;
+                        bt1.OnHovercolor = Color.DimGray;
+                        bt1.Activecolor = Color.DarkGray;
                         bt1.Iconimage = null;
                         bt1.TextAlign = ContentAlignment.MiddleCenter;
                         bt1.BorderRadius = 5;
                         bt1.Click += new EventHandler(deletebtn_Click);
+
+                        //seperator for the emails
+                        BunifuSeparator spr = new BunifuSeparator();
+                        spr.LineThickness = 2;
+                        spr.Height = 1;
+                        spr.Anchor = (AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right);
+                        spr.LineColor = Color.FromArgb(235, 60, 0);
+                        spr.Transparency = 50;
+
 
                         //a panel to catch the rows
                         FlowLayoutPanel fly = new FlowLayoutPanel();
@@ -174,18 +237,24 @@ namespace OnlineMongo
 
                         //adding the pannel to the mother flowpanel
                         flowLayoutPanel1.Controls.Add(fly);
+                        flowLayoutPanel1.Controls.Add(spr);
 
 
                     }
-                    da.Dispose();
+
+
+
+
                 }
+            }
+                reader.Close();
 
             }
             catch(MySqlException ex)
             {
                 MessageBox.Show(ex.Message);
             }
-
+            con.Close();
         }
 
         //a function to handle download button events
@@ -197,7 +266,7 @@ namespace OnlineMongo
 
             SaveFileDialog save = new SaveFileDialog();
             save.Filter = "(*.pdf)|*.PDF";
-            string load = "select * from sentitems where item_id = '" + button.Name + "'";
+            string load = "select * from sentitems where item_id = '" + button.Name + "' and receiver_email = '"+login.user_email+"'";
             string update = "update sentitems set status = 'Read' where item_id = '" + button.Name + "' ";
             MySqlCommand com = new MySqlCommand(load, con);
             MySqlCommand com1 = new MySqlCommand(update, con);

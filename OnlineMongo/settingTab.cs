@@ -176,6 +176,7 @@ namespace OnlineMongo
                                 saveBtn.Visible = false;
                                 cancelBtn.Visible = false;
                                 editBtn.Visible = true;
+                            myProfile.check = true;
                             }
                            
                         }
@@ -208,6 +209,7 @@ namespace OnlineMongo
                             saveBtn.Visible = false;
                             cancelBtn.Visible = false;
                             editBtn.Visible = true;
+                        myProfile.check = true;
                         
                     }
                     else

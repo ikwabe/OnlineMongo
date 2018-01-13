@@ -40,43 +40,41 @@ namespace OnlineMongo
         {
             MySqlConnection con = new MySqlConnection();
             con.ConnectionString = login.dbConnection;
-            string readBooks = "select * from myclass where user_id = '"+ login.user_id +"'";
-            MySqlDataAdapter da;
+            string readBooks = "select book_id, book_name from myclass where user_id = '"+ login.user_id +"'";
+           
             MySqlCommand com = new MySqlCommand(readBooks, con);
-            DataTable table = new DataTable();
-            
+           
+            MySqlDataReader reader;
 
             try
             {
                 con.Open();
-                //Retreaving Book name
-                da = new MySqlDataAdapter(com);
-                da.Fill(table);
-                for (int i = 0; i < table.Rows.Count; i++)
-                {
-                    //Take the book
-                    string Tittle = table.Rows[i][3].ToString();
-                    //Button
-                    BunifuFlatButton book = new BunifuFlatButton();
-                    book.Name = table.Rows[i][0].ToString();
-                    book.TextFont = new Font("Cambria", 12, FontStyle.Bold);
-                    book.Textcolor = Color.FromArgb(30,0,40);
-                    book.Text = Tittle;
-                    book.AutoSize = true;
-                    book.Normalcolor = Color.Silver;
-                    book.OnHovercolor = Color.FromArgb(32, 9, 191);
-                    book.Activecolor = Color.DarkGreen;
-                    book.Iconimage = null;
-                    book.TextAlign = ContentAlignment.TopLeft;
-                    book.BorderRadius = 5;
-                    book.Click += new EventHandler(book_Click);
-                    
-                    
+               
+                    reader = com.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        //take the book name
+                        string Tittle = reader.GetString("book_name");
+                        //take the book id
+                        string book_id = reader.GetString("book_id");
+                        //Button
+                        BunifuFlatButton book = new BunifuFlatButton();
+                        book.Name = book_id;
+                        book.TextFont = new Font("Cambria", 12, FontStyle.Bold);
+                        book.Textcolor = Color.FromArgb(30, 0, 40);
+                        book.Text = Tittle;
+                        book.AutoSize = true;
+                        book.Normalcolor = Color.Silver;
+                        book.OnHovercolor = Color.FromArgb(32, 9, 191);
+                        book.Activecolor = Color.DarkGreen;
+                        book.Iconimage = null;
+                        book.TextAlign = ContentAlignment.TopLeft;
+                        book.BorderRadius = 5;
+                        book.Click += new EventHandler(book_Click);
+                        flowLayoutPanel1.Controls.Add(book);
 
-                    flowLayoutPanel1.Controls.Add(book);
-                   
-
-                }
+                    }
+                    
 
                 }
             catch (MySqlException ex)
@@ -320,6 +318,7 @@ namespace OnlineMongo
                         rd = com.ExecuteReader();
                         rd.Close();
                         loadBookTimer.Start();
+                        Bcheck = false;
                     }
                     else
                     {
@@ -430,6 +429,7 @@ namespace OnlineMongo
                         rd = com.ExecuteReader();
                         rd.Close();
                         loadLectureTimer.Start();
+                        Lcheck = false;
                     }
                     else
                     {
@@ -561,6 +561,7 @@ namespace OnlineMongo
                             videoPlayer.Visible = false;
                             hideVideoBtn.Visible = false;
                             videoPlayer.Ctlcontrols.stop();
+                            Vcheck = false;
 
                         }
                         //the video name exist only in the database deletion perfomed
@@ -571,6 +572,7 @@ namespace OnlineMongo
                             videoPlayer.Visible = false;
                             hideVideoBtn.Visible = false;
                             videoPlayer.Ctlcontrols.stop();
+                            Vcheck = false;
 
                         }
                     }

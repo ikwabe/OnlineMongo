@@ -310,12 +310,12 @@ namespace OnlineMongo
             
 
             //reyrieve new emails
-            emailCheckTimer.Start();
+           emailCheckTimer.Start();
             check = true;
             iCheck = true;
-            soundTimer.Start();
+          soundTimer.Start();
             //maximize the window
-            maximize();
+           // maximize();
             emailNumberLabel.Visible = true;
 
             //creating Directory for the app Data.
@@ -739,41 +739,33 @@ namespace OnlineMongo
         int numb;
         private void loadEmail()
         {
-            MySqlDataAdapter ad;
+           
             MySqlConnection con = new MySqlConnection();
             con.ConnectionString = login.dbConnection;
-            string detail = "select * from users where username = '" + login.txt.Text + "'";
-
-            MySqlCommand com = new MySqlCommand(detail, con);
+           
             try
             {
 
                 con.Open();
-
-                ad = new MySqlDataAdapter(com);
-                //taking email to the table for searchimg its corresponding messages in sentmail table
-                DataTable table = new DataTable();
-                ad.Fill(table);
-                string userEmail = table.Rows[0][3].ToString();
-                ad.Dispose();
-
                 //reading all emails correspond to the user email
-                string readEmail = "select mailsubject,senderemail from sentmail where receiveremail = '" + userEmail + "'";
-                string readMesage = "select * from sentmail where receiveremail = '" + userEmail + "' order by sentmail_id desc";
+                string readMesage = "select status from sentmail where receiveremail = '" + login.user_email + "' order by sentmail_id desc";
                 //for reading the message in the file
-                MySqlCommand com2 = new MySqlCommand(readMesage, con);
+                MySqlCommand com = new MySqlCommand(readMesage, con);
+                MySqlDataReader reader;
+                
+                DataTable table = new DataTable();
 
-                ad = new MySqlDataAdapter(com2);
-                DataTable table2 = new DataTable();
-                ad.Fill(table2);
+                reader = com.ExecuteReader();
+                table.Load(reader);
+                reader.Close();
                 int j = 0;
                 
 
                 
-                for (int i = 0; i < table2.Rows.Count; i++)
+                for (int i = 0; i < table.Rows.Count; i++)
                 {
                     //the email is new
-                    if (table2.Rows[i][5].ToString() == "New")
+                    if (table.Rows[i][0].ToString() == "New")
                     {
                        
                         j++;
@@ -820,7 +812,6 @@ namespace OnlineMongo
                     k = 1;
                 }
 
-                ad.Dispose();
 
             }
             catch (MySqlException ex)
@@ -836,12 +827,11 @@ namespace OnlineMongo
 
         }
 
-
         private void loadItems()
         {
             MySqlConnection con = new MySqlConnection();
             con.ConnectionString = login.dbConnection;
-            string load = "select * from sentitems where status = 'New'";
+            string load = "select status from sentitems where status = 'New' and receiver_email = '" + login.user_email + "'";
             MySqlCommand com = new MySqlCommand(load, con);
             MySqlDataAdapter da;
             DataTable table = new DataTable();
@@ -875,25 +865,9 @@ namespace OnlineMongo
         //reading the new emails
         private void emailCheckTimer_Tick(object sender, EventArgs e)
         {
-            if(check == true)
-            {
-                loadEmail();
-                check = false;
-            }
-            else
-            {
-
-            }
-            if(iCheck == true)
-            {
-                loadItems();
-                iCheck = false;
-            }
-            else
-            {
-
-            }
-            
+          //loading the emails
+           loadEmail();
+                  
         }
 
 
@@ -924,6 +898,12 @@ namespace OnlineMongo
         {
             items item = new items();
             item.Show();
+        }
+
+        private void itemTimer_Tick(object sender, EventArgs e)
+        {
+            //loading the items
+            loadItems();
         }
     }
 }

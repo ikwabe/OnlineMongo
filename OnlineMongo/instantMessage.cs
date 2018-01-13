@@ -22,23 +22,24 @@ namespace OnlineMongo
         //a function to load email of the user
         private void loadEmail()
         {
-            MySqlDataAdapter ad;
+            
             MySqlConnection con = new MySqlConnection();
             con.ConnectionString = login.dbConnection;
-            string detail = "select * from users where user_id = '" + friendtb.user_id + "'";
+            string detail = "select email from users where user_id = '" + friendtb.user_id + "'";
             MySqlCommand com = new MySqlCommand(detail, con);
-
+            MySqlDataReader reader;
             try
             {
 
                 con.Open();
-                // MySqlDataReader reader;
-                ad = new MySqlDataAdapter(com);
-                // reader = com.ExecuteReader();
-                DataTable table = new DataTable();
-                ad.Fill(table);
-                toLabel.Text = table.Rows[0][3].ToString();
-                ad.Dispose();
+               //reading the email.
+                reader = com.ExecuteReader();
+                while (reader.Read())
+                {
+                    string email = reader.GetString("email");
+                    toLabel.Text = email;
+                }
+                reader.Close();
             }
             catch (MySqlException ex)
             {
@@ -50,23 +51,25 @@ namespace OnlineMongo
         //for reply in inbox 
         private void replyEmail()
         {
-            MySqlDataAdapter ad;
+            
             MySqlConnection con = new MySqlConnection();
             con.ConnectionString = login.dbConnection;
-            string detail = "select * from sentmail where sentmail_id = '" + inbonTab.selectedMail + "' ";
+            string detail = "select senderemail from sentmail where sentmail_id = '" + inbonTab.selectedMail + "' ";
             MySqlCommand com = new MySqlCommand(detail, con);
 
+            MySqlDataReader reader;
             try
             {
 
                 con.Open();
-                // MySqlDataReader reader;
-                ad = new MySqlDataAdapter(com);
-                // reader = com.ExecuteReader();
-                DataTable table = new DataTable();
-                ad.Fill(table);
-                toLabel.Text = table.Rows[0][3].ToString();
-                ad.Dispose();
+                //reading the email.
+                reader = com.ExecuteReader();
+                while (reader.Read())
+                {
+                    string email = reader.GetString("senderemail");
+                    toLabel.Text = email;
+                }
+                reader.Close();
             }
             catch (MySqlException ex)
             {
@@ -78,23 +81,25 @@ namespace OnlineMongo
         //a function for messaging a friend from viewing the ptofile
         private void sendMessageFromViewProfile()
         {
-            MySqlDataAdapter ad;
+            
             MySqlConnection con = new MySqlConnection();
             con.ConnectionString = login.dbConnection;
-            string detail = "select * from users where user_id = '" + friendtb.user_id + "'";
+            string detail = "select email from users where user_id = '" + friendtb.user_id + "'";
             MySqlCommand com = new MySqlCommand(detail, con);
 
+            MySqlDataReader reader;
             try
             {
 
                 con.Open();
-                // MySqlDataReader reader;
-                ad = new MySqlDataAdapter(com);
-                // reader = com.ExecuteReader();
-                DataTable table = new DataTable();
-                ad.Fill(table);
-                toLabel.Text = table.Rows[0][3].ToString();
-                ad.Dispose();
+                //reading the email.
+                reader = com.ExecuteReader();
+                while (reader.Read())
+                {
+                    string email = reader.GetString("email");
+                    toLabel.Text = email;
+                }
+                reader.Close();
             }
             catch (MySqlException ex)
             {
@@ -106,23 +111,25 @@ namespace OnlineMongo
         //a function for messaging a user from viewing the ptofile on post Tab
         private void sendMessageFromPostProfile()
         {
-            MySqlDataAdapter ad;
+            
             MySqlConnection con = new MySqlConnection();
             con.ConnectionString = login.dbConnection;
-            string detail = "select * from users where user_id = '" + postb.user_id + "'";
+            string detail = "select email from users where user_id = '" + postb.user_id + "'";
             MySqlCommand com = new MySqlCommand(detail, con);
 
+            MySqlDataReader reader;
             try
             {
 
                 con.Open();
-                // MySqlDataReader reader;
-                ad = new MySqlDataAdapter(com);
-                // reader = com.ExecuteReader();
-                DataTable table = new DataTable();
-                ad.Fill(table);
-                toLabel.Text = table.Rows[0][3].ToString();
-                ad.Dispose();
+                //reading the email.
+                reader = com.ExecuteReader();
+                while (reader.Read())
+                {
+                    string email = reader.GetString("email");
+                    toLabel.Text = email;
+                }
+                reader.Close();
             }
             catch (MySqlException ex)
             {
@@ -207,21 +214,14 @@ namespace OnlineMongo
             }
 
 
-            string sendmail = "select * from users where user_id = '" + login.user_id + "'";
+           
 
-            //command for retreiving email from the database
-            MySqlCommand com = new MySqlCommand(sendmail, con);
-            MySqlDataAdapter ad;
-
+            
             try
             {
                 con.Open();
-                //retrieving sender email from the database
-                ad = new MySqlDataAdapter(com);
-                DataTable table = new DataTable();
-                ad.Fill(table);
-                senderEmail = table.Rows[0][3].ToString();
-                ad.Dispose();
+                //the login email
+                senderEmail = login.user_email;
                 string subject = subjectTextBox1 + "(By " + login.txt.Text + ")";
                 string insert = "insert into sentmail (mailsubject,sentmsg,senderemail,receiveremail,status) values ('" + subject + "', @sentmsg,'" + senderEmail + "', '" + toLabel.Text + "','New')";
                 byte[] mail = null;
