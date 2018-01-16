@@ -136,7 +136,7 @@ namespace OnlineMongo
                                     }
                                     else
                                     {
-                                        MessageBox.Show("The Password should contain at least later, number,special character and more than 6 characters ");
+                                        MessageBox.Show("The Password should contain at least letter, number,special character and should be more than 6 characters ");
                                     }
                                 }
                             }

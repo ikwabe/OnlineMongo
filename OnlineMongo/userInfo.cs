@@ -22,6 +22,7 @@ namespace OnlineMongo
         public static bool reply = false;
         private void closeBtn_Click(object sender, EventArgs e)
         {
+            postb.postCheck = true;
             this.Close();
         }
 

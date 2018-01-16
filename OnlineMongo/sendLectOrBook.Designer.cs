@@ -100,7 +100,7 @@
             this.emailTxt.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.emailTxt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.emailTxt.Font = new System.Drawing.Font("Cambria", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.emailTxt.Location = new System.Drawing.Point(50, 154);
+            this.emailTxt.Location = new System.Drawing.Point(50, 148);
             this.emailTxt.Name = "emailTxt";
             this.emailTxt.Size = new System.Drawing.Size(321, 30);
             this.emailTxt.TabIndex = 50;

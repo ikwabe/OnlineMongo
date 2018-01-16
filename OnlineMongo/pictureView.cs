@@ -262,6 +262,7 @@ namespace OnlineMongo
 
         private void CancelBtn_Click(object sender, EventArgs e)
         {
+            postb.postCheck = true;
             this.Close();
         }
 

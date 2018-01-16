@@ -23,15 +23,16 @@ namespace OnlineMongo
         public static bool sound = false;
         //for item check
         public static bool iCheck = false;
+       
         string currentComputerUserName = Environment.UserName;
         //a function to download the tone from the database
        
         private void mnBtn_Click(object sender, EventArgs e)
         {
-           
+          
             if(panel2.Width == 50)
             {
-                timer1.Start();
+               // timer1.Start();
                 panel2.Visible = false;
                 panel2.Width = 250;
                 mnBtn.Location = new Point(222, mnBtn.Location.Y);
@@ -66,7 +67,7 @@ namespace OnlineMongo
                 postb.Instance.Width = 1015;
                 classPage.Instance.Width = 1015;
                 friendtb.Instance.Width = 1015;
-                postb.postCheck = false;
+              
 
 
             }
@@ -84,7 +85,7 @@ namespace OnlineMongo
 
         private void photos_Click(object sender, EventArgs e)
         {
-            postb.postCheck = false;
+          
             line.Width = photos.Width;
                 line.Left = photos.Left;
             line.Visible = true;
@@ -128,7 +129,8 @@ namespace OnlineMongo
 
         private void post_Click(object sender, EventArgs e)
         {
-            postb.postCheck = true;
+            
+           
             line.Width = post.Width;
             line.Left = post.Left;
             line.Visible = true;
@@ -168,7 +170,7 @@ namespace OnlineMongo
 
         private void friends_Click(object sender, EventArgs e)
         {
-            postb.postCheck = false;
+          
             line.Visible = true;
             line.Width = friends.Width;
             line.Left = friends.Left;
@@ -207,7 +209,7 @@ namespace OnlineMongo
 
         private void about_Click(object sender, EventArgs e)
         {
-            postb.postCheck = false;
+          
             line.Visible = true;
             line.Width = about.Width;
             line.Left = about.Left;
@@ -248,7 +250,6 @@ namespace OnlineMongo
 
         private void home_Click(object sender, EventArgs e)
         {
-            postb.postCheck = false;
             line.Visible = true;
             line.Width = home.Width;
             line.Left = home.Left;
@@ -302,6 +303,8 @@ namespace OnlineMongo
                 if (!Directory.Exists(rootDirectory + "\\Books")) { Directory.CreateDirectory(rootDirectory + "\\Books"); }
                 if (!Directory.Exists(rootDirectory + "\\Profile Photo(s)")) { Directory.CreateDirectory(rootDirectory + "\\Profile Photo(s)"); }
                 if (!Directory.Exists(rootDirectory + "\\Ring Tone")) { Directory.CreateDirectory(rootDirectory + "\\Ring Tone"); }
+                if (!Directory.Exists(rootDirectory + "\\Item(s)")) { Directory.CreateDirectory(rootDirectory + "\\Item(s)"); }
+                if (!Directory.Exists(rootDirectory + "\\Image")) { Directory.CreateDirectory(rootDirectory + "\\Image"); }
             }
             catch
             {
@@ -360,7 +363,7 @@ namespace OnlineMongo
 
         private void myProfileBtn_Click(object sender, EventArgs e)
         {
-            postb.postCheck = false;
+          
             pic.Instance.Visible = false;
             line.Visible = false;
             aboutb.Instance.Visible = false;
@@ -399,7 +402,8 @@ namespace OnlineMongo
 
         private void myClassBtn_Click(object sender, EventArgs e)
         {
-            postb.postCheck = false;
+            iCheck = true;
+          
             pic.Instance.Visible = false;
             line.Visible = false;
             aboutb.Instance.Visible = false;
@@ -443,18 +447,17 @@ namespace OnlineMongo
 
         private void bunifuImageButton2_Click(object sender, EventArgs e)
         {
-            postb.postCheck = false;
+          
             this.WindowState = FormWindowState.Minimized;
-            pinWindow pinwd = new pinWindow();
-            pinwd.Show();
-            pinwd.WindowState = FormWindowState.Minimized;
-            this.Hide();
+            //pinWindow pinwd = new pinWindow();
+            //pinwd.Show();
+            //pinwd.WindowState = FormWindowState.Minimized;
            
         }
 
         private void composeBtn_Click(object sender, EventArgs e)
         {
-            postb.postCheck = false;
+          
             pic.Instance.Visible = false;
             line.Visible = false;
             aboutb.Instance.Visible = false;
@@ -493,7 +496,7 @@ namespace OnlineMongo
 
         private void inboxBtn_Click(object sender, EventArgs e)
         {
-            postb.postCheck = false;
+          
             pic.Instance.Visible = false;
             line.Visible = false;
             aboutb.Instance.Visible = false;
@@ -532,7 +535,7 @@ namespace OnlineMongo
 
         private void draftBtn_Click(object sender, EventArgs e)
         {
-            postb.postCheck = false;
+          
             pic.Instance.Visible = false;
             line.Visible = false;
             aboutb.Instance.Visible = false;
@@ -571,7 +574,7 @@ namespace OnlineMongo
 
         private void trashBtn_Click(object sender, EventArgs e)
         {
-            postb.postCheck = false;
+          
             pic.Instance.Visible = false;
             line.Visible = false;
             aboutb.Instance.Visible = false;
@@ -610,7 +613,8 @@ namespace OnlineMongo
 
         private void settingBtn_Click(object sender, EventArgs e)
         {
-            postb.postCheck = false;
+            iCheck = true;
+          
             pic.Instance.Visible = false;
             line.Visible = false;
             aboutb.Instance.Visible = false;
@@ -651,7 +655,7 @@ namespace OnlineMongo
 
         private void sentBtn_Click(object sender, EventArgs e)
         {
-            postb.postCheck = false;
+          
             pic.Instance.Visible = false;
             line.Visible = false;
             aboutb.Instance.Visible = false;
@@ -733,14 +737,14 @@ namespace OnlineMongo
         //restoreDown Button
         private void restoreDownBtn_Click(object sender, EventArgs e)
         {
-            postb.postCheck = false;
+          
             restoreDown();
         }
 
         //maximize button
         private void maximizeBtn_Click(object sender, EventArgs e)
         {
-            postb.postCheck = false;
+          
             maximize();
         }
 
@@ -843,9 +847,10 @@ namespace OnlineMongo
             con.ConnectionString = login.dbConnection;
 
         }
-
+       private int[] chek = new int[1];
         private void loadItems()
         {
+           
             MySqlConnection con = new MySqlConnection();
             con.ConnectionString = login.dbConnection;
             string load = "select status from sentitems where status = 'New' and receiver_email = '" + login.user_email + "'";
@@ -859,10 +864,20 @@ namespace OnlineMongo
                 da = new MySqlDataAdapter(com);
                 da.Fill(table);
                 //checking if the new item exist
-                if(table.Rows.Count > 0)
+                if (table.Rows.Count > 0)
                 {
                     onlinePic.Visible = true;
 
+                    if(chek[0] < table.Rows.Count || chek[0] > table.Rows.Count)
+                    {
+                        System.Media.SoundPlayer player = new System.Media.SoundPlayer(Properties.Resources.tone);
+                        player.Play();
+                        chek[0] = table.Rows.Count;
+                    }
+                    else
+                    {
+
+                    }
                 }
                 else
                 {
@@ -894,7 +909,7 @@ namespace OnlineMongo
            
             if (sound == true)
             {
-                System.Media.SoundPlayer player = new System.Media.SoundPlayer(Properties.Resources.tone);
+                System.Media.SoundPlayer player = new System.Media.SoundPlayer(Properties.Resources.tone1);
                 player.Play();
                 sound = false;
             }
@@ -907,14 +922,14 @@ namespace OnlineMongo
         //a button for chat room
         private void chatBtn_Click(object sender, EventArgs e)
         {
-            postb.postCheck = false;
+          
             chatRoom cht = new chatRoom();
             cht.Show();
         }
 
         private void itemBtn_Click(object sender, EventArgs e)
         {
-            postb.postCheck = false;
+          
             items item = new items();
             item.Show();
         }
@@ -922,7 +937,15 @@ namespace OnlineMongo
         private void itemTimer_Tick(object sender, EventArgs e)
         {
             //loading the items
-            loadItems();
+            if(iCheck == true)
+            {
+                loadItems();
+                iCheck = false;
+            }
+            {
+
+            }
+            
         }
     }
 }

@@ -39,8 +39,10 @@ namespace OnlineMongo
         int k = 0;
 
         public static bool postCheck = false;
+        BunifuCustomTextbox txt;
         private void photo_Click(object sender, EventArgs e)
         {
+            postb.chek = false;
             line.Visible = true;
             line.Width = photo.Width;
             line.Left = photo.Left;
@@ -53,7 +55,7 @@ namespace OnlineMongo
 
         private void postb_Load(object sender, EventArgs e)
         {
-            postTimer.Start();
+            loadPost();
             friendTimer.Start();
             instPostTimer.Start();
         }
@@ -500,8 +502,8 @@ namespace OnlineMongo
                         bt[j] = new BunifuFlatButton();
                         bt[j].Text = "Comment";
                         bt[j].Name = post_id;
-                        bt[j].Height = 40;
-                        bt[j].Width = 300;
+                        bt[j].Height = 25;
+                        bt[j].Width = 100;
                         bt[j].Normalcolor = Color.FromArgb(0, 122, 204);
                         bt[j].OnHovercolor = Color.FromArgb(32, 9, 191);
                         bt[j].Activecolor = Color.FromArgb(0, 122, 204);
@@ -511,32 +513,55 @@ namespace OnlineMongo
                         bt[j].Click += new EventHandler(commentPostBtn_Click);
 
                         //TextBox
-                        BunifuCustomTextbox txt = new BunifuCustomTextbox();
-                        txt.Name = "TextBox" + i;
+                        txt = new BunifuCustomTextbox();
+                        txt.Name = post_id;
                         txt.Width = 300;
-                        txt.Height = 30;
+                        txt.Height = 25;
                         txt.Multiline = true;
-                        txt.Font = new Font("Cambria", 14);
+                        txt.Font = new Font("Cambria", 11);
                         txt.BackColor = Color.FromArgb(240, 240, 240);
                         txt.BorderStyle = BorderStyle.FixedSingle;
                         txt.ForeColor = Color.Black;
                         txt.BorderColor = Color.FromArgb(32, 9, 191);
                         txt.TextChanged += new EventHandler(txt_TextChanged);
 
-                        //adding button to the panel
-                        flowLayoutPanel1.Controls.Add(bt[j]);
+                        //a panel for photo
+                        FlowLayoutPanel photoPanel = new FlowLayoutPanel();
 
-                        //adding Textbox
-                        flowLayoutPanel1.Controls.Add(txt);
+                        photoPanel.AutoSize = true;
+                        photoPanel.Controls.Add(phot[j]);
 
-                        //taking photo to panel
-                        flowLayoutPanel1.Controls.Add(phot[j]);
+                        //a panel for comment and button
+                        FlowLayoutPanel commentPanel = new FlowLayoutPanel();
+                        commentPanel.AutoSize = true;
+                        commentPanel.FlowDirection = FlowDirection.LeftToRight;
+                        commentPanel.WrapContents = false;
+                        commentPanel.Controls.Add(txt);
+                        commentPanel.Controls.Add(bt[j]);
 
-                        //taking lable to the panel
-                        flowLayoutPanel1.Controls.Add(lb);
+                        //a panel for caption
+                        FlowLayoutPanel captionPanel = new FlowLayoutPanel();
+                        captionPanel.AutoSize = true;
+
+                        captionPanel.Controls.Add(lb);
+
+                        //a panel for caption
+                        FlowLayoutPanel unamePanel = new FlowLayoutPanel();
+                        unamePanel.AutoSize = true;
+
+                        unamePanel.Controls.Add(uname);
+
+                        ////adding comment and button to the panel
+                        flowLayoutPanel1.Controls.Add(commentPanel);
+
+                        ////taking photo to panel
+                        flowLayoutPanel1.Controls.Add(photoPanel);
+
+                        ////taking lable to the panel
+                        flowLayoutPanel1.Controls.Add(captionPanel);
 
                         //adding user name to the panel
-                        flowLayoutPanel1.Controls.Add(uname);
+                        flowLayoutPanel1.Controls.Add(unamePanel);
 
 
                         //update the poast
@@ -641,8 +666,8 @@ namespace OnlineMongo
                 bt[j] = new BunifuFlatButton();
                 bt[j].Text =  "Comment";
                 bt[j].Name = post_id;
-                bt[j].Height = 40;
-                bt[j].Width = 300;
+                bt[j].Height = 25;
+                bt[j].Width = 100;
                 bt[j].Normalcolor = Color.FromArgb(0, 122, 204);
                 bt[j].OnHovercolor = Color.FromArgb(32, 9, 191);
                 bt[j].Activecolor = Color.FromArgb(0, 122, 204);
@@ -652,32 +677,55 @@ namespace OnlineMongo
                 bt[j].Click += new EventHandler(commentPostBtn_Click);
 
                 //TextBox
-                BunifuCustomTextbox txt = new BunifuCustomTextbox();
-                txt.Name = "TextBox" + i;
+                txt = new BunifuCustomTextbox();
+                txt.Name = post_id;
                 txt.Width = 300;
-                txt.Height = 30;
+                txt.Height = 25;
                 txt.Multiline = true;
-                txt.Font = new Font("Cambria", 14);
+                txt.Font = new Font("Cambria", 11);
                 txt.BackColor = Color.FromArgb(240,240,240);
                 txt.BorderStyle = BorderStyle.FixedSingle;
                 txt.ForeColor = Color.Black;
                 txt.BorderColor = Color.FromArgb(32,9,191);
                 txt.TextChanged += new EventHandler(txt_TextChanged);
 
-                //adding button to the panel
-                flowLayoutPanel1.Controls.Add(bt[j]);
+                //a panel for photo
+                FlowLayoutPanel photoPanel = new FlowLayoutPanel();
+               
+                photoPanel.AutoSize = true;
+                photoPanel.Controls.Add(phot[j]);
 
-                //adding Textbox
-                flowLayoutPanel1.Controls.Add(txt);
+                //a panel for comment and button
+                FlowLayoutPanel commentPanel = new FlowLayoutPanel();
+                commentPanel.AutoSize = true;
+                commentPanel.FlowDirection = FlowDirection.LeftToRight;
+                commentPanel.WrapContents = false;
+                commentPanel.Controls.Add(txt);
+                commentPanel.Controls.Add(bt[j]);
 
-                //taking photo to panel
-                flowLayoutPanel1.Controls.Add(phot[j]);
+                //a panel for caption
+                FlowLayoutPanel captionPanel = new FlowLayoutPanel();
+                captionPanel.AutoSize = true;
+              
+                captionPanel.Controls.Add(lb);
 
-                //taking lable to the panel
-                flowLayoutPanel1.Controls.Add(lb);
+                //a panel for caption
+                FlowLayoutPanel unamePanel = new FlowLayoutPanel();
+                unamePanel.AutoSize = true;
+               
+                unamePanel.Controls.Add(uname);
+
+                ////adding comment and button to the panel
+                flowLayoutPanel1.Controls.Add(commentPanel);
+
+                ////taking photo to panel
+                flowLayoutPanel1.Controls.Add(photoPanel);
+
+                ////taking lable to the panel
+                flowLayoutPanel1.Controls.Add(captionPanel);
 
                 //adding user name to the panel
-                flowLayoutPanel1.Controls.Add(uname);
+                flowLayoutPanel1.Controls.Add(unamePanel);
                
             }
 
@@ -686,19 +734,13 @@ namespace OnlineMongo
 
         }
 
-        private void postTimer_Tick(object sender, EventArgs e)
-        {
-            postTimer.Stop();
-            loadPost();
-           
-        }
-
         private void friendTimer_Tick(object sender, EventArgs e)
         {
+            
             flowLayoutPanel2.Controls.Clear();
             showFriend();
             friendTimer.Stop();
-            
+
         }
 
         //function for add friend button 
@@ -772,10 +814,12 @@ namespace OnlineMongo
         }
 
         string comment;
+        string txtName;
         private void txt_TextChanged(object sender, EventArgs e)
         {
 
             var txt = sender as BunifuCustomTextbox;
+            txtName = txt.Name;
             comment = txt.Text;
 
 
@@ -785,8 +829,9 @@ namespace OnlineMongo
         //function for commenting the posts
         private void commentPostBtn_Click(object sender, EventArgs e)
         {
+            dashBoard.iCheck = false;
             var button = sender as BunifuFlatButton;
-            
+            postb.chek = false;
             MySqlConnection con = new MySqlConnection();
             con.ConnectionString = login.dbConnection;
             MySqlDataAdapter ad;
@@ -807,11 +852,13 @@ namespace OnlineMongo
                 string insertComment = "insert into comments(post_id,comment,date,user_id) values('" + int.Parse(button.Name) +"','"+ comment +"','"+ com_date +"','"+ user_id +"')";
                 MySqlCommand com1 = new MySqlCommand(insertComment, con);
                 MySqlDataReader rd;
-                if(comment != "" && comment != null)
+                if(comment != "" && comment != null && button.Name == txtName)
                 {
                     rd = com1.ExecuteReader();
                     rd.Close();
                     comment = null;
+                    postb.chek = true;
+                    txt.Text = null;
                 }
                 else
                 {
@@ -833,13 +880,14 @@ namespace OnlineMongo
         //function for handling picture click
         private void photoClickBtn_Click(object sender, EventArgs e)
         {
-            postb.postCheck = false;
+
+            
             var picName = sender as PictureBox;
 
             //taking the clicked PictureName to the static string
             photName = picName.Name;
             chek = true;
-            pic.chek = false;
+            pic.chek = true;
             myProfile.chek = false;
             postOption picv = new postOption();
             picv.Show();
@@ -850,30 +898,59 @@ namespace OnlineMongo
         //refresh function
         private void refreshBtn_Click(object sender, EventArgs e)
         {
-            flowLayoutPanel1.Controls.Clear();
-            postTimer.Start();
+            instLoadPost();
+        }
+
+        //a function to check if the post added
+        private void chekP()
+        {
+            
+            MySqlConnection con = new MySqlConnection();
+            con.ConnectionString = login.dbConnection;
+            MySqlDataReader rd;
+            DataTable table = new DataTable();
+            //query to check if the post is added at instant
+            string readpost = "SELECT chek FROM  post where chek = 'New' order by post_id DESC LIMIT 1";
+            MySqlCommand com = new MySqlCommand(readpost, con);
+            try
+            {
+                con.Open();
+                rd = com.ExecuteReader();
+                table.Load(rd);
+                rd.Close();
+                if (table.Rows.Count > 0)
+                {
+                   // Nps = true;
+                }
+                else
+                {
+                   // Nps = false;
+                }
+
+            }
+            catch (MySqlException ex)
+            {
+                if (ex.Number == -2)
+                {
+                    MessageBox.Show("Connection Fail");
+                }
+            }
+
         }
 
 
         //timer for instant post
         private void instPostTimer_Tick(object sender, EventArgs e)
-        {   
-            if(postCheck == true)
-            {
-                instLoadPost();
-            }
-            else
-            {
-
-            }    
-         
+        {
+                instLoadPost();   
         }
 
         private void friendRequestTimer_Tick(object sender, EventArgs e)
         {
+            friendRequestTimer.Stop();
             flowLayoutPanel2.Controls.Clear();
             friendRequest();
-            friendRequestTimer.Stop();
+            
         }
 
 //a function to show userprofile on post click
@@ -881,6 +958,7 @@ public static int user_id;
         public static bool profile = false;
         private void uname_Click(object sender, EventArgs e)
         {
+            dashBoard.iCheck = false;
             var labl = sender as Label;
             user_id = int.Parse(labl.Name);
             profile = true;
@@ -891,6 +969,8 @@ public static int user_id;
 
         private void ProfilePhoto_Click(object sender, EventArgs e)
         {
+            dashBoard.iCheck = false;
+           
             var pc = sender as PictureBox;
             user_id = int.Parse(pc.Name);
             profile = true;

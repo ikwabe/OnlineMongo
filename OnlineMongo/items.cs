@@ -26,6 +26,7 @@ namespace OnlineMongo
         }
         public static bool check = false;
         private int count;
+        string computerUserName = Environment.UserName;
         private void loadItems()
         {
             MySqlConnection con = new MySqlConnection();
@@ -186,7 +187,7 @@ namespace OnlineMongo
                         //Button
                         BunifuFlatButton bt = new BunifuFlatButton();
                         bt.Name = item_id;
-                        bt.Text = "Download";
+                        bt.Text = "View";
                         bt.Height = 30;
                         bt.Width = 120;
 
@@ -196,8 +197,8 @@ namespace OnlineMongo
                         bt.Iconimage = null;
                         bt.TextAlign = ContentAlignment.MiddleCenter;
                         bt.BorderRadius = 5;
-                        bt.Click += new EventHandler(downloadBtn_Click);
-
+                        bt.Click += new EventHandler(viewBtn_Click);
+                        
                         // Delete Button
                         BunifuFlatButton bt1 = new BunifuFlatButton();
                         bt1.Name = item_id;
@@ -212,8 +213,23 @@ namespace OnlineMongo
                         bt1.BorderRadius = 5;
                         bt1.Click += new EventHandler(deletebtn_Click);
 
-                        //seperator for the emails
-                        BunifuSeparator spr = new BunifuSeparator();
+                            //Redownload Button
+                            BunifuFlatButton bt2 = new BunifuFlatButton();
+                            bt2.Name = item_id;
+                            bt2.Text = "Re-Download";
+                            bt2.Height = 30;
+                            bt2.Width = 120;
+
+                            bt2.Normalcolor = Color.DarkGray;
+                            bt2.OnHovercolor = Color.DimGray;
+                            bt2.Activecolor = Color.DarkGray;
+                            bt2.Iconimage = null;
+                            bt2.TextAlign = ContentAlignment.MiddleCenter;
+                            bt2.BorderRadius = 5;
+                            bt2.Click += new EventHandler(downloadBtn_Click);
+
+                            //seperator for the emails
+                            BunifuSeparator spr = new BunifuSeparator();
                         spr.LineThickness = 2;
                         spr.Height = 1;
                         spr.Anchor = (AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right);
@@ -234,9 +250,10 @@ namespace OnlineMongo
                         fly.Controls.Add(item);
                         fly.Controls.Add(bt);
                         fly.Controls.Add(bt1);
+                        fly.Controls.Add(bt2);
 
-                        //adding the pannel to the mother flowpanel
-                        flowLayoutPanel1.Controls.Add(fly);
+                            //adding the pannel to the mother flowpanel
+                            flowLayoutPanel1.Controls.Add(fly);
                         flowLayoutPanel1.Controls.Add(spr);
 
 
@@ -282,28 +299,45 @@ namespace OnlineMongo
                 da.Fill(table);
                 da.Dispose();
 
-                if(save.ShowDialog() == DialogResult.OK)
-                {
+               
                     byte[] item = (byte[])table.Rows[0][1];
-
+                   
                     //saving the file in a specified directory
-                    using (Stream file = File.Create(save.FileName))
+                    using (Stream file = File.Create("C:/Users/"+computerUserName+"/AppData/Roaming/UdoRead/Item(s)/item.pdf"))
                     {
                         file.Write(item, 0, item.Length);
                     }
                     //update the status to READ
                     rd = com1.ExecuteReader();
                     rd.Close();
+                    
+                    
+                    
+
+                //uploading the item to the database after download
+                string insert = "insert into myclass (user_id,book,book_name) values ('" + login.user_id + "', @book,'" + table.Rows[0][2] + "')";
+                MySqlCommand com2 = new MySqlCommand(insert, con);
+                byte[] bytes = null;
+
+                try
+                {
+                    bytes = File.ReadAllBytes("C:/Users/" + computerUserName + "/AppData/Roaming/UdoRead/Item(s)/item.pdf");
+                    //insert the book in the database
+                    com2.Parameters.AddWithValue("@book", bytes);
+                    com2.ExecuteNonQuery();
                     //load the item again
                     check = true;
+
                     //item noticification check
                     dashBoard.iCheck = true;
+
+                    //activate boockCheckTimer
+                    classPage.bookTimerCheck = true;
                 }
-                else
+                catch
                 {
-
+                    MessageBox.Show("Download Failed.");
                 }
-
             }
             catch(MySqlException ex)
             {
@@ -311,6 +345,46 @@ namespace OnlineMongo
             }
             con.Close();
 
+        }
+
+        private void viewBtn_Click(object sender, EventArgs e)
+        {
+            var button = sender as BunifuFlatButton;
+            readerPdf rd = new readerPdf();
+           
+              
+                MySqlConnection con = new MySqlConnection();
+                con.ConnectionString = login.dbConnection;
+                string bookdetail = "select item from sentitems where item_id = '" + button.Name + "'";
+                MySqlCommand com = new MySqlCommand(bookdetail, con);
+                DataTable table = new DataTable();
+                MySqlDataReader reader;
+
+              try
+              {
+                    con.Open();
+                reader = com.ExecuteReader();
+                table.Load(reader);
+                reader.Close();
+
+                    byte[] book = (byte[])table.Rows[0][0];
+
+                            //wrinting a Pdf File C:/Users/"+currentComputerUserName+"/AppData/Roaming/UdoRead/Videos/
+                            using (Stream file = File.Create("C:/Users/" + computerUserName + "/AppData/Roaming/UdoRead/Books/book.pdf"))
+                            {
+                                file.Write(book, 0, book.Length);
+                            }
+
+                            //opening the pdf file
+                            rd.axAcroPDF1.src = "C:/Users/" + computerUserName + "/AppData/Roaming/UdoRead/Books/book.pdf";
+                            rd.Show();       
+
+                }
+                catch (MySqlException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                con.Close();
         }
 
         private void deletebtn_Click(object sender, EventArgs e)
@@ -351,7 +425,9 @@ namespace OnlineMongo
 
         private void items_Load(object sender, EventArgs e)
         {
+            this.WindowState = FormWindowState.Maximized;
             //load the items in the database
+            closeBtn.Location = new Point(1320, closeBtn.Location.Y);
             check = true;
         }
 

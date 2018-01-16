@@ -21,6 +21,7 @@ namespace OnlineMongo
 
         private void openBtn_Click(object sender, EventArgs e)
         {
+            dashBoard.iCheck = false;
             this.Hide();
             //view the picture
             pictureView picv = new pictureView();

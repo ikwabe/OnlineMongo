@@ -145,6 +145,12 @@
     <Compile Include="login.Designer.cs">
       <DependentUpon>login.cs</DependentUpon>
     </Compile>
+    <Compile Include="my List.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="my List.Designer.cs">
+      <DependentUpon>my List.cs</DependentUpon>
+    </Compile>
     <Compile Include="myProfile.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -212,6 +218,12 @@
     </Compile>
     <Compile Include="secretWord.Designer.cs">
       <DependentUpon>secretWord.cs</DependentUpon>
+    </Compile>
+    <Compile Include="sendBookOption.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sendBookOption.Designer.cs">
+      <DependentUpon>sendBookOption.cs</DependentUpon>
     </Compile>
     <Compile Include="sendLectOrBook.cs">
       <SubType>Form</SubType>
@@ -306,6 +318,9 @@
     <EmbeddedResource Include="login.resx">
       <DependentUpon>login.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="my List.resx">
+      <DependentUpon>my List.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="myProfile.resx">
       <DependentUpon>myProfile.cs</DependentUpon>
     </EmbeddedResource>
@@ -348,6 +363,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="secretWord.resx">
       <DependentUpon>secretWord.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sendBookOption.resx">
+      <DependentUpon>sendBookOption.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sendLectOrBook.resx">
       <DependentUpon>sendLectOrBook.cs</DependentUpon>
@@ -441,6 +459,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\tone.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tone2.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tone1.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

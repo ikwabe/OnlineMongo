@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using System.IO;
+using System.Drawing.Imaging;
 
 namespace OnlineMongo
 {
@@ -18,12 +19,13 @@ namespace OnlineMongo
         {
             InitializeComponent();
         }
-       
+        string computerUserName = Environment.UserName;
         private void closeBtn_Click(object sender, EventArgs e)
         {
+            postb.chek = true;
             this.Close();
         }
-
+        string location;
         private void uploadBtn_Click(object sender, EventArgs e)
         {
             panelCont();
@@ -33,6 +35,8 @@ namespace OnlineMongo
                 
                 pictureBox1.Image = Image.FromFile(openFileDialog1.FileName);
                 timer1.Start();
+                location = openFileDialog1.FileName;
+                CompressImage();
 
             }
             else
@@ -75,7 +79,7 @@ namespace OnlineMongo
                 con.Open();
                
                         byte[] images = null;
-                        FileStream stream = new FileStream(openFileDialog1.FileName, FileMode.Open, FileAccess.Read);
+                        FileStream stream = new FileStream("C:/Users/" + computerUserName + "/AppData/Roaming/UdoRead/Image/image.Jpeg", FileMode.Open, FileAccess.Read);
                         BinaryReader brs = new BinaryReader(stream);
                         images = brs.ReadBytes((int)stream.Length);   
                 MySqlDataReader reader;
@@ -118,6 +122,7 @@ namespace OnlineMongo
                     {
                         addPostToDb();
                         panelCont();
+                        postb.postCheck = true;
                         MessageBox.Show("Posted");
                        
 
@@ -134,6 +139,7 @@ namespace OnlineMongo
             {
                 addPostToDb();
                 panelCont();
+                postb.postCheck = true;
                 MessageBox.Show("Posted");
                 
 
@@ -141,6 +147,46 @@ namespace OnlineMongo
 
             
            
+        }
+
+        //resize image 
+        private void CompressImage()
+        {
+            // Get a bitmap. The using statement ensures objects  
+            // are automatically disposed from memory after use.  
+            using (Bitmap bmp1 = new Bitmap(@location))
+            {
+                ImageCodecInfo jpgEncoder = GetEncoder(ImageFormat.Jpeg);
+
+                // Create an Encoder object based on the GUID  
+                // for the Quality parameter category.  
+                System.Drawing.Imaging.Encoder myEncoder =
+                    System.Drawing.Imaging.Encoder.Quality;
+
+                // Create an EncoderParameters object.  
+                // An EncoderParameters object has an array of EncoderParameter  
+                // objects. In this case, there is only one  
+                // EncoderParameter object in the array.  
+                EncoderParameters myEncoderParameters = new EncoderParameters(1);
+
+                EncoderParameter myEncoderParameter = new EncoderParameter(myEncoder, 30L);
+                myEncoderParameters.Param[0] = myEncoderParameter;
+                bmp1.Save(@"C:/Users/" + computerUserName + "/AppData/Roaming/UdoRead/Image/image.jpeg", jpgEncoder, myEncoderParameters);
+            }
+        }
+
+       
+        private ImageCodecInfo GetEncoder(ImageFormat format)
+        {
+            ImageCodecInfo[] codecs = ImageCodecInfo.GetImageDecoders();
+            foreach (ImageCodecInfo codec in codecs)
+            {
+                if (codec.FormatID == format.Guid)
+                {
+                    return codec;
+                }
+            }
+            return null;
         }
     }
 }

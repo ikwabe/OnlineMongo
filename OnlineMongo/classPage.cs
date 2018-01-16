@@ -35,6 +35,9 @@ namespace OnlineMongo
         private static bool Bcheck = false;
         private static bool Lcheck = false;
         private static bool Vcheck = false;
+        public static bool sendBooks = false;
+        public static bool sendLectures = false;
+
         string currentComputerUserName = Environment.UserName;
         private void loadBooks()
         {
@@ -133,8 +136,8 @@ namespace OnlineMongo
         {
             MySqlConnection con = new MySqlConnection();
             con.ConnectionString = login.dbConnection;
-            string readBooks = "select * from lecture where user_id = '" + login.user_id + "'";
-            MySqlDataAdapter da;
+            string readBooks = "select lecture_id, lecture_name from lecture where user_id = '" + login.user_id + "'";
+            MySqlDataReader reader;
             MySqlCommand com = new MySqlCommand(readBooks, con);
             DataTable table = new DataTable();
 
@@ -143,12 +146,15 @@ namespace OnlineMongo
             {
                 con.Open();
                 //Retreaving Book name
-                da = new MySqlDataAdapter(com);
-                da.Fill(table);
+                
+
+                reader = com.ExecuteReader();
+                table.Load(reader);
+                reader.Close();
                 for (int i = 0; i < table.Rows.Count; i++)
                 {
                     //Take the book
-                    string Tittle = table.Rows[i][3].ToString();
+                    string Tittle = table.Rows[i][1].ToString();
                     //Button
                     BunifuFlatButton lecture = new BunifuFlatButton();
                     lecture.Name = table.Rows[i][0].ToString();
@@ -280,7 +286,7 @@ namespace OnlineMongo
                             //insert the book in the database
                             com.Parameters.AddWithValue("@book", bytes);
                             com.ExecuteNonQuery();
-                            loadBookTimer.Start();
+                            bookTimerCheck = true;
                         }
 
                     }
@@ -289,7 +295,7 @@ namespace OnlineMongo
                         //insert the book in the database
                         com.Parameters.AddWithValue("@book", bytes);
                         com.ExecuteNonQuery();
-                        loadBookTimer.Start();
+                        bookTimerCheck = true;
                     }
 
                 }
@@ -317,7 +323,7 @@ namespace OnlineMongo
                     {
                         rd = com.ExecuteReader();
                         rd.Close();
-                        loadBookTimer.Start();
+                        bookTimerCheck = true;;
                         Bcheck = false;
                     }
                     else
@@ -781,12 +787,21 @@ namespace OnlineMongo
             }
             
         }
-
+        public static bool bookTimerCheck = true;
         private void timer1_Tick(object sender, EventArgs e)
         {
-            flowLayoutPanel1.Controls.Clear();
-            loadBookTimer.Stop();
-            loadBooks();
+            if(bookTimerCheck == true)
+            {
+                flowLayoutPanel1.Controls.Clear();
+                loadBooks();
+                bookTimerCheck = false;
+            }
+            else
+            {
+
+            }
+
+            
         }
 
         private void classPage_Load(object sender, EventArgs e)
@@ -1000,21 +1015,24 @@ namespace OnlineMongo
             }
 
 
-            string sendmail = "select * from users where username = '" + login.txt.Text + "'";
+            string sendmail = "select email from users where user_id = '" + login.user_id + "'";
 
             //command for retreiving email from the database
             MySqlCommand com = new MySqlCommand(sendmail, con);
-            MySqlDataAdapter ad;
-
+           
+            MySqlDataReader reader;
             try
             {
                 con.Open();
                 //retrieving sender email from the database
-                ad = new MySqlDataAdapter(com);
+                
                 DataTable table = new DataTable();
-                ad.Fill(table);
-                senderEmail = table.Rows[0][3].ToString();
-                ad.Dispose();
+               
+                reader = com.ExecuteReader();
+                table.Load(reader);
+                reader.Close();
+                senderEmail = table.Rows[0][0].ToString();
+              
                 string subject = subjectTextBox1.Text + "(By " + login.txt.Text + ")";
                 string insert = "insert into sentmail (mailsubject,sentmsg,senderemail,receiveremail,status) values ('" + subject + "', @sentmsg,'" + senderEmail + "', '" + toTextBox1.Text + "','New')";
 
@@ -1086,23 +1104,26 @@ namespace OnlineMongo
             }
 
 
-            string sendmail = "select * from users where username = '" + login.txt.Text + "'";
+            string sendmail = "select email from users where user_id = '" + login.user_id + "'";
 
             //command for retreiving email from the database
             MySqlCommand com = new MySqlCommand(sendmail, con);
-            MySqlDataAdapter ad;
 
+            MySqlDataReader reader;
             try
             {
                 con.Open();
                 //retrieving sender email from the database
-                ad = new MySqlDataAdapter(com);
+
                 DataTable table = new DataTable();
-                ad.Fill(table);
-                senderEmail = table.Rows[0][3].ToString();
-                ad.Dispose();
-                string subject = subjectTextBox3.Text + "(By " + login.txt.Text + ")";
-                string insert = "insert into sentmail (mailsubject,sentmsg,senderemail,receiveremail,status) values ('" + subject + "', @sentmsg,'" + senderEmail + "', '" + toTextBox3.Text + "','New')";
+
+                reader = com.ExecuteReader();
+                table.Load(reader);
+                reader.Close();
+                senderEmail = table.Rows[0][0].ToString();
+
+                string subject = subjectTextBox1.Text + "(By " + login.txt.Text + ")";
+                string insert = "insert into sentmail (mailsubject,sentmsg,senderemail,receiveremail,status) values ('" + subject + "', @sentmsg,'" + senderEmail + "', '" + toTextBox1.Text + "','New')";
 
 
                 byte[] mail = null;
@@ -1117,7 +1138,7 @@ namespace OnlineMongo
                 //inserting the email text file to the database
                 com1.Parameters.AddWithValue("@sentmsg", mail);
                 com1.ExecuteNonQuery();
-                composetextBox3.Text = "";
+                composetextBox1.Text = "";
                 MessageBox.Show("Sent.");
 
 
@@ -1140,14 +1161,19 @@ namespace OnlineMongo
 
         private void sendBook_Click(object sender, EventArgs e)
         {
-            sendLectOrBook send = new sendLectOrBook();
+            sendBooks = true;
+            sendLectures = false;
+            sendBookOption send = new sendBookOption();
             send.ShowDialog();
         }
 
         private void sendLecture_Click(object sender, EventArgs e)
         {
-            sendLectOrBook send = new sendLectOrBook();
+            sendBooks = false;
+            sendLectures = true;
+            sendBookOption send = new sendBookOption();
             send.ShowDialog();
+           
         }
     }
 }

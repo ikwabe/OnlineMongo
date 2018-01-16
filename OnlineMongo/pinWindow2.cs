@@ -30,7 +30,7 @@ namespace OnlineMongo
             {
                 MySqlConnection con = new MySqlConnection();
                 con.ConnectionString = login.dbConnection;
-                string schPIN = "select pin from users where  username = '" + login.txt.Text + "'";
+                string schPIN = "select pin from users where  user_id = '" + login.user_id + "'";
                 MySqlCommand com = new MySqlCommand(schPIN, con);
                 MySqlDataReader reader;
                 try

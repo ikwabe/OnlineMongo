@@ -78,8 +78,8 @@ namespace OnlineMongo
         {
             MySqlConnection con = new MySqlConnection();
             con.ConnectionString = login.dbConnection;
-            string schPIN = "select pin from users where  username = '" + login.txt.Text + "'";
-            string schPWD = "select password from users where  username = '" + login.txt.Text + "'";
+            string schPIN = "select pin from users where  user_id = '" + login.user_id + "'";
+            string schPWD = "select password from users where  user_id = '" + login.user_id + "'";
             MySqlCommand com = new MySqlCommand(schPIN, con);
             MySqlCommand com1 = new MySqlCommand(schPWD, con);
             MySqlDataReader reader;
@@ -116,9 +116,9 @@ namespace OnlineMongo
         {
             if (pinTextBox.Text == pn)
             {
-                dashBoard dsb = new dashBoard();
+                //dashBoard dsb = new dashBoard();
                 this.Close();
-                dsb.Show();
+                //dsb.Show();
                 dashBoard.check = true;
                 inbonTab.check = true;
             }

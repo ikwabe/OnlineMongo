@@ -38,7 +38,6 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.postTimer = new System.Windows.Forms.Timer(this.components);
             this.friendTimer = new System.Windows.Forms.Timer(this.components);
             this.instPostTimer = new System.Windows.Forms.Timer(this.components);
             this.friendRequestTimer = new System.Windows.Forms.Timer(this.components);
@@ -139,11 +138,6 @@
             this.flowLayoutPanel1.TabIndex = 4;
             this.flowLayoutPanel1.WrapContents = false;
             // 
-            // postTimer
-            // 
-            this.postTimer.Interval = 1;
-            this.postTimer.Tick += new System.EventHandler(this.postTimer_Tick);
-            // 
             // friendTimer
             // 
             this.friendTimer.Interval = 2;
@@ -185,7 +179,6 @@
         private Bunifu.Framework.UI.BunifuCustomLabel photo;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
-        public System.Windows.Forms.Timer postTimer;
         private System.Windows.Forms.Timer friendTimer;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;

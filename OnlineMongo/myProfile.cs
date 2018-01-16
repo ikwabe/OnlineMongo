@@ -30,7 +30,9 @@ namespace OnlineMongo
             InitializeComponent();
            
         }
+        string computerUserName = Environment.UserName;
         public static bool check = false;
+        string location;
         private void changePrflPhoto_Click(object sender, EventArgs e)
         {
 
@@ -43,29 +45,32 @@ namespace OnlineMongo
                 if (openFileDialog1.ShowDialog() == DialogResult.OK)
                 {
                     pictureBox1.Image = Image.FromFile(openFileDialog1.FileName);
+                    location = openFileDialog1.FileName;
+
                 }
 
-               
+                //compress the profile photo.
+                CompressImage();              
 
-                MemoryStream mstream = new MemoryStream();
+               
+                byte[] images = null;
                 try
                 {
-                    pictureBox1.Image.Save(mstream, ImageFormat.Jpeg);
+                    
+                    FileStream stream = new FileStream("C:/Users/" + computerUserName + "/AppData/Roaming/UdoRead/Image/image.Jpeg", FileMode.Open, FileAccess.Read);
+                    BinaryReader brs = new BinaryReader(stream);
+                    images = brs.ReadBytes((int)stream.Length);
                 }
                 catch
                 {
 
                 }
-                byte[] arrImg = mstream.GetBuffer();
-                mstream.Close();
-
-
-
+                
                 MySqlCommand com = new MySqlCommand(pic, con);
 
 
                 con.Open();
-                com.Parameters.AddWithValue("@prfpic", arrImg);
+                com.Parameters.AddWithValue("@prfpic", images);
                 com.ExecuteNonQuery();
                 check = true;
              
@@ -164,6 +169,46 @@ namespace OnlineMongo
 
             }
            
+        }
+
+        //resize image 
+        private void CompressImage()
+        {
+            // Get a bitmap. The using statement ensures objects  
+            // are automatically disposed from memory after use.  
+            using (Bitmap bmp1 = new Bitmap(@location))
+            {
+                ImageCodecInfo jpgEncoder = GetEncoder(ImageFormat.Jpeg);
+
+                // Create an Encoder object based on the GUID  
+                // for the Quality parameter category.  
+                System.Drawing.Imaging.Encoder myEncoder =
+                    System.Drawing.Imaging.Encoder.Quality;
+
+                // Create an EncoderParameters object.  
+                // An EncoderParameters object has an array of EncoderParameter  
+                // objects. In this case, there is only one  
+                // EncoderParameter object in the array.  
+                EncoderParameters myEncoderParameters = new EncoderParameters(1);
+
+                EncoderParameter myEncoderParameter = new EncoderParameter(myEncoder, 30L);
+                myEncoderParameters.Param[0] = myEncoderParameter;
+                bmp1.Save(@"C:/Users/" + computerUserName + "/AppData/Roaming/UdoRead/Image/image.jpeg", jpgEncoder, myEncoderParameters);
+            }
+        }
+
+
+        private ImageCodecInfo GetEncoder(ImageFormat format)
+        {
+            ImageCodecInfo[] codecs = ImageCodecInfo.GetImageDecoders();
+            foreach (ImageCodecInfo codec in codecs)
+            {
+                if (codec.FormatID == format.Guid)
+                {
+                    return codec;
+                }
+            }
+            return null;
         }
     }
 }
