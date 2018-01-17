@@ -24,6 +24,7 @@ namespace OnlineMongo
         {
             postb.postCheck = true;
             this.Close();
+            dashBoard.emailCheck = true;
         }
 
 

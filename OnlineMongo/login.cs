@@ -16,6 +16,7 @@ namespace OnlineMongo
     {
         public static BunifuMaterialTextbox txt = new BunifuMaterialTextbox();
         public static string user_id;
+        public static string fullname;
         public login()
         {
             InitializeComponent();
@@ -74,7 +75,7 @@ namespace OnlineMongo
         {
             MySqlConnection con = new MySqlConnection();
             con.ConnectionString = dbConnection;
-            string signIn = "select user_id, email, password,username,secword from users where username = '" + txt.Text + "' and password = '" + pwd.Text + "'";
+            string signIn = "select user_id, email, password,username,secword,fname,lname from users where username = '" + txt.Text + "' and password = '" + pwd.Text + "'";
             MySqlCommand com = new MySqlCommand(signIn, con);
             try
             {
@@ -107,6 +108,7 @@ namespace OnlineMongo
                             //capturing user id for public purposes
                             user_id = table.Rows[0][0].ToString();
                             user_email = table.Rows[0][1].ToString();
+                            fullname = table.Rows[0][5].ToString() + " "+ table.Rows[0][6].ToString(); 
                             this.Hide();
                             dashBoard dsb = new dashBoard();
                             dsb.Show();
@@ -117,6 +119,7 @@ namespace OnlineMongo
                             //capturing user id for public purposes
                             user_id = table.Rows[0][0].ToString();
                             user_email = table.Rows[0][1].ToString();
+                            fullname = table.Rows[0][5].ToString() + " " + table.Rows[0][6].ToString();
                             this.Hide();
                             dashBoard dsb = new dashBoard();
                             dsb.Show();

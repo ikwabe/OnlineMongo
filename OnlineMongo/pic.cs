@@ -34,29 +34,19 @@ namespace OnlineMongo
            
         }
 
-        int i = 0 ;
-        string[] image;
+        int i = 0 ;     
         PictureBox phott;
+        string computerUserName = Environment.UserName;
+        string [] location;
         private PictureBox photo()
         {
 
             MySqlConnection con = new MySqlConnection();
             con.ConnectionString = login.dbConnection;
-            string userId = "select * from users where username = '" + login.txt.Text + "'";
+           
             MySqlDataAdapter ad;
-
-            //taking user id from the database
-            MySqlCommand com1 = new MySqlCommand(userId, con);
-            ad = new MySqlDataAdapter(com1);
-            DataTable table = new DataTable();
-            ad.Fill(table);
-            string user_idc = table.Rows[0][0].ToString();
-            ad.Dispose();
-
-            int user_id = int.Parse(user_idc);
-
             //reading images query
-            string readImage = "select * from images where user_id = '" + user_id + "' order by img_id DESC";
+            string readImage = "select * from images where user_id = '" + login.user_id + "' order by img_id DESC";
 
             MySqlCommand com = new MySqlCommand(readImage, con);
             ad = new MySqlDataAdapter(com);
@@ -138,13 +128,13 @@ namespace OnlineMongo
         }
 
 
+        int count;
+
         private void addPicToDb()
         {
             DateTime img_date = DateTime.Today;
             MySqlConnection con = new MySqlConnection();
             con.ConnectionString = login.dbConnection;
-            string userId = "select * from users where username = '" + login.txt.Text + "'";
-
            
            
             try
@@ -154,42 +144,30 @@ namespace OnlineMongo
                 MessageBox.Show("Please, Select Maximum of 20 images");
                 if (openFileDialog1.ShowDialog() == DialogResult.OK)
                 {
-                    image = openFileDialog1.FileNames;
+                    location = openFileDialog1.FileNames;
+                    count = openFileDialog1.FileNames.Length;
                     for (int i = 0; i < openFileDialog1.FileNames.Length; i++)
                     {
 
-
+                        
+                        CompressImage(location,i);
                         byte[] images = null;
-                        FileStream stream = new FileStream(image[i], FileMode.Open, FileAccess.Read);
+                        FileStream stream = new FileStream("C:/Users/" + computerUserName + "/AppData/Roaming/UdoRead/Image/image"+i+".Jpeg", FileMode.Open, FileAccess.Read);
                         BinaryReader brs = new BinaryReader(stream);
                         images = brs.ReadBytes((int)stream.Length);
 
 
-
-
-                        MySqlDataAdapter ad;
-                       
-
-                        //taking user id from the database
-                        MySqlCommand com1 = new MySqlCommand(userId, con);
-                        ad = new MySqlDataAdapter(com1);
-                        DataTable table = new DataTable();
-                        ad.Fill(table);
-                        string user_idc = table.Rows[0][0].ToString();
-                        ad.Dispose();
-
-                        int user_id = int.Parse(user_idc);
-                        //
                         //string to insert data
-                        string pic = "insert into images(image,user_id,img_date) values(@image,'" + user_id + "','" + img_date.ToShortDateString() + "')";
+                        string pic = "insert into images(image,user_id,img_date) values(@image,'" + login.user_id + "','" + img_date.ToShortDateString() + "')";
                     
                         //command to insert photos
                         MySqlCommand com = new MySqlCommand(pic, con);
                         com.Parameters.Add(new MySqlParameter("@image", images));
                         com.ExecuteNonQuery();
+                       
                     }
 
-                }
+                    }
             }
             catch (MySqlException ex)
             {
@@ -197,7 +175,6 @@ namespace OnlineMongo
             }
         
             con.Close();
-
         }
 
         private void pic_Load(object sender, EventArgs e)
@@ -240,6 +217,49 @@ namespace OnlineMongo
 
             }
 
+        }
+
+
+
+
+        //resize image 
+        private void CompressImage(string [] location,int i)
+        {
+            // Get a bitmap. The using statement ensures objects  
+            // are automatically disposed from memory after use.  
+            using (Bitmap bmp1 = new Bitmap(@location[i]))
+            {
+                ImageCodecInfo jpgEncoder = GetEncoder(ImageFormat.Jpeg);
+
+                // Create an Encoder object based on the GUID  
+                // for the Quality parameter category.  
+                System.Drawing.Imaging.Encoder myEncoder =
+                    System.Drawing.Imaging.Encoder.Quality;
+
+                // Create an EncoderParameters object.  
+                // An EncoderParameters object has an array of EncoderParameter  
+                // objects. In this case, there is only one  
+                // EncoderParameter object in the array.  
+                EncoderParameters myEncoderParameters = new EncoderParameters(1);
+
+                EncoderParameter myEncoderParameter = new EncoderParameter(myEncoder, 30L);
+                myEncoderParameters.Param[0] = myEncoderParameter;
+                bmp1.Save(@"C:/Users/" + computerUserName + "/AppData/Roaming/UdoRead/Image/image"+i+".jpeg", jpgEncoder, myEncoderParameters);
+            }
+        }
+
+
+        private ImageCodecInfo GetEncoder(ImageFormat format)
+        {
+            ImageCodecInfo[] codecs = ImageCodecInfo.GetImageDecoders();
+            foreach (ImageCodecInfo codec in codecs)
+            {
+                if (codec.FormatID == format.Guid)
+                {
+                    return codec;
+                }
+            }
+            return null;
         }
     }
 

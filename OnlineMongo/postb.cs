@@ -37,7 +37,8 @@ namespace OnlineMongo
        
         int i = 0;
         int k = 0;
-
+        int dbCount;
+        FlowLayoutPanel [] comPanel;
         public static bool postCheck = false;
         BunifuCustomTextbox txt;
         private void photo_Click(object sender, EventArgs e)
@@ -55,7 +56,8 @@ namespace OnlineMongo
 
         private void postb_Load(object sender, EventArgs e)
         {
-            loadPost();
+            postTimer.Start();
+            postCheck = true;
             friendTimer.Start();
             instPostTimer.Start();
         }
@@ -70,20 +72,12 @@ namespace OnlineMongo
             MySqlDataAdapter ad;
 
             //reading data query
-            string readAccount = "select * from users where username <> '"+ login.txt.Text +"'";
+            string readAccount = "select * from users where user_id <> '"+ login.user_id +"'";
 
-            string readLoginAccount = "select * from users where username = '" + login.txt.Text + "'";
-
-            //for login users 
-            MySqlCommand com3 = new MySqlCommand(readLoginAccount, con);
-            ad = new MySqlDataAdapter(com3);
-            DataTable table2 = new DataTable();
-            ad.Fill(table2);
-            string loginUserID = table2.Rows[0][0].ToString();
-            ad.Dispose();
+           
 
             //string to read userID from request table
-            string checkReq = "select * from requests where sender_id = '"+ loginUserID +"'";
+            string checkReq = "select * from requests where sender_id = '"+ login.user_id +"'";
             con.Open();
             //for request user_id fetch
             MySqlCommand com1 = new MySqlCommand(checkReq, con);
@@ -285,20 +279,10 @@ namespace OnlineMongo
             MySqlDataAdapter ad;
 
             //reading data query
-            string readAccount = "select * from users where username <> '" + login.txt.Text + "'";
-
-            string readLoginAccount = "select * from users where username = '" + login.txt.Text + "'";
-
-            //for login users 
-            MySqlCommand com3 = new MySqlCommand(readLoginAccount, con);
-            ad = new MySqlDataAdapter(com3);
-            DataTable table2 = new DataTable();
-            ad.Fill(table2);
-            string loginUserID = table2.Rows[0][0].ToString();
-            ad.Dispose();
+            string readAccount = "select * from users where user_id <> '" + login.user_id + "'";
 
             //string to read userID from request table
-            string checkReq = "select * from requests where sender_id = '" + loginUserID + "'";
+            string checkReq = "select * from requests where sender_id = '" + login.user_id + "'";
             con.Open();
             //for request user_id fetch
             MySqlCommand com1 = new MySqlCommand(checkReq, con);
@@ -608,7 +592,9 @@ namespace OnlineMongo
             bt = new BunifuFlatButton[table1.Rows.Count];
             phot = new PictureBox[table1.Rows.Count];
             btnName = new string[table1.Rows.Count];
+            comPanel = new FlowLayoutPanel[table1.Rows.Count];
             count = table1.Rows.Count;
+            dbCount = table1.Rows.Count;
             for (int j = 0; j < table1.Rows.Count; j++)
             {
                
@@ -695,7 +681,15 @@ namespace OnlineMongo
                 photoPanel.AutoSize = true;
                 photoPanel.Controls.Add(phot[j]);
 
-                //a panel for comment and button
+                ////a panel forcomments
+                comPanel[j] = new FlowLayoutPanel();
+                comPanel[j].AutoSize = true;
+                comPanel[j].Name = post_id;
+                comPanel[j].BorderStyle = BorderStyle.FixedSingle;
+                comPanel[j].BackColor = Color.Silver;
+                comPanel[j].FlowDirection = FlowDirection.TopDown;
+                
+                //a panel for comment text and button
                 FlowLayoutPanel commentPanel = new FlowLayoutPanel();
                 commentPanel.AutoSize = true;
                 commentPanel.FlowDirection = FlowDirection.LeftToRight;
@@ -717,6 +711,9 @@ namespace OnlineMongo
 
                 ////adding comment and button to the panel
                 flowLayoutPanel1.Controls.Add(commentPanel);
+
+                //taking comments to panel
+                flowLayoutPanel1.Controls.Add(comPanel[j]);
 
                 ////taking photo to panel
                 flowLayoutPanel1.Controls.Add(photoPanel);
@@ -749,34 +746,18 @@ namespace OnlineMongo
             DateTime date = DateTime.Now;
             MySqlConnection con = new MySqlConnection();
             con.ConnectionString = login.dbConnection;
-            MySqlDataAdapter ad;
-
             try
             {
                 con.Open();
-
-                //taking the login user id
-                string userId = "select * from users where username = '" + login.txt.Text + "'";
-
-                MySqlCommand com1 = new MySqlCommand(userId, con);
-                ad = new MySqlDataAdapter(com1);
-                DataTable table = new DataTable();
-                ad.Fill(table);
-                string user_idc = table.Rows[0][0].ToString();
-                string fullname = table.Rows[0][1].ToString() + " " + table.Rows[0][2].ToString(); ;
-
-                ad.Dispose();
-
-                int user_id = int.Parse(user_idc);
                 //a variable to handle button clik
                 var button = sender as BunifuFlatButton;
 
                 //string to insert data to the request table
-                string sendReq = "insert into requests(user_id,date,sender_id,sender_full_name) values ('" + button.Name + "', '" + date + "','" + user_id + "','"+ fullname +"')";
+                string sendReq = "insert into requests(user_id,date,sender_id,sender_full_name) values ('" + button.Name + "', '" + date + "','" + login.user_id + "','"+ login.fullname +"')";
 
                 //a string to check if the request is already in the table
 
-                string reqCheck = "select * from requests where user_id = '" + button.Name + "' and sender_id = '" + user_id + "'";
+                string reqCheck = "select * from requests where user_id = '" + button.Name + "' and sender_id = '" + login.user_id + "'";
                 MySqlDataReader rd;
                 //command to insert requests table
                 MySqlCommand com = new MySqlCommand(sendReq, con);
@@ -834,28 +815,41 @@ namespace OnlineMongo
             postb.chek = false;
             MySqlConnection con = new MySqlConnection();
             con.ConnectionString = login.dbConnection;
-            MySqlDataAdapter ad;
+            
 
-            //reading data query
-            string userId = "select * from users where username = '" + login.txt.Text + "'";
+
             try
             {
                 con.Open();
-                MySqlCommand com = new MySqlCommand(userId, con);
-                ad = new MySqlDataAdapter(com);
-                DataTable table1 = new DataTable();
-                ad.Fill(table1);
-
-                int user_id = (int)table1.Rows[0][0];
                 DateTime com_date = DateTime.Now;
 
-                string insertComment = "insert into comments(post_id,comment,date,user_id) values('" + int.Parse(button.Name) +"','"+ comment +"','"+ com_date +"','"+ user_id +"')";
+                string insertComment = "insert into comments(post_id,comment,date,user_id,user_name) values('" + int.Parse(button.Name) + "','" + comment + "','" + com_date + "','" + login.user_id + "','" + login.fullname + "')";
                 MySqlCommand com1 = new MySqlCommand(insertComment, con);
                 MySqlDataReader rd;
-                if(comment != "" && comment != null && button.Name == txtName)
+                if (comment != "" && comment != null && button.Name == txtName)
                 {
                     rd = com1.ExecuteReader();
                     rd.Close();
+
+                    //inserting comment in the panel
+                    for (int j = 0; j < dbCount; j++)
+                    {
+                        if (comPanel[j].Name == button.Name)
+                        {
+                            Label coomm = new Label();
+                            coomm.Font = new Font("Cambria", 11,FontStyle.Bold);
+                            coomm.ForeColor = Color.FromArgb(30,0,40);
+                            coomm.Text = login.fullname + ": " + comment;
+                            coomm.AutoSize = true;
+                            comPanel[j].AutoSize = true;
+                            comPanel[j].Controls.Add(coomm);
+                        }
+                        else
+                        {
+
+                        }
+
+                    }
                     comment = null;
                     postb.chek = true;
                     txt.Text = null;
@@ -881,7 +875,7 @@ namespace OnlineMongo
         private void photoClickBtn_Click(object sender, EventArgs e)
         {
 
-            
+            dashBoard.emailCheck = false;
             var picName = sender as PictureBox;
 
             //taking the clicked PictureName to the static string
@@ -942,7 +936,15 @@ namespace OnlineMongo
         //timer for instant post
         private void instPostTimer_Tick(object sender, EventArgs e)
         {
-                instLoadPost();   
+            if(postCheck == true)
+            {
+                instLoadPost();
+            }
+            else
+            {
+
+            }
+                 
         }
 
         private void friendRequestTimer_Tick(object sender, EventArgs e)
@@ -959,6 +961,7 @@ public static int user_id;
         private void uname_Click(object sender, EventArgs e)
         {
             dashBoard.iCheck = false;
+            dashBoard.emailCheck = false;
             var labl = sender as Label;
             user_id = int.Parse(labl.Name);
             profile = true;
@@ -970,7 +973,7 @@ public static int user_id;
         private void ProfilePhoto_Click(object sender, EventArgs e)
         {
             dashBoard.iCheck = false;
-           
+            dashBoard.emailCheck = false;
             var pc = sender as PictureBox;
             user_id = int.Parse(pc.Name);
             profile = true;
@@ -980,5 +983,10 @@ public static int user_id;
 
         }
 
+        private void postTimer_Tick(object sender, EventArgs e)
+        {
+            loadPost();
+            postTimer.Stop();
         }
+    }
 }

@@ -23,6 +23,7 @@ namespace OnlineMongo
         public static bool sound = false;
         //for item check
         public static bool iCheck = false;
+        public static bool emailCheck = false;
        
         string currentComputerUserName = Environment.UserName;
         //a function to download the tone from the database
@@ -129,7 +130,7 @@ namespace OnlineMongo
 
         private void post_Click(object sender, EventArgs e)
         {
-            
+
            
             line.Width = post.Width;
             line.Left = post.Left;
@@ -315,11 +316,13 @@ namespace OnlineMongo
         }
         private void dashBoard_Load_1(object sender, EventArgs e)
         {
-            
-            
+
+
 
             //reyrieve new emails
-           emailCheckTimer.Start();
+            emailCheckTimer.Start();
+           
+            
             check = true;
             iCheck = true;
           soundTimer.Start();
@@ -897,8 +900,10 @@ namespace OnlineMongo
         //reading the new emails
         private void emailCheckTimer_Tick(object sender, EventArgs e)
         {
-          //loading the emails
-           loadEmail();
+          
+                loadEmail();
+           
+          
                   
         }
 

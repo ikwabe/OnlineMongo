@@ -41,6 +41,7 @@
             this.friendTimer = new System.Windows.Forms.Timer(this.components);
             this.instPostTimer = new System.Windows.Forms.Timer(this.components);
             this.friendRequestTimer = new System.Windows.Forms.Timer(this.components);
+            this.postTimer = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.refreshBtn)).BeginInit();
             this.panel3.SuspendLayout();
@@ -153,6 +154,11 @@
             this.friendRequestTimer.Interval = 1;
             this.friendRequestTimer.Tick += new System.EventHandler(this.friendRequestTimer_Tick);
             // 
+            // postTimer
+            // 
+            this.postTimer.Interval = 1;
+            this.postTimer.Tick += new System.EventHandler(this.postTimer_Tick);
+            // 
             // postb
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -185,5 +191,6 @@
         private Bunifu.Framework.UI.BunifuImageButton refreshBtn;
         private System.Windows.Forms.Timer instPostTimer;
         private System.Windows.Forms.Timer friendRequestTimer;
+        private System.Windows.Forms.Timer postTimer;
     }
 }

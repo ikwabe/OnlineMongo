@@ -32,6 +32,7 @@ namespace OnlineMongo
         {
             this.Hide();
             postb.postCheck = true;
+            dashBoard.emailCheck = true;
         }
         //function for downloading the image
         private void Download()
