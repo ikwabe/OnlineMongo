@@ -582,151 +582,216 @@ namespace OnlineMongo
             //reading data query
             string readImage = "select * from post";
 
-            MySqlCommand com = new MySqlCommand(readImage, con);
-            ad = new MySqlDataAdapter(com);
-            DataTable table1 = new DataTable();
-            ad.Fill(table1);
-
-
-
-            bt = new BunifuFlatButton[table1.Rows.Count];
-            phot = new PictureBox[table1.Rows.Count];
-            btnName = new string[table1.Rows.Count];
-            comPanel = new FlowLayoutPanel[table1.Rows.Count];
-            count = table1.Rows.Count;
-            dbCount = table1.Rows.Count;
-            for (int j = 0; j < table1.Rows.Count; j++)
+            //read the comments 
+            string loadcomments = "select post_id,comment,user_name,user_id from comments";
+            MySqlCommand com1 = new MySqlCommand(loadcomments, con);
+            DataTable table = new DataTable();
+            MySqlDataReader rd;
+            try
             {
-               
-                i++;
-                string post_id = table1.Rows[j][0].ToString();
-                //Image
-                phot[j] = new PictureBox();
-                phot[j].Width = 300;
-                phot[j].Height = 172;
-                phot[j].Name = post_id;
-                phot[j].SizeMode = PictureBoxSizeMode.Zoom;
-                phot[j].Cursor = Cursors.Hand;
-                phot[j].Click += new EventHandler(photoClickBtn_Click);
-                //takking photo to the panel
-                try
-                {
-                    byte[] img = (byte[])table1.Rows[j][1];
-                    MemoryStream ms = new MemoryStream(img);
-                    phot[j].Image = Image.FromStream(ms);
+                con.Open();
+                //taking the comments
+                rd = com1.ExecuteReader();
+                table.Load(rd);
+                rd.Close();
+
+                MySqlCommand com = new MySqlCommand(readImage, con);
+                ad = new MySqlDataAdapter(com);
+                DataTable table1 = new DataTable();
+                ad.Fill(table1);
 
 
-                }
-                catch
-                {
 
-                }
-
-                //Label
-                lb = new Label();
-                lb.Name = "lable" + k;
-                lb.AutoSize = true;
-                lb.Font = new Font("Cambria", 16);
-                try
-                {
-                    lb.Text = table1.Rows[j][2].ToString();
-
-                }
-                catch
+                bt = new BunifuFlatButton[table1.Rows.Count];
+                phot = new PictureBox[table1.Rows.Count];
+                btnName = new string[table1.Rows.Count];
+                comPanel = new FlowLayoutPanel[table1.Rows.Count];
+                count = table1.Rows.Count;
+                dbCount = table1.Rows.Count;
+                for (int j = 0; j < table1.Rows.Count; j++)
                 {
 
+                    i++;
+                    string post_id = table1.Rows[j][0].ToString();
+                    //Image
+                    phot[j] = new PictureBox();
+                    phot[j].Width = 300;
+                    phot[j].Height = 172;
+                    phot[j].Name = post_id;
+                    phot[j].SizeMode = PictureBoxSizeMode.Zoom;
+                    phot[j].Cursor = Cursors.Hand;
+                    phot[j].Click += new EventHandler(photoClickBtn_Click);
+                    //takking photo to the panel
+                    try
+                    {
+                        byte[] img = (byte[])table1.Rows[j][1];
+                        MemoryStream ms = new MemoryStream(img);
+                        phot[j].Image = Image.FromStream(ms);
+
+
+                    }
+                    catch
+                    {
+
+                    }
+
+                    //Label
+                    lb = new Label();
+                    lb.Name = "lable" + k;
+                    lb.AutoSize = true;
+                    lb.Font = new Font("Cambria", 16);
+                    try
+                    {
+                        lb.Text = table1.Rows[j][2].ToString();
+
+                    }
+                    catch
+                    {
+
+                    }
+                    //User Full name
+                    string fullname = table1.Rows[j][5].ToString();
+                    Label uname = new Label();
+                    uname = new Label();
+                    uname.Name = table1.Rows[j][3].ToString();
+                    uname.AutoSize = true;
+                    uname.ForeColor = Color.DarkGreen;
+                    uname.Cursor = Cursors.Hand;
+                    uname.Font = new Font("Cambria", 14);
+                    uname.Text = "Posted by: " + fullname;
+                    uname.Click += new EventHandler(uname_Click);
+                    //Button
+
+                    bt[j] = new BunifuFlatButton();
+                    bt[j].Text = "Comment";
+                    bt[j].Name = post_id;
+                    bt[j].Height = 25;
+                    bt[j].Width = 100;
+                    bt[j].Normalcolor = Color.FromArgb(0, 122, 204);
+                    bt[j].OnHovercolor = Color.FromArgb(32, 9, 191);
+                    bt[j].Activecolor = Color.FromArgb(0, 122, 204);
+                    bt[j].Iconimage = null;
+                    bt[j].TextAlign = ContentAlignment.MiddleCenter;
+                    bt[j].BorderRadius = 5;
+                    bt[j].Click += new EventHandler(commentPostBtn_Click);
+
+                    //TextBox
+                    txt = new BunifuCustomTextbox();
+                    txt.Name = post_id;
+                    txt.Width = 300;
+                    txt.Height = 25;
+                    txt.Multiline = true;
+                    txt.Font = new Font("Cambria", 11);
+                    txt.BackColor = Color.FromArgb(240, 240, 240);
+                    txt.BorderStyle = BorderStyle.FixedSingle;
+                    txt.ForeColor = Color.Black;
+                    txt.BorderColor = Color.FromArgb(32, 9, 191);
+                    txt.TextChanged += new EventHandler(txt_TextChanged);
+
+                    //a panel for photo
+                    FlowLayoutPanel photoPanel = new FlowLayoutPanel();
+
+                    photoPanel.AutoSize = true;
+                    photoPanel.Controls.Add(phot[j]);
+
+                    ////a panel forcomments
+                    comPanel[j] = new FlowLayoutPanel();
+                    comPanel[j].AutoSize = true;
+                    comPanel[j].Name = post_id;
+                    comPanel[j].BackColor = Color.LightGray;
+                    comPanel[j].FlowDirection = FlowDirection.TopDown;
+                    //adding data to comment panel
+
+                    for (int i = 0; i < table.Rows.Count; i++)
+                    {
+                        if (comPanel[j].Name == table.Rows[i][0].ToString())
+                        {
+                            //label
+                            Label coomm = new Label();
+                            coomm.Font = new Font("Sitka Small", 11, FontStyle.Bold);
+                            coomm.ForeColor = Color.FromArgb(30, 0, 40);
+                            coomm.Text = ": " + table.Rows[i][1].ToString();
+                            coomm.AutoSize = true;
+
+                            //LinkLable for username
+                            LinkLabel userbt = new LinkLabel();
+                           userbt.Text = table.Rows[i][2].ToString();
+                           userbt.Name = table.Rows[i][3].ToString();
+                            userbt.ActiveLinkColor = Color.Gray;
+                           userbt.LinkColor = Color.Gray;
+                           userbt.AutoSize = true;
+                            userbt.LinkBehavior = LinkBehavior.NeverUnderline;
+                            userbt.Cursor = Cursors.Hand;
+                            userbt.BackColor = Color.Transparent;
+                           userbt.Font = new Font("Lucida Fax", 9, FontStyle.Bold);
+                           userbt.TextAlign = ContentAlignment.MiddleLeft;
+                           userbt.Click += new EventHandler(buttonBtn_Click);
+
+                            //flowlayout to add comment and name 
+                            FlowLayoutPanel content = new FlowLayoutPanel();
+                            content.FlowDirection = FlowDirection.LeftToRight;
+                            content.WrapContents = false;
+                            content.AutoSize = true;
+
+                            //ading the comment to the panel
+                            content.Controls.Add(userbt);
+                            content.Controls.Add(coomm);
+
+                            //adding the panel to the main panel
+                            comPanel[j].AutoSize = true;
+                            comPanel[j].Controls.Add(content);
+                        }
+                        else
+                        {
+
+                        }
+
+                    }
+
+                    //a panel for comment text and button
+                    FlowLayoutPanel commentPanel = new FlowLayoutPanel();
+                    commentPanel.AutoSize = true;
+                    commentPanel.FlowDirection = FlowDirection.LeftToRight;
+                    commentPanel.WrapContents = false;
+                    commentPanel.Controls.Add(txt);
+                    commentPanel.Controls.Add(bt[j]);
+
+                    //a panel for caption
+                    FlowLayoutPanel captionPanel = new FlowLayoutPanel();
+                    captionPanel.AutoSize = true;
+
+                    captionPanel.Controls.Add(lb);
+
+                    //a panel for caption
+                    FlowLayoutPanel unamePanel = new FlowLayoutPanel();
+                    unamePanel.AutoSize = true;
+
+                    unamePanel.Controls.Add(uname);
+
+                    ////adding comment and button to the panel
+                    flowLayoutPanel1.Controls.Add(commentPanel);
+
+                    //taking comments to panel
+                    flowLayoutPanel1.Controls.Add(comPanel[j]);
+
+                    ////taking photo to panel
+                    flowLayoutPanel1.Controls.Add(photoPanel);
+
+                    ////taking lable to the panel
+                    flowLayoutPanel1.Controls.Add(captionPanel);
+
+                    //adding user name to the panel
+                    flowLayoutPanel1.Controls.Add(unamePanel);
+
                 }
-                //User Full name
-              string  fullname = table1.Rows[j][5].ToString();
-                Label uname = new Label();
-                uname = new Label();
-                uname.Name = table1.Rows[j][3].ToString();
-                uname.AutoSize = true;
-                uname.ForeColor = Color.DarkGreen;
-                uname.Cursor = Cursors.Hand;
-                uname.Font = new Font("Cambria", 14);
-                uname.Text = "Posted by: " + fullname;
-                uname.Click += new EventHandler(uname_Click);
-                //Button
 
-                bt[j] = new BunifuFlatButton();
-                bt[j].Text =  "Comment";
-                bt[j].Name = post_id;
-                bt[j].Height = 25;
-                bt[j].Width = 100;
-                bt[j].Normalcolor = Color.FromArgb(0, 122, 204);
-                bt[j].OnHovercolor = Color.FromArgb(32, 9, 191);
-                bt[j].Activecolor = Color.FromArgb(0, 122, 204);
-                bt[j].Iconimage = null;
-                bt[j].TextAlign = ContentAlignment.MiddleCenter;
-                bt[j].BorderRadius = 5;
-                bt[j].Click += new EventHandler(commentPostBtn_Click);
-
-                //TextBox
-                txt = new BunifuCustomTextbox();
-                txt.Name = post_id;
-                txt.Width = 300;
-                txt.Height = 25;
-                txt.Multiline = true;
-                txt.Font = new Font("Cambria", 11);
-                txt.BackColor = Color.FromArgb(240,240,240);
-                txt.BorderStyle = BorderStyle.FixedSingle;
-                txt.ForeColor = Color.Black;
-                txt.BorderColor = Color.FromArgb(32,9,191);
-                txt.TextChanged += new EventHandler(txt_TextChanged);
-
-                //a panel for photo
-                FlowLayoutPanel photoPanel = new FlowLayoutPanel();
-               
-                photoPanel.AutoSize = true;
-                photoPanel.Controls.Add(phot[j]);
-
-                ////a panel forcomments
-                comPanel[j] = new FlowLayoutPanel();
-                comPanel[j].AutoSize = true;
-                comPanel[j].Name = post_id;
-                comPanel[j].BorderStyle = BorderStyle.FixedSingle;
-                comPanel[j].BackColor = Color.Silver;
-                comPanel[j].FlowDirection = FlowDirection.TopDown;
-                
-                //a panel for comment text and button
-                FlowLayoutPanel commentPanel = new FlowLayoutPanel();
-                commentPanel.AutoSize = true;
-                commentPanel.FlowDirection = FlowDirection.LeftToRight;
-                commentPanel.WrapContents = false;
-                commentPanel.Controls.Add(txt);
-                commentPanel.Controls.Add(bt[j]);
-
-                //a panel for caption
-                FlowLayoutPanel captionPanel = new FlowLayoutPanel();
-                captionPanel.AutoSize = true;
-              
-                captionPanel.Controls.Add(lb);
-
-                //a panel for caption
-                FlowLayoutPanel unamePanel = new FlowLayoutPanel();
-                unamePanel.AutoSize = true;
-               
-                unamePanel.Controls.Add(uname);
-
-                ////adding comment and button to the panel
-                flowLayoutPanel1.Controls.Add(commentPanel);
-
-                //taking comments to panel
-                flowLayoutPanel1.Controls.Add(comPanel[j]);
-
-                ////taking photo to panel
-                flowLayoutPanel1.Controls.Add(photoPanel);
-
-                ////taking lable to the panel
-                flowLayoutPanel1.Controls.Add(captionPanel);
-
-                //adding user name to the panel
-                flowLayoutPanel1.Controls.Add(unamePanel);
-               
+                ad.Dispose();
             }
-
-            ad.Dispose();
+            catch(MySqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            con.Close();
            
 
         }
@@ -836,19 +901,47 @@ namespace OnlineMongo
                     {
                         if (comPanel[j].Name == button.Name)
                         {
+                            //label
                             Label coomm = new Label();
-                            coomm.Font = new Font("Cambria", 11,FontStyle.Bold);
-                            coomm.ForeColor = Color.FromArgb(30,0,40);
-                            coomm.Text = login.fullname + ": " + comment;
+                            coomm.Font = new Font("Sitka Small", 11, FontStyle.Bold);
+                            coomm.ForeColor = Color.FromArgb(30, 0, 40);
+                            coomm.Text = ": " + comment;
                             coomm.AutoSize = true;
+
+                            //button for username
+                            LinkLabel userbt = new LinkLabel();
+                            userbt.Text = login.fullname;
+                            userbt.Name = login.user_id;
+                            userbt.ActiveLinkColor = Color.Gray;
+                            userbt.LinkColor = Color.Gray;
+                            userbt.AutoSize = true;
+                            userbt.LinkBehavior = LinkBehavior.NeverUnderline;
+                            userbt.Cursor = Cursors.Hand;
+                            userbt.BackColor = Color.Transparent;
+                            userbt.Font = new Font("Lucida Fax", 9, FontStyle.Bold);
+                            userbt.TextAlign = ContentAlignment.MiddleLeft;
+                            userbt.Click += new EventHandler(buttonBtn_Click);
+
+                            //flowlayout to add comment and name 
+                            FlowLayoutPanel content = new FlowLayoutPanel();
+                            content.FlowDirection = FlowDirection.LeftToRight;
+                            content.WrapContents = false;
+                            content.AutoSize = true;
+
+                            //ading the comment to the panel
+                            content.Controls.Add(userbt);
+                            content.Controls.Add(coomm);
+
+                            //adding the panel to the main panel
                             comPanel[j].AutoSize = true;
-                            comPanel[j].Controls.Add(coomm);
+                            comPanel[j].Controls.Add(content);
+
                         }
                         else
                         {
 
                         }
-
+                        
                     }
                     comment = null;
                     postb.chek = true;
@@ -886,9 +979,22 @@ namespace OnlineMongo
             postOption picv = new postOption();
             picv.Show();
 
-
+            
         }
 
+        //a function for button click
+        private void buttonBtn_Click(object sender, EventArgs e)
+        {
+            var button = sender as LinkLabel;
+            dashBoard.iCheck = false;
+            dashBoard.emailCheck = false;
+            user_id = int.Parse(button.Name);
+            profile = true;
+            friendtb.profile = false;
+            userInfo uInf = new userInfo();
+            uInf.Show();
+
+        }
         //refresh function
         private void refreshBtn_Click(object sender, EventArgs e)
         {

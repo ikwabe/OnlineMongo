@@ -95,9 +95,9 @@
             this.photo.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.photo.Location = new System.Drawing.Point(17, 19);
             this.photo.Name = "photo";
-            this.photo.Size = new System.Drawing.Size(103, 19);
+            this.photo.Size = new System.Drawing.Size(104, 19);
             this.photo.TabIndex = 13;
-            this.photo.Text = "Upload Photo";
+            this.photo.Text = "Upload Status";
             this.photo.Click += new System.EventHandler(this.photo_Click);
             // 
             // panel2
