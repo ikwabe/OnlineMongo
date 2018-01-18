@@ -515,6 +515,13 @@ namespace OnlineMongo
                         photoPanel.AutoSize = true;
                         photoPanel.Controls.Add(phot[j]);
 
+                        ////a panel forcomments
+                        comPanel[j] = new FlowLayoutPanel();
+                        comPanel[j].AutoSize = true;
+                        comPanel[j].Name = post_id;
+                        comPanel[j].BackColor = Color.LightGray;
+                        comPanel[j].FlowDirection = FlowDirection.TopDown;
+
                         //a panel for comment and button
                         FlowLayoutPanel commentPanel = new FlowLayoutPanel();
                         commentPanel.AutoSize = true;
@@ -537,6 +544,9 @@ namespace OnlineMongo
 
                         ////adding comment and button to the panel
                         flowLayoutPanel1.Controls.Add(commentPanel);
+
+                        //taking comments to panel
+                        flowLayoutPanel1.Controls.Add(comPanel[j]);
 
                         ////taking photo to panel
                         flowLayoutPanel1.Controls.Add(photoPanel);
@@ -872,6 +882,7 @@ namespace OnlineMongo
 
         }
        
+
         //function for commenting the posts
         private void commentPostBtn_Click(object sender, EventArgs e)
         {
@@ -888,14 +899,13 @@ namespace OnlineMongo
                 con.Open();
                 DateTime com_date = DateTime.Now;
 
-                string insertComment = "insert into comments(post_id,comment,date,user_id,user_name) values('" + int.Parse(button.Name) + "','" + comment + "','" + com_date + "','" + login.user_id + "','" + login.fullname + "')";
+                string insertComment = "insert into comments(post_id,comment,date,user_id,user_name,status) values('" + int.Parse(button.Name) + "','" + comment + "','" + com_date + "','" + login.user_id + "','" + login.fullname + "','New')";
                 MySqlCommand com1 = new MySqlCommand(insertComment, con);
                 MySqlDataReader rd;
                 if (comment != "" && comment != null && button.Name == txtName)
                 {
                     rd = com1.ExecuteReader();
                     rd.Close();
-
                     //inserting comment in the panel
                     for (int j = 0; j < dbCount; j++)
                     {
@@ -941,8 +951,9 @@ namespace OnlineMongo
                         {
 
                         }
-                        
+
                     }
+
                     comment = null;
                     postb.chek = true;
                     txt.Text = null;
@@ -1001,39 +1012,99 @@ namespace OnlineMongo
             instLoadPost();
         }
 
-        //a function to check if the post added
-        private void chekP()
+        //a function to check if the comment added
+        private void chekComment()
         {
             
             MySqlConnection con = new MySqlConnection();
             con.ConnectionString = login.dbConnection;
-            MySqlDataReader rd;
+            //read the comments 
+            string loadcomments = "select post_id,comment,user_name,user_id,comment_id from comments where status = 'New'";
+            string countPost = "select post_id from post";
+            MySqlCommand com1 = new MySqlCommand(loadcomments, con);
+            MySqlCommand com = new MySqlCommand(countPost, con);
             DataTable table = new DataTable();
-            //query to check if the post is added at instant
-            string readpost = "SELECT chek FROM  post where chek = 'New' order by post_id DESC LIMIT 1";
-            MySqlCommand com = new MySqlCommand(readpost, con);
+            DataTable table1 = new DataTable();
+            MySqlDataReader rd;
             try
             {
                 con.Open();
-                rd = com.ExecuteReader();
+                //taking the comments
+                rd = com1.ExecuteReader();
                 table.Load(rd);
                 rd.Close();
-                if (table.Rows.Count > 0)
+
+                //counting the post
+                rd = com.ExecuteReader();
+                table1.Load(rd);
+                rd.Close();
+                
+
+                comPanel = new FlowLayoutPanel[table1.Rows.Count];
+                //adding data to comment panel
+                for (int j = 0; j < table1.Rows.Count; j++)
                 {
-                   // Nps = true;
-                }
-                else
-                {
-                   // Nps = false;
+                    comPanel[j] = new FlowLayoutPanel();
+
+                    for (int i = 0; i < table.Rows.Count; i++)
+                    {
+                        if (comPanel[j].Name == table.Rows[i][0].ToString() && table.Rows[i][4].ToString() == "New")
+                        {
+                            //label
+                            Label coomm = new Label();
+                            coomm.Font = new Font("Sitka Small", 11, FontStyle.Bold);
+                            coomm.ForeColor = Color.FromArgb(30, 0, 40);
+                            coomm.Text = ": " + table.Rows[i][1].ToString();
+                            coomm.AutoSize = true;
+
+                            //LinkLable for username
+                            LinkLabel userbt = new LinkLabel();
+                            userbt.Text = table.Rows[i][2].ToString();
+                            userbt.Name = table.Rows[i][3].ToString();
+                            userbt.ActiveLinkColor = Color.Gray;
+                            userbt.LinkColor = Color.Gray;
+                            userbt.AutoSize = true;
+                            userbt.LinkBehavior = LinkBehavior.NeverUnderline;
+                            userbt.Cursor = Cursors.Hand;
+                            userbt.BackColor = Color.Transparent;
+                            userbt.Font = new Font("Lucida Fax", 9, FontStyle.Bold);
+                            userbt.TextAlign = ContentAlignment.MiddleLeft;
+                            userbt.Click += new EventHandler(buttonBtn_Click);
+
+                            //flowlayout to add comment and name 
+                            FlowLayoutPanel content = new FlowLayoutPanel();
+                            content.FlowDirection = FlowDirection.LeftToRight;
+                            content.WrapContents = false;
+                            content.AutoSize = true;
+
+                            //ading the comment to the panel
+                            content.Controls.Add(userbt);
+                            content.Controls.Add(coomm);
+
+                            //adding the panel to the main panel
+                            comPanel[j].AutoSize = true;
+                            comPanel[j].Controls.Add(content);
+
+                            string update = "update comments set status = 'Posted' where comment_id = '" + table.Rows[i][4] + "'";
+                            MySqlCommand com3 = new MySqlCommand(update, con);
+
+                            rd = com3.ExecuteReader();
+                            rd.Close();
+                        }
+                        else
+                        {
+
+                        }
+
+                    }
                 }
 
             }
             catch (MySqlException ex)
             {
-                if (ex.Number == -2)
-                {
-                    MessageBox.Show("Connection Fail");
-                }
+               
+                    MessageBox.Show(ex.Message);
+                
             }
 
         }
