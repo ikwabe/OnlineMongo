@@ -105,41 +105,7 @@ namespace OnlineMongo
             con.Close();
         }
       
-        private void email_OnValueChanged_1(object sender, EventArgs e)
-        {
-            
-            if(email.Text == "")
-            {
-                emailBar.Visible = false;
-                emailBar.animated = false;
-                emailPassPic.Visible = false;
-
-            }
-            else
-            {
-                emailBar.Visible = true;
-                emailBar.animated = true;
-                if (email.Text == emailTxt)
-                {
-                    
-                    emailBar.Visible = false;
-                    emailBar.animated = false;
-                    emailPassPic.Visible = true;
-                    secwordLb.Text = secqnTxt;
-                    showSecBox();
-
-
-
-                }
-                else
-                {
-                    HideSecBox();
-                    HidePwdBtn();
-                }
-            }
-
-           
-        }
+       
 
         private void secword_OnValueChanged(object sender, EventArgs e)
         {
@@ -197,6 +163,46 @@ namespace OnlineMongo
 
             }
             con.Close();
+        }
+
+        private void resetPwd_Load(object sender, EventArgs e)
+        {
+            email.Text = verifyEmail.emailHold;
+            email.Enabled = false;
+        }
+
+        private void email_OnValueChanged(object sender, EventArgs e)
+        {
+            if (email.Text == "")
+            {
+                emailBar.Visible = false;
+                emailBar.animated = false;
+                emailPassPic.Visible = false;
+
+            }
+            else
+            {
+                emailBar.Visible = true;
+                emailBar.animated = true;
+                if (email.Text == emailTxt)
+                {
+
+                    emailBar.Visible = false;
+                    emailBar.animated = false;
+                    emailPassPic.Visible = true;
+                    secwordLb.Text = secqnTxt;
+                    showSecBox();
+
+
+
+                }
+                else
+                {
+                    HideSecBox();
+                    HidePwdBtn();
+                }
+            }
+
         }
     }
 }

@@ -499,7 +499,7 @@ namespace OnlineMongo
 
         private void inboxBtn_Click(object sender, EventArgs e)
         {
-          
+            inbonTab.check = true;
             pic.Instance.Visible = false;
             line.Visible = false;
             aboutb.Instance.Visible = false;
@@ -816,11 +816,13 @@ namespace OnlineMongo
                     {
 
                         sound = true;
+                        inbonTab.check = true;
                         numb = j;
                     }
                     else
                     {
                         sound = false;
+                        inbonTab.check = false;
                         numb = j;
                     }
                 }

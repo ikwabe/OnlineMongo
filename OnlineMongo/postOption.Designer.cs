@@ -165,6 +165,7 @@
             this.Name = "postOption";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "postOption";
+            this.Load += new System.EventHandler(this.postOption_Load);
             this.ResumeLayout(false);
 
         }

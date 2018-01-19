@@ -63,7 +63,7 @@ namespace OnlineMongo
            
         }
        
-
+        public static string emailHold;
         private void emailTxt_KeyDown(object sender, KeyEventArgs e)
         {
             if (emailTxt.Text == "")
@@ -92,6 +92,7 @@ namespace OnlineMongo
                         this.Close();
                         try
                         {
+                            emailHold = email;
                             resetPwd rs = new resetPwd();
                             rs.Show();
                         }

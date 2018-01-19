@@ -90,5 +90,11 @@ namespace OnlineMongo
             this.Hide();
             postb.postCheck = true;
         }
+
+        private void postOption_Load(object sender, EventArgs e)
+        {
+            postb.postCheck = false;
+
+        }
     }
 }

@@ -182,7 +182,7 @@
             this.email.Size = new System.Drawing.Size(350, 33);
             this.email.TabIndex = 30;
             this.email.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.email.OnValueChanged += new System.EventHandler(this.email_OnValueChanged_1);
+            this.email.OnValueChanged += new System.EventHandler(this.email_OnValueChanged);
             // 
             // pictureBox1
             // 
@@ -321,6 +321,7 @@
             this.Name = "resetPwd";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "resetPwd";
+            this.Load += new System.EventHandler(this.resetPwd_Load);
             this.Headerpanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.bunifuImageButton1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

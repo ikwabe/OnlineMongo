@@ -146,7 +146,7 @@
             // 
             // instPostTimer
             // 
-            this.instPostTimer.Interval = 1;
+            this.instPostTimer.Interval = 2000;
             this.instPostTimer.Tick += new System.EventHandler(this.instPostTimer_Tick);
             // 
             // friendRequestTimer

@@ -82,7 +82,7 @@ namespace OnlineMongo
                     uname.Name = table.Rows[j][3].ToString();
                     uname.AutoSize = true;
                     uname.ForeColor = Color.DarkGreen;
-                    uname.Font = new Font("Cambria", 11, FontStyle.Bold);
+                    uname.Font = new Font("Cambria", 12, FontStyle.Bold);
                     uname.Text = fullname;
                     uname.Cursor = Cursors.Hand;
                     uname.Click += new EventHandler(uname_Click);
@@ -91,7 +91,7 @@ namespace OnlineMongo
                     BunifuFlatButton bt = new BunifuFlatButton();
                     bt.Name = table.Rows[j][0].ToString();
                     bt.Text = "Confirm";
-                    bt.Height = 20;
+                    bt.Height = 25;
                     bt.Width = 60;
                     bt.Normalcolor = Color.FromArgb(0, 122, 204);
                     bt.OnHovercolor = Color.FromArgb(32, 9, 191);
@@ -105,7 +105,7 @@ namespace OnlineMongo
                     BunifuFlatButton bt1 = new BunifuFlatButton();
                     bt1.Name = table.Rows[j][0].ToString();
                     bt1.Text = "Cancel";
-                    bt1.Height = 20;
+                    bt1.Height = 25;
                     bt1.Width = 60;
                     bt1.Normalcolor = Color.FromArgb(0, 122, 204);
                     bt1.OnHovercolor = Color.FromArgb(32, 9, 191);
@@ -114,21 +114,28 @@ namespace OnlineMongo
                     bt1.TextAlign = ContentAlignment.MiddleCenter;
                     bt1.BorderRadius = 5;
                     bt1.Click += new EventHandler(CancelFriendBtn_Click);
-                    flowLayoutPanel1.FlowDirection = FlowDirection.TopDown;
-                   
+
+                    //panel for username
+                    FlowLayoutPanel unameP = new FlowLayoutPanel();
+                    unameP.FlowDirection = FlowDirection.LeftToRight;
+                    unameP.AutoSize = true;
+                    unameP.Controls.Add(uname);
+
+                    //panel for buttons
+                    FlowLayoutPanel BtP = new FlowLayoutPanel();
+                    BtP.FlowDirection = FlowDirection.LeftToRight;
+                    BtP.AutoSize = true;
+                    BtP.WrapContents = false;
+                    BtP.Controls.Add(bt);
+                    BtP.Controls.Add(bt1);
+
+
                     //adding user name to the panel
-                    flowLayoutPanel1.Controls.Add(uname);
+                    flowLayoutPanel1.Controls.Add(unameP);
                     
                     //adding confirm button to the panel
-                    flowLayoutPanel1.Controls.Add(bt);
-                    flowLayoutPanel1.FlowDirection = FlowDirection.LeftToRight;
-                    //adding cancel button to the panel
-                    flowLayoutPanel1.Controls.Add(bt1);
-
+                    flowLayoutPanel1.Controls.Add(BtP);
                     
-
-
-
                 }
 
                 }
@@ -165,6 +172,17 @@ namespace OnlineMongo
         {
             var button = sender as Label;
             user_id = int.Parse(button.Name);
+            profile = true;
+            postb.profile = false;
+            userMenu usMn = new userMenu();
+            usMn.Show();
+
+        }
+
+        private void photo_Click(object sender, EventArgs e)
+        {
+            var photo = sender as PictureBox;
+            user_id = int.Parse(photo.Name);
             profile = true;
             postb.profile = false;
             userMenu usMn = new userMenu();
@@ -351,6 +369,7 @@ namespace OnlineMongo
                         phot[i].Name = table.Rows[i][1].ToString();
                         phot[i].SizeMode = PictureBoxSizeMode.StretchImage;
                         phot[i].Cursor = Cursors.Hand;
+                        phot[i].Click += new EventHandler(photo_Click);
                         //takking photo to the panel
                         try
                         {

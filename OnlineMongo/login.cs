@@ -22,7 +22,7 @@ namespace OnlineMongo
             InitializeComponent();
         }
 
-        public static string dbConnection = "server = localhost; user = root; password =ikwabe04; database = udoread";
+        public static string dbConnection = "server = 172.20.10.5; user = root; password =ikwabe04; database = udoread";
         private void bunifuImageButton1_Click(object sender, EventArgs e)
         {
            if(MessageBox.Show("Are you sure you want to close?","Close",MessageBoxButtons.YesNo) == DialogResult.Yes){

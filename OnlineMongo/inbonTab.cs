@@ -31,9 +31,10 @@ namespace OnlineMongo
             InitializeComponent();
             
         }
-        public static bool check = false;
+        public static bool check = true;
         public static string enumber;
         public static bool reply = false;
+       
 
         private void loadEmail()
         {
@@ -146,10 +147,10 @@ namespace OnlineMongo
 
         private void inbonTab_Load(object sender, EventArgs e)
         {
-            timer1.Start();
+            //timer1.Start();
+            check = true;
             refreshBar.Visible = true;
             refreshBar.animated = true;
-            check = true;
             refreshBar.Visible = false;
             refreshBar.animated = false;
         }
