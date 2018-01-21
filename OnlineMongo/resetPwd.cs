@@ -20,14 +20,6 @@ namespace OnlineMongo
             dataCheck();
         }
 
-        private void bunifuImageButton1_Click(object sender, EventArgs e)
-        {
-            login lgn = new login();
-            lgn.Show();
-            this.Close();
-            
-        }
-
         private void showSecBox()
         {
             secword.Visible = true;
@@ -137,34 +129,6 @@ namespace OnlineMongo
                
         }
 
-        private void resetPwdBtn_Click(object sender, EventArgs e)
-        {
-            MySqlConnection con = new MySqlConnection();
-            con.ConnectionString = login.dbConnection;
-
-            string update = "update users set password = '"+"UdoRead1234" +"' where email = '"+ email.Text +"'";
-
-            MySqlCommand com = new MySqlCommand(update, con);
-            MySqlDataReader reader;
-            try
-            {
-                con.Open();
-                reader = com.ExecuteReader();
-                reader.Close();
-                MessageBox.Show("Password Reset Succesiful. Your Password is UdoRead1234. You can change it, when you login to your account.");
-                this.Close();
-                login lg = new login();
-                lg.Show();
-
-            }
-            catch (MySqlException ex)
-            {
-                MessageBox.Show(ex.Message);
-
-            }
-            con.Close();
-        }
-
         private void resetPwd_Load(object sender, EventArgs e)
         {
             email.Text = verifyEmail.emailHold;
@@ -202,6 +166,49 @@ namespace OnlineMongo
                     HidePwdBtn();
                 }
             }
+
+        }
+
+        private void bunifuImageButton1_MouseClick(object sender, MouseEventArgs e)
+        {
+            if(e.Button == MouseButtons.Left)
+            {
+                login lgn = new login();
+                lgn.Show();
+                this.Close();
+            }
+            else
+            {
+
+            }
+        }
+
+        private void resetPwdBtn_Click(object sender, EventArgs e)
+        {
+            MySqlConnection con = new MySqlConnection();
+            con.ConnectionString = login.dbConnection;
+
+            string update = "update users set password = '" + "UdoRead1234" + "' where email = '" + email.Text + "'";
+
+            MySqlCommand com = new MySqlCommand(update, con);
+            MySqlDataReader reader;
+            try
+            {
+                con.Open();
+                reader = com.ExecuteReader();
+                reader.Close();
+                MessageBox.Show("Password Reset Succesiful. Your Password is UdoRead1234. You can change it, when you login to your account.");
+                this.Close();
+                login lg = new login();
+                lg.Show();
+
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+
+            }
+            con.Close();
 
         }
     }

@@ -27,269 +27,6 @@ namespace OnlineMongo
        
         string currentComputerUserName = Environment.UserName;
         //a function to download the tone from the database
-       
-        private void mnBtn_Click(object sender, EventArgs e)
-        {
-          
-            if(panel2.Width == 50)
-            {
-               // timer1.Start();
-                panel2.Visible = false;
-                panel2.Width = 250;
-                mnBtn.Location = new Point(222, mnBtn.Location.Y);
-                panelAnimator.ShowSync(panel2);
-                logo.Visible = true;
-                panel4.Width = 810;
-                pic.Instance.Width = 810;
-                myProfile.Instance.Width = 810;
-                hometb.Instance.Width = 810;
-                aboutb.Instance.Width = 810;
-                postb.Instance.Width = 810;
-                classPage.Instance.Width = 810;
-                friendtb.Instance.Width = 810;
-                hometb.Instance.Dock = DockStyle.Fill;
-                signOutBtn.Location = new Point(1000, signOutBtn.Location.Y);
-
-
-            }
-            else
-            {
-                panel2.Visible = false;
-                panel2.Width = 50;
-                logo.Visible = false;
-                mnBtn.Location = new Point(12, mnBtn.Location.Y);
-                signOutBtn.Location = new Point(1200, signOutBtn.Location.Y);
-                panelAnimator.ShowSync(panel2);
-                panel4.Width = 1015;
-                pic.Instance.Width = 1015;
-                myProfile.Instance.Width = 1015;
-                hometb.Instance.Width = 1015;
-                aboutb.Instance.Width = 1015;
-                postb.Instance.Width = 1015;
-                classPage.Instance.Width = 1015;
-                friendtb.Instance.Width = 1015;
-              
-
-
-            }
-        }
-
-        private void bunifuImageButton1_Click(object sender, EventArgs e)
-        {
-
-            if (MessageBox.Show("Are you sure you want to close?", "Close", MessageBoxButtons.YesNo) == DialogResult.Yes)
-            {
-                Application.Restart();
-              
-            }
-        }
-
-        private void photos_Click(object sender, EventArgs e)
-        {
-          
-            line.Width = photos.Width;
-                line.Left = photos.Left;
-            line.Visible = true;
-            classPage.Instance.Visible = false;
-                aboutb.Instance.Visible = false;
-                friendtb.Instance.Visible = false;
-                postb.Instance.Visible = false;
-                hometb.Instance.Visible = false;
-                myProfile.Instance.Visible = false;
-                composeMsg.Instance.Visible = false;
-                inbonTab.Instance.Visible = false;
-                draftTab.Instance.Visible = false;
-                trashTab.Instance.Visible = false;
-                settingTab.Instance.Visible = false;
-            sentTab.Instance.Visible = false;
-            pic.Instance.BringToFront();
-               
-            if (panel2.Width == 50)
-            {
-                
-                panel4.Controls.Add(pic.Instance);
-                pic.Instance.Dock = DockStyle.Fill;
-                picAnimation.ShowSync(pic.Instance);
-            }
-            else if(panel2.Width == 250)
-            {
-                panel4.Controls.Add(pic.Instance);
-                pic.Instance.Dock = DockStyle.Fill;
-                picAnimation.ShowSync(pic.Instance);
-            }
-
-            else
-            {
-                panel4.Controls.Add(pic.Instance);
-                pic.Instance.Dock = DockStyle.Fill;
-                picAnimation.ShowSync(pic.Instance);
-            }
-            
-
-        }
-
-        private void post_Click(object sender, EventArgs e)
-        {
-
-           
-            line.Width = post.Width;
-            line.Left = post.Left;
-            line.Visible = true;
-            pic.Instance.Visible = false;
-            classPage.Instance.Visible = false;
-            aboutb.Instance.Visible = false;
-            friendtb.Instance.Visible = false;
-            hometb.Instance.Visible = false;
-            composeMsg.Instance.Visible = false;
-            myProfile.Instance.Visible = false;
-            inbonTab.Instance.Visible = false;
-            draftTab.Instance.Visible = false;
-            trashTab.Instance.Visible = false;
-            settingTab.Instance.Visible = false;
-            sentTab.Instance.Visible = false;
-            postb.Instance.BringToFront();
-            panel4.Controls.Add(postb.Instance);
-            postb.Instance.Dock = DockStyle.Fill;
-            tabAnimator.ShowSync(postb.Instance);
-
-            if (panel2.Width == 50)
-            {
-                postb.Instance.Width = 1015;
-                panel4.Controls.Add(postb.Instance);
-                postb.Instance.Dock = DockStyle.Fill;
-                tabAnimator.ShowSync(postb.Instance);
-            }
-
-            else
-            {
-                panel4.Controls.Add(postb.Instance);
-                postb.Instance.Dock = DockStyle.Fill;
-                tabAnimator.ShowSync(postb.Instance);
-            }
-
-        }
-
-        private void friends_Click(object sender, EventArgs e)
-        {
-          
-            line.Visible = true;
-            line.Width = friends.Width;
-            line.Left = friends.Left;
-            pic.Instance.Visible = false;
-            classPage.Instance.Visible = false;
-            aboutb.Instance.Visible = false;
-            postb.Instance.Visible = false;
-            hometb.Instance.Visible = false;
-            myProfile.Instance.Visible = false;
-            composeMsg.Instance.Visible = false;
-            inbonTab.Instance.Visible = false;
-            draftTab.Instance.Visible = false;
-            trashTab.Instance.Visible = false;
-            settingTab.Instance.Visible = false;
-            sentTab.Instance.Visible = false;
-            friendtb.Instance.BringToFront();
-            panel4.Controls.Add(friendtb.Instance);
-            friendtb.Instance.Dock = DockStyle.Fill;
-            tabAnimator.ShowSync(friendtb.Instance);
-
-            if (panel2.Width == 50)
-            {
-                friendtb.Instance.Width = 1015;
-                panel4.Controls.Add(friendtb.Instance);
-                friendtb.Instance.Dock = DockStyle.Fill;
-                tabAnimator.ShowSync(friendtb.Instance);
-            }
-
-            else
-            {
-                panel4.Controls.Add(friendtb.Instance);
-                friendtb.Instance.Dock = DockStyle.Fill;
-                tabAnimator.ShowSync(friendtb.Instance);
-            }
-        }
-
-        private void about_Click(object sender, EventArgs e)
-        {
-          
-            line.Visible = true;
-            line.Width = about.Width;
-            line.Left = about.Left;
-            pic.Instance.Visible = false;
-            postb.Instance.Visible = false;
-            classPage.Instance.Visible = false;
-            friendtb.Instance.Visible = false;
-            hometb.Instance.Visible = false;
-            myProfile.Instance.Visible = false;
-            composeMsg.Instance.Visible = false;
-            inbonTab.Instance.Visible = false;
-            draftTab.Instance.Visible = false;
-            trashTab.Instance.Visible = false;
-            settingTab.Instance.Visible = false;
-            sentTab.Instance.Visible = false;
-            aboutb.Instance.BringToFront();
-            panel4.Controls.Add(aboutb.Instance);
-            aboutb.Instance.Dock = DockStyle.Fill;
-            tabAnimator.ShowSync(aboutb.Instance);
-
-            if (panel2.Width == 50)
-            {
-                
-                panel4.Controls.Add(aboutb.Instance);
-                aboutb.Instance.Dock = DockStyle.Fill;
-                tabAnimator.ShowSync(aboutb.Instance);
-            }
-
-            else
-            {
-                panel4.Controls.Add(aboutb.Instance);
-                aboutb.Instance.Dock = DockStyle.Fill;
-                tabAnimator.ShowSync(aboutb.Instance);
-
-            }
-
-            }
-
-        private void home_Click(object sender, EventArgs e)
-        {
-            line.Visible = true;
-            line.Width = home.Width;
-            line.Left = home.Left;
-            pic.Instance.Visible = false;
-            postb.Instance.Visible = false;
-            aboutb.Instance.Visible = false;
-            friendtb.Instance.Visible = false;
-            classPage.Instance.Visible = false;
-            myProfile.Instance.Visible = false;
-            composeMsg.Instance.Visible = false;
-            inbonTab.Instance.Visible = false;
-            draftTab.Instance.Visible = false;
-            trashTab.Instance.Visible = false;
-            settingTab.Instance.Visible = false;
-            sentTab.Instance.Visible = false;
-            hometb.Instance.BringToFront();
-            panel4.Controls.Add(hometb.Instance);
-            hometb.Instance.Dock = DockStyle.Fill;
-            tabAnimator.ShowSync(hometb.Instance);
-
-            if (panel2.Width == 50)
-            {
-                hometb.Instance.Width = 1015;
-                panel4.Controls.Add(hometb.Instance);
-                hometb.Instance.Dock = DockStyle.Fill;
-                tabAnimator.ShowSync(hometb.Instance);
-
-            }
-
-            else
-            {
-                panel4.Controls.Add(hometb.Instance);
-                hometb.Instance.Dock = DockStyle.Fill;
-                tabAnimator.ShowSync(hometb.Instance);
-
-
-            }
-
-        }
 
 
         static void createDirectory()
@@ -327,7 +64,7 @@ namespace OnlineMongo
             iCheck = true;
           soundTimer.Start();
             //maximize the window
-           // maximize();
+           maximize();
             emailNumberLabel.Visible = true;
 
             //creating Directory for the app Data.
@@ -339,7 +76,7 @@ namespace OnlineMongo
             postb.Instance.Visible = false;
             aboutb.Instance.Visible = false;
             friendtb.Instance.Visible = false;
-            hometb.Instance.Visible = false;
+            hometb.Instance.Visible = true;
             myProfile.Instance.Visible = false;
             classPage.Instance.Visible = false;
             composeMsg.Instance.Visible = false;
@@ -352,7 +89,7 @@ namespace OnlineMongo
             hometb.Instance.BringToFront();
             panel4.Controls.Add(hometb.Instance);
             hometb.Instance.Dock = DockStyle.Fill;
-            tabAnimator.ShowSync(hometb.Instance);
+           // tabAnimator.ShowSync(hometb.Instance);
             panel2.Visible = true;
             panel2.Width = 50;
             panel4.Width = 1015;
@@ -360,339 +97,14 @@ namespace OnlineMongo
             mnBtn.Location = new Point(12, mnBtn.Location.Y);
             panelAnimator.ShowSync(panel2);
             hometb.Instance.Width = 1015;
+           
 
-
-        }
-
-        private void myProfileBtn_Click(object sender, EventArgs e)
-        {
-          
-            pic.Instance.Visible = false;
-            line.Visible = false;
-            aboutb.Instance.Visible = false;
-            friendtb.Instance.Visible = false;
-            postb.Instance.Visible = false;
-            hometb.Instance.Visible = false;
-            classPage.Instance.Visible = false;
-            composeMsg.Instance.Visible = false;
-            inbonTab.Instance.Visible = false;
-            draftTab.Instance.Visible = false;
-            trashTab.Instance.Visible = false;
-            settingTab.Instance.Visible = false;
-            sentTab.Instance.Visible = false;
-            myProfile.Instance.BringToFront();
-            panel4.Controls.Add(myProfile.Instance);
-            myProfile.Instance.Dock = DockStyle.Fill;
-            picAnimation.ShowSync(myProfile.Instance);
-
-            if (panel2.Width == 50)
-            {
-                myProfile.Instance.Width = 1015;
-                panel4.Controls.Add(myProfile.Instance);
-                myProfile.Instance.Dock = DockStyle.Fill;
-                picAnimation.ShowSync(myProfile.Instance);
-
-            }
-
-            else
-            {
-                panel4.Controls.Add(myProfile.Instance);
-                myProfile.Instance.Dock = DockStyle.Fill;
-                picAnimation.ShowSync(myProfile.Instance);
-
-            }
-        }
-
-        private void myClassBtn_Click(object sender, EventArgs e)
-        {
-            iCheck = true;
-          
-            pic.Instance.Visible = false;
-            line.Visible = false;
-            aboutb.Instance.Visible = false;
-            friendtb.Instance.Visible = false;
-            myProfile.Instance.Visible = false;
-            postb.Instance.Visible = false;
-            hometb.Instance.Visible = false;
-            composeMsg.Instance.Visible = false;
-            inbonTab.Instance.Visible = false;
-            draftTab.Instance.Visible = false;
-            trashTab.Instance.Visible = false;
-            settingTab.Instance.Visible = false;
-            sentTab.Instance.Visible = false;
-            classPage.Instance.BringToFront();
-            panel4.Controls.Add(classPage.Instance);
-            classPage.Instance.Dock = DockStyle.Fill;
-            picAnimation.ShowSync(classPage.Instance);
-
-            if (panel2.Width == 50)
-            {
-                classPage.Instance.Width = 1015;
-                panel4.Controls.Add(classPage.Instance);
-                classPage.Instance.Dock = DockStyle.Fill;
-                picAnimation.ShowSync(classPage.Instance);
-
-            }
-
-            else
-            {
-                panel4.Controls.Add(classPage.Instance);
-                classPage.Instance.Dock = DockStyle.Fill;
-                picAnimation.ShowSync(classPage.Instance);
-            }
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
             timer1.Stop();
             logoTransition.ShowSync(logo);
-        }
-
-        private void bunifuImageButton2_Click(object sender, EventArgs e)
-        {
-          
-            this.WindowState = FormWindowState.Minimized;
-            //pinWindow pinwd = new pinWindow();
-            //pinwd.Show();
-            //pinwd.WindowState = FormWindowState.Minimized;
-           
-        }
-
-        private void composeBtn_Click(object sender, EventArgs e)
-        {
-          
-            pic.Instance.Visible = false;
-            line.Visible = false;
-            aboutb.Instance.Visible = false;
-            friendtb.Instance.Visible = false;
-            myProfile.Instance.Visible = false;
-            postb.Instance.Visible = false;
-            hometb.Instance.Visible = false;
-            classPage.Instance.Visible = false;
-            inbonTab.Instance.Visible = false;
-            draftTab.Instance.Visible = false;
-            trashTab.Instance.Visible = false;
-            settingTab.Instance.Visible = false;
-            sentTab.Instance.Visible = false;
-            composeMsg.Instance.BringToFront();
-            panel4.Controls.Add(composeMsg.Instance);
-            composeMsg.Instance.Dock = DockStyle.Fill;
-            tabAnimator.ShowSync(composeMsg.Instance);
-
-            if (panel2.Width == 50)
-            {
-                composeMsg.Instance.Width = 1015;
-                panel4.Controls.Add(composeMsg.Instance);
-                composeMsg.Instance.Dock = DockStyle.Fill;
-                tabAnimator.ShowSync(composeMsg.Instance);
-
-            }
-
-            else
-            {
-                panel4.Controls.Add(composeMsg.Instance);
-                composeMsg.Instance.Dock = DockStyle.Fill;
-                tabAnimator.ShowSync(composeMsg.Instance);
-       
-            }
-        }
-
-        private void inboxBtn_Click(object sender, EventArgs e)
-        {
-            inbonTab.check = true;
-            pic.Instance.Visible = false;
-            line.Visible = false;
-            aboutb.Instance.Visible = false;
-            friendtb.Instance.Visible = false;
-            myProfile.Instance.Visible = false;
-            postb.Instance.Visible = false;
-            hometb.Instance.Visible = false;
-            classPage.Instance.Visible = false;
-            composeMsg.Instance.Visible = false;
-            draftTab.Instance.Visible = false;
-            trashTab.Instance.Visible = false;
-            settingTab.Instance.Visible = false;
-            sentTab.Instance.Visible = false;
-            inbonTab.Instance.BringToFront();
-            panel4.Controls.Add(inbonTab.Instance);
-            inbonTab.Instance.Dock = DockStyle.Fill;
-            tabAnimator.ShowSync(inbonTab.Instance);
-
-            if (panel2.Width == 50)
-            {
-                inbonTab.Instance.Width = 1015;
-                panel4.Controls.Add(inbonTab.Instance);
-                inbonTab.Instance.Dock = DockStyle.Fill;
-                tabAnimator.ShowSync(inbonTab.Instance);
-
-            }
-
-            else
-            {
-                panel4.Controls.Add(inbonTab.Instance);
-                inbonTab.Instance.Dock = DockStyle.Fill;
-                tabAnimator.ShowSync(inbonTab.Instance);
-
-            }
-        }
-
-        private void draftBtn_Click(object sender, EventArgs e)
-        {
-          
-            pic.Instance.Visible = false;
-            line.Visible = false;
-            aboutb.Instance.Visible = false;
-            friendtb.Instance.Visible = false;
-            myProfile.Instance.Visible = false;
-            postb.Instance.Visible = false;
-            hometb.Instance.Visible = false;
-            classPage.Instance.Visible = false;
-            composeMsg.Instance.Visible = false;
-            inbonTab.Instance.Visible = false;
-            trashTab.Instance.Visible = false;
-            settingTab.Instance.Visible = false;
-            sentTab.Instance.Visible = false;
-            draftTab.Instance.BringToFront();
-            panel4.Controls.Add(draftTab.Instance);
-            draftTab.Instance.Dock = DockStyle.Fill;
-            tabAnimator.ShowSync(draftTab.Instance);
-
-            if (panel2.Width == 50)
-            {
-                draftTab.Instance.Width = 1015;
-                panel4.Controls.Add(draftTab.Instance);
-                inbonTab.Instance.Dock = DockStyle.Fill;
-                tabAnimator.ShowSync(draftTab.Instance);
-
-            }
-
-            else
-            {
-                panel4.Controls.Add(draftTab.Instance);
-                draftTab.Instance.Dock = DockStyle.Fill;
-                tabAnimator.ShowSync(draftTab.Instance);
-
-            }
-        }
-
-        private void trashBtn_Click(object sender, EventArgs e)
-        {
-          
-            pic.Instance.Visible = false;
-            line.Visible = false;
-            aboutb.Instance.Visible = false;
-            friendtb.Instance.Visible = false;
-            myProfile.Instance.Visible = false;
-            postb.Instance.Visible = false;
-            hometb.Instance.Visible = false;
-            classPage.Instance.Visible = false;
-            inbonTab.Instance.Visible = false;
-            composeMsg.Instance.Visible = false;
-            draftTab.Instance.Visible = false;
-            settingTab.Instance.Visible = false;
-            sentTab.Instance.Visible = false;
-            trashTab.Instance.BringToFront();
-            panel4.Controls.Add(trashTab.Instance);
-            trashTab.Instance.Dock = DockStyle.Fill;
-            tabAnimator.ShowSync(trashTab.Instance);
-
-            if (panel2.Width == 50)
-            {
-                trashTab.Instance.Width = 1015;
-                panel4.Controls.Add(trashTab.Instance);
-                trashTab.Instance.Dock = DockStyle.Fill;
-                tabAnimator.ShowSync(trashTab.Instance);
-
-            }
-
-            else
-            {
-                panel4.Controls.Add(trashTab.Instance);
-                trashTab.Instance.Dock = DockStyle.Fill;
-                tabAnimator.ShowSync(trashTab.Instance);
-
-            }
-        }
-
-        private void settingBtn_Click(object sender, EventArgs e)
-        {
-            iCheck = true;
-          
-            pic.Instance.Visible = false;
-            line.Visible = false;
-            aboutb.Instance.Visible = false;
-            friendtb.Instance.Visible = false;
-            myProfile.Instance.Visible = false;
-            postb.Instance.Visible = false;
-            hometb.Instance.Visible = false;
-            classPage.Instance.Visible = false;
-            composeMsg.Instance.Visible = false;
-            inbonTab.Instance.Visible = false;
-            draftTab.Instance.Visible = false;
-            trashTab.Instance.Visible = false;
-            sentTab.Instance.Visible = false;
-            settingTab.Instance.BringToFront();
-            panel4.Controls.Add(settingTab.Instance);
-            settingTab.Instance.Dock = DockStyle.Fill;
-            tabAnimator.ShowSync(settingTab.Instance);
-
-            if (panel2.Width == 50)
-            {
-                settingTab.Instance.Width = 1015;
-                panel4.Controls.Add(settingTab.Instance);
-                settingTab.Instance.Dock = DockStyle.Fill;
-                tabAnimator.ShowSync(settingTab.Instance);
-
-            }
-
-            else
-            {
-                panel4.Controls.Add(settingTab.Instance);
-                settingTab.Instance.Dock = DockStyle.Fill;
-                tabAnimator.ShowSync(settingTab.Instance);
-
-            }
-
-            
-        }
-
-        private void sentBtn_Click(object sender, EventArgs e)
-        {
-          
-            pic.Instance.Visible = false;
-            line.Visible = false;
-            aboutb.Instance.Visible = false;
-            friendtb.Instance.Visible = false;
-            myProfile.Instance.Visible = false;
-            postb.Instance.Visible = false;
-            hometb.Instance.Visible = false;
-            classPage.Instance.Visible = false;
-            composeMsg.Instance.Visible = false;
-            inbonTab.Instance.Visible = false;
-            draftTab.Instance.Visible = false;
-            trashTab.Instance.Visible = false;
-            settingTab.Instance.Visible = false;
-            sentTab.Instance.BringToFront();
-            panel4.Controls.Add(sentTab.Instance);
-            sentTab.Instance.Dock = DockStyle.Fill;
-            tabAnimator.ShowSync(sentTab.Instance);
-
-            if (panel2.Width == 50)
-            {
-                sentTab.Instance.Width = 1015;
-                panel4.Controls.Add(sentTab.Instance);
-                sentTab.Instance.Dock = DockStyle.Fill;
-                tabAnimator.ShowSync(sentTab.Instance);
-
-            }
-
-            else
-            {
-                panel4.Controls.Add(sentTab.Instance);
-                sentTab.Instance.Dock = DockStyle.Fill;
-                tabAnimator.ShowSync(sentTab.Instance);
-
-            }
         }
 
         //function to maximize the screen
@@ -726,32 +138,7 @@ namespace OnlineMongo
             signOutBtn.Location = new Point(776, signOutBtn.Location.Y);
         }
 
-        private void chooseQn_Click(object sender, EventArgs e)
-        {
-            secretWord sc = new secretWord();
-            sc.Show();
-        }
-
         private void logoutBtn_Click(object sender, EventArgs e)
-        {
-            Application.Restart();
-        }
-
-        //restoreDown Button
-        private void restoreDownBtn_Click(object sender, EventArgs e)
-        {
-          
-            restoreDown();
-        }
-
-        //maximize button
-        private void maximizeBtn_Click(object sender, EventArgs e)
-        {
-          
-            maximize();
-        }
-
-        private void signOutBtn_Click(object sender, EventArgs e)
         {
             Application.Restart();
         }
@@ -926,21 +313,6 @@ namespace OnlineMongo
             }
         }
 
-        //a button for chat room
-        private void chatBtn_Click(object sender, EventArgs e)
-        {
-          
-            chatRoom cht = new chatRoom();
-            cht.Show();
-        }
-
-        private void itemBtn_Click(object sender, EventArgs e)
-        {
-          
-            items item = new items();
-            item.Show();
-        }
-
         private void itemTimer_Tick(object sender, EventArgs e)
         {
             //loading the items
@@ -953,6 +325,703 @@ namespace OnlineMongo
 
             }
             
+        }
+
+        private void mnBtn_MouseClick(object sender, MouseEventArgs e)
+        {
+            if(e.Button == MouseButtons.Left)
+            {
+                if (panel2.Width == 50)
+                {
+                    // timer1.Start();
+                    panel2.Visible = false;
+                    panel2.Width = 250;
+                    mnBtn.Location = new Point(222, mnBtn.Location.Y);
+                    panelAnimator.ShowSync(panel2);
+                    logo.Visible = true;
+                    panel4.Width = 810;
+                    pic.Instance.Width = 810;
+                    myProfile.Instance.Width = 810;
+                    hometb.Instance.Width = 810;
+                    aboutb.Instance.Width = 810;
+                    postb.Instance.Width = 810;
+                    classPage.Instance.Width = 810;
+                    friendtb.Instance.Width = 810;
+                    hometb.Instance.Dock = DockStyle.Fill;
+                    signOutBtn.Location = new Point(1000, signOutBtn.Location.Y);
+
+
+                }
+                else
+                {
+                    panel2.Visible = false;
+                    panel2.Width = 50;
+                    logo.Visible = false;
+                    mnBtn.Location = new Point(12, mnBtn.Location.Y);
+                    signOutBtn.Location = new Point(1200, signOutBtn.Location.Y);
+                    panelAnimator.ShowSync(panel2);
+                    panel4.Width = 1015;
+                    pic.Instance.Width = 1015;
+                    myProfile.Instance.Width = 1015;
+                    hometb.Instance.Width = 1015;
+                    aboutb.Instance.Width = 1015;
+                    postb.Instance.Width = 1015;
+                    classPage.Instance.Width = 1015;
+                    friendtb.Instance.Width = 1015;
+
+
+
+                }
+            }
+            else
+            {
+
+            }
+        }
+
+
+        private void home_MouseClick(object sender, MouseEventArgs e)
+        {
+            if(e.Button == MouseButtons.Left)
+            {
+                line.Visible = true;
+                line.Width = home.Width;
+                line.Left = home.Left;
+                pic.Instance.Visible = false;
+                postb.Instance.Visible = false;
+                aboutb.Instance.Visible = false;
+                friendtb.Instance.Visible = false;
+                classPage.Instance.Visible = false;
+                myProfile.Instance.Visible = false;
+                composeMsg.Instance.Visible = false;
+                inbonTab.Instance.Visible = false;
+                draftTab.Instance.Visible = false;
+                trashTab.Instance.Visible = false;
+                settingTab.Instance.Visible = false;
+                sentTab.Instance.Visible = false;
+                hometb.Instance.Visible = true;
+                hometb.Instance.BringToFront();
+                panel4.Controls.Add(hometb.Instance);
+                hometb.Instance.Dock = DockStyle.Fill;
+               // tabAnimator.ShowSync(hometb.Instance);
+
+                if (panel2.Width == 50)
+                {
+                    hometb.Instance.Width = 1015;
+                    panel4.Controls.Add(hometb.Instance);
+                    hometb.Instance.Dock = DockStyle.Fill;
+                    hometb.Instance.Visible = true;
+                   // tabAnimator.ShowSync(hometb.Instance);
+
+                }
+
+                else
+                {
+                    panel4.Controls.Add(hometb.Instance);
+                    hometb.Instance.Dock = DockStyle.Fill;
+                    hometb.Instance.Visible = true;
+                   // tabAnimator.ShowSync(hometb.Instance);
+
+
+                }
+            }
+            else
+            {
+
+            }
+        }
+
+        private void photos_MouseClick(object sender, MouseEventArgs e)
+        {
+            if(e.Button == MouseButtons.Left)
+            {
+                line.Width = photos.Width;
+                line.Left = photos.Left;
+                line.Visible = true;
+                classPage.Instance.Visible = false;
+                aboutb.Instance.Visible = false;
+                friendtb.Instance.Visible = false;
+                postb.Instance.Visible = false;
+                hometb.Instance.Visible = false;
+                myProfile.Instance.Visible = false;
+                composeMsg.Instance.Visible = false;
+                inbonTab.Instance.Visible = false;
+                draftTab.Instance.Visible = false;
+                trashTab.Instance.Visible = false;
+                settingTab.Instance.Visible = false;
+                sentTab.Instance.Visible = false;
+                pic.Instance.Visible = true;
+                pic.Instance.BringToFront();
+
+                if (panel2.Width == 50)
+                {
+
+                    panel4.Controls.Add(pic.Instance);
+                    pic.Instance.Dock = DockStyle.Fill;
+                   
+                   // picAnimation.ShowSync(pic.Instance);
+                }
+                else if (panel2.Width == 250)
+                {
+                    panel4.Controls.Add(pic.Instance);
+                    pic.Instance.Dock = DockStyle.Fill;
+                   // picAnimation.ShowSync(pic.Instance);
+                }
+
+                else
+                {
+                    panel4.Controls.Add(pic.Instance);
+                    pic.Instance.Dock = DockStyle.Fill;
+                    //picAnimation.ShowSync(pic.Instance);
+                }
+
+            }
+            else
+            {
+
+            }
+        }
+
+        private void post_MouseClick(object sender, MouseEventArgs e)
+        {
+            if(e.Button == MouseButtons.Left)
+            {
+                line.Width = post.Width;
+                line.Left = post.Left;
+                line.Visible = true;
+                pic.Instance.Visible = false;
+                classPage.Instance.Visible = false;
+                aboutb.Instance.Visible = false;
+                friendtb.Instance.Visible = false;
+                hometb.Instance.Visible = false;
+                composeMsg.Instance.Visible = false;
+                myProfile.Instance.Visible = false;
+                inbonTab.Instance.Visible = false;
+                draftTab.Instance.Visible = false;
+                trashTab.Instance.Visible = false;
+                settingTab.Instance.Visible = false;
+                sentTab.Instance.Visible = false;
+                postb.Instance.Visible = true;
+                postb.Instance.BringToFront();
+                panel4.Controls.Add(postb.Instance);
+                postb.Instance.Dock = DockStyle.Fill;
+               // tabAnimator.ShowSync(postb.Instance);
+
+                if (panel2.Width == 50)
+                {
+                    postb.Instance.Width = 1015;
+                    panel4.Controls.Add(postb.Instance);
+                    postb.Instance.Dock = DockStyle.Fill;
+                   // tabAnimator.ShowSync(postb.Instance);
+                }
+
+                else
+                {
+                    panel4.Controls.Add(postb.Instance);
+                    postb.Instance.Dock = DockStyle.Fill;
+                    //tabAnimator.ShowSync(postb.Instance);
+                }
+
+            }
+            else
+            {
+
+            }
+        }
+
+        private void friends_MouseClick(object sender, MouseEventArgs e)
+        {
+            if(e.Button == MouseButtons.Left)
+            {
+                line.Visible = true;
+                line.Width = friends.Width;
+                line.Left = friends.Left;
+                pic.Instance.Visible = false;
+                classPage.Instance.Visible = false;
+                aboutb.Instance.Visible = false;
+                postb.Instance.Visible = false;
+                hometb.Instance.Visible = false;
+                myProfile.Instance.Visible = false;
+                composeMsg.Instance.Visible = false;
+                inbonTab.Instance.Visible = false;
+                draftTab.Instance.Visible = false;
+                trashTab.Instance.Visible = false;
+                settingTab.Instance.Visible = false;
+                sentTab.Instance.Visible = false;
+                friendtb.Instance.Visible = true;
+                friendtb.Instance.BringToFront();
+                panel4.Controls.Add(friendtb.Instance);
+                friendtb.Instance.Dock = DockStyle.Fill;
+                //tabAnimator.ShowSync(friendtb.Instance);
+
+                if (panel2.Width == 50)
+                {
+                    friendtb.Instance.Width = 1015;
+                    panel4.Controls.Add(friendtb.Instance);
+                    friendtb.Instance.Dock = DockStyle.Fill;
+                   // tabAnimator.ShowSync(friendtb.Instance);
+                }
+
+                else
+                {
+                    panel4.Controls.Add(friendtb.Instance);
+                    friendtb.Instance.Dock = DockStyle.Fill;
+                   // tabAnimator.ShowSync(friendtb.Instance);
+                }
+            }
+            else
+            {
+
+            }
+        }
+
+        private void about_MouseClick(object sender, MouseEventArgs e)
+        {
+            if(e.Button == MouseButtons.Left)
+            {
+                line.Visible = true;
+                line.Width = about.Width;
+                line.Left = about.Left;
+                pic.Instance.Visible = false;
+                postb.Instance.Visible = false;
+                classPage.Instance.Visible = false;
+                friendtb.Instance.Visible = false;
+                hometb.Instance.Visible = false;
+                myProfile.Instance.Visible = false;
+                composeMsg.Instance.Visible = false;
+                inbonTab.Instance.Visible = false;
+                draftTab.Instance.Visible = false;
+                trashTab.Instance.Visible = false;
+                settingTab.Instance.Visible = false;
+                sentTab.Instance.Visible = false;
+                aboutb.Instance.Visible = true;
+                aboutb.Instance.BringToFront();
+                panel4.Controls.Add(aboutb.Instance);
+                aboutb.Instance.Dock = DockStyle.Fill;
+                //tabAnimator.ShowSync(aboutb.Instance);
+
+                if (panel2.Width == 50)
+                {
+
+                    panel4.Controls.Add(aboutb.Instance);
+                    aboutb.Instance.Dock = DockStyle.Fill;
+                    //tabAnimator.ShowSync(aboutb.Instance);
+                }
+
+                else
+                {
+                    panel4.Controls.Add(aboutb.Instance);
+                    aboutb.Instance.Dock = DockStyle.Fill;
+                    //tabAnimator.ShowSync(aboutb.Instance);
+
+                }
+            }
+            else
+            {
+
+            }
+        }
+
+        private void signOutBtn_MouseClick(object sender, MouseEventArgs e)
+        {
+            if(e.Button == MouseButtons.Left)
+            {
+                Application.Restart();
+            }
+            else
+            {
+
+            }
+        }
+
+        private void miniMizeBtn_MouseClick(object sender, MouseEventArgs e)
+        {
+            if(e.Button == MouseButtons.Left)
+            {
+                this.WindowState = FormWindowState.Minimized;
+                //pinWindow pinwd = new pinWindow();
+                //pinwd.Show();
+                //pinwd.WindowState = FormWindowState.Minimized;
+            }
+            else
+            {
+
+            }
+        }
+
+        private void restoreDownBtn_MouseClick(object sender, MouseEventArgs e)
+        {
+            if(e.Button == MouseButtons.Left)
+            {
+                restoreDown();
+            }
+            else
+            {
+
+            }
+        }
+
+        private void maximizeBtn_MouseClick(object sender, MouseEventArgs e)
+        {
+            if(e.Button == MouseButtons.Left)
+            {
+                maximize();
+            }
+            else
+            {
+
+            }
+        }
+
+        private void closeBtn_MouseClick(object sender, MouseEventArgs e)
+        {
+            if(e.Button == MouseButtons.Left)
+            {
+                if (MessageBox.Show("Are you sure you want to close?", "Close", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    Application.Restart();
+
+                }
+            }
+            else
+            {
+
+            }
+        }
+
+        private void myProfileBtn_Click(object sender, EventArgs e)
+        {
+            pic.Instance.Visible = false;
+            line.Visible = false;
+            aboutb.Instance.Visible = false;
+            friendtb.Instance.Visible = false;
+            postb.Instance.Visible = false;
+            hometb.Instance.Visible = false;
+            classPage.Instance.Visible = false;
+            composeMsg.Instance.Visible = false;
+            inbonTab.Instance.Visible = false;
+            draftTab.Instance.Visible = false;
+            trashTab.Instance.Visible = false;
+            settingTab.Instance.Visible = false;
+            sentTab.Instance.Visible = false;
+            myProfile.Instance.Visible = true;
+            myProfile.Instance.BringToFront();
+            panel4.Controls.Add(myProfile.Instance);
+            myProfile.Instance.Dock = DockStyle.Fill;
+           // picAnimation.ShowSync(myProfile.Instance);
+
+            if (panel2.Width == 50)
+            {
+                myProfile.Instance.Width = 1015;
+                panel4.Controls.Add(myProfile.Instance);
+                myProfile.Instance.Dock = DockStyle.Fill;
+                //picAnimation.ShowSync(myProfile.Instance);
+
+            }
+
+            else
+            {
+                panel4.Controls.Add(myProfile.Instance);
+                myProfile.Instance.Dock = DockStyle.Fill;
+               // picAnimation.ShowSync(myProfile.Instance);
+
+            }
+        }
+
+        private void myClassBtn_Click(object sender, EventArgs e)
+        {
+            iCheck = true;
+
+            pic.Instance.Visible = false;
+            line.Visible = false;
+            aboutb.Instance.Visible = false;
+            friendtb.Instance.Visible = false;
+            myProfile.Instance.Visible = false;
+            postb.Instance.Visible = false;
+            hometb.Instance.Visible = false;
+            composeMsg.Instance.Visible = false;
+            inbonTab.Instance.Visible = false;
+            draftTab.Instance.Visible = false;
+            trashTab.Instance.Visible = false;
+            settingTab.Instance.Visible = false;
+            sentTab.Instance.Visible = false;
+            classPage.Instance.Visible = true;
+            classPage.Instance.BringToFront();
+            panel4.Controls.Add(classPage.Instance);
+            classPage.Instance.Dock = DockStyle.Fill;
+           // picAnimation.ShowSync(classPage.Instance);
+
+            if (panel2.Width == 50)
+            {
+                classPage.Instance.Width = 1015;
+                panel4.Controls.Add(classPage.Instance);
+                classPage.Instance.Dock = DockStyle.Fill;
+               // picAnimation.ShowSync(classPage.Instance);
+
+            }
+
+            else
+            {
+                panel4.Controls.Add(classPage.Instance);
+                classPage.Instance.Dock = DockStyle.Fill;
+               // picAnimation.ShowSync(classPage.Instance);
+            }
+        }
+
+        private void composeBtn_Click(object sender, EventArgs e)
+        {
+            pic.Instance.Visible = false;
+            line.Visible = false;
+            aboutb.Instance.Visible = false;
+            friendtb.Instance.Visible = false;
+            myProfile.Instance.Visible = false;
+            postb.Instance.Visible = false;
+            hometb.Instance.Visible = false;
+            classPage.Instance.Visible = false;
+            inbonTab.Instance.Visible = false;
+            draftTab.Instance.Visible = false;
+            trashTab.Instance.Visible = false;
+            settingTab.Instance.Visible = false;
+            sentTab.Instance.Visible = false;
+            composeMsg.Instance.Visible = true;
+            composeMsg.Instance.BringToFront();
+            panel4.Controls.Add(composeMsg.Instance);
+            composeMsg.Instance.Dock = DockStyle.Fill;
+           // tabAnimator.ShowSync(composeMsg.Instance);
+
+            if (panel2.Width == 50)
+            {
+                composeMsg.Instance.Width = 1015;
+                panel4.Controls.Add(composeMsg.Instance);
+                composeMsg.Instance.Dock = DockStyle.Fill;
+               // tabAnimator.ShowSync(composeMsg.Instance);
+
+            }
+
+            else
+            {
+                panel4.Controls.Add(composeMsg.Instance);
+                composeMsg.Instance.Dock = DockStyle.Fill;
+              //  tabAnimator.ShowSync(composeMsg.Instance);
+
+            }
+        }
+
+        private void inboxBtn_Click(object sender, EventArgs e)
+        {
+            inbonTab.check = true;
+            pic.Instance.Visible = false;
+            line.Visible = false;
+            aboutb.Instance.Visible = false;
+            friendtb.Instance.Visible = false;
+            myProfile.Instance.Visible = false;
+            postb.Instance.Visible = false;
+            hometb.Instance.Visible = false;
+            classPage.Instance.Visible = false;
+            composeMsg.Instance.Visible = false;
+            draftTab.Instance.Visible = false;
+            trashTab.Instance.Visible = false;
+            settingTab.Instance.Visible = false;
+            sentTab.Instance.Visible = false;
+            inbonTab.Instance.Visible = true;
+            inbonTab.Instance.BringToFront();
+            panel4.Controls.Add(inbonTab.Instance);
+            inbonTab.Instance.Dock = DockStyle.Fill;
+           // tabAnimator.ShowSync(inbonTab.Instance);
+
+            if (panel2.Width == 50)
+            {
+                inbonTab.Instance.Width = 1015;
+                panel4.Controls.Add(inbonTab.Instance);
+                inbonTab.Instance.Dock = DockStyle.Fill;
+               // tabAnimator.ShowSync(inbonTab.Instance);
+
+            }
+
+            else
+            {
+                panel4.Controls.Add(inbonTab.Instance);
+                inbonTab.Instance.Dock = DockStyle.Fill;
+              //  tabAnimator.ShowSync(inbonTab.Instance);
+
+            }
+        }
+
+        private void sentBtn_Click(object sender, EventArgs e)
+        {
+            pic.Instance.Visible = false;
+            line.Visible = false;
+            aboutb.Instance.Visible = false;
+            friendtb.Instance.Visible = false;
+            myProfile.Instance.Visible = false;
+            postb.Instance.Visible = false;
+            hometb.Instance.Visible = false;
+            classPage.Instance.Visible = false;
+            composeMsg.Instance.Visible = false;
+            inbonTab.Instance.Visible = false;
+            draftTab.Instance.Visible = false;
+            trashTab.Instance.Visible = false;
+            settingTab.Instance.Visible = false;
+            sentTab.Instance.Visible = true;
+            sentTab.Instance.BringToFront();
+            panel4.Controls.Add(sentTab.Instance);
+            sentTab.Instance.Dock = DockStyle.Fill;
+            //tabAnimator.ShowSync(sentTab.Instance);
+
+            if (panel2.Width == 50)
+            {
+                sentTab.Instance.Width = 1015;
+                panel4.Controls.Add(sentTab.Instance);
+                sentTab.Instance.Dock = DockStyle.Fill;
+              //  tabAnimator.ShowSync(sentTab.Instance);
+
+            }
+
+            else
+            {
+                panel4.Controls.Add(sentTab.Instance);
+                sentTab.Instance.Dock = DockStyle.Fill;
+              //  tabAnimator.ShowSync(sentTab.Instance);
+
+            }
+        }
+
+        private void draftBtn_Click(object sender, EventArgs e)
+        {
+            pic.Instance.Visible = false;
+            line.Visible = false;
+            aboutb.Instance.Visible = false;
+            friendtb.Instance.Visible = false;
+            myProfile.Instance.Visible = false;
+            postb.Instance.Visible = false;
+            hometb.Instance.Visible = false;
+            classPage.Instance.Visible = false;
+            composeMsg.Instance.Visible = false;
+            inbonTab.Instance.Visible = false;
+            trashTab.Instance.Visible = false;
+            settingTab.Instance.Visible = false;
+            sentTab.Instance.Visible = false;
+            draftTab.Instance.Visible = true;
+            draftTab.Instance.BringToFront();
+            panel4.Controls.Add(draftTab.Instance);
+            draftTab.Instance.Dock = DockStyle.Fill;
+           // tabAnimator.ShowSync(draftTab.Instance);
+
+            if (panel2.Width == 50)
+            {
+                draftTab.Instance.Width = 1015;
+                panel4.Controls.Add(draftTab.Instance);
+                inbonTab.Instance.Dock = DockStyle.Fill;
+               // tabAnimator.ShowSync(draftTab.Instance);
+
+            }
+
+            else
+            {
+                panel4.Controls.Add(draftTab.Instance);
+                draftTab.Instance.Dock = DockStyle.Fill;
+               // tabAnimator.ShowSync(draftTab.Instance);
+
+            }
+        }
+
+        private void trashBtn_Click(object sender, EventArgs e)
+        {
+            pic.Instance.Visible = false;
+            line.Visible = false;
+            aboutb.Instance.Visible = false;
+            friendtb.Instance.Visible = false;
+            myProfile.Instance.Visible = false;
+            postb.Instance.Visible = false;
+            hometb.Instance.Visible = false;
+            classPage.Instance.Visible = false;
+            inbonTab.Instance.Visible = false;
+            composeMsg.Instance.Visible = false;
+            draftTab.Instance.Visible = false;
+            settingTab.Instance.Visible = false;
+            sentTab.Instance.Visible = false;
+            trashTab.Instance.Visible = true;
+            trashTab.Instance.BringToFront();
+            panel4.Controls.Add(trashTab.Instance);
+            trashTab.Instance.Dock = DockStyle.Fill;
+           // tabAnimator.ShowSync(trashTab.Instance);
+
+            if (panel2.Width == 50)
+            {
+                trashTab.Instance.Width = 1015;
+                panel4.Controls.Add(trashTab.Instance);
+                trashTab.Instance.Dock = DockStyle.Fill;
+              //  tabAnimator.ShowSync(trashTab.Instance);
+
+            }
+
+            else
+            {
+                panel4.Controls.Add(trashTab.Instance);
+                trashTab.Instance.Dock = DockStyle.Fill;
+               // tabAnimator.ShowSync(trashTab.Instance);
+
+            }
+        }
+
+        private void settingBtn_Click(object sender, EventArgs e)
+        {
+            iCheck = true;
+
+            pic.Instance.Visible = false;
+            line.Visible = false;
+            aboutb.Instance.Visible = false;
+            friendtb.Instance.Visible = false;
+            myProfile.Instance.Visible = false;
+            postb.Instance.Visible = false;
+            hometb.Instance.Visible = false;
+            classPage.Instance.Visible = false;
+            composeMsg.Instance.Visible = false;
+            inbonTab.Instance.Visible = false;
+            draftTab.Instance.Visible = false;
+            trashTab.Instance.Visible = false;
+            sentTab.Instance.Visible = false;
+            settingTab.Instance.Visible = true;
+            settingTab.Instance.BringToFront();
+            panel4.Controls.Add(settingTab.Instance);
+            settingTab.Instance.Dock = DockStyle.Fill;
+           // tabAnimator.ShowSync(settingTab.Instance);
+
+            if (panel2.Width == 50)
+            {
+                settingTab.Instance.Width = 1015;
+                panel4.Controls.Add(settingTab.Instance);
+                settingTab.Instance.Dock = DockStyle.Fill;
+               // tabAnimator.ShowSync(settingTab.Instance);
+
+            }
+
+            else
+            {
+                panel4.Controls.Add(settingTab.Instance);
+                settingTab.Instance.Dock = DockStyle.Fill;
+               // tabAnimator.ShowSync(settingTab.Instance);
+
+            }
+
+        }
+
+        private void chatBtn_Click(object sender, EventArgs e)
+        {
+            chatRoom cht = new chatRoom();
+            cht.Show();
+        }
+
+        private void itemBtn_Click(object sender, EventArgs e)
+        {
+            items item = new items();
+            item.Show();
+        }
+
+        private void chooseQn_Click(object sender, EventArgs e)
+        {
+            secretWord sc = new secretWord();
+            sc.Show();
         }
     }
 }

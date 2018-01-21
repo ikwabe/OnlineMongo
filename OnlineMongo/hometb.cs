@@ -31,8 +31,28 @@ namespace OnlineMongo
             InitializeComponent();
         }
 
+        //public static class NativeMethods
+        //{
+        //    [DllImport("wininet.dll", SetLastError = true)]
+        //    private static extern bool InternetSetOption(IntPtr hInternet, int dwOption,
+        //                                                 IntPtr lpBuffer, int lpdwBufferLength);
+
+        //    public static void SuppressCookiePersist()
+        //    {
+        //        int dwOption = 81; //INTERNET_OPTION_SUPPRESS_BEHAVIOR
+        //        int option = 3; // INTERNET_SUPPRESS_COOKIE_PERSIST
+
+        //        IntPtr optionPtr = Marshal.AllocHGlobal(sizeof(int));
+        //        Marshal.WriteInt32(optionPtr, option);
+
+        //        InternetSetOption(IntPtr.Zero, dwOption, optionPtr, sizeof(int));
+        //        Marshal.FreeHGlobal(optionPtr);
+        //    }
+        //}
+
         private void searchBtn_Click(object sender, EventArgs e)
         {
+           // NativeMethods.SuppressCookiePersist();
             webBrowser1.Navigate(searchTxt.Text);
         }
 
@@ -53,62 +73,74 @@ namespace OnlineMongo
 
         private void facebookBtn_Click(object sender, EventArgs e)
         {
+           // NativeMethods.SuppressCookiePersist();
             webBrowser1.Navigate("www.facebook.com");
         }
 
         private void youTubeBtn_Click(object sender, EventArgs e)
         {
+           // NativeMethods.SuppressCookiePersist();
             webBrowser1.Navigate("www.youtube.com");
         }
 
         private void googleBtn_Click(object sender, EventArgs e)
         {
+           // NativeMethods.SuppressCookiePersist();
             webBrowser1.Navigate("www.google.com");
         }
 
         private void whatsappBtn_Click(object sender, EventArgs e)
         {
+           // NativeMethods.SuppressCookiePersist();
             webBrowser1.Navigate("web.whatsapp.com");
         }
 
         private void utorrentBtn_Click(object sender, EventArgs e)
         {
+           // NativeMethods.SuppressCookiePersist();
             webBrowser1.Navigate("extratorrents.ch");
         }
 
         private void alibabaBtn_Click(object sender, EventArgs e)
         {
+           // NativeMethods.SuppressCookiePersist();
             webBrowser1.Navigate("www.alibaba.com");
         }
 
         private void gmailBtn_Click(object sender, EventArgs e)
         {
+           // NativeMethods.SuppressCookiePersist();
             webBrowser1.Navigate("mail.google.com");
         }
 
         private void yahooBtn_Click(object sender, EventArgs e)
         {
+           // NativeMethods.SuppressCookiePersist();
             webBrowser1.Navigate("www.yahoo.com");
         }
 
         private void ebayBtn_Click(object sender, EventArgs e)
         {
+           // NativeMethods.SuppressCookiePersist();
             webBrowser1.Navigate("www.ebay.com");
         }
 
         private void amazonBtn_Click(object sender, EventArgs e)
         {
+           // NativeMethods.SuppressCookiePersist();
             webBrowser1.Navigate("www.amazon.com");
         }
 
         private void ymailBtn_Click(object sender, EventArgs e)
         {
+           // NativeMethods.SuppressCookiePersist();
             webBrowser1.Navigate("in.mail.yahoo.com");
         }
 
         private void webBrowser1_Navigated(object sender, WebBrowserNavigatedEventArgs e)
         {
             webBrowser1.ScriptErrorsSuppressed = true;
+            
             searchTxt.Text = webBrowser1.Url.ToString();
            
         }

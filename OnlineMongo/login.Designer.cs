@@ -33,7 +33,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(login));
             this.bunifuElipse1 = new Bunifu.Framework.UI.BunifuElipse(this.components);
             this.Headerpanel = new System.Windows.Forms.Panel();
-            this.bunifuImageButton1 = new Bunifu.Framework.UI.BunifuImageButton();
+            this.closeBtn = new Bunifu.Framework.UI.BunifuImageButton();
             this.bunifuDragControl1 = new Bunifu.Framework.UI.BunifuDragControl(this.components);
             this.loginBtn = new Bunifu.Framework.UI.BunifuThinButton2();
             this.bunifuCustomLabel1 = new Bunifu.Framework.UI.BunifuCustomLabel();
@@ -48,7 +48,7 @@
             this.animate = new System.Windows.Forms.Timer(this.components);
             this.annimator = new BunifuAnimatorNS.BunifuTransition(this.components);
             this.Headerpanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bunifuImageButton1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.closeBtn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.logopic)).BeginInit();
             this.SuspendLayout();
             // 
@@ -60,7 +60,7 @@
             // Headerpanel
             // 
             this.Headerpanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(9)))), ((int)(((byte)(191)))));
-            this.Headerpanel.Controls.Add(this.bunifuImageButton1);
+            this.Headerpanel.Controls.Add(this.closeBtn);
             this.annimator.SetDecoration(this.Headerpanel, BunifuAnimatorNS.DecorationType.None);
             this.Headerpanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.Headerpanel.Location = new System.Drawing.Point(0, 0);
@@ -68,21 +68,21 @@
             this.Headerpanel.Size = new System.Drawing.Size(568, 52);
             this.Headerpanel.TabIndex = 0;
             // 
-            // bunifuImageButton1
+            // closeBtn
             // 
-            this.bunifuImageButton1.BackColor = System.Drawing.Color.Transparent;
-            this.bunifuImageButton1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.annimator.SetDecoration(this.bunifuImageButton1, BunifuAnimatorNS.DecorationType.None);
-            this.bunifuImageButton1.Image = ((System.Drawing.Image)(resources.GetObject("bunifuImageButton1.Image")));
-            this.bunifuImageButton1.ImageActive = null;
-            this.bunifuImageButton1.Location = new System.Drawing.Point(529, 3);
-            this.bunifuImageButton1.Name = "bunifuImageButton1";
-            this.bunifuImageButton1.Size = new System.Drawing.Size(36, 30);
-            this.bunifuImageButton1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.bunifuImageButton1.TabIndex = 0;
-            this.bunifuImageButton1.TabStop = false;
-            this.bunifuImageButton1.Zoom = 10;
-            this.bunifuImageButton1.Click += new System.EventHandler(this.bunifuImageButton1_Click);
+            this.closeBtn.BackColor = System.Drawing.Color.Transparent;
+            this.closeBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.annimator.SetDecoration(this.closeBtn, BunifuAnimatorNS.DecorationType.None);
+            this.closeBtn.Image = ((System.Drawing.Image)(resources.GetObject("closeBtn.Image")));
+            this.closeBtn.ImageActive = null;
+            this.closeBtn.Location = new System.Drawing.Point(529, 3);
+            this.closeBtn.Name = "closeBtn";
+            this.closeBtn.Size = new System.Drawing.Size(36, 30);
+            this.closeBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.closeBtn.TabIndex = 0;
+            this.closeBtn.TabStop = false;
+            this.closeBtn.Zoom = 10;
+            this.closeBtn.MouseClick += new System.Windows.Forms.MouseEventHandler(this.closeBtn_MouseClick);
             // 
             // bunifuDragControl1
             // 
@@ -142,7 +142,7 @@
             this.signUpLink.TabIndex = 6;
             this.signUpLink.TabStop = true;
             this.signUpLink.Text = "Sign Up";
-            this.signUpLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.signUpLink_LinkClicked);
+            this.signUpLink.MouseClick += new System.Windows.Forms.MouseEventHandler(this.signUpLink_MouseClick);
             // 
             // label2
             // 
@@ -212,7 +212,7 @@
             this.forgetPwdLink.TabIndex = 27;
             this.forgetPwdLink.TabStop = true;
             this.forgetPwdLink.Text = "Forget Password";
-            this.forgetPwdLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.forgetPwdLink_LinkClicked);
+            this.forgetPwdLink.MouseClick += new System.Windows.Forms.MouseEventHandler(this.forgetPwdLink_MouseClick);
             // 
             // label3
             // 
@@ -289,7 +289,7 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.login_Load);
             this.Headerpanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.bunifuImageButton1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.closeBtn)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.logopic)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -304,7 +304,7 @@
         private Bunifu.Framework.UI.BunifuDragControl bunifuDragControl1;
         private System.Windows.Forms.LinkLabel signUpLink;
         private Bunifu.Framework.UI.BunifuCustomLabel bunifuCustomLabel1;
-        private Bunifu.Framework.UI.BunifuImageButton bunifuImageButton1;
+        private Bunifu.Framework.UI.BunifuImageButton closeBtn;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label7;

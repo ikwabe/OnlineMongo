@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            BunifuAnimatorNS.Animation animation2 = new BunifuAnimatorNS.Animation();
-            BunifuAnimatorNS.Animation animation3 = new BunifuAnimatorNS.Animation();
-            BunifuAnimatorNS.Animation animation4 = new BunifuAnimatorNS.Animation();
-            BunifuAnimatorNS.Animation animation1 = new BunifuAnimatorNS.Animation();
+            BunifuAnimatorNS.Animation animation143 = new BunifuAnimatorNS.Animation();
+            BunifuAnimatorNS.Animation animation142 = new BunifuAnimatorNS.Animation();
+            BunifuAnimatorNS.Animation animation144 = new BunifuAnimatorNS.Animation();
+            BunifuAnimatorNS.Animation animation141 = new BunifuAnimatorNS.Animation();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(dashBoard));
             this.bunifuElipse1 = new Bunifu.Framework.UI.BunifuElipse(this.components);
             this.Headerpanel = new System.Windows.Forms.Panel();
@@ -128,7 +128,7 @@
             this.restoreDownBtn.TabStop = false;
             this.restoreDownBtn.Visible = false;
             this.restoreDownBtn.Zoom = 10;
-            this.restoreDownBtn.Click += new System.EventHandler(this.restoreDownBtn_Click);
+            this.restoreDownBtn.MouseClick += new System.Windows.Forms.MouseEventHandler(this.restoreDownBtn_MouseClick);
             // 
             // maximizeBtn
             // 
@@ -147,7 +147,7 @@
             this.maximizeBtn.TabIndex = 2;
             this.maximizeBtn.TabStop = false;
             this.maximizeBtn.Zoom = 10;
-            this.maximizeBtn.Click += new System.EventHandler(this.maximizeBtn_Click);
+            this.maximizeBtn.MouseClick += new System.Windows.Forms.MouseEventHandler(this.maximizeBtn_MouseClick);
             // 
             // miniMizeBtn
             // 
@@ -166,7 +166,7 @@
             this.miniMizeBtn.TabIndex = 1;
             this.miniMizeBtn.TabStop = false;
             this.miniMizeBtn.Zoom = 10;
-            this.miniMizeBtn.Click += new System.EventHandler(this.bunifuImageButton2_Click);
+            this.miniMizeBtn.MouseClick += new System.Windows.Forms.MouseEventHandler(this.miniMizeBtn_MouseClick);
             // 
             // closeBtn
             // 
@@ -185,7 +185,7 @@
             this.closeBtn.TabIndex = 0;
             this.closeBtn.TabStop = false;
             this.closeBtn.Zoom = 10;
-            this.closeBtn.Click += new System.EventHandler(this.bunifuImageButton1_Click);
+            this.closeBtn.MouseClick += new System.Windows.Forms.MouseEventHandler(this.closeBtn_MouseClick);
             // 
             // bunifuDragControl1
             // 
@@ -498,7 +498,7 @@
             this.mnBtn.TabIndex = 7;
             this.mnBtn.TabStop = false;
             this.mnBtn.Zoom = 10;
-            this.mnBtn.Click += new System.EventHandler(this.mnBtn_Click);
+            this.mnBtn.MouseClick += new System.Windows.Forms.MouseEventHandler(this.mnBtn_MouseClick);
             // 
             // panel1
             // 
@@ -531,7 +531,7 @@
             this.signOutBtn.Size = new System.Drawing.Size(54, 16);
             this.signOutBtn.TabIndex = 61;
             this.signOutBtn.Text = "Sign Out";
-            this.signOutBtn.Click += new System.EventHandler(this.signOutBtn_Click);
+            this.signOutBtn.MouseClick += new System.Windows.Forms.MouseEventHandler(this.signOutBtn_MouseClick);
             // 
             // chooseQn
             // 
@@ -604,7 +604,7 @@
             this.about.Size = new System.Drawing.Size(44, 16);
             this.about.TabIndex = 4;
             this.about.Text = "ABOUT";
-            this.about.Click += new System.EventHandler(this.about_Click);
+            this.about.MouseClick += new System.Windows.Forms.MouseEventHandler(this.about_MouseClick);
             // 
             // friends
             // 
@@ -622,7 +622,7 @@
             this.friends.Size = new System.Drawing.Size(51, 16);
             this.friends.TabIndex = 3;
             this.friends.Text = "FRIENDS";
-            this.friends.Click += new System.EventHandler(this.friends_Click);
+            this.friends.MouseClick += new System.Windows.Forms.MouseEventHandler(this.friends_MouseClick);
             // 
             // post
             // 
@@ -640,7 +640,7 @@
             this.post.Size = new System.Drawing.Size(42, 16);
             this.post.TabIndex = 2;
             this.post.Text = "POSTS";
-            this.post.Click += new System.EventHandler(this.post_Click);
+            this.post.MouseClick += new System.Windows.Forms.MouseEventHandler(this.post_MouseClick);
             // 
             // photos
             // 
@@ -658,28 +658,28 @@
             this.photos.Size = new System.Drawing.Size(54, 16);
             this.photos.TabIndex = 1;
             this.photos.Text = "PHOTOS";
-            this.photos.Click += new System.EventHandler(this.photos_Click);
+            this.photos.MouseClick += new System.Windows.Forms.MouseEventHandler(this.photos_MouseClick);
             // 
             // panelAnimator
             // 
             this.panelAnimator.AnimationType = BunifuAnimatorNS.AnimationType.HorizBlind;
             this.panelAnimator.Cursor = null;
-            animation2.AnimateOnlyDifferences = true;
-            animation2.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.BlindCoeff")));
-            animation2.LeafCoeff = 0F;
-            animation2.MaxTime = 1F;
-            animation2.MinTime = 0F;
-            animation2.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.MosaicCoeff")));
-            animation2.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation2.MosaicShift")));
-            animation2.MosaicSize = 0;
-            animation2.Padding = new System.Windows.Forms.Padding(0);
-            animation2.RotateCoeff = 0F;
-            animation2.RotateLimit = 0F;
-            animation2.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.ScaleCoeff")));
-            animation2.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.SlideCoeff")));
-            animation2.TimeCoeff = 0F;
-            animation2.TransparencyCoeff = 0F;
-            this.panelAnimator.DefaultAnimation = animation2;
+            animation143.AnimateOnlyDifferences = true;
+            animation143.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation143.BlindCoeff")));
+            animation143.LeafCoeff = 0F;
+            animation143.MaxTime = 1F;
+            animation143.MinTime = 0F;
+            animation143.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation143.MosaicCoeff")));
+            animation143.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation143.MosaicShift")));
+            animation143.MosaicSize = 0;
+            animation143.Padding = new System.Windows.Forms.Padding(0);
+            animation143.RotateCoeff = 0F;
+            animation143.RotateLimit = 0F;
+            animation143.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation143.ScaleCoeff")));
+            animation143.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation143.SlideCoeff")));
+            animation143.TimeCoeff = 0F;
+            animation143.TransparencyCoeff = 0F;
+            this.panelAnimator.DefaultAnimation = animation143;
             this.panelAnimator.TimeStep = 0.03F;
             // 
             // panel2
@@ -913,7 +913,7 @@
             this.home.Size = new System.Drawing.Size(43, 16);
             this.home.TabIndex = 7;
             this.home.Text = "HOME";
-            this.home.Click += new System.EventHandler(this.home_Click);
+            this.home.MouseClick += new System.Windows.Forms.MouseEventHandler(this.home_MouseClick);
             // 
             // panel4
             // 
@@ -931,22 +931,22 @@
             // 
             this.tabAnimator.AnimationType = BunifuAnimatorNS.AnimationType.Scale;
             this.tabAnimator.Cursor = null;
-            animation3.AnimateOnlyDifferences = true;
-            animation3.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation3.BlindCoeff")));
-            animation3.LeafCoeff = 0F;
-            animation3.MaxTime = 1F;
-            animation3.MinTime = 0F;
-            animation3.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation3.MosaicCoeff")));
-            animation3.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation3.MosaicShift")));
-            animation3.MosaicSize = 0;
-            animation3.Padding = new System.Windows.Forms.Padding(0);
-            animation3.RotateCoeff = 0F;
-            animation3.RotateLimit = 0F;
-            animation3.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation3.ScaleCoeff")));
-            animation3.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation3.SlideCoeff")));
-            animation3.TimeCoeff = 0F;
-            animation3.TransparencyCoeff = 0F;
-            this.tabAnimator.DefaultAnimation = animation3;
+            animation142.AnimateOnlyDifferences = true;
+            animation142.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation142.BlindCoeff")));
+            animation142.LeafCoeff = 0F;
+            animation142.MaxTime = 1F;
+            animation142.MinTime = 0F;
+            animation142.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation142.MosaicCoeff")));
+            animation142.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation142.MosaicShift")));
+            animation142.MosaicSize = 0;
+            animation142.Padding = new System.Windows.Forms.Padding(0);
+            animation142.RotateCoeff = 0F;
+            animation142.RotateLimit = 0F;
+            animation142.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation142.ScaleCoeff")));
+            animation142.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation142.SlideCoeff")));
+            animation142.TimeCoeff = 0F;
+            animation142.TransparencyCoeff = 0F;
+            this.tabAnimator.DefaultAnimation = animation142;
             this.tabAnimator.Interval = 1;
             this.tabAnimator.TimeStep = 0.15F;
             // 
@@ -954,22 +954,22 @@
             // 
             this.picAnimation.AnimationType = BunifuAnimatorNS.AnimationType.HorizSlide;
             this.picAnimation.Cursor = null;
-            animation4.AnimateOnlyDifferences = true;
-            animation4.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation4.BlindCoeff")));
-            animation4.LeafCoeff = 0F;
-            animation4.MaxTime = 1F;
-            animation4.MinTime = 0F;
-            animation4.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation4.MosaicCoeff")));
-            animation4.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation4.MosaicShift")));
-            animation4.MosaicSize = 0;
-            animation4.Padding = new System.Windows.Forms.Padding(0);
-            animation4.RotateCoeff = 0F;
-            animation4.RotateLimit = 0F;
-            animation4.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation4.ScaleCoeff")));
-            animation4.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation4.SlideCoeff")));
-            animation4.TimeCoeff = 0F;
-            animation4.TransparencyCoeff = 0F;
-            this.picAnimation.DefaultAnimation = animation4;
+            animation144.AnimateOnlyDifferences = true;
+            animation144.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation144.BlindCoeff")));
+            animation144.LeafCoeff = 0F;
+            animation144.MaxTime = 1F;
+            animation144.MinTime = 0F;
+            animation144.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation144.MosaicCoeff")));
+            animation144.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation144.MosaicShift")));
+            animation144.MosaicSize = 0;
+            animation144.Padding = new System.Windows.Forms.Padding(0);
+            animation144.RotateCoeff = 0F;
+            animation144.RotateLimit = 0F;
+            animation144.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation144.ScaleCoeff")));
+            animation144.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation144.SlideCoeff")));
+            animation144.TimeCoeff = 0F;
+            animation144.TransparencyCoeff = 0F;
+            this.picAnimation.DefaultAnimation = animation144;
             this.picAnimation.Interval = 1;
             this.picAnimation.TimeStep = 0.15F;
             // 
@@ -977,22 +977,22 @@
             // 
             this.logoTransition.AnimationType = BunifuAnimatorNS.AnimationType.ScaleAndRotate;
             this.logoTransition.Cursor = null;
-            animation1.AnimateOnlyDifferences = true;
-            animation1.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.BlindCoeff")));
-            animation1.LeafCoeff = 0F;
-            animation1.MaxTime = 1F;
-            animation1.MinTime = 0F;
-            animation1.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.MosaicCoeff")));
-            animation1.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation1.MosaicShift")));
-            animation1.MosaicSize = 0;
-            animation1.Padding = new System.Windows.Forms.Padding(30);
-            animation1.RotateCoeff = 0.5F;
-            animation1.RotateLimit = 0.2F;
-            animation1.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.ScaleCoeff")));
-            animation1.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.SlideCoeff")));
-            animation1.TimeCoeff = 0F;
-            animation1.TransparencyCoeff = 0F;
-            this.logoTransition.DefaultAnimation = animation1;
+            animation141.AnimateOnlyDifferences = true;
+            animation141.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation141.BlindCoeff")));
+            animation141.LeafCoeff = 0F;
+            animation141.MaxTime = 1F;
+            animation141.MinTime = 0F;
+            animation141.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation141.MosaicCoeff")));
+            animation141.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation141.MosaicShift")));
+            animation141.MosaicSize = 0;
+            animation141.Padding = new System.Windows.Forms.Padding(30);
+            animation141.RotateCoeff = 0.5F;
+            animation141.RotateLimit = 0.2F;
+            animation141.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation141.ScaleCoeff")));
+            animation141.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation141.SlideCoeff")));
+            animation141.TimeCoeff = 0F;
+            animation141.TransparencyCoeff = 0F;
+            this.logoTransition.DefaultAnimation = animation141;
             this.logoTransition.Interval = 1;
             this.logoTransition.TimeStep = 0.1F;
             // 

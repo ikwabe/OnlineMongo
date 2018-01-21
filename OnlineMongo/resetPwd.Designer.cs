@@ -82,7 +82,7 @@
             this.bunifuImageButton1.TabIndex = 0;
             this.bunifuImageButton1.TabStop = false;
             this.bunifuImageButton1.Zoom = 10;
-            this.bunifuImageButton1.Click += new System.EventHandler(this.bunifuImageButton1_Click);
+            this.bunifuImageButton1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.bunifuImageButton1_MouseClick);
             // 
             // bunifuDragControl1
             // 

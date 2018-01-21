@@ -22,13 +22,7 @@ namespace OnlineMongo
             InitializeComponent();
         }
 
-        public static string dbConnection = "server = 172.20.10.5; user = root; password =ikwabe04; database = udoread";
-        private void bunifuImageButton1_Click(object sender, EventArgs e)
-        {
-           if(MessageBox.Show("Are you sure you want to close?","Close",MessageBoxButtons.YesNo) == DialogResult.Yes){
-                Application.Exit();
-            }
-        }
+        public static string dbConnection = "server = localhost; user = root; password =ikwabe04; database = udoread";
        
         
 
@@ -55,92 +49,6 @@ namespace OnlineMongo
 
         }
 
-
-        private void signUpLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-           
-            signUp sgp = new signUp();
-            sgp.Show();
-            this.Hide();
-        }
-
-        private void forgetPwdLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            verifyEmail ve = new verifyEmail();
-            ve.Show();
-            this.Hide();
-        }
-
-        private void loginBtn_Click(object sender, EventArgs e)
-        {
-            MySqlConnection con = new MySqlConnection();
-            con.ConnectionString = dbConnection;
-            string signIn = "select user_id, email, password,username,secword,fname,lname from users where username = '" + txt.Text + "' and password = '" + pwd.Text + "'";
-            MySqlCommand com = new MySqlCommand(signIn, con);
-            try
-            {
-                con.Open();
-
-                MySqlDataReader reader;
-                DataTable table = new DataTable();
-                if (txt.Text == "")
-                {
-                    label3.Text = "Username field can not be empty.";
-                }
-                else if (pwd.Text == "")
-                {
-                    label3.Text = "Password field can not be empty.";
-
-                }
-                else
-                {
-                    //checking the database
-                reader = com.ExecuteReader();
-                table.Load(reader);
-                reader.Close();
-
-                if (table.Rows.Count > 0)
-                {
-                    pwd.Enabled = false;
-                    if (table.Rows[0][4] == null || table.Rows[0][4] == DBNull.Value)
-                    {
-                        MessageBox.Show("Please remember to set your SECRET WORD for password recovery and security purposes.");
-                            //capturing user id for public purposes
-                            user_id = table.Rows[0][0].ToString();
-                            user_email = table.Rows[0][1].ToString();
-                            fullname = table.Rows[0][5].ToString() + " "+ table.Rows[0][6].ToString(); 
-                            this.Hide();
-                            dashBoard dsb = new dashBoard();
-                            dsb.Show();
-                       
-                    }
-                    else
-                    {
-                            //capturing user id for public purposes
-                            user_id = table.Rows[0][0].ToString();
-                            user_email = table.Rows[0][1].ToString();
-                            fullname = table.Rows[0][5].ToString() + " " + table.Rows[0][6].ToString();
-                            this.Hide();
-                            dashBoard dsb = new dashBoard();
-                            dsb.Show();
-
-
-                        }
-
-
-                }
-                else
-                {
-                    label3.Text = "You have enterd a wrong Password or Username";
-                }
-            }
-            }
-            catch (MySqlException ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            con.Close();
-        }
        
         private void pwd_KeyDown(object sender, KeyEventArgs e)
         {
@@ -213,6 +121,121 @@ namespace OnlineMongo
             {
 
             }
+        }
+
+       
+
+        private void signUpLink_MouseClick(object sender, MouseEventArgs e)
+        {
+            if(e.Button == MouseButtons.Left)
+            {
+                signUp sgp = new signUp();
+                sgp.Show();
+                this.Hide();
+            }
+            else
+            {
+
+            }
+        }
+
+        private void forgetPwdLink_MouseClick(object sender, MouseEventArgs e)
+        {
+            if(e.Button == MouseButtons.Left)
+            {
+                verifyEmail ve = new verifyEmail();
+                ve.Show();
+                this.Hide();
+            }
+            else
+            {
+
+            }
+        }
+
+        private void closeBtn_MouseClick(object sender, MouseEventArgs e)
+        {
+            if(e.Button == MouseButtons.Left)
+            {
+                if (MessageBox.Show("Are you sure you want to close?", "Close", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    Application.Exit();
+                }
+            }
+            else
+            {
+
+            }
+        }
+
+        private void loginBtn_Click(object sender, EventArgs e)
+        {
+            MySqlConnection con = new MySqlConnection();
+            con.ConnectionString = dbConnection;
+            string signIn = "select user_id, email, password,username,secword,fname,lname from users where username = '" + txt.Text + "' and password = '" + pwd.Text + "'";
+            MySqlCommand com = new MySqlCommand(signIn, con);
+            try
+            {
+                con.Open();
+
+                MySqlDataReader reader;
+                DataTable table = new DataTable();
+                if (txt.Text == "")
+                {
+                    label3.Text = "Username field can not be empty.";
+                }
+                else if (pwd.Text == "")
+                {
+                    label3.Text = "Password field can not be empty.";
+                }
+                else
+                {
+                    //checking the database
+                    reader = com.ExecuteReader();
+                    table.Load(reader);
+                    reader.Close();
+
+                    if (table.Rows.Count > 0)
+                    {
+                        pwd.Enabled = false;
+                        if (table.Rows[0][4] == null || table.Rows[0][4] == DBNull.Value)
+                        {
+                            MessageBox.Show("Please remember to set your SECRET WORD for password recovery and security purposes.");
+                            //capturing user id for public purposes
+                            user_id = table.Rows[0][0].ToString();
+                            user_email = table.Rows[0][1].ToString();
+                            fullname = table.Rows[0][5].ToString() + " " + table.Rows[0][6].ToString();
+                            this.Hide();
+                           
+                            dashBoard dsb = new dashBoard();
+                            dsb.Show();
+                            startup st = new startup();
+                            st.ShowDialog();
+
+                        }
+                        else
+                        {
+                            //capturing user id for public purposes
+                            user_id = table.Rows[0][0].ToString();
+                            user_email = table.Rows[0][1].ToString();
+                            fullname = table.Rows[0][5].ToString() + " " + table.Rows[0][6].ToString();
+                            this.Hide();
+                            dashBoard dsb = new dashBoard();
+                            dsb.Show();
+                           
+                        }
+                    }
+                    else
+                    {
+                        label3.Text = "You have enterd a wrong Password or Username";
+                    }
+                }
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            con.Close();
         }
     }
 }
