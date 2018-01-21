@@ -18,8 +18,9 @@ namespace OnlineMongo
             Application.SetCompatibleTextRenderingDefault(false);
            
                 Application.Run(new login());
-           
-           
+
+
+
         }
     }
 }

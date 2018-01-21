@@ -48,14 +48,27 @@ namespace OnlineMongo
             animate.Stop();
             animator.ShowSync(logopic);
         }
-
+        //a function to decryp password
+        public string GetMD5Hash(string input)
+        {
+            System.Security.Cryptography.MD5CryptoServiceProvider x = new System.Security.Cryptography.MD5CryptoServiceProvider();
+            byte[] bs = System.Text.Encoding.UTF8.GetBytes(input);
+            bs = x.ComputeHash(bs);
+            System.Text.StringBuilder s = new System.Text.StringBuilder();
+            foreach (byte b in bs)
+            {
+                s.Append(b.ToString("x2").ToLower());
+            }
+            string password = s.ToString();
+            return password;
+        }
         private void bunifuThinButton21_Click(object sender, EventArgs e)
         {
             //sign up button
 
             MySqlConnection con = new MySqlConnection();
             con.ConnectionString = login.dbConnection;
-            string query = "insert into users(fname,lname,email,password,username,pin) values ('"+ fname.Text +"', '"+ lname.Text +"', '"+ email.Text +"','"+ pwd.Text +"','"+ username.Text + "','" + pinLb.Text + "')";
+            string query = "insert into users(fname,lname,email,password,username,pin) values ('"+ fname.Text +"', '"+ lname.Text +"', '"+ email.Text +"','"+ GetMD5Hash(pwd.Text) +"','"+ username.Text + "','" + pinLb.Text + "')";
             string chek = "select email from users where email = '"+ email.Text +"'";
             string chek2 = "select username from users where username = '"+ username.Text +"'";
 

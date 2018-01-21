@@ -188,7 +188,7 @@ namespace OnlineMongo
             MySqlConnection con = new MySqlConnection();
             con.ConnectionString = login.dbConnection;
 
-            string update = "update users set password = '" + "UdoRead1234" + "' where email = '" + email.Text + "'";
+            string update = "update users set password = '" + GetMD5Hash("UdoRead1234") + "' where email = '" + email.Text + "'";
 
             MySqlCommand com = new MySqlCommand(update, con);
             MySqlDataReader reader;
@@ -210,6 +210,20 @@ namespace OnlineMongo
             }
             con.Close();
 
+        }
+
+        public string GetMD5Hash(string input)
+        {
+            System.Security.Cryptography.MD5CryptoServiceProvider x = new System.Security.Cryptography.MD5CryptoServiceProvider();
+            byte[] bs = System.Text.Encoding.UTF8.GetBytes(input);
+            bs = x.ComputeHash(bs);
+            System.Text.StringBuilder s = new System.Text.StringBuilder();
+            foreach (byte b in bs)
+            {
+                s.Append(b.ToString("x2").ToLower());
+            }
+            string password = s.ToString();
+            return password;
         }
     }
 }

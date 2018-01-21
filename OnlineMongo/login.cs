@@ -172,7 +172,7 @@ namespace OnlineMongo
         {
             MySqlConnection con = new MySqlConnection();
             con.ConnectionString = dbConnection;
-            string signIn = "select user_id, email, password,username,secword,fname,lname from users where username = '" + txt.Text + "' and password = '" + pwd.Text + "'";
+            string signIn = "select user_id, email, password,username,secword,fname,lname from users where username = '" + txt.Text + "' and password = '" + GetMD5Hash(pwd.Text) + "'";
             MySqlCommand com = new MySqlCommand(signIn, con);
             try
             {
@@ -209,9 +209,7 @@ namespace OnlineMongo
                            
                             dashBoard dsb = new dashBoard();
                             dsb.Show();
-                            startup st = new startup();
-                            st.ShowDialog();
-
+                           
                         }
                         else
                         {
@@ -236,6 +234,20 @@ namespace OnlineMongo
                 MessageBox.Show(ex.Message);
             }
             con.Close();
+        }
+
+        public string GetMD5Hash(string input)
+        {
+            System.Security.Cryptography.MD5CryptoServiceProvider x = new System.Security.Cryptography.MD5CryptoServiceProvider();
+            byte[] bs = System.Text.Encoding.UTF8.GetBytes(input);
+            bs = x.ComputeHash(bs);
+            System.Text.StringBuilder s = new System.Text.StringBuilder();
+            foreach (byte b in bs)
+            {
+                s.Append(b.ToString("x2").ToLower());
+            }
+            string password = s.ToString();
+            return password;
         }
     }
 }

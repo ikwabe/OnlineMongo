@@ -39,8 +39,8 @@ namespace OnlineMongo
             MySqlConnection con = new MySqlConnection();
             con.ConnectionString = login.dbConnection;
 
-            string query = "select email,password from users where  email = '" + email.Text + "' and password = '" + oldPwd.Text + "'";
-            string update = "update  users set password = '" + newPwd.Text + "' where email = '" + email.Text + "'";
+            string query = "select email,password from users where  email = '" + email.Text + "' and password = '" + GetMD5Hash(oldPwd.Text)  + "'";
+            string update = "update  users set password = '" + GetMD5Hash(newPwd.Text) + "' where email = '" + email.Text + "'";
 
             MySqlCommand com = new MySqlCommand(query, con);
             MySqlCommand com1 = new MySqlCommand(update, con);
@@ -82,6 +82,18 @@ namespace OnlineMongo
             }
             con.Close();
         }
-
+        public string GetMD5Hash(string input)
+        {
+            System.Security.Cryptography.MD5CryptoServiceProvider x = new System.Security.Cryptography.MD5CryptoServiceProvider();
+            byte[] bs = System.Text.Encoding.UTF8.GetBytes(input);
+            bs = x.ComputeHash(bs);
+            System.Text.StringBuilder s = new System.Text.StringBuilder();
+            foreach (byte b in bs)
+            {
+                s.Append(b.ToString("x2").ToLower());
+            }
+            string password = s.ToString();
+            return password;
+        }
     }
 }
